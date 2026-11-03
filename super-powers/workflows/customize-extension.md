@@ -48,6 +48,8 @@ A dotted subpath matters: `...\Administrator\Service.PriceRules` retains `Servic
 
 The library row is a Power packaging/loader location, not automatic creation of an independently managed Joomla library extension. Check the generated manifest, installer/update/uninstall handling and namespace ownership when multiple extensions share library code. Custom `jcb_powers_path`, plugin or module targets require their actual target source and generated package inspection. The component resolver has explicit Administrator/Site patterns at this revision; do not invent an equivalent `Api` placement rule from those two rows.
 
+The [live administrator exercise](../../testing/playground/power-placement-verification.md) verified one class using the first namespace convention, its generated import and an installed dashboard caller. Site/library placement and other contexts retain their separate acceptance gates.
+
 ## Author the class and its dependencies
 
 1. Use [create a Power](create-power.md) or [maintain and debug](maintain-and-debug.md). Keep the index, `settings.json`, raw body `code.power`, derived `code.php` and README consistent. In the GUI, the corresponding record holds the same identity, namespace, relationships and main class code. The repository body contains members only: omit `<?php`, the namespace, outer class declaration and its outer braces.

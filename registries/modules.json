@@ -25,8 +25,8 @@
       "source_baseline": "super-powers/sources.md",
       "test_workflow": "super-powers/workflows/validate-and-integrate.md",
       "verification": {
-        "static": "Local documentation checks, 34 regression checks, PHP 8.3.6 smoke test, ShellCheck and independent fresh-agent creation exercise passed; see super-powers/verification.md.",
-        "integration": "Live Playground import and reopened-record inspection passed for the existing official Regex Power on Joomla/JCB 6.2.0 and PHP 8.4.1. Candidate staging-branch refresh, documentation fixtures, compilation and runtime execution were not tested; see testing/playground/verification.md."
+        "static": "37 Power regression checks and 10 composed-service cases passed within the 201-check distribution run. A separate fresh-agent stock-availability repository passed its validator and 64 PHP assertions on PHP 8.3.6; see testing/scenarios/verification.md and super-powers/verification.md.",
+        "integration": "Official Regex import/reopened inspection passed. A separate GUI-authored PlacementProbe compiled to the expected Administrator class and returned 42 through an installed Demo dashboard on Joomla/JCB 6.2.0 with PHP selector 8.4. Site/library placement, DI, candidate repository refresh and documentation-fixture integration remain unrun; see testing/playground/power-placement-verification.md."
       },
       "skill_entrypoint": "super-powers/SKILL.md"
     },
@@ -69,7 +69,7 @@
       "test_workflow": "packages/workflows/validate-and-integrate.md",
       "verification": {
         "static": "Pinned 41-contract inventory, all 83 source-file hashes, model routing, six skill entrypoints, deterministic regeneration, ShellCheck and combined 108 regressions passed. Hello World and the original fixture pass the bounded profile with external Field Types. Two larger catalogues hit the strict empty-child authoring gate; see packages/verification.md.",
-        "integration": "Playground repository creation and Hello World source/branch selection were observed on Joomla/JCB 6.2.0 and PHP 8.4.1. Catalogue loading produced no visible item list or JCB error; cause unresolved. No package import, refresh, export, compile, install or runtime pass; see packages/verification.md."
+        "integration": "The earlier Hello World catalogue-loading attempt remains unresolved. A separate GUI-authored Notes component compiled, installed and passed administrator CRUD on Joomla/JCB 6.2.0 with deployment PHP 8.4.27; its ZIP was retained. Server-boundary probing was blocked, and source import/export, clean-instance reproduction and full scenarios remain unrun; see testing/scenarios/notes-admin-verification.md and packages/verification.md."
       }
     }
   ]
