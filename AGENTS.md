@@ -1,6 +1,6 @@
 # Agent operating contract
 
-This is the official **JoomEngine Skills** repository for the **whole Joomla Component Builder (JCB) ecosystem**. Its operational modules cover Super Powers, Field Types, Snippets and Packages. Follow the task's relevant skill, module and verification status; do not impose one entity's file format, dependency rules, or identity semantics on another.
+This is the official **JoomEngine Skills** repository for the **whole Joomla Component Builder (JCB) ecosystem**. Joomla Packaging Engine Skills covers the complete journey from an application request through reusable entities, custom PHP behaviour, compilation, installed validation and delivery. Follow the task's relevant skill, module and verification status; do not impose one entity's file format, dependency rules, or identity semantics on another.
 
 ## Start here
 
@@ -12,6 +12,7 @@ This is the official **JoomEngine Skills** repository for the **whole Joomla Com
 
 ## Non-negotiable project policy
 
+- Keep JCB at the centre. Use the [request-to-extension workflow](workflows/request-to-extension.md) for application requests; maintain behaviour in blueprint records and supporting source so the compiler can reproduce it. The earlier repository-only authoring MCP scope does not limit these community skills.
 - Investigate supported **Joomla core/framework** capabilities first; then `joomengine/super-powers`, the central shared foundation and reference standard; then specialist Power repositories. Reuse suitable code through composition, dependency injection, or inheritance before creating a new implementation.
 - In a Super Power repository, `settings.json` and `code.power` are authoritative import inputs. Keep generated `code.php`, indexes, and documentation consistent; a PHP-only patch does not update the imported power.
 - For Super Powers, preserve existing GUIDs. Generate new UUIDv4 identifiers with a cryptographically secure system facility and check all registered current indexes plus task-specific repositories before use. Other JCB entities must follow their own module's identity contract; some use natural keys instead of GUIDs. Preserve repository order and provenance when resolving dependencies.

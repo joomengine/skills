@@ -1,5 +1,7 @@
 # JoomEngine Skills
 
+**Joomla Packaging Engine Skills** provides the complete development route around Joomla Component Builder: understand a requested application, reuse existing entities, add custom PHP behaviour, compile and exercise the extension, and deliver maintainable source or installable packages. Start an application request with the [request-to-extension workflow](workflows/request-to-extension.md); use the model routes below for a focused change. JCB authoring records and supporting Power source remain the maintainable source throughout the workflow.
+
 The official [JoomEngine skills repository](https://github.com/joomengine/skills) provides operational guidance for agents working across the **Joomla Component Builder (JCB) ecosystem**. Use [SKILL.md](SKILL.md) as the concise task router, then load only the relevant module, reference and workflow. This repository explains how to locate authoritative sources, make consistent changes and verify the result; it complements JCB source code and its [architecture publication](https://architecture.joomlacomponentbuilder.com/).
 
 **Start with [SKILL.md](SKILL.md) and [AGENTS.md](AGENTS.md), then follow the relevant task below.** Focused skill entry points cover Super Powers, Field Types, Snippets, Packages and shared Playground integration. Consult the [skill registry](registries/skills.json) for entry points and the [module registry](registries/modules.json) for scope and verification status. Follow the [loading guide](standards/skill-loading.md) to supply a complete portable distribution to an agent.
@@ -8,6 +10,7 @@ The official [JoomEngine skills repository](https://github.com/joomengine/skills
 
 | Task | Read next |
 | --- | --- |
+| Build an extension from a user's application requirements | [Request-to-extension workflow](workflows/request-to-extension.md) |
 | Understand, create, extend, maintain, or debug a Super Power repository | [Super Powers skill](super-powers/SKILL.md) |
 | Create or maintain Field Types, research Joomla properties/defaults, or override a core definition | [Field Types skill](field-types/SKILL.md) |
 | Create or maintain reusable view snippets and their classifications | [Snippets skill](snippets/SKILL.md) |
