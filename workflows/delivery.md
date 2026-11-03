@@ -17,6 +17,8 @@ Include only deliverables actually generated. A working source repository is not
 
 Use the actual root's compiler operation and inspect every warning/error. Download each requested extension package through JCB or a verified MCP artifact flow. Record filename, extension version, target Joomla/PHP, source commit/root identity, dependencies and SHA-256. Test installation and the user's actual use cases; successful compilation alone cannot prove payment, shipping, authorisation or stock-synchronisation behaviour.
 
+In Playground, follow the [package-retention procedure](../testing/playground/README.md#6-compile-inspect-install-and-run), including the Code file-download fallback when the embedded compiler link does not produce a file. Retain the artifact before an installation action removes its temporary copy.
+
 Preserve maintained source for every correction. A generated PHP edit in JoomEngine Code must return to the appropriate JCB code field, Power definition, asset source or compiler before the next compile can reproduce it. Record any external integration still requiring the user's account or configuration rather than presenting a simulated result as live acceptance.
 
 ## Back up editable blueprints and supporting entities

@@ -32,6 +32,12 @@ The agent produced a complete local repository containing `StockProvider` and `A
 
 The exercise used the evolving working distribution rather than a frozen checkout; its initial recorded Git HEAD alone does not attest every document read. The resulting local-only source commit was `cfb68d4aa5e81ca4be66c7b2197ecb614148490e`; it is an execution identifier, not a public repository URL. No remote publication was performed. This demonstrates repository authoring and local PHP behaviour, not JCB import, generated class placement, installed Joomla behaviour, stock reservation or the Clothing Store scenario. Those integration stages remain unrun for this candidate. The maintained [composition fixture](../../super-powers/examples/composed-service/README.md) is a separate reproducible source example with its own CI checks.
 
+## Reduced live Notes exercise on 3 November 2026
+
+A separate fresh agent built an administrator-only Notes component through JCB in Playground. After correcting a component/list-view naming collision in maintained source, it compiled and installed the component, created/reopened a 120-character title, edited it, and completed trash/permanent deletion. The actual ZIP was retained and all 101 generated PHP files passed local PHP 8.3.6 lint. A diagnostic upload hung before a server-side invalid-input probe could run; browser required/maxlength behaviour and generated-rule inspection must not be reported as that server test.
+
+The [bounded receipt](notes-admin-verification.md) records identities, mirror revisions, runtime, artifact hash, failure/correction and unrun stages. This narrower administrator task does not implement the public-facing Note Desk brief above. Separately, the [live Power receipt](../playground/power-placement-verification.md) demonstrates one custom administrator PHP class and installed caller; it does not certify the other application scenarios.
+
 ## Record future execution
 
 Follow the [fresh-agent procedure](README.md), retain one receipt per candidate, and link it here with the distribution/source revisions and tested runtime. Report documentation navigation, offline source validation, JCB execution, provider integration, remote source publication and site restoration separately. Add named blockers or failures as soon as they are observed instead of waiting for an overall pass.

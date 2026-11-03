@@ -42,3 +42,9 @@ The screenshot records the selected source, not successful acquisition. **No pac
 Follow [package acceptance](workflows/validate-and-integrate.md) for the candidate being changed. Record import/update, authoring persistence, Push/remote read-back, compilation, installation and runtime separately. A successful reference import will not validate newly authored fixture identities, arbitrary staging branches, external credentials or all sub-models. A package consumer containing Joomla Power tokens does not establish Super Power execution.
 
 The prior shared [Regex receipt](../testing/playground/verification.md) is evidence for its Power import only. No remote package source has been published from the browser exercise, and no issue has been submitted.
+
+## Separate GUI-authored Notes slice — 3 November 2026
+
+A later fresh-agent exercise used the GUI to author a concrete Field, Validation Rule, Admin View and component, then compiled and installed the corrected component and exercised administrator create/reopen/edit/trash/delete. Its generated ZIP was retained and all 101 PHP files passed local lint. See the [Notes receipt](../testing/scenarios/notes-admin-verification.md) for identities, the naming failure and durable correction, artifact hash and the blocked server-boundary probe.
+
+This establishes the named GUI-authoring and administrator runtime slice. It does not resolve the earlier Hello World catalogue-loading result or prove package source import/export, clean-instance reproduction, public views, APIs or the full Note Desk scenario.

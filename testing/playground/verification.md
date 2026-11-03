@@ -65,3 +65,7 @@ node --test test/config.test.mjs test/site-import.test.mjs test/version-catalog.
 **35 tests passed.** These cover current custom HTTP/HTTPS package/checksum handling, public versus private configuration, complete-site metadata and independent restore configuration, malformed/partial ZIP rejection, supported runtime constraints, version-catalogue staged bytes and hash/failure handling. They are pure JavaScript fixture tests, not the upstream full build pinned to Node.js 26.12.1 or a WASM runtime test.
 
 No new browser launch, live native MCP connection, MCP content write, compiler, installed application, complete-site database restoration or repository Push was performed by this refresh. The existing MCP HTTP test was inspected and explicitly expects nested content execution to be rejected; it was not executed here. Retain these boundaries when describing the new documentation's coverage.
+
+## Separate live custom-PHP exercise — 2026-11-03
+
+The later [Administrator Power receipt](power-placement-verification.md) records a separate GUI-authored class compiled into the expected component path, its resolved import/caller, successful installation and an observed dashboard result of `42`. That is live evidence for the named Power and administrator client; it does not expand the scope of the earlier import or offline tests above.
