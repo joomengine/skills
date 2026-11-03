@@ -14,6 +14,7 @@ The implementation baseline is the inspected JCB `6.x` revision, with a comparis
 
 | Task | Required reading |
 | --- | --- |
+| Add application behaviour beyond generated fields, views and CRUD | [Customize an extension](workflows/customize-extension.md): clean classes, JPK/SPK, component/library placement, service construction and real callers |
 | Understand how the files and compiler fit together | [Specification](specification.md), then the relevant [settings](settings-reference.md) |
 | Create a repository from nothing | [Create a repository](workflows/create-repository.md) |
 | Add a new class, interface, trait, or abstraction | [Create a power](workflows/create-power.md) |
@@ -33,6 +34,8 @@ The implementation baseline is the inspected JCB `6.x` revision, with a comparis
 JCB imports **`settings.json` plus `code.power`** through the index. The settings describe identity and structure; `code.power` contains the raw class/interface/trait body. `code.php` is a derived assembled representation useful for review and PHP validation. Editing only that representation leaves the authoritative definition unchanged.
 
 The contract is larger than PHP syntax: index paths, GUIDs, settings relationships, namespace placeholders, imports, aliases, service registrations, and generated output must agree. Valid external dependencies need not be present in the same repository. An empty body can be intentional. Read the exact field semantics before normalizing a seemingly unusual value.
+
+Custom business logic belongs in this source model as well: an extension can combine Joomla types through [Joomla Powers](../joomla-powers/SKILL.md) with newly authored Super Power classes, interfaces and services. [Component Administrator, Site and library placement](workflows/customize-extension.md#choose-a-compiled-location) lets the same authoring mechanism supply application-owned classes and reusable libraries. The [composed-service example](examples/composed-service/README.md) demonstrates a complete two-Power dependency and constructor injection, with a runnable algorithm test.
 
 ## Required engineering decisions
 

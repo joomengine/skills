@@ -9,6 +9,9 @@ Read [scope and baseline](README.md) and the shared [operating contract](../AGEN
 
 | Task | Load and execute |
 | --- | --- |
+| Turn user requirements into a complete extension | [Application workflow](../workflows/request-to-extension.md) |
+| Find reusable entities and adapt their graph safely | [Entity reuse](../standards/entity-reuse.md) |
+| Add custom PHP services, callers and class placement | [PHP customization](../super-powers/workflows/customize-extension.md) |
 | Discover a maintained core mirror or recover public source access | [Shared repository network](../standards/repository-network.md) |
 | Select the correct entity or nested setting | [Model router](models/README.md) and the matching field file in [contract inventory](model-contracts.json) |
 | Understand portable records, indexes and identities | [Serialization and graph contract](specification.md) |

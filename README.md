@@ -11,6 +11,14 @@ The official [JoomEngine skills repository](https://github.com/joomengine/skills
 | Task | Read next |
 | --- | --- |
 | Build an extension from a user's application requirements | [Request-to-extension workflow](workflows/request-to-extension.md) |
+| Reuse an existing entity or create an independent adaptation | [Entity reuse and dependency acquisition](standards/entity-reuse.md) |
+| Add algorithms, integrations and clean PHP classes to an extension | [PHP customization and class placement](super-powers/workflows/customize-extension.md) |
+| Reference supported Joomla classes through JPK | [Joomla Powers skill](joomla-powers/SKILL.md) |
+| Author on the user's Joomla/JCB installation through MCP | [MCP setup, discovery and execution](workflows/mcp.md) |
+| Hand over a compiled extension, blueprint or complete site | [Delivery and verified restoration](workflows/delivery.md) |
+| Try a small, intermediate or e-commerce application request | [Worked scenarios and outcomes](examples/README.md) |
+| Check what an independent agent has actually demonstrated | [Scenario acceptance](testing/scenarios/README.md) and [execution ledger](testing/scenarios/verification.md) |
+| Discover official repository families across the code distributed network | [Ecosystem catalogue](registries/ecosystem-repositories.json) |
 | Understand, create, extend, maintain, or debug a Super Power repository | [Super Powers skill](super-powers/SKILL.md) |
 | Create or maintain Field Types, research Joomla properties/defaults, or override a core definition | [Field Types skill](field-types/SKILL.md) |
 | Create or maintain reusable view snippets and their classifications | [Snippets skill](snippets/SKILL.md) |

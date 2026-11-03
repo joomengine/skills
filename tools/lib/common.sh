@@ -6,7 +6,7 @@ need() { command -v "$1" >/dev/null 2>&1 || fail "Required command missing: $1";
 for required_command in jq realpath sha256sum; do need "$required_command"; done
 # Deliberately bounded public HTTPS syntax. Does not prove ownership or DNS reachability.
 public_repository_url() {
-	jq -e 'type=="string" and test("^https://([A-Za-z0-9]([A-Za-z0-9-]*[A-Za-z0-9])?\\.)+[A-Za-z][A-Za-z0-9-]*(:[0-9]{1,5})?/[A-Za-z0-9._~/-]+$") and (test("(^|/)\\.\\.?(/|$)")|not) and (capture("^https://[^/:]+(?::(?<port>[0-9]+))?/")|if .port==null then true else (.port|tonumber)>0 and (.port|tonumber)<=65535 end)' >/dev/null
+	jq -e 'type=="string" and test("^https://([A-Za-z0-9]([A-Za-z0-9-]*[A-Za-z0-9])?\\.)+[A-Za-z][A-Za-z0-9-]*(:[0-9]{1,5})?/[A-Za-z0-9._~/-]+$") and (test("(^|/)\\.\\.?(/|$)")|not) and (capture("^https://[^/:]+(?::(?<port>[0-9]+))?/")|if .port==null then true else (.port|tonumber)>0 and (.port|tonumber)<=65535 end) and (capture("^https://(?<host>[^/:]+)").host|ascii_downcase|. != "git.vdm.dev" and (endswith(".git.vdm.dev")|not))' >/dev/null
 }
 read_fetch_sources() {
 	local source_file=$1 registry=$2 source_map unknown url
@@ -16,7 +16,7 @@ read_fetch_sources() {
 	unknown=$(jq -r --slurpfile registry "$registry" 'keys[] as $id | select([$registry[0].repositories[].id]|index($id)==null)|$id' <<<"$source_map")
 	[[ -z $unknown ]] || fail "Source map has unknown registry IDs: $unknown"
 	while IFS= read -r url; do
-		public_repository_url <<<"$url" || fail 'Source map URLs must be public HTTPS repository URLs without credentials, query, fragment, whitespace or traversal'
+		public_repository_url <<<"$url" || fail 'Source map URLs must be public HTTPS repository URLs without credentials, query, fragment, whitespace, traversal or the agent-excluded git.vdm.dev host'
 	done < <(jq -c '.[]' <<<"$source_map")
 	printf '%s\n' "$source_map"
 }
@@ -26,15 +26,18 @@ validate_fetch_urls() {
 }
 fetch_public_branch() {
 	local directory=$1 url=$2 branch=$3 mapped=$4 effective_url
+	# Inspect URL rewrites without a request, including scp-style/SSH rewrites.
+	# Never print this value: caller configuration may embed credentials.
+	effective_url=$(git -C "$directory" ls-remote --get-url "$url") || fail 'Cannot determine effective Git URL'
+	if jq -R -e 'try (capture("^(?:[A-Za-z][A-Za-z0-9+.-]*://)?(?:[^/@]+@)?(?<host>[^/:]+)").host|ascii_downcase|rtrimstr(".")|. == "git.vdm.dev" or endswith(".git.vdm.dev")) catch false' <<<"$effective_url" >/dev/null; then
+		fail 'Agent policy excludes git.vdm.dev; refusing effective fetch destination'
+	fi
 	if [[ $mapped == true ]]; then
 		need timeout
-		# --get-url expands insteadOf rules without contacting the remote. Never
-		# print a rewritten value: caller configuration may embed credentials.
-		effective_url=$(git -C "$directory" ls-remote --get-url "$url") || fail 'Cannot determine effective mapped Git URL'
 		[[ $effective_url == "$url" ]] || fail 'Git URL rewriting changes the explicitly selected source; refusing mapped fetch'
 		GIT_TERMINAL_PROMPT=0 GIT_ASKPASS=/bin/false timeout --signal=TERM --kill-after=5s 60s git -C "$directory" -c core.hooksPath=/dev/null -c protocol.file.allow=never -c credential.helper= -c http.extraHeader= -c http.followRedirects=false fetch -q --depth=1 --no-tags "$url" "refs/heads/$branch"
 	else
-		git -C "$directory" -c core.hooksPath=/dev/null -c protocol.file.allow=never fetch -q --depth=1 --no-tags "$url" "refs/heads/$branch"
+		git -C "$directory" -c core.hooksPath=/dev/null -c protocol.file.allow=never -c http.followRedirects=false fetch -q --depth=1 --no-tags "$url" "refs/heads/$branch"
 	fi
 }
 safe_file() {

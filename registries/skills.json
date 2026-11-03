@@ -7,6 +7,7 @@
   "skills": [
     {"name": "joomengine-jcb", "path": "SKILL.md", "role": "ecosystem-router"},
     {"name": "super-powers", "path": "super-powers/SKILL.md", "role": "model"},
+    {"name": "joomla-powers", "path": "joomla-powers/SKILL.md", "role": "model"},
     {"name": "field-types", "path": "field-types/SKILL.md", "role": "model"},
     {"name": "snippets", "path": "snippets/SKILL.md", "role": "model"},
     {"name": "packages", "path": "packages/SKILL.md", "role": "model"},

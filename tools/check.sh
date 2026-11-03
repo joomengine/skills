@@ -48,6 +48,9 @@ if [[ -f $root/packages/model-contracts.json ]]; then
 	while IFS= read -r destination; do safe_file "$root/packages" "$destination" >/dev/null; done < <(jq -r '.entities[]|.reference,.guide,.schema' "$root/packages/model-contracts.json")
 fi
 bash "$root/tests/run-fetch-tests.sh"
+bash "$root/tests/run-network-tests.sh"
+bash "$root/joomla-powers/tests/run-mapping-tests.sh"
+php "$root/super-powers/examples/composed-service/smoke.php"
 bash "$root/tests/run-tests.sh"
 bash "$root/tests/run-entity-tests.sh"
 bash "$root/tests/run-package-tests.sh"

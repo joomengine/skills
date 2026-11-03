@@ -3,6 +3,20 @@
   "purpose": "Task routing and evidence status for JoomEngine JCB skills and operational modules; not a JCB runtime configuration.",
   "modules": [
     {
+      "id": "joomla-powers",
+      "path": "joomla-powers",
+      "entrypoint": "joomla-powers/README.md",
+      "skill_entrypoint": "joomla-powers/SKILL.md",
+      "status": "in-progress",
+      "scope": "Discover, reference, author and validate Joomla Power mappings from JPK identities to version-appropriate Joomla platform namespaces; distinct from custom Super Power class implementations.",
+      "source_baseline": "joomla-powers/sources.md",
+      "test_workflow": "joomla-powers/workflows/validate-and-integrate.md",
+      "verification": {
+        "static": "Source-derived contract and 13 offline mapping tests passed; see joomla-powers/sources.md for the executed checks and limits.",
+        "integration": "No candidate Joomla Power import, compilation or installed runtime result is claimed. Follow the model acceptance workflow."
+      }
+    },
+    {
       "id": "super-powers",
       "path": "super-powers",
       "entrypoint": "super-powers/README.md",

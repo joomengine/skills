@@ -79,3 +79,7 @@ The checked-in examples are selected specimens with identified roles and provena
 - Source comparisons and checked-in fixtures do not substitute for importing a changed Power into JCB, compiling a consumer, and exercising its affected behaviour. Report unavailable integration checks explicitly.
 - The architecture publication has its own edition and evidence scope. Its older compiler pin and integrated extrusion fingerprints must not be relabeled as a full audit of the current branch.
 - No identity catalogue can prove universal uniqueness outside the repositories inspected. Secure UUIDv4 generation plus the required live collision checks is the authoring policy; it is not a claim of exhaustive global discovery.
+
+## Customization source refresh — 2026-11-03
+
+For the [application customization workflow](workflows/customize-extension.md), a fresh GitHub branch lookup of `joomengine/Joomla-Component-Builder:6.x` returned the same `408703a857ad937479b1e28de7f693af178dcc83` baseline. `Compiler/Power::setNamespace`, `Compiler/Joomla/Path::core`, `Compiler/Power/Structure::build`, the generated Power autoloader and `Compiler/Config::getAddpower` were reinspected locally at that commit. The workflow records exact source links and the distinction between predicted paths and observed compiled output. The composed-service fixture is newly authored documentation material, not copied upstream code; its scope and executed checks are recorded in [verification](verification.md).

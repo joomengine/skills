@@ -11,6 +11,7 @@ Record the target repository and branch, requested behaviour, existing identity 
 
 | Task | Load and follow |
 | --- | --- |
+| Add application algorithms, integrations or services to a JCB extension | [Customize an extension](workflows/customize-extension.md): JPK/SPK choice, Administrator/Site/library placement, constructor injection, real callers and regeneration |
 | Discover a maintained core mirror or recover public source access | [Shared repository network](../standards/repository-network.md) |
 | Start an empty repository | [Create a repository](workflows/create-repository.md) |
 | Add a class, interface or trait | [Create a Power](workflows/create-power.md) and affected [settings fields](settings-reference.md) |
@@ -24,6 +25,7 @@ Preserve these boundaries:
 - Edit `settings.json` and the raw declaration body in `code.power`; keep the index and derived `code.php` consistent. A complete PHP file is not a raw Power body, and an empty body can be valid.
 - Preserve an existing GUID. Allocate a distinct new UUIDv4 through `tools/new-power-guid.sh` using a current complete catalogue and all local unpublished additions; follow the creation workflow rather than copying fixture IDs.
 - Keep portable placeholders and documented null/empty/sentinel values. Do not replace a portable namespace with one observed in a single compiled component.
+- Keep domain behaviour in cohesive PHP Powers and connect it through the owning JCB model. Select compiled placement through the documented namespace template; neither including a class nor importing a provider registers its services. Use [Joomla Powers](../joomla-powers/SKILL.md) for existing Joomla type mappings.
 - Research Joomla first, then the central `joomengine/super-powers` foundation, then specialist repositories. Preserve ordered resolution and shadowed provenance; a catalogue membership check is not full dependency compatibility or closure.
 
 Run commands from the checkout root using [tools/README.md](../tools/README.md). Validate the complete candidate with `tools/validate-power-repository.sh`, using the actual repository and catalogue paths. Resolve failures or report the specific unsupported transformation; inspect explicitly skipped PHP checks. Load another model's skill only when an actual dependency or consumer requires it.

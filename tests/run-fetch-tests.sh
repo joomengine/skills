@@ -40,7 +40,9 @@ case $command in
 	check-ref-format) exit 0 ;;
 	init) mkdir -p "${@: -1}" ;;
 	ls-remote)
-		if [[ ${FETCH_MOCK_REWRITE:-0} == 1 ]]; then
+		if [[ ${FETCH_MOCK_BLOCKED_REWRITE:-0} == 1 ]]; then
+			printf 'git@GIT.VDM.DEV:joomla/blocked.git\n'
+		elif [[ ${FETCH_MOCK_REWRITE:-0} == 1 ]]; then
 			"$FETCH_REAL_GIT" -C "$directory" -c 'url.https://rewrite-user:rewrite-password@rewrite.example/.insteadOf=https://mirror.example/' ls-remote --get-url "${@: -1}"
 		else printf '%s\n' "${@: -1}"; fi ;;
 	fetch)
@@ -116,10 +118,13 @@ expect 1 'Unknown source-map ID is rejected before fetching' bash "$root/tools/f
 # These expressions intentionally expand only in the child Bash invocation.
 # shellcheck disable=SC2016
 expect 0 'Invalid mapping makes no fetch request or output directory' bash -c '[[ ! -s $1 && ! -e $2 ]]' _ "$FETCH_MOCK_LOG" "$work/unknown"
-for url in 'http://mirror.example/project.git' 'https://user:secret@mirror.example/project.git' 'https://mirror.example/project.git?token=secret' 'https://mirror.example/project.git#fragment' 'https://mirror.example/../project.git' 'https://mirror.example/project git' 'https://mirror.example:99999/project.git'; do
+for url in 'http://mirror.example/project.git' 'https://user:secret@mirror.example/project.git' 'https://mirror.example/project.git?token=secret' 'https://mirror.example/project.git#fragment' 'https://mirror.example/../project.git' 'https://mirror.example/project git' 'https://mirror.example:99999/project.git' 'https://git.vdm.dev/joomla/project.git' 'https://GIT.VDM.DEV:443/joomla/project.git' 'https://git.vdm.dev./joomla/project.git' 'https://backup.git.vdm.dev/joomla/project.git'; do
 	jq -n --arg url "$url" '{"joomengine/joomla-fieldtypes":$url}' > "$work/bad.json"
 	expect 1 "Unsafe source URL rejected: ${url%%[?#]*}" bash "$root/tools/fetch-entity-catalog.sh" field-types "$work/rejected" "$work/fields.json" --sources "$work/bad.json"
 done
+# The complete rejected set above must not have made even one Git fetch.
+# shellcheck disable=SC2016
+expect 0 'Excluded and malformed source URLs make no network request' bash -c '[[ ! -s $1 ]]' _ "$FETCH_MOCK_LOG"
 printf '[]\n' > "$work/bad.json"
 expect 1 'Source map must be an object' bash "$root/tools/fetch-power-catalog.sh" "$work/bad-shape" "$work/powers.json" --sources "$work/bad.json"
 printf '{}\n{}\n' > "$work/bad.json"
@@ -137,6 +142,12 @@ expect 0 'Failed entity source preserves attempted order without fallback or out
 # Original positional calls remain valid, now recording canonical fetch_url too.
 expect 0 'Unmapped legacy Power invocation remains compatible' bash "$root/tools/fetch-power-catalog.sh" "$work/default-power" "$work/powers.json"
 expect 0 'Unmapped catalogs explicitly record canonical transport' jq -e 'all(.repositories[]; .fetch_url==.url)' "$work/default-power/manifest.json"
+: > "$FETCH_MOCK_LOG"
+export FETCH_MOCK_BLOCKED_REWRITE=1
+expect 1 'Unmapped Git rewriting cannot route an agent to an excluded SSH host' bash "$root/tools/fetch-power-catalog.sh" "$work/blocked-rewrite" "$work/powers.json"
+unset FETCH_MOCK_BLOCKED_REWRITE
+# shellcheck disable=SC2016
+expect 0 'Excluded rewritten destination is rejected before network access' bash -c '[[ ! -s $1 && ! -e $2 ]]' _ "$FETCH_MOCK_LOG" "$work/blocked-rewrite"
 : > "$FETCH_MOCK_LOG"
 export FETCH_MOCK_REWRITE=1
 expect 1 'Real Git insteadOf rewriting is rejected before a mapped fetch' bash "$root/tools/fetch-power-catalog.sh" "$work/rewritten" "$work/powers.json" --sources "$work/power-sources.json"

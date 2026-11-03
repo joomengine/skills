@@ -1,0 +1,11 @@
+{
+    "system_name": "JText",
+    "settings": {
+        "settings0": {
+            "namespace": "Joomla\\CMS\\Language\\Text",
+            "joomla_version": "0"
+        }
+    },
+    "guid": "ba6326ef-cb79-4348-80f4-ab086082e3c5",
+    "description": "The core Joomla Text class."
+}
