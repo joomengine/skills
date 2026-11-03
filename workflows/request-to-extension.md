@@ -50,6 +50,8 @@ Preserve unchanged shared identities. Create a fresh collision-checked identity 
 
 Map each requested capability to the [model router](../packages/models/README.md) and exact [field contract](../packages/model-contracts.json). Keep this mapping brief and specific to the application:
 
+Choose component and view code names together. Reserve the standard dashboard's component code name, avoid generated class/path collisions, and keep visible product names separate from those internal identifiers; follow [component naming](../packages/models/component.md#root-identity-and-build-settings).
+
 - Model stored data with concrete Fields, Field Types and Admin Views. Attach records through their actual association settings. Decide whether repeating data is stored in JSON or in related rows according to query, lifecycle and API needs; a visible subform alone does not prove a separate table or endpoint exists.
 - Model public behaviour with Site Views, Dynamic Gets, Layouts, Templates, assets and router configuration. Model administrator workflows, permissions, imports and configuration alongside their data.
 - Put algorithms, business rules and integrations in cohesive PHP classes using [Super Powers](../super-powers/SKILL.md). Use [Joomla Powers](../joomla-powers/SKILL.md) for target-appropriate Joomla class references. Keep controllers, views and generated hooks focused on calling those services. Follow the [customization workflow](../super-powers/workflows/customize-extension.md) for exact Power placement, namespace, autoload and service wiring supported by the target compiler.
