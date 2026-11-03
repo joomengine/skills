@@ -1,0 +1,29 @@
+{
+  "system_name": "JoomEngine.Examples.LineTotal",
+  "namespace": "[[[NamespacePrefix]]]\\Joomla\\SkillExample\\LineTotal",
+  "type": "final class",
+  "power_version": "1.0.0",
+  "load_selection": null,
+  "description": "Documentation fixture: line pricing through an injected provider.\n\n@since 1.0.0",
+  "composer": [],
+  "licensing_template": "/**\n * @package    JCB.AiDoc.Examples\n * @license    CC0-1.0; see LICENSE\n */\n",
+  "extendsinterfaces_custom": "",
+  "add_head": 0,
+  "extends": "",
+  "extendsinterfaces": null,
+  "extends_custom": "",
+  "implements_custom": "",
+  "implements": null,
+  "property_selection": null,
+  "method_selection": null,
+  "head": "",
+  "use_selection": [
+    {
+      "use": "20d6e122-d419-4f2d-acfb-a5c1819fc2d1",
+      "as": "default"
+    }
+  ],
+  "add_licensing_template": 2,
+  "guid": "06847141-791d-4482-8640-fc8bf1bf9037",
+  "name": "LineTotal"
+}

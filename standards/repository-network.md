@@ -4,6 +4,8 @@ Use the maintained network for public core repository reads when it can reduce G
 
 This is a shared retrieval workflow for every model. A mirror supplies another route to an existing logical repository. Preserve the model's identities, file contracts, source attribution, repository precedence and validation requirements. Read access through a mirror does not select a contribution destination or authorize Push.
 
+**Host policy:** agents must never access, probe, clone, configure for acquisition or publish to `git.vdm.dev`, including when discovery advertises it as online. It is reserved for the maintainer's internal backup and human interaction. Exclude that host before selecting any normal or recovery source. Human-facing issue links may remain links for the user; agents must not open or submit through them. This policy is stronger than the inspected JCB runtime's default exclusion and must be applied independently.
+
 ## Contents
 
 - [Discover targets and interpret status](#discover-targets-and-interpret-status)
@@ -36,6 +38,8 @@ The response contains repository locations and availability. It does not carry a
 
 These mappings identify the current core resources. Refresh discovery before selecting a mirror; additional targets may appear without a skills release.
 
+The [ecosystem repository registry](../registries/ecosystem-repositories.json) routes every documented family to its canonical catalogue, including the specialist Power repository registry. It describes logical roles, not an exhaustive list of network endpoints. Enumerate **all** returned `targets` on each discovery snapshot so new families remain visible; load their documented format before consuming them. The separate Repositories catalogue supplies JCB repository setup records, while the network API supplies advertised locations and monitored health. Neither is a substitute for inspecting the actual model index and payload.
+
 | Task / logical core repository | Network target | Relevant index |
 | --- | --- | --- |
 | Super Powers: `joomengine/super-powers` | `super-powers` | `super-powers.json` |
@@ -43,10 +47,12 @@ These mappings identify the current core resources. Refresh discovery before sel
 | Snippets: `joomengine/snippets` | `snippets` | `snippet-index.json`, `snippet-type.json` |
 | Default Packages: `joomengine/packages` | `packages` | Entity-specific files under `index/` |
 | Joomla Powers | `joomla-powers` | Follow the actual Joomla Power source contract; this is distinct from Super Powers |
-| Specialist Power catalogues | Discover the corresponding target, such as `gitea`, `openai`, `search` or `phpseclib` | Verify the catalogue's format and logical identity |
+| Specialist Power catalogues: Gitea, OpenAI, Search, phpseclib, PSR and Minify | Discover the corresponding target when advertised; see the [Power registry](../registries/power-repositories.json) | `super-powers.json` for these documented sources; missing discovery targets do not remove required repositories |
 | Repository discovery | Inspect `repoindex` / `repositories` when returned | Inspect the advertised repository's own documentation |
 
 Use each node's **exact `url`**. Do not construct a mirror by replacing `github.com` in a URL: inspected mirrors commonly use `/joomla/<repository>`, while GitHub sources use `/joomengine/<repository>`. The inspected `repositories` target points to a repository named `repoindex`, demonstrating why target and path must not be assumed equal. A similar name on another forge is not sufficient evidence of a maintained mirror.
+
+Among suitable status-1 nodes, prefer `codefloe.com`, then `codeberg.org`, then another advertised accessible host. This is the maintainer's preference, not a priority promised by API order. Use a preferred host only when its exact repository URL is advertised for that target or separately established as the authorised source. An online alternative comes before an offline preferred host. Never invent a Codefloe URL because it is preferred; new endpoints are being added over time. Keep repository **content precedence** unchanged when selecting a different read transport.
 
 Apply a default-core mirror only to the corresponding core source. It does not replace a user's custom fork, unmerged changes, arbitrary package collection or private dependency. `joomengine/joomla-packages` and the separate Hello World repository are distinct sources; do not substitute the `packages` target for them. If the requested source is absent from discovery, retain its authorized source and report any access gap. Follow the model's collision-check rules across core, additional repositories and local unpublished records. Mirrors of the same core are alternative transports, not new independent catalogues or higher-priority overrides.
 
@@ -58,8 +64,7 @@ An agent may perform discovery with any supported read-only HTTP client. The rep
 set -euo pipefail
 network_dir=$(mktemp -d "${TMPDIR:-/tmp}/jcb-network.XXXXXX")
 network_url=https://api.joomlacomponentbuilder.com/v1/network/community/jcb/
-curl --fail --silent --show-error --location --max-redirs 3 \
-	--proto '=https' --proto-redir '=https' \
+curl --fail --silent --show-error --proto '=https' \
 	--connect-timeout 10 --max-time 30 \
 	--output "$network_dir/project.pending.json" "$network_url"
 jq -e -s '
@@ -83,16 +88,13 @@ printf 'Discovery receipt: %s\n' "$network_dir"
 
 Reuse this snapshot across targets in the same acquisition phase. Keep the response and observation time with the task evidence. Refresh after a failed endpoint, a resumed task or before a final freshness-sensitive identity check; do not label a cached status as freshly observed. Refreshing discovery updates endpoint-health evidence only. A final new-identity collision check also needs freshly fetched required indexes; never update an old catalogue timestamp merely because discovery succeeded. Record unresolved synchronization uncertainty. This is an agent workflow policy, not a cache lifetime promised by the service. Prefer an existing suitable checkout and local searches to another remote request.
 
-The following complete example selects an advertised online Field Type mirror and uses it to fetch the official catalogue. The first eligible node is a candidate, not an API-guaranteed priority or fastest endpoint. Inspect the printed URL; use another advertised candidate if it is unsuitable. Prefer community hosts over concentrating routine load on `git.vdm.dev`.
+The following complete example selects an advertised online Field Type mirror and uses it to fetch the official catalogue. The selector reads only the saved JSON; it opens no connections and works with newly discovered target names without a skills update. It excludes the agent-forbidden host, credential-bearing or malformed URLs, sorts by the host policy, and preserves the exact node URL. Inspect the selected URL and required revision; it is a candidate, not proof of availability or equivalent bytes.
 
 ```bash
 network_target=joomla-fieldtypes
-mirror_url=$(jq -er --arg target "$network_target" '
-	[.targets[] | select(.target == $target) | .network[] |
-		select(.status == 1) |
-		select(.url | startswith("https://git.vdm.dev/") | not)][0].url
-	// error("No eligible monitored-online mirror; use the recovery workflow")
-' "$network_dir/project.json")
+bash tools/network-candidates.sh "$network_dir/project.json" "$network_target" \
+	> "$network_dir/candidates.json"
+mirror_url=$(jq -er '.[0].url' "$network_dir/candidates.json")
 printf 'Selected %s: %s\n' "$network_target" "$mirror_url"
 jq -n --arg url "$mirror_url" \
 	'{"joomengine/joomla-fieldtypes": $url}' > "$network_dir/sources.json"
@@ -103,6 +105,8 @@ jq '.repositories[] | {id, url, fetch_url, branch, commit, indexes}' \
 ```
 
 `--sources` is an explicit canonical-repository-ID → retrieval-URL map. The fetcher retains canonical `id`/`url`, order and the registry's branch, and records the actual `fetch_url`, fetched commit and index hashes. Both catalogue fetchers support it; see [tools](../tools/README.md) for the exact arguments. Mapped repositories use that transport; unmapped repositories still use their registered source. An override failure fails the fetch rather than silently substituting different bytes. A catalogue is published only after all required sources pass.
+
+`network-candidates.sh` exits `0` with eligible nodes, `1` for invalid arguments or malformed discovery data, and `2` with `[]` when no eligible node remains. An absent target also returns `2`; no URL is guessed. Only during the bounded recovery below, append `--include-offline` to list status-0 candidates after all online candidates. This flag never permits the excluded host. The catalogue fetchers independently reject that host in source maps and effective Git rewrites, and disable automatic HTTP redirects. Inspect an unexpected redirect explicitly rather than allowing it to silently change the source.
 
 These tools already use Git transport rather than GitHub REST to read indexes. A mirror override reduces GitHub-hosted reads as well. A complete Super Power catalogue still requires every registered source: when discovery has no mirror for a required specialist repository, a partial mirror map does not remove that requirement. Do not fabricate a live manifest or mark an incomplete collision scan complete.
 
@@ -124,9 +128,9 @@ For an intentional fork override, preserve its distinct provenance and position.
 
 ## Handle unavailable endpoints
 
-1. Try a suitable status-1 endpoint for the exact target. Keep timeouts bounded, inspect the Git/HTTP result and validate that the response is the expected data rather than an HTML error page.
+1. Exclude `git.vdm.dev` in every path, then try a suitable status-1 endpoint for the exact target using the host preference above. Keep timeouts bounded, inspect the Git/HTTP result and validate that the response is the expected data rather than an HTML error page.
 2. On an ordinary unavailable/rate-limited read, preserve the failure, refresh discovery once and try another suitable advertised node. Respect any retry timing and host/client access restrictions. Changing transport is not permission to bypass an access control or browser security challenge.
-3. If no online node works, a status-0 node may receive one bounded read probe per candidate during this recovery cycle. A successful read is evidence that it was reachable for that operation; preserve the API's reported `0` alongside the observation. Do not rewrite the service's status or poll all offline hosts continuously.
+3. If no online node works, an eligible status-0 node may receive one bounded read probe per candidate during this recovery cycle. The excluded host remains forbidden regardless of status or absence of alternatives. A successful read is evidence that it was reachable for that operation; preserve the API's reported `0` alongside the observation. Do not rewrite the service's status or poll all offline hosts continuously.
 4. If the API is unavailable, a previously saved discovery receipt or known authorized checkout can help, with its age and status explicitly marked stale/unknown. Check the requested revision locally. If live acquisition remains unavailable, state which checks cannot finish; never manufacture a successful fresh catalogue.
 5. If the target is absent, stop guessing URL suffixes. Rediscover the project and use the exact target or the independently authorized source. The documented API uses HTTP 403 for unknown system/project/target and HTTP 400 for an invalid status filter; a discovery 403 alone does not establish a GitHub rate limit.
 
@@ -139,6 +143,8 @@ Read the [Playground procedure](../testing/playground/README.md) and the selecte
 For an advertised URL such as `https://codeberg.org/joomla/packages`, the repository base is `https://codeberg.org`, organization is `joomla`, and repository name is `packages`. Select the actual provider supported by the installed JCB version (Gitea-compatible for this example), then the model's repository area/target separately. Do not place the whole repository URL or the network API URL into the base field; do not append `/api/v1` unless that installed field explicitly requires it.
 
 Set and verify the intended **read branch**, published state and effective order. Leave write branch/token empty for a read-only core mirror. Check that a changed host does not retain an unrelated credential. Keep private/custom repositories and staging branches on their actual authorized sources. Use the model's index and expected identity to verify acquisition, then inspect persisted data and the real generated consumer. For Packages, audit all eligible writable repositories before any authorized Push; a mirror selection for reading must not create another export destination.
+
+Inspect existing enabled connections before import or compile. If they point to `git.vdm.dev`, replace the read transport with an eligible discovered mirror, or disable that connection if it is not required. If it is required and no authorised replacement works, record the missing source and stop that dependent operation. Do not start JCB acquisition on the assumption that its runtime will always apply the same exclusion policy. Follow [entity reuse](entity-reuse.md) to acquire only the required models and preserve locally available definitions.
 
 ## Understand JCB's network integration
 
@@ -153,6 +159,8 @@ JCB itself uses this service. The following are source observations at `6.x@4087
 These source findings aid diagnosis. Prepare a minimal reproduction for [human-led JCB issue submission](../testing/reporting-issues.md) where relevant; this documentation does not patch the JCB runtime.
 
 ## Evidence and maintenance
+
+On **2026-11-03**, a direct HTTPS GET of the project discovery endpoint returned a valid `jcb` response with 11 targets. Both `repoindex` and `repositories` were present, with the latter pointing to a `repoindex` repository; Codeberg was advertised and Codefloe was not yet present in this snapshot. This is a dated observation only. No excluded host was contacted, and absent future targets or Codefloe entries must not be inferred unavailable permanently. The maintained selector's offline tests cover unknown future target names, host preference, offline recovery, absent/blocked-only results, malformed input and forbidden URL forms. These checks establish selection behaviour, not live repository availability or a JCB import/compile pass.
 
 On **2026-10-31**, direct project discovery returned HTTP 200 with 11 targets. Target-specific requests for `packages`, `snippets` and `joomla-fieldtypes` returned JSON; both status-filtered Super Power requests returned only their requested status. Counts and online/offline states are observations, not a static endpoint registry. The API documentation's source link led to a general organization page; no specific backend source revision was established.
 

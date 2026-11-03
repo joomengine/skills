@@ -1,0 +1,50 @@
+	/**
+	 * @var    UnitPriceProvider
+	 * @since  1.0.0
+	 */
+	private UnitPriceProvider $prices;
+
+	/**
+	 * Inject the pricing boundary; the application supplies its adapter.
+	 *
+	 * @param   UnitPriceProvider  $prices  Current server-side prices.
+	 * @since   1.0.0
+	 */
+	public function __construct(UnitPriceProvider $prices)
+	{
+		$this->prices = $prices;
+	}
+
+	/**
+	 * Calculate a line total without taxes, shipping or stock reservation.
+	 *
+	 * @param   string  $sku       Exact variant identifier.
+	 * @param   int     $quantity  Positive number of units.
+	 * @return  int               Total in integer minor currency units.
+	 * @throws  \InvalidArgumentException  For empty SKUs or invalid quantities.
+	 * @throws  \UnexpectedValueException  For a negative adapter price.
+	 * @throws  \OverflowException         If the total exceeds PHP_INT_MAX.
+	 * @throws  \OutOfBoundsException      When the adapter cannot find the SKU.
+	 * @since   1.0.0
+	 */
+	public function calculate(string $sku, int $quantity): int
+	{
+		if (trim($sku) === '' || $quantity < 1)
+		{
+			throw new \InvalidArgumentException('A SKU and positive quantity are required.');
+		}
+
+		$unitPrice = $this->prices->unitPrice($sku);
+
+		if ($unitPrice < 0)
+		{
+			throw new \UnexpectedValueException('The unit price must not be negative.');
+		}
+
+		if ($unitPrice !== 0 && $quantity > intdiv(PHP_INT_MAX, $unitPrice))
+		{
+			throw new \OverflowException('The line total exceeds the supported integer range.');
+		}
+
+		return $unitPrice * $quantity;
+	}

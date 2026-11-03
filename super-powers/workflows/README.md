@@ -4,6 +4,7 @@ These procedures apply to PHP Super Power repositories. They do not describe Joo
 
 | Task | Procedure | Completion artifact |
 | --- | --- | --- |
+| Implement application-specific behaviour | [Customize an extension](customize-extension.md) | Maintained PHP Powers, explicit compiled placement, caller/service wiring and consumer verification |
 | Start with no repository content | [Create a repository](create-repository.md) | A documented repository with a valid index, first useful power, and declared dependencies |
 | Add a new reusable unit | [Create a power](create-power.md) | New identity, source pair, index record, PHP representation, and documentation |
 | Repair or improve an existing power | [Maintain and debug](maintain-and-debug.md) | An explained source-level change with preserved identity and relevant regression evidence |

@@ -1,0 +1,11 @@
+	/**
+	 * Return the current unit price in integer minor currency units.
+	 *
+	 * The caller selects one currency; missing variants must throw.
+	 *
+	 * @param   string  $sku  Exact product variant identifier.
+	 * @return  int          Nonnegative minor-unit amount.
+	 * @throws  \OutOfBoundsException  When the variant does not exist.
+	 * @since   1.0.0
+	 */
+	public function unitPrice(string $sku): int;

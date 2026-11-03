@@ -51,3 +51,17 @@ The [source map](sources.md) pins the Playground implementation inspected for co
 The documentation expansion passed `tools/check.sh` with jq 1.8.1 and PHP 8.3.6 (75 regression checks), ShellCheck and whitespace checks. Four independent temporary-copy probes confirmed that the checker rejects a missing `test_workflow`, a traversing path, a nonexistent file and a symlink escaping the repository. All ten documented setup links were parsed and normalized against the pinned Playground configuration implementation and checked against its version/deployment catalogue, including the encoded compiler route. These were offline checks; they did not launch those ten environments or exercise the browser workflows.
 
 The project now has a demonstrated browser integration route. Each contribution must use its module's own acceptance procedure and retain a fresh result for the changed identities and revisions. The [Super Powers](../../super-powers/workflows/validate-and-integrate.md), [Field Types](../../field-types/workflows/validate-and-integrate.md) and [Snippets](../../snippets/workflows/integrate.md) workflows define the remaining model-specific checks. Unperformed stages remain explicit even when another stage passes.
+
+## 2026-11-03 source and offline workflow refresh
+
+Inspected Playground `58b21b3d61c7415c231f8d180c388409b4910d74`, native MCP component `f1375656ea4f1f62955253a6b5daa0979e9c6cb5` and the TypeScript predecessor notice at `8a2dc91cec01244950a544517fe907d41406ff5f`. Updated the configuration, database inspection, MCP capability gate and delivery instructions using the [source ledger](sources.md#current-workflow-refresh-2026-11-03) and [native MCP evidence](../../workflows/mcp.md#source-evidence).
+
+Ran the following existing upstream tests against that isolated Playground source checkout with Node.js 24.22.1 and its available `fflate` 0.8.3 dependency:
+
+```bash
+node --test test/config.test.mjs test/site-import.test.mjs test/version-catalog.test.mjs
+```
+
+**35 tests passed.** These cover current custom HTTP/HTTPS package/checksum handling, public versus private configuration, complete-site metadata and independent restore configuration, malformed/partial ZIP rejection, supported runtime constraints, version-catalogue staged bytes and hash/failure handling. They are pure JavaScript fixture tests, not the upstream full build pinned to Node.js 26.12.1 or a WASM runtime test.
+
+No new browser launch, live native MCP connection, MCP content write, compiler, installed application, complete-site database restoration or repository Push was performed by this refresh. The existing MCP HTTP test was inspected and explicitly expects nested content execution to be rejected; it was not executed here. Retain these boundaries when describing the new documentation's coverage.

@@ -69,3 +69,11 @@ The final static tool run against the seven recorded source snapshots produced t
 The shared-foundation failure is a source/representation consistency finding, not evidence that JCB reads `code.php`. The complete source survey and the validator's first-failure behaviour are different forms of evidence.
 
 The validators remain bounded static tools: unknown compiler transformations, full import/alias/inheritance semantics, dependency closure beyond available catalogues, PHP/Joomla version compatibility and runtime behaviour need the documented integration checks. Read the tool's explicit limitations before treating a pass as evidence for a broader claim.
+
+## Application customization expansion — 2026-11-03
+
+The current public `joomengine/Joomla-Component-Builder:6.x` head was resolved through the GitHub connector to `408703a857ad937479b1e28de7f693af178dcc83`. The [customization workflow](workflows/customize-extension.md) was checked against that source's namespace preparation, Joomla path resolver, file structure builder, autoloader, compiler switches and token injectors. Administrator/Site/library rows are source-derived expected output; they are not recorded compiled-path observations.
+
+The [composed-service fixture](examples/composed-service/README.md) passed **10 behavioural cases on PHP 8.3.6**. The standard Power repository validator passed for both complete definitions: **2 Powers, 2 PHP syntax checks, 0 bodies requiring deferred compiler comparison**, using the previously saved, hash-checked catalogue snapshot from the original module review. Its sole Power dependency resolves within the fixture. That snapshot was not refreshed for this exercise, and the two newly generated fixture-only identities are not claimed to have passed a fresh global collision scan or to be published production Powers.
+
+The tests demonstrate constructor composition, integer-minor-unit arithmetic and its invalid-input, missing-variant and overflow behavior in the assembled inspection PHP. They do not exercise a real Joomla price adapter, Joomla DI, JPK mapping, candidate import, compiled placement, installation or an actual UI/API caller. Those stages remain subject to the [consumer acceptance procedure](workflows/validate-and-integrate.md). The earlier upstream Regex import does not change this fixture's verification status.

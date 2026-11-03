@@ -4,7 +4,7 @@
 
 **Project policy:** when implementation work calls for JCB integration testing, use an available suitable Playground/browser environment within the user's authorization. Continue ordinary test setup and reversible test changes without adding an approval pause. Respect an explicit opt-out, a different requested environment, and the browser/tool's actual capabilities. If the environment is unavailable, unsupported or blocked, retain the evidence, continue independent checks, and report the exact unexecuted stage. Never turn a blocked test into a pass or require an account, paid AI provider or public publication merely to run this procedure.
 
-**Evidence boundary:** implementation claims here use Playground `main` at `4a2d017c653a12d5524f677772e4db50aa044e26`, inspected 2026-10-31. Its default recipe uses Joomla 6.2.0 and a browser-adapted JCB 6.2.0 package. JCB acquisition details are additionally traced to the separately pinned JCB `6.x` source. Those are distinct version identities. Compare the live installation before relying on a controller name or format. See [sources and freshness](sources.md) and the [observed verification record](verification.md); neither this procedure nor upstream Playground CI proves a candidate change passed.
+**Evidence boundary:** current environment, discovery, MCP and delivery guidance was refreshed against Playground `main` at `58b21b3d61c7415c231f8d180c388409b4910d74` on 2026-11-03. It uses the int64 PHP distribution and a published dynamic Joomla/JCB catalogue. Earlier source references and browser receipts remain dated historical evidence; JCB acquisition details use the separately pinned JCB `6.x` source. Compare the live installation before relying on a controller name or format. See [current sources](sources.md#current-workflow-refresh-2026-11-03) and [observed verification](verification.md); source inspection and upstream tests do not prove a candidate change passed.
 
 For monitored core mirrors and access recovery, use [repository network discovery and JCB setup](../../standards/repository-network.md#configure-jcb-and-playground). Preserve the actual candidate branch and keep read transport separate from authorized Push destinations.
 
@@ -18,6 +18,8 @@ For monitored core mirrors and access recovery, use [repository network discover
 | Snippet acceptance | [Acquisition, copied consumer and runtime workflow](../../snippets/workflows/integrate.md) |
 | Package blueprint acceptance | [Graph acquisition, component/module/plugin compile and runtime](../../packages/workflows/validate-and-integrate.md) |
 | Build in the GUI and export source | [Package authoring, write destinations and Push/read-back](../../packages/workflows/author-in-playground.md) |
+| Use a user-hosted MCP or assess Playground MCP | [Connection, discovered capabilities and browser limits](../../workflows/mcp.md) |
+| Deliver ZIPs, source repositories or the whole site | [Delivery and restore verification](../../workflows/delivery.md) |
 | Understand what has actually run | [Verification record](verification.md) |
 | Preserve and hand off a defect | [Issue reporting](../reporting-issues.md) |
 
@@ -111,6 +113,8 @@ Open **JoomEngine Code** beside the running site. Its workspace is the active Jo
 
 Imported Powers, Field Types, Snippets and JCB authoring records are held in the site's database. Browsing or editing a PHP file in Code does not update those records. Use JCB's supported record editor/acquisition flow for them, then compile again. Likewise, updating a repository JSON/body file is not complete until the intended database record is refreshed. Keep repository source, JCB database state, compiled package and installed files distinct when tracing a mismatch.
 
+Select **DB** beside Code to open Adminer against the same running MariaDB. Inspect actual saved values and generated table relationships when debugging. Submitted queries and edits affect the real site; switching or hiding the panel does not submit unfinished forms. Do not replace JCB model saves with direct SQL and then claim the normal authoring/import path passed. Use a clean checkpoint for diagnostic mutations and reproduce durable changes through the maintained model. Detached database/editor windows still need the owner tab; Playground Save/export preserves site state. [Current database sources](sources.md#current-workflow-refresh-2026-11-03)
+
 For a PHP failure, use **Debug and refresh** for the current GET, or **Arm PHP request** with the exact URL/query and method before the matching navigation/form submission. Set a breakpoint in an executed source location; inspect stack/variables and step/continue. Expression evaluation executes PHP and can have side effects. While paused, source writes and normal requests queue: continue/stop before waiting for them. Stopping a POST does not roll back completed writes or authorize replay; inspect state before retrying. [P09](sources.md)
 
 The optional **AI Assistant** is separate from the external agent operating this workflow. It can read bounded context and propose file changes for review; it has no shell or PHP execution tool. It needs a user-configured provider accepting requests from its opaque origin, and live provider compatibility is not established merely by a preset or fixture test. Normal editing/debugging needs no AI key. Its changes still require the authoritative-source/rebuild procedure above. Do not put credentials in project files or ask for them when browser testing does not need the assistant. [P10](sources.md)
@@ -121,10 +125,10 @@ For an authorized automated harness, Playground exports `prepareEnvironment()` a
 
 | Boundary | Consequence |
 | --- | --- |
-| WASM runtime and adapted JCB package | Record browser/PHP/Joomla/JCB and package provenance. Browser success does not certify byte-identical native JCB, 64-bit PHP or every production server. |
+| WASM runtime and JCB package | Record browser/PHP/Joomla/JCB, actual integer size and package provenance. Current source uses int64 PHP; this does not certify every native server or an older saved site's runtime. |
 | Browser Fetch/CORS | PHP HTTP calls and repository/package downloads still require the host's CORS permission. No public proxy is provided. Diagnose provider/CORS/rate-limit/auth errors before blaming an item format. |
 | Occupied PHP worker | Recursive HTTP into the same running instance cannot complete. Use an independent service/instance for such tests where appropriate; do not claim this execution path passed. |
-| Optional `jcb-mcp` | Same-browser authentication/discovery is available; content-editing actions requiring recursive Joomla API calls are unsupported in this release. External MCP clients cannot reach a private browser instance via the static URL. |
+| Optional `jcb-mcp` | Same-browser authentication/discovery is available; content-editing actions requiring recursive Joomla API calls are unsupported at the current inspected source. External clients cannot reach a private instance via the static URL. Follow the [MCP capability gate and GUI fallback](../../workflows/mcp.md#use-mcp-with-playground). |
 | Database/host facilities | Real MariaDB/PDO is available; remote database connections, `mysqli`, arbitrary sockets, host executables and a production mail server are not. |
 | Browser storage/memory | Save/export deliberately; browser storage may be cleared/evicted, tab closure may interrupt saving, and advertised PHP limits do not guarantee available device memory. |
 | Browser isolation | Requires HTTPS/localhost, service workers, Web Locks, IndexedDB, SharedArrayBuffer and cross-origin isolation. This release documents desktop Chromium/Firefox support; unsupported browsers are a recorded blocker. |

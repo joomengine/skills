@@ -32,13 +32,13 @@ Select the route from actual tools and access, not from the presence of an MCP o
 | Existing blueprint/source repository or efficient structured authoring | Work directly on [Packages](../packages/SKILL.md) and the relevant model repositories, then acquire them in JCB | Preserve exact serialization, identities, indexes and dependencies; validate imported records |
 | Existing working JCB definitions | Extend those definitions and export through the supported model Push operation | Preserve local work and inspect every eligible write destination before export |
 
-These routes can be combined. Repository authoring followed by Playground validation and GUI authoring followed by source export must converge on the same JCB contracts. Prefer a supplied suitable environment when that is the user's intent. MCP access, browser access and the in-editor AI assistant are separate capabilities.
+These routes can be combined. Repository authoring followed by Playground validation and GUI authoring followed by source export must converge on the same JCB contracts. Prefer a supplied suitable environment when that is the user's intent. MCP access, browser access and the in-editor AI assistant are separate capabilities. Follow [MCP setup and execution](mcp.md) for a supplied connection, including the current Playground capability gate; a browser-hosted MCP package is not automatically reachable or writable from an external agent.
 
 Before editing repositories, read the [loading guide](../standards/skill-loading.md), [operating contract](../AGENTS.md) and applicable model entrypoint. Use source at the installed target revision when a field, control or operation differs from the documented baseline. Branches belong to the task; do not enforce the earlier prototype's universal `master` branch or Joomla-6-only scope on this ecosystem workflow.
 
 ## Discover reusable building blocks
 
-Use the [repository network](../standards/repository-network.md) to discover currently advertised sources. Use official model catalogues and configured project repositories, retaining their order and provenance. Avoid a full remote scan for every field: fetch relevant indexes once, search locally, then inspect the promising records, README descriptions, configuration and source at the recorded revision.
+Use the [repository network](../standards/repository-network.md) and [entity reuse procedure](../standards/entity-reuse.md) to discover currently advertised sources and choose what to reuse. Use official model catalogues and configured project repositories, retaining their order and provenance. Avoid a full remote scan for every field: fetch relevant indexes once, search locally, then inspect the promising records, README descriptions, configuration and source at the recorded revision.
 
 For each requirement, decide whether an existing item can be used unchanged, needs a distinct adaptation, or has no suitable match. Record why a new implementation is necessary. A repository's example is a candidate to inspect, not proof that it already solves the requested application.
 
@@ -52,7 +52,7 @@ Map each requested capability to the [model router](../packages/models/README.md
 
 - Model stored data with concrete Fields, Field Types and Admin Views. Attach records through their actual association settings. Decide whether repeating data is stored in JSON or in related rows according to query, lifecycle and API needs; a visible subform alone does not prove a separate table or endpoint exists.
 - Model public behaviour with Site Views, Dynamic Gets, Layouts, Templates, assets and router configuration. Model administrator workflows, permissions, imports and configuration alongside their data.
-- Put algorithms, business rules and integrations in cohesive PHP classes using [Super Powers](../super-powers/SKILL.md). Use Joomla Powers for target-appropriate Joomla class references. Keep controllers, views and generated hooks focused on calling those services. Check the exact Power placement, namespace, autoload and service wiring supported by the target compiler.
+- Put algorithms, business rules and integrations in cohesive PHP classes using [Super Powers](../super-powers/SKILL.md). Use [Joomla Powers](../joomla-powers/SKILL.md) for target-appropriate Joomla class references. Keep controllers, views and generated hooks focused on calling those services. Follow the [customization workflow](../super-powers/workflows/customize-extension.md) for exact Power placement, namespace, autoload and service wiring supported by the target compiler.
 - Use [Snippets](../snippets/SKILL.md) when appropriate for reusable view source and inspect their asset/library requirements. Copied snippets do not automatically track catalogue updates.
 - Treat generated API configuration as part of application design. Inspect exposed resources, authentication, authorization, accepted fields and relation semantics. Generating CRUD endpoints does not implement stock reconciliation, payment verification or other business rules automatically.
 
@@ -71,7 +71,7 @@ Report source validation, acquisition, persisted-record inspection, compilation,
 
 ## Deliver maintainable work
 
-Deliver what the user requested, identifying the distinct artifacts:
+Follow [delivery and portability](delivery.md) and deliver what the user requested, identifying the distinct artifacts:
 
 - **Installable extension:** the JCB-generated component/module/plugin package and the target versions and checks actually exercised.
 - **Editable blueprint:** the complete affected Packages graph, indexes and assets, plus references to supporting Power/Field Type/Snippet repositories. Export supporting models through their own source contracts; do not assume component Push publishes every external catalogue.

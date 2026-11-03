@@ -31,6 +31,10 @@ The fixture identity is `25a2c706-36eb-49ec-bbbb-be8218b101e1`. It was securely 
 
 The fixture is not a compiler implementation. Its inspection file was assembled for documentation; production output must follow JCB's actual exporter/compiler for the selected revision. A passing PHP smoke check proves the example method and syntax in that PHP runtime, not JCB import or compilation. Namespace relocation and placement still require the integration checks described in the workflows.
 
+## Locally complete composed service
+
+The [composed-service fixture](composed-service/README.md) adds a real interface dependency and constructor-injected behaviour. It contains two complete Power definitions, an index, inspection PHP and a ten-case executable test. `LineTotal` obtains the server-side price from `UnitPriceProvider` and checks invalid inputs and integer overflow. Read the [customization workflow](../workflows/customize-extension.md) to connect this pattern to the actual JCB application, choose Administrator/Site/library placement, and verify service wiring. The fixture does not supply a production database adapter or claim a compiled e-commerce implementation.
+
 ## Complete upstream examples pinned to inspected revisions
 
 Each linked directory contains its **complete settings, body, PHP representation and documentation**. Follow the file links within it; do not infer unshown fields from the short observations below. These are read-only specimens of existing identities. No upstream source is relicensed by this documentation.

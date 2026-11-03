@@ -1,0 +1,24 @@
+{
+  "06847141-791d-4482-8640-fc8bf1bf9037": {
+    "name": "LineTotal",
+    "type": "final class",
+    "namespace": "VDM\\Joomla\\SkillExample",
+    "code": "src/06847141-791d-4482-8640-fc8bf1bf9037/code.php",
+    "power": "src/06847141-791d-4482-8640-fc8bf1bf9037/code.power",
+    "settings": "src/06847141-791d-4482-8640-fc8bf1bf9037/settings.json",
+    "path": "src/06847141-791d-4482-8640-fc8bf1bf9037",
+    "spk": "Super---06847141_791d_4482_8640_fc8bf1bf9037---Power",
+    "guid": "06847141-791d-4482-8640-fc8bf1bf9037"
+  },
+  "20d6e122-d419-4f2d-acfb-a5c1819fc2d1": {
+    "name": "UnitPriceProvider",
+    "type": "interface",
+    "namespace": "VDM\\Joomla\\SkillExample",
+    "code": "src/20d6e122-d419-4f2d-acfb-a5c1819fc2d1/code.php",
+    "power": "src/20d6e122-d419-4f2d-acfb-a5c1819fc2d1/code.power",
+    "settings": "src/20d6e122-d419-4f2d-acfb-a5c1819fc2d1/settings.json",
+    "path": "src/20d6e122-d419-4f2d-acfb-a5c1819fc2d1",
+    "spk": "Super---20d6e122_d419_4f2d_acfb_a5c1819fc2d1---Power",
+    "guid": "20d6e122-d419-4f2d-acfb-a5c1819fc2d1"
+  }
+}

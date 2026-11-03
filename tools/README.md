@@ -109,7 +109,7 @@ The shell tools run purpose-built `jq` checks in `tools/jq`; they do **not** inv
 
 ```bash
 bash tools/check.sh
-shellcheck -x -P tools tools/*.sh tools/lib/*.sh tests/*.sh
+shellcheck -x -P tools tools/*.sh tools/lib/*.sh tests/*.sh joomla-powers/tools/*.sh joomla-powers/tests/*.sh
 ```
 
 `check.sh` checks shell syntax, parses all JSON, checks relative Markdown **file destinations** outside fenced code blocks, validates the module and repository registries, and runs the Power, entity and Package regression suites plus `tools/check-skills.sh`. Every module must declare a `test_workflow` path under its module directory that resolves to an existing file within this repository. These structural checks do not establish that a workflow is complete or that its integration tests passed. The checker does not validate remote URLs, Markdown fragments/anchors, full Markdown syntax, arbitrary reference-style links, or render diagrams. The CI workflow supplies PHP and ShellCheck and runs these checks on pull requests and pushes to `main`.
@@ -117,6 +117,20 @@ shellcheck -x -P tools tools/*.sh tools/lib/*.sh tests/*.sh
 These checks and this repository's CI do not run Playground browser acceptance tests. Follow the [shared Playground procedure](../testing/playground/README.md) and the model-specific `test_workflow` in [modules.json](../registries/modules.json) for repository acquisition, real consumer integration, compilation and runtime validation. Report offline checks and observed browser results separately.
 
 The tests use temporary synthetic catalogues and mutate the complete maintained [minimal repository](../super-powers/examples/minimal-repository/README.md). They exercise empty bodies, sentinels, malformed nested metadata, singleton JSON documents, identity/SPK/declaration/body drift, comment-only declaration spoofing, unsafe paths, incomplete/stale/tampered catalogues, unresolved references and ordered duplicates. Synthetic catalogue timestamps/mode labels are fixture inputs, not live-source evidence. Test files are cleaned automatically; no upstream repositories are changed.
+
+## Select a live-discovered repository candidate
+
+Save a validated discovery response using the [repository network workflow](../standards/repository-network.md), then select one of its exact target names:
+
+```bash
+bash tools/network-candidates.sh /tmp/jcb-network/project.json packages
+```
+
+This command reads the supplied snapshot without opening a network connection. It outputs eligible nodes as JSON, preferring online Codefloe and Codeberg entries before other online hosts. It preserves discovered URLs and metadata, accepts future target names, and always excludes `git.vdm.dev` and its subdomains. Add `--include-offline` only for the documented bounded recovery path; offline candidates remain after all online candidates. A selected node still needs a successful read at the required branch/revision.
+
+Exit `0` means candidates are available, `1` means malformed input/arguments, and `2` means none remain. The latter can mean an absent target, no online nodes or excluded/unusable URLs; it does not declare the entire network offline. See the [logical ecosystem catalogue](../registries/ecosystem-repositories.json) for model and index routing, not a fixed endpoint allowlist. `tests/run-network-tests.sh` exercises evolving targets, host preference, exclusion, invalid data and duplicate/status behaviour. Catalogue fetchers additionally reject excluded Git rewrites and refuse HTTP redirects, so a rejected source needs a freshly verified advertised URL.
+
+The shared checker also runs the [Joomla Power mapping helper tests](../joomla-powers/sources.md) and the [composed PHP service smoke test](../super-powers/examples/composed-service/README.md). Those checks establish bounded source behaviour, not JCB compilation or class placement.
 
 ## Field Type and Snippet catalogues
 

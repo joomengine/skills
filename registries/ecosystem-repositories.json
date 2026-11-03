@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "purpose": "Logical official JCB repository families and discovery entry points. This is neither an exhaustive network endpoint list nor a JCB runtime configuration.",
+  "network_discovery": "https://api.joomlacomponentbuilder.com/v1/network/community/jcb/",
+  "discovery_policy": "Enumerate all live targets; inspect each target's advertised exact URLs. Target hints below aid recognition and do not whitelist or exhaust future models. Preserve the actual source branch/revision and consuming JCB repository order.",
+  "preferred_mirror_hosts": ["codefloe.com", "codeberg.org"],
+  "agent_excluded_hosts": ["git.vdm.dev"],
+  "families": [
+    {
+      "model": "super-power",
+      "canonical_repository": "joomengine/super-powers",
+      "additional_repository_registry": "registries/power-repositories.json",
+      "known_target_hint": "super-powers",
+      "index": "super-powers.json",
+      "role": "Shared PHP class foundation; the referenced registry also lists Gitea, OpenAI, Search, phpseclib, PSR and Minify specialist sources."
+    },
+    {
+      "model": "joomla-power",
+      "canonical_repository": "joomengine/joomla-powers",
+      "known_target_hint": "joomla-powers",
+      "role": "Version-aware Joomla class references; inspect the Joomla Power contract rather than assuming the Super Power format."
+    },
+    {
+      "model": "field-type",
+      "canonical_repository": "joomengine/joomla-fieldtypes",
+      "repository_registry": "registries/field-type-repositories.json",
+      "known_target_hint": "joomla-fieldtypes",
+      "index": "index.json",
+      "role": "Official core metadata and defaults for concrete Fields."
+    },
+    {
+      "model": "snippet",
+      "canonical_repository": "joomengine/snippets",
+      "repository_registry": "registries/snippet-repositories.json",
+      "known_target_hint": "snippets",
+      "indexes": ["snippet-index.json", "snippet-type.json"],
+      "role": "Reusable view source and its classifications."
+    },
+    {
+      "model": "package",
+      "canonical_repository": "joomengine/packages",
+      "known_target_hint": "packages",
+      "index_directory": "index/",
+      "contract_inventory": "packages/model-contracts.json",
+      "role": "Default reusable component, module, plugin, view, Field, query, layout, code and relationship graph. Other package collections remain independent sources, not aliases of this default."
+    },
+    {
+      "model": "repository",
+      "known_target_hints": ["repoindex", "repositories"],
+      "role": "JCB repository setup catalogue. Resolve the actual repository URL and its format from discovery and that repository's documentation; target name need not equal repository name."
+    }
+  ],
+  "additional_sources": [
+    {
+      "repository": "joomengine/joomla-packages",
+      "role": "Separate package collection; require actual access and preserve its own source identity. Never substitute the default packages mirror."
+    },
+    {
+      "repository": "vast-development-method/hello-world-blueprint",
+      "role": "Standalone reference blueprint; separate from the default package catalogue."
+    }
+  ]
+}

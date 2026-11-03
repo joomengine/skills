@@ -21,6 +21,8 @@ Supply the checkout's absolute path and task, or an accessible task-entry URL wi
 | Task | Local entrypoint from checkout root | Published entry URL |
 | --- | --- | --- |
 | Route a JCB task | [SKILL.md](../SKILL.md) | [Root skill](https://github.com/joomengine/skills/blob/main/SKILL.md) |
+| Build an application through JCB | [workflows/request-to-extension.md](../workflows/request-to-extension.md) | [Application workflow](https://github.com/joomengine/skills/blob/main/workflows/request-to-extension.md) |
+| Reference Joomla platform classes | [joomla-powers/SKILL.md](../joomla-powers/SKILL.md) | [Joomla Powers skill](https://github.com/joomengine/skills/blob/main/joomla-powers/SKILL.md) |
 | Work with Super Powers | [super-powers/SKILL.md](../super-powers/SKILL.md) | [Super Powers skill](https://github.com/joomengine/skills/blob/main/super-powers/SKILL.md) |
 | Work with Field Type catalogues | [field-types/SKILL.md](../field-types/SKILL.md) | [Field Types skill](https://github.com/joomengine/skills/blob/main/field-types/SKILL.md) |
 | Work with Snippets and classifications | [snippets/SKILL.md](../snippets/SKILL.md) | [Snippets skill](https://github.com/joomengine/skills/blob/main/snippets/SKILL.md) |
