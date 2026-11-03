@@ -43,6 +43,8 @@ These interfaces are documented by the publication's [source contract](https://g
 
 ## Authority boundaries
 
+Use the [official JCB tutorial index](https://github.com/joomengine/jcb-documentation/blob/master/english/index.md) for feature explanations, UI demonstrations and worked development concepts. Match a tutorial's version to the installed JCB and verify exact serialized values against the model contract and source. For an application request, start with the [development workflow](../workflows/request-to-extension.md); use this architecture map and tutorials to answer the specific relationship or lifecycle question, rather than loading every article.
+
 1. **Project policy** states the desired maintenance approach, including Joomla-first reuse and the shared `joomengine/super-powers` foundation. Policy does not prove that the current implementation behaves correctly.
 2. **The architecture publication** explains mechanisms and relationships. Its edition records the source captures behind those explanations. In this edition the core compiler study uses `bca4a1520484f3e2c2fbd12964a5995b0d058de1`, with separately fingerprinted integrated extrusion work. Do not label all of it as verified at today's branch tip.
 3. **The implementation at the target revision** determines the operational contract. [Super Powers sources](../super-powers/sources.md), [Field Types sources](../field-types/sources.md), and [Snippets sources](../snippets/sources.md) record each module's separately inspected implementation and repository specimens.

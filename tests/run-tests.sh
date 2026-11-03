@@ -30,6 +30,21 @@ for repository in super-powers search psr phpseclib openai gitea minify; do
 	index=$((index + 1))
 done
 jq -s --arg date "$(date -u +%FT%TZ)" '{version:1,mode:"live",created_at:$date,repositories:.}' "$work/repositories" > "$work/catalog/manifest.json"
+# The composed example's runtime test loads code.php. Also validate its actual
+# JCB import inputs so stale previews and broken GUID wiring cannot pass CI.
+cp -R "$root/super-powers/examples/composed-service" "$work/composed"
+composed_guid=$(jq -r '.[] | select(.name=="LineTotal") | .guid' "$work/composed/super-powers.json")
+composed_body="$work/composed/src/$composed_guid/code.power"
+composed_settings="$work/composed/src/$composed_guid/settings.json"
+expect_status 0 'composed service import inputs and local dependency validate' bash "$root/tools/validate-power-repository.sh" "$work/composed" "$work/catalog"
+if command -v php >/dev/null 2>&1; then
+	cp "$composed_body" "$work/composed-body.original"
+	printf '\n\tpublic function sourceOnlyChange(): void {}\n' >> "$composed_body"
+	expect_status 1 'composed service source drift is rejected despite runnable preview' bash "$root/tools/validate-power-repository.sh" "$work/composed" "$work/catalog"
+	cp "$work/composed-body.original" "$composed_body"
+fi
+edit_json "$composed_settings" '.use_selection |= map(.use="00000000-0000-4000-8000-000000000001")'
+expect_status 2 'composed service missing injected-interface identity is unresolved' bash "$root/tools/validate-power-repository.sh" "$work/composed" "$work/catalog"
 cp -R "$root/super-powers/examples/minimal-repository" "$work/repository"
 guid=$(jq -r 'keys[0]' "$work/repository/super-powers.json")
 settings="$work/repository/src/$guid/settings.json"
