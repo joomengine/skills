@@ -1,6 +1,6 @@
 ---
 name: joomengine-jcb
-description: "Create, extend, maintain, debug and validate Joomla Component Builder repositories and blueprints that generate Joomla components, modules and plugins. Use for JCB Super Powers, Field Types, Snippets, Packages, their sub-models, repository identity/dependency resolution, decentralized mirror discovery, and Playground authoring, export and integration testing. Select the relevant model skill and contract before editing source."
+description: "Build, extend, maintain and validate Joomla extensions from user requirements with Joomla Component Builder (JCB). Route application requests through reusable blueprint entities, custom PHP Super Powers and Joomla class references, repository discovery, authorized MCP or Playground authoring, compilation, testing and delivery. Also use for individual Powers, Field Types, Snippets, Packages and their sub-models."
 ---
 
 # JoomEngine JCB skills
@@ -9,6 +9,7 @@ Read [AGENTS.md](AGENTS.md) for the operating contract. Identify the requested a
 
 | Task | Entry point |
 | --- | --- |
+| Turn an application request into a working extension | [Request-to-extension workflow](workflows/request-to-extension.md) |
 | Author or maintain reusable PHP Powers | [Super Powers skill](super-powers/SKILL.md) |
 | Define field metadata, properties and defaults | [Field Types skill](field-types/SKILL.md) |
 | Maintain reusable view source and its classifications | [Snippets skill](snippets/SKILL.md) |
