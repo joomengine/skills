@@ -18,6 +18,12 @@ All 39 local Markdown file destinations across the six new scenario/procedure fi
 
 A second read-only review found three actionable acceptance problems: fixture changes leaking between cases, missing returned-loan coverage, and remote shipping/payment cases applying to an explicitly narrower integration scope. The briefs now isolate fixtures, seed the last-stock concurrency case explicitly, test the returned-loan transition, and distinguish agreed fixed-rate/link-only scope from blocked promised integration. This is documentation/source review evidence, not a fresh-agent application build or any of the runtime passes above.
 
+## Distribution checks on 3 November 2026
+
+The assembled distribution passed its offline documentation/registry checks, Bash syntax checks and ShellCheck 0.11.0. Executed regression groups were 45 transport, 22 network selection, 13 Joomla Power mapping, 37 Super Power, 41 Field Type/Snippet and 33 Package checks, plus 10 composed-service behaviour cases: 201 checks in total. PHP execution used 8.3.6. These are source/tooling checks; they do not change the application-runtime status table above.
+
+An independent review found that running the composed-service preview alone would not protect its authoritative `code.power` source or dependency metadata. The Super Power suite now validates that complete fixture and explicitly rejects source/preview drift and an unresolved injected-interface GUID. The existing validator performs those checks; no second format implementation was introduced.
+
 ## Record future execution
 
 Follow the [fresh-agent procedure](README.md), retain one receipt per candidate, and link it here with the distribution/source revisions and tested runtime. Report documentation navigation, offline source validation, JCB execution, provider integration, remote source publication and site restoration separately. Add named blockers or failures as soon as they are observed instead of waiting for an overall pass.
