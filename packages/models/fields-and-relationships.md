@@ -54,6 +54,19 @@ The package resolver scans a Field XML's `fields="..."` references and `validate
 
 The compiler extracts the `validate` name, normalizes it, checks the target's core rule list, then looks up custom PHP by name. A core rule is not a missing package record. Conversely, a missing custom rule can reach a source path that removes its custom link without a completed diagnostic; explicitly verify the generated class and actual validation rather than relying on compiler silence. [Field/Rule::set](https://github.com/vdm-io/Joomla-Component-Builder/blob/408703a857ad937479b1e28de7f693af178dcc83/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Field/Rule.php), [Joomla6 core rule source](https://github.com/vdm-io/Joomla-Component-Builder/blob/408703a857ad937479b1e28de7f693af178dcc83/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Field/JoomlaSix/CoreRule.php).
 
+### Enforce length on the server as well as the form
+
+An XML `maxlength` limits ordinary browser input; it does not by itself establish server-side length validation. Use a compatible core rule or a JCB Validation Rule, and inspect the generated form's `validate` attribute and rule class. The current core Text metadata lacks `validate_regex`, and [Field/Attributes::extraAttributes](https://github.com/vdm-io/Joomla-Component-Builder/blob/408703a857ad937479b1e28de7f693af178dcc83/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Field/Attributes.php) does not pass arbitrary additional attributes through. Adding an unrecognized XML property is therefore not a reliable workaround.
+
+For a title-length rule of 1–120 Unicode code points, a distinct JCB rule can reuse Joomla's inherited regex implementation. Save these **class members only** in the rule's PHP field, then reference that rule's actual unique natural name from the concrete Field:
+
+```php
+protected $regex = '\\A.{1,120}\\z';
+protected $modifiers = 'u';
+```
+
+The inspected [Joomla FormRule](https://github.com/joomla/joomla-cms/blob/ed920e9103e8354f221968f5ffdf27221bc28191/libraries/src/Form/FormRule.php) owns those protected, untyped members and tests the expression. This is a source-derived pattern, not a universal Field Type override: keep the shared Text definition unchanged, preserve the Field's `required`/filter/storage choices, and inspect the generated target class. Test empty, accepted-boundary and oversized submissions against the installed server; a browser that prevents typing the invalid value does not prove the server rejected it. See the [execution ledger](../../testing/scenarios/verification.md) for the stages actually exercised.
+
 ## Author, integrate and debug
 
 1. Research the real Joomla Field and choose/reuse the external catalogue identity. Declare the required runtime version and assets/context.
