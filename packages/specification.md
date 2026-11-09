@@ -1,5 +1,7 @@
 # Package repository specification
 
+**Operating version:** follow the [latest JCB version policy](../standards/version-policy.md). Resolve the current production release for production-target builds and inspect its actual package contracts. The recorded baseline below identifies the source of this specification's observations; it is not an installation pin.
+
 **Scope:** the indexed blueprint/entity graph handled by JCB's Package services. **Implementation baseline:** JCB `6.x@408703a857ad937479b1e28de7f693af178dcc83`, inspected 2026-10-31; its manifest identifies `6.2.1-alpha1`. This is source evidence, not a claim that every path has run on that version or that an installed `6.2.0` package is identical. [Sources](sources.md) give immutable references and the limits of each claim. Requirements marked **Policy** are this repository's authoring standard.
 
 ## What a Package contains

@@ -5,6 +5,8 @@ description: "Use, create, maintain and validate JCB Joomla Power namespace mapp
 
 # Joomla Powers
 
+Use the [latest JCB version policy](../standards/version-policy.md). Resolve the current production compiler and verify mappings for the selected Joomla target; historical source hashes do not fix the supported target list.
+
 Read [README.md](README.md) for scope and [specification.md](specification.md) for the exact mapping contract. Keep this module with the complete JoomEngine Skills distribution.
 
 1. Identify the target Joomla/JCB/PHP versions and the Joomla capability the consumer needs. Inspect that target's actual API; a namespace mapping does not preserve removed methods or changed signatures.
@@ -14,3 +16,5 @@ Read [README.md](README.md) for scope and [specification.md](specification.md) f
 5. Run [integration acceptance](workflows/validate-and-integrate.md): check persisted mappings, compile a real caller, inspect imports and aliases, install and exercise that caller. Record every unrun stage.
 
 Read [sources.md](sources.md) before asserting behavior on another JCB revision. Match exact versions before claiming compatibility. A Joomla Power references an available symbol; it does not install a PHP implementation, configure dependency injection, grant permissions, or supply payment/shipping behavior.
+
+If these instructions prevent the requested outcome or require an undocumented workaround, report the gap through the [Skills feedback workflow](../testing/reporting-issues.md) and continue supported recovery. Upstream JCB issue submission follows the separate human-led procedure there.

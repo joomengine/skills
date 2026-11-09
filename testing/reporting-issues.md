@@ -1,6 +1,22 @@
-# Prepare a JCB issue for human submission
+# Report an unsuccessful build outcome and improve the skills
 
-**Authority: project-owner policy, 31 October 2026.** The human reviews and submits JCB issues through the [official JCB issue chooser](https://git.vdm.dev/joomla/Component-Builder/issues/new/choose). Agents help investigate and prepare a useful report; they do not submit it under this policy. This preserves a human's sign-off. Difficulty reaching the issue tracker from an agent does not authorize posting somewhere else or circumventing its access controls.
+**Project-owner policy, updated 9 November 2026.** These skills guide agents from a component request to a complete, stable, runnable Joomla extension ready for deployment on the agreed target, with maintainable JCB source and the requested deliverables. When following the skills does not produce that outcome, **create an issue in [joomengine/skills](https://github.com/joomengine/skills/issues)** describing the problem so maintainers can improve the instructions. This feedback loop is part of using the skills.
+
+Report missing steps, incorrect guidance, unclear navigation, unsuitable defaults, version mismatches and practical blockers encountered during a real build. Report a guidance gap even when a workaround lets the current build finish. Identify the observed failure without waiting for certainty about its root cause; maintainers can determine whether the correction belongs in the skills, a dependency or both.
+
+## Submit useful Skills feedback
+
+1. Preserve the failing state and continue diagnosis using [the procedure below](#establish-what-failed). Continue independent work and supported recovery toward the requested extension; filing feedback is not a substitute for finishing the build.
+2. Search the [Skills issues](https://github.com/joomengine/skills/issues) for the same failure. Add new, relevant reproduction evidence to a matching open issue; otherwise create a focused issue using [the build-outcome form](https://github.com/joomengine/skills/issues/new?template=skill-outcome.yml). Do not create duplicate reports merely because another task encountered the same known problem.
+3. Include the requested outcome, Skills commit and document paths, actual environment, steps followed, expected and observed behavior, and the attempts that improved or failed to improve the result. Use a sanitized summary of a private prompt and the smallest synthetic reproduction. Name unknown values instead of inventing them.
+4. Submit through available authorized GitHub tools as part of this reporting workflow; no separate routine confirmation is required for the sanitized Skills report. Verify the created issue or posted evidence and include its URL in the build handoff. If tracker write access is unavailable, provide the complete report and the issue link for submission, then continue work that can proceed.
+5. Keep the build moving: repair maintained definitions or supporting source, regenerate and verify the affected behavior. Describe any remaining concrete blocker and the next action in the issue. Do not report successful deployment or restoration until the requested artifact actually works.
+
+Keep each report actionable. Missing user credentials or an unanswered product choice alone does not call for a Skills issue; report when the guidance fails to discover, explain or handle that requirement. Feedback should improve the workflow for the next agent, not copy an entire session transcript into the tracker.
+
+## Maintainer improvement loop
+
+Use the issue to reproduce the failure, identify the responsible guide and correct the instructions, routing, example or supporting tool. Add a focused regression or acceptance case when it helps preserve the correction. Follow the revised path for the reported case, record the result and link the corrective PR in the issue. If a runtime dependency also needs a fix, retain the Skills issue for the agent-facing guidance and connect the upstream resolution when available. This turns real component-building experience into a progressively more complete skill set.
 
 ## Establish what failed
 
@@ -11,11 +27,15 @@ Use the module's acceptance procedure and the [shared Playground workflow](playg
 3. Reproduce once from a known starting state. State whether the result is repeatable, intermittent, or occurred only once. Include Init versus Pull/Reset and fresh versus existing local records when relevant.
 4. Record Joomla, JCB, PHP, browser and Playground build/provenance when available. A Playground failure is evidence for that WASM environment; report whether the same case was tried on native Joomla and the result. An unavailable comparison remains unrun.
 5. Inspect the relevant generated files and error messages. If an editor patch helps diagnosis, retain its diff, return the fix to maintained source and reproduce after regeneration before describing it as a completed fix.
-6. Search existing issues if accessible. Report an inaccessible tracker honestly; do not claim there are no duplicates without checking. A human can perform that check during submission.
+6. Search existing issues in the relevant tracker if accessible. Report an inaccessible tracker honestly; do not claim there are no duplicates without checking.
 
-For a defect confined to Playground's deployment, editor, persistence or WASM compatibility, identify that evidence and let the human decide whether to report it to [Playground](https://github.com/joomengine/playground/issues) instead of, or alongside, JCB. Keep cross-project findings clearly attributed. Do not automatically cross-post.
+## Route upstream implementation defects separately
 
-## Hand the human a complete draft
+Skills feedback goes to `joomengine/skills`, including the instructions needed to recognize or recover from an upstream problem. **Upstream JCB issue submission remains human-led** under the 31 October 2026 policy: prepare a useful report for the [official JCB issue chooser](https://git.vdm.dev/joomla/Component-Builder/issues/new/choose); the human reviews and submits it. Do not access or probe that host from an agent. A Skills report does not authorize automatic cross-posting to another tracker.
+
+For a defect confined to Playground's deployment, editor, persistence or WASM compatibility, identify that evidence and let the human decide whether to report it to [Playground](https://github.com/joomengine/playground/issues) instead of, or alongside, JCB. Keep the Skills issue focused on how the agent workflow should handle the problem, with clearly attributed links to any upstream reports. An upstream submission is not a prerequisite for reporting the Skills gap.
+
+## Hand the human a complete upstream draft
 
 Supply the actual values for the affected case, using these sections. This is a content checklist, not a request to create an issue full of unfilled placeholders.
 
@@ -33,4 +53,4 @@ Supply the actual values for the affected case, using these sections. This is a 
 
 Never include access tokens, passwords, session-bound virtual URLs, provider keys, personal/private data or a whole database export merely to supply evidence. Deployment/share URLs describe configuration, not a copy of the current database or an authentication grant. Use public minimal fixtures or let the human decide how to supply private material. Check attached archives and screenshots before proposing them for upload.
 
-End the handoff with the official issue link and a clear request for the human to review, choose the appropriate template and submit. Keep the draft available in the user's requested channel. The human can return the issue URL for later correlation with a fix; do not claim an issue exists before receiving or verifying it.
+For the upstream JCB draft, end the handoff with the official issue link and a clear request for the human to review, choose the appropriate template and submit. Keep the draft available in the user's requested channel. The human can return the issue URL for later correlation with a fix; verify it before recording the upstream issue as submitted.

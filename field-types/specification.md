@@ -1,5 +1,7 @@
 # Field Type repository specification
 
+**Operating version:** use the [latest JCB version policy](../standards/version-policy.md) and inspect the selected Joomla target's current field behavior. The source snapshots below identify evidence, not required runtime pins.
+
 **Scope:** the `fieldtype` repository contract consumed by JCB's `Joomla.Fieldtype` services. **Evidence:** JCB `6.x@408703a857ad937479b1e28de7f693af178dcc83` and core catalogue `master@3be64d59378b5650825b97b44dbd58f2cdb82fcb`, inspected 2026-10-31. [Sources](sources.md) distinguish implementation, specimens and remaining verification limits. Project requirements below are explicitly marked **Policy**.
 
 ## Entities and authority boundaries

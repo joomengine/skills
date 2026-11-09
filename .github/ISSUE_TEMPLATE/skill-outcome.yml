@@ -1,0 +1,56 @@
+name: Build outcome or skill gap
+description: Report where the skills failed to deliver the requested Joomla extension or needed a workaround.
+title: "[Skill outcome] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Help improve the route from an application request to a complete, stable, runnable Joomla extension.
+        Search existing issues first. Include a small reproduction and sanitized evidence; exclude credentials, private prompts, customer data, complete-site archives and database exports.
+  - type: textarea
+    id: requested-outcome
+    attributes:
+      label: Requested outcome
+      description: Summarize the extension, the behavior or deliverable you needed, and the part the skills did not help you complete.
+    validations:
+      required: true
+  - type: textarea
+    id: skills-path
+    attributes:
+      label: Skills revision and instructions followed
+      description: Give the Skills commit or version and the document paths or sections used. Identify the missing, incorrect or unclear instruction. State unknown revisions explicitly.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Build environment
+      description: Give actual Joomla, JCB and PHP versions; Playground or native site; browser/MCP/GUI route; and relevant dependency revisions. State which values are unknown.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      description: Describe the starting state and numbered actions needed to reproduce the problem. Link a public synthetic fixture when useful. Say whether the failure repeats or is intermittent.
+    validations:
+      required: true
+  - type: textarea
+    id: expected-actual
+    attributes:
+      label: Expected and observed results
+      description: Explain the intended behavior and what actually happened, including the affected artifact or saved data. Include concise sanitized errors or screenshots when useful.
+    validations:
+      required: true
+  - type: textarea
+    id: recovery
+    attributes:
+      label: Recovery attempts and current build status
+      description: Describe attempted fixes, any working workaround, what is still blocked, and the result of retrying the affected operation.
+    validations:
+      required: true
+  - type: textarea
+    id: improvement
+    attributes:
+      label: Suggested improvement or related issue
+      description: If known, describe the instruction, example, capability discovery or tool change that would help the next agent. Link related Skills or upstream issues and distinguish a confirmed cause from a hypothesis.

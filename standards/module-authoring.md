@@ -24,6 +24,8 @@ Assign each consequential statement one of these meanings, explicitly in a secti
 
 Use immutable source URLs for implementation claims, with symbol names so the relevant code remains discoverable. Record the inspection date and branch as well as the commit. Links to moving branches can supplement these references for discovery; they cannot replace pinned evidence. Do not copy dates, counts, commit IDs, or validation outcomes from an old conversation as if reverified.
 
+Apply the [latest JCB version policy](version-policy.md) in every module. The operating default is the current production JCB release, with current alpha/beta builds for requested development work. A source baseline is evidence, not a required installation version. Keep historical citations accurate while updating operational instructions for the current release; never require an old commit merely because the guide was researched there.
+
 When sources disagree, describe the disagreement. Source code establishes actual implementation behaviour; documented project policy establishes intended maintenance practice. An exported example may expose a defect or an older format. Do not turn it into a rule simply because it exists. Where resolution changes the intended contract, keep the issue explicit rather than silently rewriting history.
 
 Read relevant architecture chapters first for context, then inspect the actual implementation. Depending on the subject, this may include metadata maps, XML forms, SQL, serializers, importers, compilers, generated output, runtime classes, and upstream framework documentation. A schema inferred only from examples is not a complete semantic contract.
@@ -47,6 +49,8 @@ Use a descriptive lowercase directory name with hyphens. The following are requi
 The module must be linked from the root skill/README and `registries/modules.json`. Record `id`, `path`, `entrypoint`, `skill_entrypoint`, `status`, `scope`, `source_baseline`, `test_workflow`, and `verification`. Register the skill's name and path in `registries/skills.json`; follow [loading and distribution](skill-loading.md) and the bounded frontmatter profile enforced by `tools/check-skills.sh`. Keep the complete distribution coherent; nested model entry points must not imply standalone installation when they require shared resources. `test_workflow` is a repository-relative path to that module's actual acceptance procedure, not merely the shared environment guide. The repository checker requires it to exist. `status` must be `in-progress`, `documented`, or `deprecated`; `documented` means the documentation meets this standard, not that every target environment has been exercised. `verification` must separately state static and integration evidence.
 
 Choose one canonical location for each rule. Use links and short reminders elsewhere. Make the reading path task-based: fixing a method should not require reading every architecture chapter, while creating an empty repository must lead through every necessary step.
+
+Keep guidance for **using Playground to build with JCB** in the Skills [Playground guide](../testing/playground/README.md). The Playground repository owns implementation/developer documentation for maintaining Playground itself and links agents to the Skills guide. Move useful user/agent instructions into their canonical Skills section instead of maintaining a second operational guide in another repository.
 
 For a model with sub-models, provide an exhaustive source-derived inventory and a task router. Distinguish independent entities, parent-owned child records, nested form settings, external models and compiler-only features. Put exact field/option metadata in focused per-entity references and operational choices in the corresponding guide. Generated references must record their source revision and derivation, preserve meaningful nested metadata, and have a repeatable update path. Do not generate filler prose or imply that a field list establishes consumer semantics.
 
@@ -138,6 +142,8 @@ Before marking a module `documented`, require:
 - Skill names/descriptions/routes pass the declared metadata profile, and all model entry points work within the complete distribution. Verify a representative task loads only its required resources; do not claim client installation or automatic discovery without exercising that client.
 - Independent review or a fresh-agent exercise has been performed and blocking findings resolved.
 - The PR states changes, source revisions, verification evidence, and remaining limits truthfully.
+
+When following the skills fails to produce the requested complete extension, use the [Skills feedback workflow](../testing/reporting-issues.md). Maintainers reproduce the reported obstacle, correct the canonical instructions or examples, exercise the affected task and close the feedback loop with the correction. Keep Skills issue reporting distinct from human-led upstream JCB issue submission; the upstream policy does not prohibit agents from reporting gaps in this repository's guidance.
 
 ## 8. Delivery and continuing maintenance
 

@@ -34,6 +34,8 @@ Read only the task-relevant route after these invariants. Use [the module-author
 
 ## Applicability and proof
 
+Use the [latest JCB version policy](../standards/version-policy.md) for authoring and compilation. Resolve current JCB and verify the actual target Joomla field implementation; the source snapshots below identify research evidence rather than a required runtime version.
+
 The JCB repository contract was inspected on `6.x` at `408703a857ad937479b1e28de7f693af178dcc83`; the core catalogue on `master` at `3be64d59378b5650825b97b44dbd58f2cdb82fcb` contains 49 entries. These are recorded source baselines, not minimum supported version numbers or an assertion that all 49 definitions are correct for every Joomla target. See [sources](sources.md) for inspection dates, source paths and Joomla research scope.
 
 This module documents metadata authoring and static checks, plus a browser integration procedure using [JoomEngine Playground](../testing/playground/README.md). The [shared browser verification record](../testing/playground/verification.md) establishes the observations made for that path; the [Field Type verification record](verification.md) separately identifies this module's completed and unexecuted stages. A successful repository validation does not prove import success, SQL compatibility, a generated custom field's PHP validity, or runtime form behaviour. The PR and workflow result must say which checks were actually executed.

@@ -1,5 +1,7 @@
 # Joomla Power mapping contract
 
+**Operating version:** use the [latest JCB version policy](../standards/version-policy.md), then verify current mappings for the selected Joomla target. Historical form options and source hashes below are evidence, not a frozen compiler or target list.
+
 **Authority:** source-inspected behavior at the [recorded revisions](sources.md), with stricter authoring guidance identified below.
 
 ## Token and repository representations

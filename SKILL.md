@@ -1,11 +1,13 @@
 ---
 name: joomengine-jcb
-description: "Build, extend, maintain and validate Joomla extensions from user requirements with Joomla Component Builder (JCB). Route application requests through reusable blueprint entities, custom PHP Super Powers and Joomla class references, repository discovery, authorized MCP or Playground authoring, compilation, testing and delivery. Also use for individual Powers, Field Types, Snippets, Packages and their sub-models."
+description: "Build complete, stable, runnable Joomla extensions from user requirements with the latest Joomla Component Builder (JCB), ready for deployment on the agreed target. Route application requests through reusable blueprint entities, PHP Powers, repository discovery, authorized MCP or Playground authoring, compilation, testing and final delivery. Also use for maintaining extensions, individual Powers, Field Types, Snippets, Packages and their sub-models."
 ---
 
 # JoomEngine JCB skills
 
 Read [AGENTS.md](AGENTS.md) for the operating contract. Identify the requested artifact, supported Joomla/JCB/PHP versions and authoritative repository before editing. Read the selected module's scope and verification status; load references only for the affected fields or relationships.
+
+Carry the application through the [completion contract](workflows/delivery.md#completion-contract). Resolve the latest JCB at execution time under the [version policy](standards/version-policy.md); source hashes in research references are not runtime requirements. Use the canonical [Playground guide](testing/playground/README.md) for browser authoring.
 
 | Task | Entry point |
 | --- | --- |
@@ -31,6 +33,7 @@ Read [AGENTS.md](AGENTS.md) for the operating contract. Identify the requested a
 | Discover maintained core mirrors or reduce GitHub reads | [Repository network](standards/repository-network.md) |
 | Locate official repository families and indexes | [Ecosystem repository catalogue](registries/ecosystem-repositories.json) |
 | Run static checks | [Tools](tools/README.md) |
+| Report instructions that fail to produce the requested extension | [Skills feedback loop](testing/reporting-issues.md) |
 | Introduce another model or sub-model | [Module authoring standard](standards/module-authoring.md) |
 
 Trace maintained source through imported records, a real consuming blueprint, generated output and installed behaviour. Use Playground by default for authorized implementation validation when supported browser access is available. Respect explicit opt-outs and record each failed, blocked or unrun stage separately.
@@ -39,6 +42,6 @@ Preserve the identity of existing items; allocate new identities under the selec
 
 For new application entities, prefer immutable application GUIDs for relationships and portable data exchange, while retaining Joomla's numeric primary keys. Definition GUIDs, application GUIDs, local numeric IDs and business keys have different roles. Each separately persisted child entity needs its own Admin View and component attachment; subform XML alone does not create its table or save lifecycle. Follow the focused workflows above before implementing these features.
 
-Keep source changes and evidence reviewable on the requested branch. Report actual checks and remaining limits. Prepare JCB issue reproductions for [human submission](testing/reporting-issues.md); do not submit under this project's human-led policy.
+Keep source changes and delivery evidence reviewable on the requested branch. When following the skills fails to produce the desired outcome, report the problem in `joomengine/skills` through the [feedback workflow](testing/reporting-issues.md), and continue supported recovery toward completion. Upstream JCB implementation reports follow the separate human-submission procedure in that guide.
 
 Keep the complete distribution under `joomengine-jcb` when registering it as an Agent Skill; follow [loading and distribution](standards/skill-loading.md). Nested model entries rely on shared resources in this distribution. Skill loading does not supply browser tools, credentials or authorization, and automatic discovery depends on the actual client.

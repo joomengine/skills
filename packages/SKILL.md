@@ -5,6 +5,8 @@ description: "Create, extend, maintain and debug Joomla Component Builder packag
 
 # Build JCB package blueprints
 
+Use the [latest JCB version policy](../standards/version-policy.md). Resolve the current production release for production-target work; source hashes in these references are research evidence, not runtime requirements.
+
 Read [scope and baseline](README.md) and the shared [operating contract](../AGENTS.md). Obtain the requested extension behaviour, Joomla/JCB/PHP targets, source/read branch, authorized write destinations, existing identities and dependency catalogues. Preserve established source and local edits. Inspect uncertain target-specific behaviour before authoring.
 
 | Task | Load and execute |
@@ -33,3 +35,5 @@ Preserve these non-obvious constraints: the repository is a shared graph, not on
 Before Push, inspect every eligible writable package repository in the disposable JCB instance. A selected root does not restrict the exporter to one destination. Follow the documented write-branch/token and read-back procedure; report publication as unrun if no authorized destination/credential exists.
 
 Validate the entire affected repository and dependency closure, then use Playground for the actual root and linked consumers. Inspect persisted records and generated files, install the produced extension and exercise the requested behaviour. Correct the authoritative blueprint/source and regenerate after diagnostic edits. Return the changed identities, selected/shadowed provenance, actual checks, observed results and remaining gaps using [verification](verification.md); never equate a successful import or ZIP with runtime completion.
+
+If these instructions prevent the requested outcome or require an undocumented workaround, report the gap through the [Skills feedback workflow](../testing/reporting-issues.md) and continue supported recovery. Upstream JCB issue submission follows the separate human-led procedure there.

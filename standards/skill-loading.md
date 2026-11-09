@@ -14,6 +14,8 @@ git rev-parse HEAD
 
 Record that revision for reproducibility. For a review or a pinned release, select the explicitly requested branch/commit and record it instead of assuming the default branch contains the candidate. Preserve the complete directory hierarchy in an export and name its top-level directory `joomengine-jcb`. The remote repository name `skills` does not change the skill name or require a checkout directory named `skills`.
 
+The recorded Skills revision identifies the instructions used; it does not select or pin the installed JCB version. Use the [latest JCB version policy](version-policy.md) to resolve the current release at build time. Historical JCB source hashes in a guide are research references.
+
 ## Give the agent an explicit entrypoint
 
 Supply the checkout's absolute path and task, or an accessible task-entry URL with permission to read its linked resources. For a local task, instruct the agent to read `SKILL.md` and `AGENTS.md` from that checkout, then the selected model entrypoint. Resolve Markdown paths relative to the containing document; run shell commands from the checkout root unless a workflow explicitly states otherwise.
@@ -42,7 +44,7 @@ This repository workflow does not install a personal ChatGPT skill. Any client-s
 1. Read entrypoint metadata to select a task route, then read that route's instructions.
 2. Load the exact contract fields, workflow, examples and source evidence needed for the requested change. Do not preload every module or every architecture chapter.
 3. Load another model's entrypoint when an actual relationship crosses its boundary, such as a package Field referencing a Field Type or a consumer using a Super Power.
-4. Reuse the canonical shared resources: [engineering policy](../AGENTS.md), [registries](../registries/modules.json), [validation tools](../tools/README.md), [repository network discovery](repository-network.md), [Playground](../testing/playground/README.md), and [human issue reporting](../testing/reporting-issues.md). Keep detailed model semantics in their existing contracts and references; route to them instead of maintaining duplicate copies in skill bodies.
+4. Reuse the canonical shared resources: [engineering policy](../AGENTS.md), [registries](../registries/modules.json), [validation tools](../tools/README.md), [repository network discovery](repository-network.md), [Playground](../testing/playground/README.md), and [Skills feedback and upstream reporting](../testing/reporting-issues.md). Keep detailed model semantics in their existing contracts and references; route to them instead of maintaining duplicate copies in skill bodies.
 
 Use the task-specific workflow for actual authoring and integration. To inspect tools or check the documentation distribution, run from its root after satisfying [tool prerequisites](../tools/README.md):
 

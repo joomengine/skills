@@ -6,7 +6,7 @@ This module explains how to create, extend, maintain and debug **JCB Snippet rep
 
 **Project policy:** [`joomengine/snippets`](https://github.com/joomengine/snippets) is the official **core** catalog. Every new Snippet repository must account for its current GUIDs. A genuinely new item must never reuse a core GUID. Maintaining the same item, including an intentional fork override, retains its identity and requires an explicit provenance/precedence record. Search core before inventing a duplicate pattern.
 
-**Verified baseline:** JCB `6.x` at `408703a857ad937479b1e28de7f693af178dcc83`; core catalog `master` at `a7f536be6ea7a8af5bdf86d81c9f7f547b862365`, inspected 2026-10-31. The format describes these sources, not an untested promise about all JCB/Joomla versions. The core snapshot has 353 snippets and 40 snippet types; its examples reference Bootstrap v4 and UIkit v2 libraries. Old markup is not automatically suitable for the current consuming template or framework. See [sources](sources.md) for the evidence and limitations.
+Use the [latest JCB version policy](../standards/version-policy.md) and choose snippet assets compatible with the current consuming template/framework. The recorded research snapshot is JCB `6.x@408703a857ad937479b1e28de7f693af178dcc83` and core catalog `master@a7f536be6ea7a8af5bdf86d81c9f7f547b862365`, inspected 2026-10-31. Its 353 snippets and 40 types include Bootstrap v4 and UIkit v2 examples. These references identify the inspected data; they do not require that JCB version or those older UI libraries. See [sources](sources.md) when comparing current behavior.
 
 | Task | Read next |
 | --- | --- |

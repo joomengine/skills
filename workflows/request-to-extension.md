@@ -2,6 +2,8 @@
 
 **Scope: project workflow policy.** Use this route when a user describes an application rather than naming a JCB model. Keep Joomla Component Builder at the centre: the maintained deliverable is its authoring graph and supporting source, from which JCB generates the extension. Choose the environment and delivery format to fit the task. This workflow covers requirements, reuse, customization, compilation, installed behaviour and handover.
 
+The required outcome is a complete, stable, runnable extension ready for deployment on the agreed target. Follow the [completion contract](delivery.md#completion-contract) through the final deliverables. Resolve the latest JCB under the [version policy](../standards/version-policy.md); inspect the current implementation when historical references differ.
+
 ## Contents
 
 - [Establish the requested outcome](#establish-the-requested-outcome)
@@ -103,3 +105,5 @@ Do not equate a Git-host source ZIP with a complete Playground export. When an a
 On discovery failure, follow the network's bounded retry and alternate-host procedure. On import failure, inspect source identity, selected repository/branch, dependencies and local record state before retrying. On compile or runtime failure, preserve the actual error and trace the generated location back to its JCB authoring field or Power; repair that maintained source.
 
 Save/export useful work before a destructive site reset. Report a blocked operation with the smallest missing input or reproducible failure. Continue independent work that remains authorized. Completion requires the agreed deliverables and evidence; neither the amount of documentation nor an unrelated successful demo certifies the requested application.
+
+If these instructions fail to lead to the requested result, or a successful build requires an undocumented correction, [create or update a Skills issue](../testing/reporting-issues.md) with the reproduction and the useful improvement. Continue resolving the build while maintainers use that feedback to improve the canonical guidance. Link the report in the handoff so the finding can be followed through to its correction.

@@ -5,6 +5,8 @@ description: "Create, extend, maintain, debug and validate JCB PHP Super Power r
 
 # Work with JCB Super Powers
 
+Use the [latest JCB version policy](../standards/version-policy.md). Resolve the current production release for production-target work and inspect its Power contracts; historical source hashes do not pin the running compiler.
+
 Use this entrypoint within the complete `joomengine-jcb` checkout; retain its shared parent resources. Follow [skill loading](../standards/skill-loading.md) and [AGENTS.md](../AGENTS.md). Read [scope and applicability](README.md), then load only the task-relevant references below.
 
 Record the target repository and branch, requested behaviour, existing identity or new-item decision, supported JCB/Joomla/PHP versions, and authorized dependency sources. Inspect the affected source and [specification](specification.md) before editing. Use [sources.md](sources.md) to verify implementation-dependent claims at the target revision.
@@ -32,4 +34,4 @@ Run commands from the checkout root using [tools/README.md](../tools/README.md).
 
 For executable changes, follow [Playground setup](../testing/playground/README.md) and the module's integration workflow: verify persisted import/refresh, a real consuming reference and caller, generated output, installation and runtime behaviour. Return durable fixes from generated files to authoritative source and rebuild.
 
-Finish with a reviewable source/index/representation diff, the GUID decision and dependency provenance, tested revisions and versions, exact static and integration results, and remaining limits. Consult [verification.md](verification.md) for historical evidence; do not count an earlier import as acceptance of this change. Prepare reproducible JCB defects for [human issue submission](../testing/reporting-issues.md).
+Finish with a reviewable source/index/representation diff, the GUID decision and dependency provenance, tested revisions and versions, exact static and integration results, and remaining limits. Consult [verification.md](verification.md) for historical evidence; do not count an earlier import as acceptance of this change. If these instructions prevent the requested outcome or require an undocumented workaround, report the gap through the [Skills feedback workflow](../testing/reporting-issues.md) and continue supported recovery. Upstream JCB issue submission follows the separate human-led procedure there.

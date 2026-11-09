@@ -5,6 +5,8 @@ description: "Create, maintain, compare, override and validate JCB Field Type ca
 
 # Work with JCB Field Types
 
+Use the [latest JCB version policy](../standards/version-policy.md). Resolve the current production release for production-target work and inspect the current Field Type/consumer contracts; historical source hashes do not pin the runtime.
+
 Use this entrypoint within the complete `joomengine-jcb` checkout; retain its shared parent resources. Follow [skill loading](../standards/skill-loading.md) and [AGENTS.md](../AGENTS.md). Read [scope and applicability](README.md), then load only the references needed for the task.
 
 Record the target repository and branch, existing or proposed Field Type identity, intended Joomla XML `type`, supported JCB/Joomla/PHP versions, and affected concrete Fields. Inspect [specification.md](specification.md) before changing the interchange format; use [sources.md](sources.md) to recheck version-dependent behaviour.
@@ -30,4 +32,4 @@ Run commands from the checkout root using [tools/README.md](../tools/README.md).
 
 For executable changes, use [Playground setup](../testing/playground/README.md) and this module's integration workflow. Inspect the persisted definition, new and existing concrete Fields, explicit and omitted values, generated XML/PHP/SQL, installation, form validation and save/reload behaviour. Fix authoritative metadata, blueprint or compiler source before regenerating.
 
-Finish with a reviewable item/index diff, identity and precedence decisions, property/default evidence and target versions, actual validation results, and unrun or blocked stages. Keep historical [verification](verification.md) separate from this candidate's evidence. Prepare reproducible JCB defects for [human issue submission](../testing/reporting-issues.md).
+Finish with a reviewable item/index diff, identity and precedence decisions, property/default evidence and target versions, actual validation results, and unrun or blocked stages. Keep historical [verification](verification.md) separate from this candidate's evidence. If these instructions prevent the requested outcome or require an undocumented workaround, report the gap through the [Skills feedback workflow](../testing/reporting-issues.md) and continue supported recovery. Upstream JCB issue submission follows the separate human-led procedure there.
