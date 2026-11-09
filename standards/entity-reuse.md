@@ -6,6 +6,7 @@
 
 - [Discover and assess candidates](#discover-and-assess-candidates)
 - [Choose unchanged reuse, adaptation or maintenance](#choose-unchanged-reuse-adaptation-or-maintenance)
+- [Separate definition identity from application identity](#separate-definition-identity-from-application-identity)
 - [Acquire the smallest useful graph](#acquire-the-smallest-useful-graph)
 - [Adapt a graph without breaking identities](#adapt-a-graph-without-breaking-identities)
 - [Compile, verify and hand off](#compile-verify-and-hand-off)
@@ -44,7 +45,22 @@ The default for a changed, independently reusable project variant is a new ident
 
 Follow each domain's identity contract. Most standalone Package records and Powers use GUIDs; a concrete Field and its Field Type are different entities. Package child records use the owning parent's key. Custom Code, Placeholders and Validation Rules have natural keys, and filesystem payloads have their own path/pointer rules. Use the [Package identity table](../packages/specification.md#typed-identities-and-supported-families); never allocate UUIDs for every object indiscriminately.
 
-For a genuinely new GUID-based entity, use a cryptographically generated UUIDv4 and check the relevant current core/additional catalogues plus unpublished local additions. Use the existing [Power](../super-powers/workflows/create-power.md), [Field Type](../field-types/workflows/create-repository.md), [Snippet](../snippets/workflows/create.md) or [Package](../packages/workflows/create-repository.md) procedure. Unavailable catalogues are a disclosed collision-check limitation, not permission to invent an identifier or report universal uniqueness.
+For a manually authored new GUID-based entity, use a cryptographically generated UUIDv4 and check the relevant current core/additional catalogues plus unpublished local additions. Use the existing [Power](../super-powers/workflows/create-power.md), [Field Type](../field-types/workflows/create-repository.md), [Snippet](../snippets/workflows/create.md) or [Package](../packages/workflows/create-repository.md) procedure. Supported importers can have their own identity contract: the inspected [Extrusion Guid resolver](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Extrusion/Resolver/Guid.php) preserves valid supplied GUIDs or derives UUIDv5 identities from source coordinates. Do not replace those established identities merely to make them UUIDv4. Unavailable catalogues are a disclosed collision-check limitation, not evidence of a completed universal collision scan.
+
+## Separate definition identity from application identity
+
+**Project policy, clarified 2026-11-09:** recommend stable application GUIDs for relationships between new application entities, especially for import/export, cross-site data movement and external integrations. Keep Joomla's numeric primary keys and core-managed user, asset and access identities. Deliberate numeric-ID application relationships remain supported; document their portability boundary instead of silently converting an existing system.
+
+| Identity | Example | Meaning |
+| --- | --- | --- |
+| JCB definition GUID | Product Admin View GUID | Identifies one reusable blueprint record across authoring repositories |
+| Application-row GUID | A particular Product's `guid` | Identifies one runtime business record across data exports and environments |
+| Numeric primary key | Product `id` | Identifies the local database row for Joomla Table/controller/ACL handling |
+| Business key | SKU | Domain identifier with independently defined uniqueness and change rules |
+
+A Field definition GUID never becomes the value of that Field in every business row. Keep the portable blueprint graph and runtime data graph separate. GUID links avoid rebasing relationship values when local numeric IDs change; they do not configure database replication, resolve conflicting writes, or guarantee performance by themselves. Index the actual lookups and design synchronization separately.
+
+Use [application identities](../packages/workflows/application-identities.md) for GUID and numeric variants, [modal relationships](../packages/workflows/modal-relationships.md) for controls and routing, and [GUID migration](../packages/workflows/guid-migration.md) for an existing application.
 
 ## Acquire the smallest useful graph
 

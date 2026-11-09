@@ -11,6 +11,10 @@ These guides explain how JCB records become an application. Read the [package co
 | Define a component, attach views, configure options/dashboard/router or release an update | [Component assembly](component.md) |
 | Build a database-backed CRUD screen, organize fields/tabs or control list presentation | [Admin Views](admin-views.md) |
 | Choose form input, storage, application relationships or validation | [Fields and relationships](fields-and-relationships.md) |
+| Choose application GUIDs and configure selection/edit/default behavior | [Application identities](../workflows/application-identities.md), [modal relationships](../workflows/modal-relationships.md) |
+| Persist repeated rows to separate child entities | [Normalized subforms](../workflows/normalized-subforms.md) |
+| Expose list/item operations and inspect generated API routes | [API selection](api-selection.md) |
+| Harvest an existing extension or import application data | [Import router](../workflows/imports.md), [Extrusion](../workflows/extrusion.md) |
 | Query data, render a frontend/custom backend page, reuse a template/layout | [Presentation and Dynamic Gets](presentation-and-queries.md) |
 | Build/attach a module or plugin and its class members/update records | [Modules, plugins and class records](extensions.md) |
 | Load a library, transfer files/folders, package assets or diagnose a missing resource | [Libraries and assets](libraries-and-assets.md) |

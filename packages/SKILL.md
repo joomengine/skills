@@ -11,6 +11,11 @@ Read [scope and baseline](README.md) and the shared [operating contract](../AGEN
 | --- | --- |
 | Turn user requirements into a complete extension | [Application workflow](../workflows/request-to-extension.md) |
 | Find reusable entities and adapt their graph safely | [Entity reuse](../standards/entity-reuse.md) |
+| Choose application GUIDs, selectors and existing-data migration | [Identities](workflows/application-identities.md), [modal controls](workflows/modal-relationships.md), [migration](workflows/guid-migration.md) |
+| Persist subform rows as independent entities | [Normalized subforms and child Admin Views](workflows/normalized-subforms.md) |
+| Select the correct package/schema/application import | [Import router](workflows/imports.md); [Extrusion](workflows/extrusion.md); [immediate](workflows/immediate-import.md), [translation](workflows/translation-import.md), [staged](workflows/staged-import.md) |
+| Generate API routes or activate a compiler prerequisite | [API selection](models/api-selection.md), [compiler plugins](workflows/compiler-plugins.md) |
+| Explain repository operations or publish source | [Operations](../standards/repository-operations.md), [publication preflight](workflows/publication-preflight.md) |
 | Add custom PHP services, callers and class placement | [PHP customization](../super-powers/workflows/customize-extension.md) |
 | Discover a maintained core mirror or recover public source access | [Shared repository network](../standards/repository-network.md) |
 | Select the correct entity or nested setting | [Model router](models/README.md) and the matching field file in [contract inventory](model-contracts.json) |

@@ -54,3 +54,9 @@ Module/plugin roots expose installer-constructor code; preflight install/update/
 6. Install, enable/publish in the correct context, configure and exercise the real module output or plugin event. Test permissions, empty/error inputs and the relevant upgrade/uninstall path in an authorized disposable target. Follow [integration validation](../workflows/validate-and-integrate.md).
 
 If no extension artifact appears, inspect its component attachment and `target` before debugging class code. If a member is missing, compare the saved body with editor selection metadata. If an event never fires, inspect group, enabled state, subscription/method signature and service provider for the exact Joomla version. If parameters fail, inspect generated grouping and Field/rule registration. Carry any generated-output repair back to the original blueprint and compile again.
+
+## Compiler prerequisites and webservices plugins
+
+An extension-group compiler plugin belongs to the authoring build environment. Compile/export attachment does not install, enable or select it in JCB's compiler configuration. Follow [compiler plugin activation and repeatability](../workflows/compiler-plugins.md) for native subscriptions, positional reference arguments, bootstrap and the two final builds. Deliver that build prerequisite separately from ordinary runtime extensions.
+
+A webservices plugin belongs to the installed consumer when the component exposes an API. Follow [API selection](api-selection.md) for the nonsequential `add_api` enum, generated route tokens, dynamic resource exposure, alternate GUID/business-key selectors and actual HTTP authorization tests. It uses a different event contract from compiler plugins.

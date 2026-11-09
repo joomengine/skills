@@ -62,6 +62,8 @@ Sources: [SQL tweak consumer](https://github.com/vdm-io/Joomla-Component-Builder
 
 ## Assembly and acceptance
 
+Use [API selection](api-selection.md) for the actual `add_api` enum, generated route inventory and write permissions. If compilation depends on a build plugin, follow [compiler prerequisites](../workflows/compiler-plugins.md): install, enable and select it on the authoring site, then rebuild the component. Keep retained update SQL in maintained source and verify it survives consecutive builds; a one-time history-derived SQL file is not a durable migration strategy. See [libraries and assets](libraries-and-assets.md) for source-owned SQL/assets and clean-consumer dependencies.
+
 1. Establish the root identity, supported target, component name/namespace/version and actual intended installation behaviour.
 2. Create/reuse views, Fields, queries and assets through their model guides. Add complete linking-child records pointing back to this root. Attach [modules/plugins](extensions.md) and [files/libraries](libraries-and-assets.md) only when required.
 3. Configure options/menu/dashboard/router and enabled code hooks. Keep local credentials and deployment paths outside the portable payload where the contract excludes them.

@@ -2,6 +2,10 @@
 
 Inspected on **31 October 2026**. This record separates source-derived contracts, offline validation and observed browser execution. It does not certify every package entity/field combination or every Joomla target.
 
+## Follow-up documentation checks on 9 November 2026
+
+The revised distribution passed `bash tools/check.sh` with PHP 8.3.6 (Tokenizer and SimpleXML available): 45 fetch, 22 network, 13 mapping, 37 Power, 41 Field Type/Snippet and 33 Package regressions plus 10 composed-service cases, **201 total**. ShellCheck 0.9.0, Bash/JSON/skill/registry/local-link checks and `git diff --check` passed. These are freshly executed tooling checks, not a new compiler or installed-runtime pass. The [independent routing exercise](../testing/scenarios/verification.md#documentation-routing-exercise-on-9-november-2026) tests the documentation path at planning level only.
+
 ## Source and structural evidence
 
 - JCB `6.x@408703a857ad937479b1e28de7f693af178dcc83` exposes 42 Package Remote Config classes and 41 logical contracts: 40 database models with matching forms and the virtual file/folder contract. The generated inventory covers 527 serialized top-level fields and retains nested Table/form metadata in the per-entity references.
@@ -48,3 +52,9 @@ The prior shared [Regex receipt](../testing/playground/verification.md) is evide
 A later fresh-agent exercise used the GUI to author a concrete Field, Validation Rule, Admin View and component, then compiled and installed the corrected component and exercised administrator create/reopen/edit/trash/delete. Its generated ZIP was retained and all 101 PHP files passed local lint. See the [Notes receipt](../testing/scenarios/notes-admin-verification.md) for identities, the naming failure and durable correction, artifact hash and the blocked server-boundary probe.
 
 This establishes the named GUI-authoring and administrator runtime slice. It does not resolve the earlier Hello World catalogue-loading result or prove package source import/export, clean-instance reproduction, public views, APIs or the full Note Desk scenario.
+
+## Clothing Store contribution review — 9 November 2026
+
+Two supplied contribution documents were evaluated and their hashes recorded in the [bounded review](evidence/clothing-store/documentation-review.md). Their recommendations now route to GUID identity/modal/migration, normalized subform, synchronous/staged import, Extrusion, compiler-prerequisite, API and publication workflows. The review distinguishes directly inspected source claims in those guides from reported store-specific implementation results.
+
+The handover describes later compile, migration and installed acceptance slices, including failed/superseded artifacts and uncompleted cases. Its companion source/acceptance archives were not supplied for this review; no corresponding harness, installer, source Push or complete-site restore was rerun. Preserve the receipt's reported/unverified classification. The new documentation does not change the earlier browser observations or certify the complete Clothing Store scenario. Repository checks for this documentation change must be recorded separately from application acceptance.

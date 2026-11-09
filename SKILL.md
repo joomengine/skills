@@ -11,6 +11,10 @@ Read [AGENTS.md](AGENTS.md) for the operating contract. Identify the requested a
 | --- | --- |
 | Turn an application request into a working extension | [Request-to-extension workflow](workflows/request-to-extension.md) |
 | Reuse or adapt existing entities and their relationships | [Entity reuse](standards/entity-reuse.md) |
+| Choose GUID application relationships, modal selectors or migrate existing IDs | [Application identities](packages/workflows/application-identities.md), [modal relationships](packages/workflows/modal-relationships.md), [GUID migration](packages/workflows/guid-migration.md) |
+| Save repeated form rows to their own tables and Admin Views | [Normalized subforms](packages/workflows/normalized-subforms.md) |
+| Choose package acquisition, Extrusion, immediate or staged data import | [Import router](packages/workflows/imports.md) |
+| Understand Init, Pull, Reset and Push across repository categories | [Repository operations](standards/repository-operations.md) |
 | Add custom PHP behaviour and choose administrator/site/library placement | [PHP customization](super-powers/workflows/customize-extension.md) |
 | Reference Joomla classes through JPK mappings | [Joomla Powers skill](joomla-powers/SKILL.md) |
 | Use an existing Joomla/JCB MCP connection | [MCP setup and execution](workflows/mcp.md) |
@@ -32,6 +36,8 @@ Read [AGENTS.md](AGENTS.md) for the operating contract. Identify the requested a
 Trace maintained source through imported records, a real consuming blueprint, generated output and installed behaviour. Use Playground by default for authorized implementation validation when supported browser access is available. Respect explicit opt-outs and record each failed, blocked or unrun stage separately.
 
 Preserve the identity of existing items; allocate new identities under the selected model's rules. Resolve references against current authoritative catalogues without flattening repository precedence. Reuse Joomla facilities and existing Powers before adding another implementation.
+
+For new application entities, prefer immutable application GUIDs for relationships and portable data exchange, while retaining Joomla's numeric primary keys. Definition GUIDs, application GUIDs, local numeric IDs and business keys have different roles. Each separately persisted child entity needs its own Admin View and component attachment; subform XML alone does not create its table or save lifecycle. Follow the focused workflows above before implementing these features.
 
 Keep source changes and evidence reviewable on the requested branch. Report actual checks and remaining limits. Prepare JCB issue reproductions for [human submission](testing/reporting-issues.md); do not submit under this project's human-led policy.
 
