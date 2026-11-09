@@ -6,6 +6,29 @@ Capture the exact failure, expected result, root/entity/key, source branch/commi
 
 Keep four representations distinct: repository source, JCB database/filesystem authoring state, compiled extension, and installed runtime. Locate the first point where expected and observed data differ. Fixing a later representation can help diagnosis, but does not prove the maintained source works.
 
+## Trace a GUI code field
+
+When unsure where a JCB code field lands, let the compiler show you. This is also useful before adding a hook, moving PHP into a Power or splitting a large view into Templates and Layouts.
+
+1. Add a distinctive, syntactically valid comment to the **authoring code field** being investigated and save the record. For a PHP body, use `// JCB_TRACE_PRODUCT_SAVE_20261109`; for HTML, use `<!-- JCB_TRACE_PRODUCT_TEMPLATE_20261109 -->`. Choose a unique label for the current investigation and match the field's language; do not add a PHP opening tag to a field that expects only a body.
+2. In JCB's Compiler, set **Add Custom Code Placeholders** and **Debug (line numbers)** to **Yes** for this diagnostic build. Compile the affected **extension** and install that compiled extension into the test site.
+3. Open **JoomEngine Code** and search the installed extension for the unique comment. Inspect the containing file, class/method or template, available variables, surrounding generated code and imports. This reveals where JCB inserts that field, instead of guessing its lifecycle or writing extra plumbing.
+4. Read nearby markers to trace the responsible authoring record or compiler path. Correct the original GUI field, Power or other maintained source. If the probe is absent, check that the saved field is enabled, the right component was compiled and the new package was installed before moving code elsewhere.
+5. Remove your probe comment from the authoring field. Recompile and reinstall with the normal compiler settings, then exercise the affected feature. JCB regenerates the files; there is no manual marker-stripping step.
+
+The controls are temporary compile overrides, not a debugging subsystem to configure:
+
+| Control or output | Meaning |
+| --- | --- |
+| **Global** | Default when the compiler page loads again. For these two controls, it inherits the selected component's saved setting; it does not always mean **No**. |
+| **Yes** / **No** | Override that setting for the submitted compilation. Refreshing the compiler page returns the controls to **Global**. |
+| **Add Custom Code Placeholders** | Adds source-location markers around supported GUI/custom-code sections. A GUI marker such as `JCBGUI.<table>.<field>.<id>` identifies the JCB table, code field and local record ID, not an application GUID. |
+| **Debug (line numbers)** | Adds compiler class and source-line references to generated comments. These locate the generating compiler code; they are not the line numbers of the GUI field or a PHP debugger. |
+
+When the effective settings are off, recompilation and reinstallation regenerate the files without those compiler-added markers. Usually returning to **Global** is sufficient; if a component's saved setting enables them, choose **No** for that build or update the intended component setting. Keep your authored comments that explain the implementation; remove only your temporary probe from its source.
+
+**Verified source, 9 November 2026:** [Compiler form controls](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/admin/src/View/Compiler/HtmlView.php) define the Global/Yes/No values and Global defaults; [Config::getAddplaceholders()/getDebuglinenr()](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Config.php) resolve overrides against the component settings. [Customcode/Gui::set()](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Customcode/Gui.php) writes GUI markers, and [Utilities/Line::_()](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Utilities/Line.php) emits compiler class/line references. These citations describe the inspected `6.x` source, not a version to install; follow the [latest-version policy](../../standards/version-policy.md).
+
 ## Ordered diagnosis
 
 | Symptom | Check first | Next action and success evidence |
@@ -31,7 +54,7 @@ Keep four representations distinct: repository source, JCB database/filesystem a
 
 1. Reproduce with the smallest root and source set that still fails, preserving the identity and reference pattern that triggers the issue. Do not remove the failing dependency and call the resulting unrelated component fixed.
 2. Compare authoritative source with the saved local record through its documented transformations. Recheck branch SHA before blaming stale caches. If a supported refresh/reload is needed, record it and inspect values again; arbitrary cache clearing is not proof.
-3. Compare the saved graph with the compiled ZIP and installed files. Use JoomEngine Code to inspect/debug actual runtime files under the shared guide. Retain diagnostic diffs and request details; a stopped POST may already have changed state.
+3. Compare the saved graph with the compiled ZIP and installed files. Use JoomEngine Code and [trace a GUI code field](#trace-a-gui-code-field) to locate the actual generated context. Review maintained PHP/HTML against the [authored-code standard](../../standards/authored-code.md). Retain diagnostic diffs and request details; a stopped POST may already have changed state.
 4. Apply the durable correction to package definitions, the external catalogue or compiler source that owns the fault. Refresh the correct local records, recompile and reinstall. Repeat the original failing case and one relevant unchanged case.
 5. For an upstream defect, preserve exact pinned inputs, sanitized logs, minimal steps, expected/observed output and environment limits. Follow [human issue reporting](../../testing/reporting-issues.md); do not submit automatically.
 

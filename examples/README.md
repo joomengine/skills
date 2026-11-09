@@ -1,5 +1,7 @@
 # From a user request to a Joomla extension
 
+For existing implementations to acquire and adapt, start with the [reference pattern catalogue](reference-patterns.md): focused Demo features, advanced Service Directory composition and JCB's translation importer. It connects the blueprint records to their generated consumers and the applicable recipes. The scenarios below describe new applications that can use those techniques.
+
 Use these application scenarios to learn and assess the complete [request-to-extension workflow](../workflows/request-to-extension.md). Each starts with an ordinary request, identifies consequential decisions, maps the application to JCB models, and defines observable acceptance. They are implementation briefs and test cases, **not prebuilt extensions or successful execution reports**.
 
 | Scenario | What it exercises | Starting point |

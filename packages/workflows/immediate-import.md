@@ -1,54 +1,52 @@
 # Build an immediate application importer
 
-Use this workflow when administrators upload and map a spreadsheet, then apply it in the current request. Reuse the actual Transient reader/mapper composition from the [translation reference](translation-import.md), while keeping application rules in compiler-aware Powers. This is the selected route for the [Clothing Store example](../../examples/clothing-store.md); its queue alternative is documented separately.
+Use this workflow when administrators upload and map a spreadsheet, then apply it in the current request. Start with the **complete** [JCB translation-import composition](translation-import.md): its Custom Admin View, upload template, mapping layouts, example export, endpoints and service providers. Select it through the [import router](imports.md); the application's requirements determine whether this or the queued reference is appropriate.
 
-**Authority:** the service contracts below are inspected shared source; the guarded batch design is derived application guidance. The supplied Clothing Store handover reports a working adaptation, but its private implementation/checkpoint was not supplied for independent reconstruction by this PR. Do not copy that report's test counts as new evidence.
+**Authority:** the translation guide records the inspected implementation and its source-specific behavior. The adaptation steps below are project guidance for reusing that feature in another application. Use the [latest JCB version policy](../../standards/version-policy.md); reference commits identify evidence, not an installation requirement.
 
-## Inputs and composition
+## Acquire the feature and define its application contract
 
-Determine file formats, maximum bytes/rows, required columns, create/update match key, application GUID policy, authorization, omission/null meaning, error policy and replay behavior. Derive these from the requested domain; ask only for unresolved product decisions. A file extension is not content validation.
+1. Identify the application tables/Admin Views, required columns, create/update match key and [GUID relationship policy](application-identities.md). Determine supported formats, realistic file volume, permissions, omitted/empty value behavior and what users should see when only some rows can be applied. Keep domain rules tied to the requested feature rather than inheriting another application's business keys or numeric limits.
+2. Locate the authoring records and dependencies through the [reference map](../../examples/reference-patterns.md#importers). Reuse the upload template, mapping layouts/Fields, shared Custom Code and asset configuration with the controller/Ajax callers. Keep the reference's separation of presentation and behavior. Follow [entity reuse](../../standards/entity-reuse.md) when adapting identities and links.
+3. Resolve the Import Factory, Transient, Entity, mapping/row services, file services and spreadsheet reader/exporter with their providers, interfaces and libraries. The [translation service trace](translation-import.md#follow-the-real-caller-and-services) identifies their actual construction. Reuse compiler-aware Power references and providers; do not paste generated JCB namespaces into a new component or manually reconstruct a working factory.
+4. Choose the file lifecycle. The translation reference stores upload metadata in session state and cleans up the temporary file. Use that for a session-scoped upload. If uploads must remain managed application records, compose the [Files/File Types feature](media-files.md) and define retention separately; immediate execution does not require or prohibit persistent files.
 
-Resolve the shared Powers' `settings.json`, `code.power`, interfaces, providers and external libraries. The identifiers below locate reusable source; they are not identities to assign to new application classes.
+## Adapt upload, mapping and Apply
 
-| Responsibility | Shared Power GUID |
+1. Attach the Custom Admin View and its dependencies to the component. Adapt the existing uploader's type, upload, display and delete endpoints, component/target references, language strings and asset paths. Keep progress, error, cancellation and mapping visibility behavior. Do not replace the frontend with an unrelated file input merely because the backend still calls `File.Agent`.
+2. Define the application's supported targets and labels in one maintained source. Use it for both the mapping controls and the **Download Example** action through `Spreadsheet.Exporter`, following the [complete-feature contract](imports.md#deliver-a-complete-import-feature). Keep required-column instructions with this definition. Verify that the downloaded file produces the intended mapping, including case and header labels.
+3. Adapt the mapping fields to source `column` → supported `target`. Validate required and ambiguous mappings before applying rows. Read the same sheet/header row for preview and execution. Apply the format and resource limits appropriate to the actual environment; do not silently import a prefix of an over-limit file.
+4. Configure the import Entity for the actual parent table, parent key, link/match field and any supported joins/subforms. Follow the existing model and Power behavior before adding an adapter. Reuse ordinary row import where it satisfies the application's save semantics. A new domain Power should address a specific unmet rule and have an actual caller/provider.
+5. Keep permission and CSRF checks at the upload, Apply, delete/cancel and example actions as appropriate. Resolve the file from the authenticated operation's owned metadata. Do not accept an arbitrary request-supplied server path. Use a fresh execution payload and capture `execute(...)->result()` once, following the reference's mutable-state semantics.
+6. Show the actual result and row errors. Immediate execution is not inherently an all-or-nothing transaction; the inspected Transient importer can continue after row failures. Choose the error policy the feature needs. Retain the normal per-row workflow when that is correct; implement and test a focused transaction/staging adaptation only when the application requires an atomic batch. See [matching the failure policy](#match-the-failure-policy) before making that promise.
+7. Clean the temporary upload/session state on completion and cancellation according to the selected retry behavior. If correction/retry retains an upload, keep it bound to the same authorized operation and remove it when no longer needed. Reuse the reference's lifecycle rather than adding queue tables to solve a temporary-upload requirement.
+
+Keep Joomla toolbar dispatch working when templates contain separate upload and mapping forms. Inspect the generated view's expected `adminForm`, task and CSRF fields, preserve that structure and avoid nested forms. Exercise the real toolbar buttons after compilation.
+
+## Match the failure policy
+
+| Application requirement | Implementation consequence |
 | --- | --- |
-| Import Factory | `ff8d5fdb-2d1f-4178-bd18-a43b8efd1068` |
-| Transient execution | `abd147d0-2f8c-4905-80f5-164f20278d1c` |
-| Message / Mapper / Data | `25a4968a-94a1-415f-9353-3fc131773a82` / `90b48ea8-0930-48d1-869a-bce9c901589c` / `05f23281-58e3-482e-be42-2dc1355ef4ea` |
-| Spreadsheet Reader / RowData | `c4169332-3914-400e-b861-972b2d465963` / `36063502-2115-4c8d-b16a-0c76cc8c1ada` |
-| Row / Parent / Join | `afb5b891-7130-422a-b389-1934b0e4fc48` / `cc923dc9-8f5c-46ea-810c-d93df2e5752b` / `db00768d-c7a6-421d-8f39-577550ddf792` |
-| Assessor / Entity | `8aab17d9-f0cc-436b-9da0-c63a96e2e5b9` / `ae8978fd-bfd3-45a3-97ef-1b8bf2140c10` |
+| Apply valid rows and report rejected rows | Reuse the ordinary row-processing composition; present row errors and the actual saved result even if the assessor also reports success. |
+| Reject the whole file if any row fails | Use a supported transaction around all affected application writes, with validation before mutation as needed; prove rollback on a late failure. This is an application adaptation, not the default Transient contract. |
+| Update existing records without duplicating them | Configure a stable match key and check create/update/replay behavior, preserving application GUIDs. |
+| Protect against concurrent edits | Use the application's existing locking/revision strategy at the write boundary and test a stale update. A preview check or transaction alone is not a concurrency policy. |
 
-These are a navigation subset, not complete dependency closure. Inspect [Transient's body](https://github.com/joomengine/super-powers/blob/9cd980492bed4c8177a6e32b703641950ec93604/src/abd147d0-2f8c-4905-80f5-164f20278d1c/code.power) and [settings](https://github.com/joomengine/super-powers/blob/9cd980492bed4c8177a6e32b703641950ec93604/src/abd147d0-2f8c-4905-80f5-164f20278d1c/settings.json) at shared Powers `master@9cd980492bed4c8177a6e32b703641950ec93604`. Constructor order and the actual JCB provider are in the translation guide. Preserve compiler-aware dependency references so the generated namespace resolves in a clean component, rather than hardcoding JCB's host namespace.
-
-## Implement upload, mapping and Apply
-
-1. Add a maintained Custom Admin View/controller or supported equivalent and an actual permission-protected caller. Upload through the file service, store metadata bound to the authenticated session/user, and display header/row preview. Apply, cancel and download-example actions require their own permission and CSRF handling where applicable.
-2. Define the form's mapping rows as source `column` → supported `target`. Reject unknown targets, duplicate target assignments, duplicate source columns and missing required targets before execution. Read the same sheet and header row in preview and processing. Validate limits before allocation and during row reading; reject over-limit input rather than importing a prefix silently.
-3. Resolve the file from session-owned metadata. Check that it is still the exact file prepared for this operation; never accept an arbitrary server path. Preserve the original immutable input receipt or digest needed for retry. Use a new payload because Transient removes `maps` from the object.
-4. Construct Transient with a domain ParentTable adapter that **validates and collects rows without application writes**. Return a meaningful non-null row key only for a valid staged row; return `null` or throw for rejection. Do not allow the JoinTables collaborator to perform writes during this collection phase. Isolate/reset mutable Mapper, Data, Row, Message and Entity state between attempts.
-5. Obtain the result once. Require no row/reader errors and at least one valid staged row before applying the batch. The shared assessor's success banner is not sufficient; retain row errors and replace misleading success messages on rejection. Catch thrown failures at the application boundary as well as inspecting collected messages.
-6. Start one application transaction for the staged batch on transactional tables. Reload and recheck access, typed parent ownership, unique business/application keys, revisions and domain constraints. Protect the check-to-write interval with appropriate row locks or conditional updates matching the expected revision, and verify affected-row counts; a transaction and reread alone do not prevent a concurrent overwrite. Apply through checked writers; throw on false results. Commit only if the whole batch succeeds, otherwise roll it back. Avoid Joomla parent Table/asset lifecycle or DDL inside this boundary unless its transactional behavior is independently proved; see [subform save boundaries](normalized-subforms.md#place-the-transaction-correctly).
-7. Return exact created/updated/unchanged/rejected counts and row-level reasons. Define idempotency: identical replay must not duplicate rows or increment revisions merely because it is retried. Recheck expected revisions at the write boundary so a file preview cannot overwrite concurrent changes.
-8. Clean temporary file/session state after completion and cancellation using an explicit retry policy. A failed batch can retain a session-owned file for corrected mapping only when that is the documented UI flow; otherwise remove it and require a new upload. Clean unexpected failures in `finally` and avoid leaking server paths in user errors.
-
-For the Clothing Store profile, the handover selects SKU matching, immutable Variant GUIDs, Product GUID ownership and exact integer price/stock/revision validation. Its 2 MB/5,000-row limits and ten mandatory columns are example choices, not shared defaults. Map to the actual application's named fields and reuse its existing services; do not silently introduce a substitute CSV parser or staged queue.
-
-Custom layouts with separate upload and mapping forms must preserve Joomla toolbar dispatch: use one separate hidden `adminForm` with task and CSRF fields where the generated toolbar expects it. Do not nest the upload/map forms inside another form. Verify actual button submissions after compilation.
+If an atomic adaptation is needed, inspect every writer participating in its boundary, including joins and Joomla Table/asset operations; see [save boundaries](normalized-subforms.md#place-the-transaction-correctly). A collection-only adapter is one possible design, not a required layer for every importer. Do not claim all-or-nothing behavior when underlying services have already persisted rows or commit independently.
 
 ## Acceptance and recovery
 
-Compile from saved authoring records and install the genuine ZIP on a clean Joomla consumer, with its spreadsheet library and loader. Run these cases through the real UI and inspect full before/after application snapshots:
+Compile from saved authoring records and install the genuine ZIP on the target with its spreadsheet library and loader. Run the real interface, not only an isolated importer call:
 
-| Case | Expected policy for an atomic importer |
+| Case | Expected result |
 | --- | --- |
-| Valid create/update and identical replay | Stable GUIDs, correct ownership and revisions; replay creates no duplicate or extra revision |
-| Empty file, reader failure or all invalid rows | No application writes; clear failure |
-| Duplicate keys, mapping collision or unknown target | Rejected before mutation |
-| One invalid row among valid rows | Whole batch rejected with unchanged snapshot |
-| Late stale revision or database error | Whole application batch rolled back; no success banner |
-| Unauthorized upload/apply or forged parent GUID | No data disclosure or mutation outside authorization |
-| Cancel, expired session and repeated Apply | Defined cleanup and replay result; no arbitrary path access |
-| Alternate sheet, each advertised format and resource limit | Preview and processed rows agree; unsupported/over-limit input rejects visibly |
+| Download example, fill a synthetic row, upload, map and Apply | A usable download, correct mapping, saved row and accurate result; all visible controls work. |
+| Update and identical replay | The selected match key finds the intended record; GUIDs and relationships remain stable and replay follows the documented policy. |
+| Empty file, invalid required value, ambiguous mapping or reader failure | Clear, relevant errors and the chosen per-row or whole-file result; no misleading claim that all rows succeeded. |
+| One invalid row among valid rows | Actual saved state agrees with the advertised failure policy. |
+| Unauthorized operation or file from another session/user | No unauthorized file access or application mutation. |
+| Cancel, expired session and repeated Apply | Defined cleanup/retry behavior and no reuse of an unrelated file. |
+| Each advertised format, alternate sheet and expected volume | Preview and processed rows agree; unsupported or over-limit input fails visibly. |
+| Late write failure or concurrent edit, when the feature promises protection | The required rollback/conflict behavior holds at the actual write boundary. |
 
-If results are uncertain after a disconnected request, inspect the operation's durable result/idempotency state before retrying. Preserve the source file and sanitized evidence according to the chosen cleanup policy; do not retry a partially applied generic importer as though it were atomic. Fix the maintained adapter and regenerate. Report source/isolated/installed/concurrency evidence separately.
+Inspect application rows and related records after execution. If a request disconnects, inspect the saved state before retrying; reconcile partial work under the selected match/error policy. Correct the maintained configuration or focused domain Power, regenerate and repeat the affected case. Use the [translation troubleshooting notes](translation-import.md#source-specific-troubleshooting) when a source behavior explains the symptom.

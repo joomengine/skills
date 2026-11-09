@@ -14,6 +14,10 @@ The recorded inventory covers **41 logical package contracts** found in **42 Rem
 | Build through JCB's GUI and export to an authorized branch | [Author in Playground](workflows/author-in-playground.md) |
 | Choose portable application relationships and selector controls | [Application identities](workflows/application-identities.md), [modal relationships](workflows/modal-relationships.md), [GUID migration](workflows/guid-migration.md) |
 | Persist repeated child entities through their own Admin Views | [Normalized subforms](workflows/normalized-subforms.md) |
+| Load structured page data and related collections | [Dynamic Get recipe](workflows/dynamic-get.md) |
+| Reuse managed uploads, image crops and display | [Files and images](workflows/media-files.md) |
+| Find and adapt a complete existing feature | [Reference patterns](../examples/reference-patterns.md), [feature reuse](../standards/entity-reuse.md#reuse-a-complete-feature) |
+| Trace a code slot and maintain readable source | [Compiler tracing](workflows/debug.md#trace-a-gui-code-field), [authored code](../standards/authored-code.md) |
 | Choose schema harvest or immediate/staged data import | [Import router](workflows/imports.md), [Extrusion](workflows/extrusion.md) |
 | Generate APIs and activate build-time prerequisites | [API selection](models/api-selection.md), [compiler plugins](workflows/compiler-plugins.md) |
 | Understand repository operation scope and publish source | [Operations](../standards/repository-operations.md), [publication preflight](workflows/publication-preflight.md) |

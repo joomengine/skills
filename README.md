@@ -20,6 +20,10 @@ A starting prompt can be as simple as: “Use https://github.com/joomengine/skil
 | Reuse an existing entity or create an independent adaptation | [Entity reuse and dependency acquisition](standards/entity-reuse.md) |
 | Design portable application keys and modal relationships | [Application identities](packages/workflows/application-identities.md), [modal relationships](packages/workflows/modal-relationships.md) |
 | Store subform children in their own tables and Admin Views | [Normalized subforms](packages/workflows/normalized-subforms.md) |
+| Load page data and related collections through JCB | [Dynamic Get recipe](packages/workflows/dynamic-get.md) |
+| Reuse a complete file uploader, image cropping and display feature | [Files and images](packages/workflows/media-files.md) |
+| Locate reusable features in Demo, Service Directory and JCB | [Reference pattern catalogue](examples/reference-patterns.md) |
+| Trace generated code to its GUI field and maintain readable source | [Compiler tracing](packages/workflows/debug.md#trace-a-gui-code-field), [authored code standard](standards/authored-code.md) |
 | Select the correct import mechanism | [Import router](packages/workflows/imports.md) |
 | Understand repository operations and limit Push destinations | [Operations overview](standards/repository-operations.md), [publication preflight](packages/workflows/publication-preflight.md) |
 | Add algorithms, integrations and clean PHP classes to an extension | [PHP customization and class placement](super-powers/workflows/customize-extension.md) |
@@ -49,6 +53,10 @@ A starting prompt can be as simple as: “Use https://github.com/joomengine/skil
 | Run the repository checks | [Validation tools](tools/README.md) |
 
 ## Shared engineering policy
+
+JCB performs the heavy lifting through reusable authoring records and its compiler. Pull a suitable Field, Admin View, presentation feature or whole blueprint with its dependencies, then adapt the necessary parts. The [reference catalogue](examples/reference-patterns.md) connects focused Demo patterns and advanced Service Directory composition to practical recipes. These components demonstrate techniques; their business models are not universal application requirements.
+
+JCB deliberately offers advanced authors freedom without restrictive architectural guardrails. The skills teach sound choices within that freedom: use generated retrieval and persistence where they fit, compose Templates and Layouts, and write readable custom behaviour for the application's remaining needs.
 
 1. Research Joomla core/framework solutions for the supported versions first.
 2. Search [joomengine/super-powers](https://github.com/joomengine/super-powers), the **central shared foundation and reference standard** for JCB-owned reusable classes.

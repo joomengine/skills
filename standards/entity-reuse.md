@@ -5,6 +5,7 @@
 ## Contents
 
 - [Discover and assess candidates](#discover-and-assess-candidates)
+- [Reuse a complete feature](#reuse-a-complete-feature)
 - [Choose unchanged reuse, adaptation or maintenance](#choose-unchanged-reuse-adaptation-or-maintenance)
 - [Separate definition identity from application identity](#separate-definition-identity-from-application-identity)
 - [Acquire the smallest useful graph](#acquire-the-smallest-useful-graph)
@@ -31,6 +32,24 @@ jq -r 'to_entries[] |
 ```
 
 Use the selected model's index path and format for other families. Fetching an entire component to discover one Field is unnecessary. A dependency index identifies membership; inspect the actual dependency payload when its behaviour matters.
+
+## Reuse a complete feature
+
+Choose the smallest **working feature**, which can span several records. A file-upload Field without its type configuration, storage, handlers and display is not the reusable uploader. A Site View without its Dynamic Get, Templates, Layouts and assets is not the reusable page. JCB can acquire individual blueprint entities or an entire component; choose the scope that delivers the requested behaviour with its dependencies.
+
+Use the [reference pattern catalogue](../examples/reference-patterns.md) to locate actual source records and generated consumers. Demo supplies focused examples; Service Directory demonstrates larger compositions of the same mechanisms. Inspect both the authoring records and the generated result to see which work JCB already performs. Keep domain-specific names and GUIDs in the specimen catalogue, not as fixed requirements for every new application.
+
+| Required capability | Reuse and adapt together |
+| --- | --- |
+| Smart subform with its own table | Parent expert Field, child Admin View and Fields, GUID link, component association, shared `Data.Subform` hooks; follow [normalized subforms](../packages/workflows/normalized-subforms.md) |
+| Managed relationship | Target Admin View, stored key, title lookup, selector Field/Field Type, edit/New links and permissions; follow [modal relationships](../packages/workflows/modal-relationships.md) |
+| Managed files and images | Files and File Types Admin Views, upload/display Fields, configuration, AJAX tasks, shared Powers, assets, crop settings and display Layout; follow [media files](../packages/workflows/media-files.md) |
+| Public list or detail page | Dynamic Get and defined result shape, Site View, Templates, Layouts, routes and assets; follow [Dynamic Get](../packages/workflows/dynamic-get.md) |
+| Data importer | Custom Admin View, upload/mapping/feedback presentation, example download, shared import/export Powers, handlers, and queue records when required; follow the [import router](../packages/workflows/imports.md) |
+
+Acquire the selected records from their real repositories using the operations below. Inspect the saved graph before adapting it. In the GUI, **Save as Copy** can start an independent variant where that editor supports it; inspect the resulting identity, owned settings and linked records before attaching the variant. Copying a view does not imply that every shared Field or Power has also been cloned. Remap only the records that must differ, preserving unchanged reusable dependencies.
+
+Before adding custom code, identify the unmet requirement precisely. A bespoke adapter, manual SQL query, staging layer or compiler plugin is justified by behaviour the existing mechanism cannot supply; none is a routine prerequisite for using JCB. Its intentionally open architecture supports advanced choices without forcing them onto every feature.
 
 ## Choose unchanged reuse, adaptation or maintenance
 

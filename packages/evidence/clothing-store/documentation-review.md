@@ -1,5 +1,21 @@
 # Clothing Store contribution review — 9 November 2026
 
+## Follow-up: authoring-site and reference-pattern review
+
+The maintainer subsequently supplied `clothing-store-build-and-debugln-num-custom-code-place.zip`, SHA-256 `5f9705ba38047674bfec0dd6a6ca2968e4f242a6037b36a8b0d81e935f3c47a0`. The follow-up inspected its saved JCB definitions and generated source alongside Demo and Service Directory. This is additional evidence after the initial document-only review retained below. The supplied site remains private; the reusable guidance and public reference sources are linked here.
+
+| Observed authoring choice | Documentation correction |
+| --- | --- |
+| Clothing Store Site View 84 combined catalogue/cart/checkout/order presentation in a compressed `default` body; no store-specific Template or Layout records were present. | Teach [Dynamic Get](../../workflows/dynamic-get.md) result shapes and related collections, composed [Templates/Layouts](../../models/presentation-and-queries.md), and [readable source](../../../standards/authored-code.md). |
+| Product category and image were text Fields, with no Category, Files or File Types Admin Views attached to the store. | Require the requested managed entity/selector and complete [media feature](../../workflows/media-files.md), including upload, crop configuration and display. |
+| The variants expert Field used staging and custom service orchestration around the shared Subform service. | Lead with the direct Demo/Service Directory [smart-subform recipe](../../workflows/normalized-subforms.md). Make additional orchestration conditional on actual domain requirements. |
+| The importer reused low-level services but supplied its own temporary upload presentation and lacked the expected example download. | Teach complete [immediate or queued importer reuse](../../workflows/imports.md), including presentation, supported headers, downloadable example and processing lifecycle. |
+| Authored view/controller/model code included direct Joomla namespaces and compressed formatting. Custom Powers did use many SPK references and dependency selections. | Clarify JPK/SPK authoring and compiler-provided aliases without claiming that all custom Power loading was wrong. |
+| Product/Order/Variant selectors already used the shared ModalSelect Field Type. The Category relationship was absent. | Preserve actual reuse and teach the [complete selector graph](../../workflows/modal-relationships.md), including the managed target entity and edit/New integration. |
+| A scoped compiler plugin implemented two corrections; its source needed the same readability review as other authored code. | Keep [compiler plugins](../../workflows/compiler-plugins.md) tied to a demonstrated gap and narrowly defined transformation. |
+
+The [reference catalogue](../../../examples/reference-patterns.md) records the inspected Demo and Service Directory blueprint identities and generated consumers. The compiler's [temporary tracing workflow](../../workflows/debug.md#trace-a-gui-code-field) connects uncertain GUI code slots to generated output. These updates teach reusable JCB mechanisms instead of promoting one store implementation into a universal architecture.
+
 ## Scope and evidence authority
 
 This review evaluated two supplied documents against Skills `main@b5633813fafd6a88226fe2a12b9f38d53619a41c`. It improves the reusable instructions; it does not publish or certify a Clothing Store implementation. The documents were read directly and their SHA-256 values calculated during this review:
@@ -11,7 +27,7 @@ This review evaluated two supplied documents against Skills `main@b5633813fafd6a
 
 The handover describes a supplied JCB **6.2.1-alpha2** distribution and reports later store-specific corrections. The annotation separately pins public JCB `6.x@037752c7e6599aa4cec900138dfb61af7ee4ba8f`. These are different provenance claims: the annotation's public commit does not by itself prove that the supplied distribution or generated store used exactly those bytes. Each operational guide identifies the source inspected for its implementation claims.
 
-The following companion archives were **not supplied for this review**. Their names and hashes are copied as reported identifiers, not independently verified bytes or public download links:
+The following companion archives were **not supplied for the initial document review**. Their names and hashes are copied as reported identifiers, not independently verified bytes or public download links; the later supplied authoring-site archive is identified separately above:
 
 | Reported archive | Reported SHA-256 | Reported contents |
 | --- | --- | --- |
@@ -27,10 +43,10 @@ The useful contribution is an operational route through existing models, not ano
 | Recommendation | Decision and canonical instructions |
 | --- | --- |
 | Prefer portable GUID relationships | Adopt for new portable application entities while retaining Joomla numeric keys and deliberate ID alternatives. Distinguish definition GUID, application GUID, numeric key and business key in [application identities](../../workflows/application-identities.md). GUIDs do not implement replication or conflict resolution. |
-| Store subform rows in their own table | Require the child entity's actual Admin View/component association and explicit expert load/save services; document normal/Multi semantics and application adapters in [normalized subforms](../../workflows/normalized-subforms.md). |
+| Store subform rows in their own table | Require the child entity's actual Admin View/component association and shared expert get/set hooks; document normal/Multi semantics and conditional domain extensions in [normalized subforms](../../workflows/normalized-subforms.md). |
 | Make GUID selectors work end to end | Trace selected value, title, filtering, controller edit lookup, linked defaults and permissions in [modal relationships](../../workflows/modal-relationships.md). A GUID column alone is insufficient. |
 | Select the right import operation | Route authoring acquisition, Extrusion, generic data import, synchronous import and queues separately in [imports](../../workflows/imports.md). |
-| Use immediate application import for this store | Reuse shared Transient services with validation/collection and an application commit in [immediate import](../../workflows/immediate-import.md); keep [translation](../../workflows/translation-import.md) and [staging](../../workflows/staged-import.md) reference semantics distinct. |
+| Reuse an application importer | Select the complete [immediate](../../workflows/immediate-import.md) or [queued](../../workflows/staged-import.md) feature from the actual requirements. The earlier handover's synchronous store design is one implementation choice; [translation](../../workflows/translation-import.md) and Demo queue reference semantics remain distinct. |
 | Explain native schema harvest | Document actual input/identity contracts and schema comparison in [Extrusion](../../workflows/extrusion.md); a harvested scaffold is not a completed application. |
 | Migrate existing relationships carefully | Preserve identity, historical/replay payloads and durable retry state through [GUID migration](../../workflows/guid-migration.md). Do not apply the store's historical SQL to unrelated databases. |
 | Preserve build corrections and dependencies | Follow [compiler plugins](../../workflows/compiler-plugins.md) and [libraries/assets](../../models/libraries-and-assets.md); repeated same-site compilation and clean-source rebuild remain distinct. |
