@@ -1,5 +1,7 @@
 # Validate Field Type source and its real consumer
 
+Use the shared [repository operation overview](../../standards/repository-operations.md) to choose Init, Pull or Reset and distinguish content targets from actions. Registering the repository alone does not import its Field Types; changing a read branch alone does not refresh existing definitions.
+
 ## Required evidence levels
 
 | Layer | Passing establishes | Passing does not establish |

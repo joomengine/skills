@@ -4,6 +4,8 @@ Use the maintained network for public core repository reads when it can reduce G
 
 This is a shared retrieval workflow for every model. A mirror supplies another route to an existing logical repository. Preserve the model's identities, file contracts, source attribution, repository precedence and validation requirements. Read access through a mirror does not select a contribution destination or authorize Push.
 
+For the effect of Init, Pull, Reset and Push on actual definitions, read the [repository operation overview](repository-operations.md). Repository registration, content precedence, network transport and publication eligibility are separate concerns. In particular, Reset can replace local definitions and is not a metadata-only cache reset.
+
 **Host policy:** agents must never access, probe, clone, configure for acquisition or publish to `git.vdm.dev`, including when discovery advertises it as online. It is reserved for the maintainer's internal backup and human interaction. Exclude that host before selecting any normal or recovery source. Human-facing issue links may remain links for the user; agents must not open or submit through them. This policy is stronger than the inspected JCB runtime's default exclusion and must be applied independently.
 
 ## Contents
@@ -148,6 +150,8 @@ Inspect existing enabled connections before import or compile. If they point to 
 
 ## Understand JCB's network integration
 
+Reinspection at `6.x@037752c7e6599aa4cec900138dfb61af7ee4ba8f` on **2026-11-09** confirms that [Resolve::api](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Network/Resolve.php) invokes alternative resolution for monitored status `0`, and [Status::active](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Network/Status.php) randomly selects an eligible active node. The Codefloe-first preference in this guide is agent/maintainer policy, not an automatic runtime failover order. A configured read branch, first matching definition and failed payload request each retain their own semantics; network health does not guarantee retry across later duplicate definitions.
+
 JCB itself uses this service. The following are source observations at `6.x@408703a857ad937479b1e28de7f693af178dcc83`, not a guarantee about every installed release or every failure path:
 
 - [Network resolver](https://github.com/vdm-io/Joomla-Component-Builder/blob/408703a857ad937479b1e28de7f693af178dcc83/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Network/Resolve.php#L70) replaces a listed source when its monitored status is `0`, changing base/organization/repository. Unknown/error status leaves the source unchanged. Branch and credentials are not selected by the network response.
@@ -159,6 +163,8 @@ JCB itself uses this service. The following are source observations at `6.x@4087
 These source findings aid diagnosis. Prepare a minimal reproduction for [human-led JCB issue submission](../testing/reporting-issues.md) where relevant; this documentation does not patch the JCB runtime.
 
 ## Evidence and maintenance
+
+On **2026-11-09**, a fresh project discovery GET returned valid JSON with **10 targets**, including `repoindex` and excluding the older `repositories` alias. Each target advertised a status-1 Codefloe node. The exact response SHA-256 was `93edaf8508e0d27eae7e90e9006c792d1da5d75a92fd355d2823eb5ca1c243e8`. This updates discovery evidence only: no mirror payload, JCB import or runtime round trip was established by that request, and the excluded host was not contacted. Discover targets on each new acquisition phase instead of using either this count or the older snapshots as a fixed catalogue.
 
 On **2026-11-03**, a direct HTTPS GET of the project discovery endpoint returned a valid `jcb` response with 11 targets. Both `repoindex` and `repositories` were present, with the latter pointing to a `repoindex` repository; Codeberg was advertised and Codefloe was not yet present in this snapshot. This is a dated observation only. No excluded host was contacted, and absent future targets or Codefloe entries must not be inferred unavailable permanently. The maintained selector's offline tests cover unknown future target names, host preference, offline recovery, absent/blocked-only results, malformed input and forbidden URL forms. These checks establish selection behaviour, not live repository availability or a JCB import/compile pass.
 

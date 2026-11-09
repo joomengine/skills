@@ -2,6 +2,8 @@
 
 Validation is layered. Each layer answers a different question; report them separately. The supplied shell tools establish static checks, not a replacement JCB compiler.
 
+Start with the shared [Init/Pull/Reset/Push overview](../../standards/repository-operations.md) when choosing an operation. Follow [publication preflight](../../packages/workflows/publication-preflight.md) before an authorized Power export; a prior selected read repository does not select the write destination.
+
 ## Validation matrix
 
 | Layer | What it can establish | What it cannot establish |
@@ -50,7 +52,7 @@ Use the supported authenticated browser flow. These control semantics were verif
 | **Pull** | Opens Pull Selection without requiring local list rows. Choose the intended repository and remote items. Calls initialization with that repository and `force=true`. | A deliberate update to an existing GUID replaces the intended local values from the selected read branch. It can also initialize absent selected items; it is not a Git merge. |
 | **Reset** | Requires selected rows in the local Powers list. Resolves their local IDs to GUIDs and resets through the approved ordered repositories, without an explicit repository selection. | The persisted definitions match the first effective source for those GUIDs; this may differ from the source selected in an earlier Init/Pull. |
 
-Preserve any local edits before Pull or Reset. Package operations can also process tracked dependencies/assets: initialization carries the selected repository and force setting into queued dependencies; reset follows its tracked direct-child/asset path. Inspect the reported scope rather than treating a one-item selection as proof that only one database record can be touched. For cross-repository dependencies, make the required local definitions available through their actual sources and verify them; do not assume an explicit-repository import automatically searches every configured source for its dependencies.
+Preserve any local edits before Pull or Reset. Package operations can also process tracked dependencies/assets: initialization carries the selected repository and force setting into queued dependencies; reset follows its tracked direct-child/asset path. Inspect the reported scope rather than treating a one-item selection as proof that only one database record can be touched. For cross-repository dependencies, make the required local definitions available through their actual sources and verify them; do not assume an explicit-repository import automatically searches every configured source for its dependencies. Importing one selected Power is also distinct from the compiler acquiring referenced Powers: neither the selected import nor a successful compile proves a forced refresh of every transitive Power dependency. Inspect dependency identities, actual local versions and the compiled consumer separately.
 
 For global lookup, the first indexed GUID wins, and an invalid selected payload does not imply fallback to a later duplicate. Changing order or a read branch does not update local records. Use a fresh request after configuration changes, then the appropriate action and persisted-value checks; repository indexes and request trackers can retain state within a request.
 
