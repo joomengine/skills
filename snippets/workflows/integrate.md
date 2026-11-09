@@ -1,5 +1,7 @@
 # Import a snippet and verify a real consumer in Playground
 
+Use the shared [repository operation overview](../../standards/repository-operations.md) to choose Init, Pull or Reset. Before an authorized Push, inspect all eligible write destinations; a source chosen in an earlier Init/Pull does not restrict publication.
+
 ## Inputs and test boundary
 
 Use the [shared Playground workflow](../../testing/playground/README.md) by default for authorized implementation validation when browser access and a suitable target are available. Follow its [configuration reference](../../testing/playground/configuration.md) for environment setup, supported Joomla/PHP choices, installed JCB checks and browser/editor access. Honor the requested target or environment; if it is unavailable, record the blocker and unrun stages rather than silently substituting another version. Do not add a permission pause to testing already covered by the task.

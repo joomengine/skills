@@ -6,6 +6,8 @@ Obtain the application's concrete requirements, root extension type, Joomla/JCB/
 
 The output is an indexed source graph and its review evidence. It is not a compiled extension ZIP or a Playground site backup. Use the [contract](../specification.md), [entity references](../reference/README.md), [examples](../examples/README.md) and [tools](../../tools/README.md). The minimal example is an instructional transport fixture, not an assertion that an arbitrary production component will compile.
 
+Use the [repository operation overview](../../standards/repository-operations.md) to distinguish connection registration, Init, Pull, Reset and Push. Before any authorized export, complete [publication preflight](publication-preflight.md); Package and Super Power destinations are separate pools and each can contain multiple writable targets.
+
 ## 1. Establish a reviewable repository
 
 Start in a new, task-owned directory. With Git installed, these commands create the repository and source directories; they do not create a usable blueprint:
@@ -21,6 +23,8 @@ printf '{}\n' > index/joomla-component.json
 Write the repository README with its purpose, supported target matrix, entry root identities, ordered external sources/read branches, and authoring/validation route. Add the correct license and attribution for original and reused content. Add a short local `AGENTS.md` pointing agents to this module, the identity/serialization rules and that repository's target constraints. An instruction file in this documentation checkout does not govern a separate checkout automatically. Keep credentials, exports of site state and local database dumps out of the source repository.
 
 Commit the initial documentation and create the task's candidate branch. A remote repository/branch must have a real initial commit before JCB can use it; empty local directories are not a remotely readable branch. Configure an authorized GitHub/Gitea remote and publish this initial candidate when that publication is in scope. Open the requested PR early, targeting the agreed base. The attachment's blueprint-authoring project uses `master` as its integration branch; use the authorized candidate branch for review/testing and record any other repository's actual branch rather than assuming all upstream examples use `master`.
+
+With an empty GitHub remote, an authorized first Contents API file creation on the default branch is another initialization route. Read back its actual branch and commit before creating the candidate; do not assume the request can create an arbitrary named branch. A successful first README write establishes a repository baseline, not successful Package or Power publication. Preserve long-lived project instructions outside generated root `README.md`, which later exporters can replace.
 
 ## 2. Choose the authoring path
 
