@@ -23,7 +23,9 @@ Record a compact task brief: requested behaviour, targets, existing inputs, esse
 
 ## Choose an execution route
 
-Select the route from actual tools and access, not from the presence of an MCP or browser label alone.
+Select the route from the user's supplied environment and actual tool capabilities. When the request supplies only an application description and this repository, start with [Playground's JCB setup](https://playground.joomengine.org/?deploy=jcb&start=0). Joomla, PHP and MariaDB run in the browser; a local JCB installation or server deployment is not a prerequisite. Choose an independent saved site and keep its owner tab open. The footer's **Agent guide** explains the current controls.
+
+Use a supplied reachable Joomla/JCB MCP connection first when it fits the user's intent. Discover its operations, and use the same site's supported GUI for gaps. If no such connection is provided, use the Playground administrator GUI; do not turn MCP setup into a requirement for browser authoring. An available same-browser Playground MCP client is an optional additional interface, subject to its discovered capabilities.
 
 | Available input | Authoring route | Required check |
 | --- | --- | --- |
@@ -58,6 +60,19 @@ Choose component and view code names together. Reserve the standard dashboard's 
 - Use [Snippets](../snippets/SKILL.md) when appropriate for reusable view source and inspect their asset/library requirements. Copied snippets do not automatically track catalogue updates.
 - Treat generated API configuration as part of application design. Inspect exposed resources, authentication, authorization, accepted fields and relation semantics. Generating CRUD endpoints does not implement stock reconciliation, payment verification or other business rules automatically.
 
+Resolve the following decisions before building the affected slice; load only the applicable guide:
+
+| Decision | Default and operational route |
+| --- | --- |
+| Portable entity relationships | Prefer immutable application GUIDs while keeping Joomla numeric primary keys. Distinguish runtime rows from JCB definition GUIDs and business keys; follow [application identities](../packages/workflows/application-identities.md). |
+| Repeated child records | Give every independently persisted child table its own real Admin View and component association. Wire the parent's expert Field to its child table through [normalized subforms](../packages/workflows/normalized-subforms.md); XML alone creates no persistence. |
+| Related record picker and linked New | Match stored key, title lookup, edit controller, defaults and permissions using [modal relationships](../packages/workflows/modal-relationships.md). |
+| Acquire definitions or import business data | Select the operation in the [import router](../packages/workflows/imports.md). Immediate import and staged queue processing are different application designs. |
+| Start from existing forms/schema | Use [Extrusion](../packages/workflows/extrusion.md), then inspect the persisted graph and emitted schema for lossy conversions. |
+| Generate API resources | Choose the actual component-view API mode and test routes/ACL through [API selection](../packages/models/api-selection.md). |
+| Maintain compiler corrections | Keep them in the supported [compiler-plugin workflow](../packages/workflows/compiler-plugins.md), with build activation and retained source assets. |
+| Change an existing ID-based application | Use the [GUID migration workflow](../packages/workflows/guid-migration.md); preserving data is a separate task from choosing new-project defaults. |
+
 Use placeholders for the contexts JCB supports. Preserve their exact syntax and scope; do not replace portable component/view identifiers with one project's compiled names. External API behaviour must be established from the actual provider's documentation and tested in an appropriate non-production environment.
 
 ## Author and validate a complete slice
@@ -65,7 +80,7 @@ Use placeholders for the contexts JCB supports. Preserve their exact syntax and 
 1. Build a minimal useful slice containing storage, its administrator operation, required PHP service and an observable consumer. Add the project's remaining capabilities after the source-to-runtime path works.
 2. Run the relevant [static validators](../tools/README.md). Inspect all unresolved references and intentional shadows. A static pass proves only the stated profile.
 3. Acquire or update the exact candidate in JCB. Init is for missing local definitions; confirm whether existing local records require the applicable Pull or Reset operation. Inspect saved/reopened records and associated children; a success notice alone does not establish refresh.
-4. Compile the actual extension with the target JCB compiler. Inspect generated PHP, namespaces, class placement/autoloading, XML, SQL, routes, assets and API output relevant to the slice. Retain the generated package and identify its source revision.
+4. Compile the actual extension with the target JCB compiler. Inspect generated PHP, namespaces, class placement/autoloading, XML, SQL, routes, assets and API output relevant to the slice. Retain the generated package and identify its source revision. If a build-only plugin is required, bootstrap, install, enable and select it before the final component build; compile again to check that required update SQL and assets survive repeated compilation.
 5. Install in a compatible disposable Joomla environment and execute the acceptance cases. Include permission denial, malformed input, failure/retry behaviour and persisted data when those change correctness. Use the [Playground procedure](../testing/playground/README.md) for available editor/debugging tools.
 6. Put lasting fixes back into JCB records, Power source or compiler source as appropriate. Regenerate and repeat the affected cases. Editing generated files alone cannot establish reproducibility.
 

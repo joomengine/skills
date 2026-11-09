@@ -8,10 +8,16 @@ The official [JoomEngine skills repository](https://github.com/joomengine/skills
 
 ## Choose the task
 
+A starting prompt can be as simple as: “Use https://github.com/joomengine/skills to build my Joomla component in Playground. It must manage equipment, borrowers and loans, prevent overlapping loans, and give me the extension installer and a complete site I can import.” Add an existing Joomla MCP connection when that is the intended environment. The agent discovers available capabilities, asks only for consequential missing requirements, and follows the [application workflow](workflows/request-to-extension.md) through delivery. No local JCB server is required for the browser Playground path.
+
 | Task | Read next |
 | --- | --- |
 | Build an extension from a user's application requirements | [Request-to-extension workflow](workflows/request-to-extension.md) |
 | Reuse an existing entity or create an independent adaptation | [Entity reuse and dependency acquisition](standards/entity-reuse.md) |
+| Design portable application keys and modal relationships | [Application identities](packages/workflows/application-identities.md), [modal relationships](packages/workflows/modal-relationships.md) |
+| Store subform children in their own tables and Admin Views | [Normalized subforms](packages/workflows/normalized-subforms.md) |
+| Select the correct import mechanism | [Import router](packages/workflows/imports.md) |
+| Understand repository operations and limit Push destinations | [Operations overview](standards/repository-operations.md), [publication preflight](packages/workflows/publication-preflight.md) |
 | Add algorithms, integrations and clean PHP classes to an extension | [PHP customization and class placement](super-powers/workflows/customize-extension.md) |
 | Reference supported Joomla classes through JPK | [Joomla Powers skill](joomla-powers/SKILL.md) |
 | Author on the user's Joomla/JCB installation through MCP | [MCP setup, discovery and execution](workflows/mcp.md) |
@@ -45,6 +51,8 @@ The official [JoomEngine skills repository](https://github.com/joomengine/skills
 4. Implement new code when the existing capabilities do not adequately satisfy the requirement; record the concrete reason.
 
 Reuse is a design decision, not a requirement to inherit from an unsuitable class. Preserve cohesive responsibilities, dependency injection, established public contracts, and portable Power metadata. Shared foundational changes require review of their consumers.
+
+Prefer immutable GUIDs for relationships between new application entities. Keep Joomla numeric primary keys and distinguish application identities from JCB definition GUIDs and business keys such as SKU. Stable keys make data exchange and multi-database integration easier; database replication, conflict resolution and synchronization still need their own implementation. Preserve deliberate existing ID-based contracts unless a migration is requested. See [application identities](packages/workflows/application-identities.md).
 
 ## Official core entity catalogues
 

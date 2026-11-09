@@ -10,6 +10,11 @@ This module covers all **41 logical package contracts** found in **42 Remote Con
 | --- | --- |
 | Start a package repository, choose identity and build a coherent graph | [Create repository](workflows/create-repository.md), [serialization contract](specification.md) |
 | Build through JCB's GUI and export to an authorized branch | [Author in Playground](workflows/author-in-playground.md) |
+| Choose portable application relationships and selector controls | [Application identities](workflows/application-identities.md), [modal relationships](workflows/modal-relationships.md), [GUID migration](workflows/guid-migration.md) |
+| Persist repeated child entities through their own Admin Views | [Normalized subforms](workflows/normalized-subforms.md) |
+| Choose schema harvest or immediate/staged data import | [Import router](workflows/imports.md), [Extrusion](workflows/extrusion.md) |
+| Generate APIs and activate build-time prerequisites | [API selection](models/api-selection.md), [compiler plugins](workflows/compiler-plugins.md) |
+| Understand repository operation scope and publish source | [Operations](../standards/repository-operations.md), [publication preflight](workflows/publication-preflight.md) |
 | Extend existing records, rename or replace relationships | [Maintain](workflows/maintain.md) |
 | Diagnose failed acquisition, missing dependencies or generated behaviour | [Debug](workflows/debug.md) |
 | Move a blueprint to another Joomla/PHP target | [Migrate target](workflows/migrate-target.md) |

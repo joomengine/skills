@@ -58,6 +58,8 @@ Use [Model/Phpadminview](https://github.com/vdm-io/Joomla-Component-Builder/blob
 
 ## Build and debug sequence
 
+For an entity edited through a parent's subform but stored in its own table, create its own Admin View, attach its schema Fields and link the view to the component. This remains necessary when its standalone menu entry is hidden. Define child access, identity, parent relationship and CRUD policy, then connect the parent's non-database subform through real expert get/save handlers. Follow [normalized subforms](../workflows/normalized-subforms.md); neither repeatable XML nor a linked list creates the child table or persistence policy.
+
 1. Create/reuse Fields and their supported Field Types; design storage/relationships first. Define the view and complete its owning component attachment.
 2. Build `admin_fields` with deliberate column roles, placement and schema inclusion. Add only the necessary conditions, relations and custom tabs, pointing every child to the view GUID.
 3. Add linked views/actions/hooks with explicit request permissions and data assumptions. Resolve code/catalogue dependencies.

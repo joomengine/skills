@@ -13,6 +13,8 @@ Choose the deliverable from the user's goal. A compiled extension, its editable 
 
 Include only deliverables actually generated. A working source repository is not an installation ZIP; a compiled component does not preserve editable JCB records; a Share link does not back up a completed site.
 
+For a Playground-built application requested for client review and continued editing, deliver the compiled runtime extension ZIPs **and** the complete-site ZIP. Include the editable project source when requested or already authorised. This lets the client install the extension on Joomla or use Playground **Upload** to inspect and continue the same JCB project. A text-only source checkpoint can preserve selected definitions and evidence, but is not automatically a complete authoring graph or independently reproducible build.
+
 ## Compile and retain installable packages
 
 Use the actual root's compiler operation and inspect every warning/error. Download each requested extension package through JCB or a verified MCP artifact flow. Record filename, extension version, target Joomla/PHP, source commit/root identity, dependencies and SHA-256. Test installation and the user's actual use cases; successful compilation alone cannot prove payment, shipping, authorisation or stock-synchronisation behaviour.
@@ -20,6 +22,8 @@ Use the actual root's compiler operation and inspect every warning/error. Downlo
 In Playground, follow the [package-retention procedure](../testing/playground/README.md#6-compile-inspect-install-and-run), including the Code file-download fallback when the embedded compiler link does not produce a file. Retain the artifact before an installation action removes its temporary copy.
 
 Preserve maintained source for every correction. A generated PHP edit in JoomEngine Code must return to the appropriate JCB code field, Power definition, asset source or compiler before the next compile can reproduce it. Record any external integration still requiring the user's account or configuration rather than presenting a simulated result as live acceptance.
+
+Separate runtime dependencies from build prerequisites. A webservices plugin used by the application belongs with the runtime delivery; a compiler plugin used only by JCB belongs in the build instructions and a separate installer. Verify the target Joomla consumer has every needed library and asset: a dependency available on the JCB authoring site is not proof it is packaged for the client. Follow [compiler plugins](../packages/workflows/compiler-plugins.md) and [libraries/assets](../packages/models/libraries-and-assets.md).
 
 ## Back up editable blueprints and supporting entities
 
@@ -44,7 +48,7 @@ The source-backed workflow below applies to Playground `58b21b3`, inspected 2026
 2. Download **Complete site**. It includes `site/`, `database.sql`, `database.ndjson` and `export.json`, together with deployment material. The current importer requires those root-level files and installed Joomla files; preserve the generated layout. Verify the archive exists and retain its checksum. Files-only and SQL-only downloads are partial alternatives, not this portable site.
 3. Inspect the archive's intended sharing scope. Complete exports preserve Joomla account data and known sandbox administrator details; JCB repository tokens and other application secrets can also be present in database records. Remove temporary write tokens from the saved site before producing a distributable export and use test data. A complete archive is not automatically safe for a public repository.
 4. Use Playground **Upload** with the exact complete-site ZIP. It restores an independent saved site without replaying the original installer commands. The current importer verifies the payload hash when available; older complete exports without it are accepted with a notice.
-5. Verify the restored Joomla/JCB versions, login, project root, representative Fields/views/relationships, custom Power code, database contents, files and initial route. Compile and test a representative consumer from the restored source. Check that unwanted credentials have not reappeared.
+5. Verify the restored Joomla/JCB versions, login, project root, representative Fields/views/relationships, custom Power code, database contents, files and initial route. Check application GUIDs and parent-child links against the exported state, independently of local numeric IDs. Reopen an editor, save a controlled change, and reload it. Compile and test a representative consumer from the restored source, including required compiler prerequisites. Check that unwanted credentials have not reappeared.
 6. Retain the original and restored evidence. If Upload fails, preserve the error/archive, inspect whether it is the expected complete export and keep the original site; do not reset the only copy.
 
 For conventional hosting, use the archive's `DEPLOYMENT.md`: provision compatible PHP/MariaDB, upload files, import SQL, configure destination database/paths and verify the installation. A successful Playground restoration is not a native-host compatibility test.
@@ -58,3 +62,5 @@ Do not promise that a forge's **Download ZIP** of an arbitrary expanded Joomla c
 ## Completion receipt
 
 Report what was delivered, how to consume it, source/root identities, target versions, hashes and the checks actually performed. Keep acquisition, compilation, installation, runtime, blueprint read-back and whole-site restoration results separate. If a user declines source backup, has not supplied write access, or a runtime feature remains unverified, record that boundary accurately without withholding independently completed deliverables.
+
+Distinguish **exported** from **restored**, **same-site repeat compilation** from **clean-source reconstruction**, and **source/test inspection** from **installed acceptance**. Keep the exact artifact tied to each result; later progress does not retroactively turn an earlier failed package into a pass. Give the recipient short concrete instructions: install the runtime ZIPs in Joomla, or open Playground and Upload the named complete-site ZIP; identify where the component and JCB source appear after restoration.

@@ -64,7 +64,15 @@ node --test test/config.test.mjs test/site-import.test.mjs test/version-catalog.
 
 **35 tests passed.** These cover current custom HTTP/HTTPS package/checksum handling, public versus private configuration, complete-site metadata and independent restore configuration, malformed/partial ZIP rejection, supported runtime constraints, version-catalogue staged bytes and hash/failure handling. They are pure JavaScript fixture tests, not the upstream full build pinned to Node.js 26.12.1 or a WASM runtime test.
 
-No new browser launch, live native MCP connection, MCP content write, compiler, installed application, complete-site database restoration or repository Push was performed by this refresh. The existing MCP HTTP test was inspected and explicitly expects nested content execution to be rejected; it was not executed here. Retain these boundaries when describing the new documentation's coverage.
+No new browser launch, live native MCP connection, MCP content write, compiler, installed application, complete-site database restoration or repository Push was performed by this refresh. The existing MCP HTTP test at this historical revision was inspected and explicitly expects nested content execution to be rejected; it was not executed here. Retain these boundaries when describing this refresh's coverage; the later source update below supersedes that capability restriction.
+
+## Documentation routing and capability refresh: 2026-11-09
+
+Inspected Playground `main@df82e34a104019c34bcbfd251d37bd9d88d347a0`, including the footer's Agent guide destination, guide, site importer, shared HTTP transport, same-site CGI callback implementation, MCP client and MCP HTTP test. Native MCP `main` remained `f1375656ea4f1f62955253a6b5daa0979e9c6cb5`. The [new source ledger](sources.md#current-network-and-mcp-refresh-2026-11-09) pins those claims.
+
+Updated task routing for a supplied MCP site or browser-only Playground, application GUIDs and independently persisted child Admin Views, maintained compiler prerequisites, runtime installers and complete-site restoration. The inspected current MCP test asserts a nested API category read and subsequent site health; this replaces the older source restriction without claiming all JCB writes are supported.
+
+Skill-entry/distribution validation and whitespace checks passed during this documentation review. The Playground footer still points to `docs/agent-guide.md`, and all 42 URLs in the revised guide parsed. No new live browser application build, MCP execution, native integration or complete-site restoration was performed. These changes are documentation and source-review results; the historical runtime receipts above remain bounded to their original artifacts.
 
 ## Separate live custom-PHP exercise — 2026-11-03
 

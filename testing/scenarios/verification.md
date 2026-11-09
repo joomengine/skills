@@ -8,9 +8,15 @@ The three [application scenarios](../../examples/README.md) define concrete user
 | --- | --- | --- | --- | --- | --- |
 | Note Desk | Not run | Not run | Not run | Not run | Not run |
 | Equipment Loans | Not run | Not run | Not run | Not run | Not run |
-| Clothing Store | Not run | Not run | Not run | Not run | Not run |
+| Clothing Store | Handover reports maintained source; not independently verified | Handover reports same-site compilation; not independently verified | Bounded slices reported; full scenario incomplete | Not established | Complete-site export reported; independent restore not established |
 
 The existing [minimal Package fixture verification](../../packages/verification.md) and [Super Power verification](../../super-powers/verification.md) cover only their recorded artifacts and stages. They do not establish these scenarios' correctness. In particular, a statically valid package graph does not prove a compiled Note Desk, and an isolated PHP rule test does not prove a concurrent reservation or checkout path.
+
+## Documentation routing exercise on 9 November 2026
+
+A fresh agent received only the revised root skill path and an Equipment/Borrower/Loan request: independently stored Loans edited through an Equipment subform, portable cross-site relationships, optional existing MCP, and installer plus reopenable Playground site. It produced an ordered implementation plan and acceptance matrix by following the root, application, model, identity, subform, modal, import, MCP, Playground and delivery guides. No missing guide was encountered.
+
+The inspected output correctly separated definition/application/local/business identities, retained three Admin Views, selected provided MCP or default Playground GUI, used guarded child persistence, required transfer testing with different local IDs, and distinguished installer/source/site export/restore. This was a **plan and navigation exercise**, not an authored component, browser execution or application pass. Independent review additionally checked all 722 local destinations/anchors in the 46 changed/new Markdown files and found no unresolved link. Its concurrency precision finding was applied to the importer and subform guides: revision checks require locks or conditional writes.
 
 ## Documentation review on 3 November 2026
 
@@ -43,3 +49,11 @@ The [bounded receipt](notes-admin-verification.md) records identities, mirror re
 Follow the [fresh-agent procedure](README.md), retain one receipt per candidate, and link it here with the distribution/source revisions and tested runtime. Report documentation navigation, offline source validation, JCB execution, provider integration, remote source publication and site restoration separately. Add named blockers or failures as soon as they are observed instead of waiting for an overall pass.
 
 No PayPal/carrier sandbox transaction, live business update, remote blueprint publication, component installation or site restoration is implied by the publication of these briefs.
+
+## Clothing Store handover review — 9 November 2026
+
+The supplied implementation handover and repository-operation annotation have been evaluated in the [contribution review](../../packages/evidence/clothing-store/documentation-review.md). That receipt identifies the documents read, the companion archives not supplied, the canonical instruction changes, and each reported execution stage. The top-level table now acknowledges that later reported work without converting it into independently verified application acceptance.
+
+The handover reports existing Product/child editing, linked-New/modal use, synchronous import/replay/rejection and bounded storefront behaviour on its final build. It explicitly leaves live new expert-child creation, Product Save as Copy, authenticated/restricted API requests, real concurrent checkout, provider integration, clean-source reconstruction, Package/Power publication and independent complete-site restore uncompleted or unestablished. Those limits remain in force for that candidate until exact later receipts are inspected.
+
+The [updated brief](../../examples/clothing-store.md) selects GUID application relationships, actual child Admin Views, the synchronous importer and explicit compiler/dependency delivery. Added acceptance cases cover identity lifecycle, modal/default behaviour, migration/recovery and repeat compilation/clean consumer dependencies. These are prescribed tests, not newly executed results. Historical evidence elsewhere in this file remains attached to its original task and artifact.

@@ -10,12 +10,23 @@ Start with the [package contract](../specification.md), then choose the task bel
 | Explain a missing record, failed import or generated defect | [Debug integration](debug.md) | Reproducible failure traced to the responsible representation |
 | Move to another supported Joomla/JCB/PHP target | [Migrate the target](migrate-target.md) | Explicit compatibility changes and fresh-install/upgrade evidence |
 | Accept a candidate | [Validate and integrate](validate-and-integrate.md) | Separate structure, acquisition, export, compilation, installation and runtime results |
+| Design new portable application relationships | [Application identities](application-identities.md), [modal controls](modal-relationships.md) | Stable row keys, coherent selectors and normal Joomla ACL/edit routing |
+| Convert an existing application's relationships to GUIDs | [GUID migration](guid-migration.md) | Preserved identities/history, recoverable migration and verified graph |
+| Persist subform rows outside the parent table | [Normalized subforms](normalized-subforms.md) | Child Admin Views, real get/save services, explicit ownership and failure behavior |
+| Choose the correct import operation | [Import router](imports.md) | A deliberate choice among package acquisition, schema harvest and application import |
+| Harvest supported existing extension source | [Extrusion](extrusion.md) | Reviewed saved graph and generated-schema comparison, including lossy conversions |
+| Apply a file synchronously | [Immediate import](immediate-import.md), [translation reference](translation-import.md) | Real shared importer composition with a defined application commit policy |
+| Process a queued import | [Staged import](staged-import.md) | Queue, actual processor, failure/retry and worker coordination policy |
+| Activate a compiler correction or retained SQL prerequisite | [Compiler plugins](compiler-plugins.md) | Installed/enabled/selected build prerequisite and repeat compilation |
+| Publish Packages and Powers | [Publication preflight](publication-preflight.md) | Audited destinations, distinct exports and remote readback |
 
 **Project policy:** use [Playground](../../testing/playground/README.md) by default for authorized implementation testing on a supported target. It is also a practical authoring environment: create Fields, Views and the Component with JCB, then use the package Push path to export their graph to an authorized candidate branch. The [configuration guide](../../testing/playground/configuration.md) governs setup, supported versions, persistence and browser limitations. A documentation-only task does not imply running every live operation.
 
 The procedures describe the inspected JCB `6.x` contract at `408703a857ad937479b1e28de7f693af178dcc83`. Compare the installed version before using a named action. [Package sources](../sources.md) identify implementation authority; [package verification](../verification.md) records actual results. Examples, expected results and prescribed acceptance cases are not completed test evidence.
 
 ## Operation scopes that govern these workflows
+
+Read the shared [repository operations overview](../../standards/repository-operations.md) first when distinguishing content categories, connection registration, Init, Pull, Reset and Push. It includes the later alpha2 source review; the pinned table below retains its original alpha1 evidence scope.
 
 The component list is `index.php?option=com_componentbuilder&view=joomla_components` in JCB administration. Use its supported authenticated UI with normal permissions and request tokens; the task names below identify source behaviour, not unauthenticated links to invoke.
 

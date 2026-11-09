@@ -4,6 +4,18 @@ Inspected **2026-10-31**. This map supports the [repository specification](speci
 
 ## Recorded baselines
 
+The original interchange inventory below remains pinned to alpha1. A focused follow-up on **2026-11-09** inspected `joomengine/Joomla-Component-Builder` `6.x@037752c7e6599aa4cec900138dfb61af7ee4ba8f` (manifest `6.2.1-alpha2`) for repository operations, application identities/modal controls, expert subforms, importers, Extrusion, APIs and compiler plugins. This does not claim regeneration of the full metadata inventory. Each focused workflow supplies its exact symbols and immutable source links.
+
+| Follow-up area | Canonical guide and evidence |
+| --- | --- |
+| Repository acquisition/publication | [Operations](../standards/repository-operations.md), [publication preflight](workflows/publication-preflight.md) |
+| Application identity and selectors | [Identities](workflows/application-identities.md), [modal relationships](workflows/modal-relationships.md), [migration](workflows/guid-migration.md) |
+| Separate-table storage and imports | [Normalized subforms](workflows/normalized-subforms.md), [import mechanisms](workflows/imports.md) |
+| Source harvest and compiler lifecycle | [Extrusion](workflows/extrusion.md), [compiler plugins](workflows/compiler-plugins.md), [API selection](models/api-selection.md) |
+| Supplied contribution reports and unavailable companion artifacts | [Review and evidence limits](evidence/clothing-store/documentation-review.md) |
+
+The owner-supplied handover's alpha2 archive comment is not treated as an upstream commit. Public source inspected at `037752c7` supports only the claims whose actual paths were checked; it does not establish byte equivalence with that earlier distribution or reproduce the reported Clothing Store acceptance run.
+
 | Source | Ref | Exact revision / identifier | Role |
 | --- | --- | --- | --- |
 | `vdm-io/Joomla-Component-Builder` | `6.x` | `408703a857ad937479b1e28de7f693af178dcc83` | Remote configs, table/form metadata, persistence, discovery, lifecycle and assets; manifest `6.2.1-alpha1` |

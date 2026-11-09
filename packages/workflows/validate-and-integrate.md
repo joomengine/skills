@@ -15,6 +15,19 @@ Use [Playground](../../testing/playground/README.md) by default for authorized p
 
 ## 1. Freeze inputs and check structure
 
+For the affected feature, include the focused acceptance cases rather than treating a root import as sufficient:
+
+| Feature | Required cases and authority |
+| --- | --- |
+| Application identity and modal relationship | [GUID/ID variants](application-identities.md) and [modal lifecycle](modal-relationships.md): actual stored key, title, select/clear/edit/New/default/filter, create/edit/copy and authorization |
+| Separate-table subform | [Normalized storage](normalized-subforms.md): actual child Admin View/table, round trip, ownership, omission/malformed input, late failure and parent-versus-child save result |
+| Immediate or staged application import | [Import router](imports.md): actual shared services, mapping, reader/row failures, partial-write policy, replay, cleanup and processor invocation when queued |
+| Extrusion | [Schema harvest](extrusion.md): pairing, deterministic identities, shared Field effects, compound indexes/defaults and actual generated SQL |
+| API | [API selection](../models/api-selection.md): inspect every generated route, enabled plugin, authenticated/restricted requests, write allowlist and PATCH omission/null handling |
+| GUID upgrade or compiler prerequisite | [Migration](guid-migration.md), [compiler plugins](compiler-plugins.md): preserved graph/history, failure/recovery, plugin activation and consecutive builds retaining update SQL |
+
+Use synthetic fixtures and label static, isolated, generated and installed results separately. The [contribution review](../evidence/clothing-store/documentation-review.md) records which prior observations were supplied as reports and which source was independently inspected; it is not a live runtime receipt.
+
 Record the selected root entity/key, candidate repository/read branch/commit, baseline commit, JCB contract revision, exact installed JCB/Joomla/PHP versions, browser/Playground build, and intended target matrix. Include ordered package/dependency catalogues with exact commits, selected and shadowed identities, asset origins and licensing. The [examples](../examples/README.md) distinguish fixtures from real learning specimens; use their actual branches and do not relabel an example as newly authored production source.
 
 From this documentation checkout, run the applicable command with existing paths:
