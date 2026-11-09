@@ -110,6 +110,8 @@ JoomEngine Code can aid inspection and debugging; its installed files are a sepa
 
 Use complete examples at the smallest size that demonstrates the rule. Cover meaningful variations, not dozens of equivalent snippets. For a repository format, include creation from an empty directory and at least one realistic dependency relationship.
 
+For a reusable application feature, document its complete working graph and acquisition path: authoring records, external Powers/Field Types, assets, caller and generated consumer. Lead with JCB's established mechanism; make additional orchestration conditional on an actual requirement. Keep exact reference component names and specimen identities in the [pattern catalogue](../examples/reference-patterns.md), while recipes teach adaptation. Include [GUI tracing](../packages/workflows/debug.md#trace-a-gui-code-field) where code placement is unclear, and follow the [authored-code standard](authored-code.md) in examples.
+
 Separate immutable reference specimens from newly created fixtures. Record source commit and original license for copied material; do not relicense it. Example identifiers must be clearly marked reference-only or fixture-only, and creation instructions must generate fresh identities. Never let an example accidentally become a globally reused production identity.
 
 Describe how a maintained repository points agents back to this guide. A root `AGENTS.md` in this documentation repository does not automatically apply to other checkouts. A consumer can add a brief local pointer identifying the module and required rules while retaining its own target/version constraints.

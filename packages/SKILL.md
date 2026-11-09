@@ -15,6 +15,10 @@ Read [scope and baseline](README.md) and the shared [operating contract](../AGEN
 | Find reusable entities and adapt their graph safely | [Entity reuse](../standards/entity-reuse.md) |
 | Choose application GUIDs, selectors and existing-data migration | [Identities](workflows/application-identities.md), [modal controls](workflows/modal-relationships.md), [migration](workflows/guid-migration.md) |
 | Persist subform rows as independent entities | [Normalized subforms and child Admin Views](workflows/normalized-subforms.md) |
+| Load page data and nested collections through JCB | [Dynamic Get recipe](workflows/dynamic-get.md), [presentation models](models/presentation-and-queries.md) |
+| Add managed uploads, cropping and display | [Files and images](workflows/media-files.md) |
+| Pull a complete working feature from a reference blueprint | [Reference patterns](../examples/reference-patterns.md), [feature reuse](../standards/entity-reuse.md#reuse-a-complete-feature) |
+| Trace a GUI code field and write maintainable source | [Compiler tracing](workflows/debug.md#trace-a-gui-code-field), [authored code](../standards/authored-code.md) |
 | Select the correct package/schema/application import | [Import router](workflows/imports.md); [Extrusion](workflows/extrusion.md); [immediate](workflows/immediate-import.md), [translation](workflows/translation-import.md), [staged](workflows/staged-import.md) |
 | Generate API routes or activate a compiler prerequisite | [API selection](models/api-selection.md), [compiler plugins](workflows/compiler-plugins.md) |
 | Explain repository operations or publish source | [Operations](../standards/repository-operations.md), [publication preflight](workflows/publication-preflight.md) |

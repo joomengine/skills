@@ -13,6 +13,10 @@ Start with the [package contract](../specification.md), then choose the task bel
 | Design new portable application relationships | [Application identities](application-identities.md), [modal controls](modal-relationships.md) | Stable row keys, coherent selectors and normal Joomla ACL/edit routing |
 | Convert an existing application's relationships to GUIDs | [GUID migration](guid-migration.md) | Preserved identities/history, recoverable migration and verified graph |
 | Persist subform rows outside the parent table | [Normalized subforms](normalized-subforms.md) | Child Admin Views, real get/save services, explicit ownership and failure behavior |
+| Load structured page data and nested collections | [Dynamic Get](dynamic-get.md) | Generated retrieval with an explicit result shape consumed by Templates and Layouts |
+| Add managed uploads, cropping and display | [Files and images](media-files.md) | Complete Files/File Types feature, handlers, assets and rendered images |
+| Reuse a working feature from an existing blueprint | [Reference patterns](../../examples/reference-patterns.md) | Acquired and adapted records with the complete required dependency graph |
+| Locate a GUI code field in generated output | [Compiler tracing](debug.md#trace-a-gui-code-field) | Identified source slot, source correction and regenerated output |
 | Choose the correct import operation | [Import router](imports.md) | A deliberate choice among package acquisition, schema harvest and application import |
 | Harvest supported existing extension source | [Extrusion](extrusion.md) | Reviewed saved graph and generated-schema comparison, including lossy conversions |
 | Apply a file synchronously | [Immediate import](immediate-import.md), [translation reference](translation-import.md) | Real shared importer composition with a defined application commit policy |

@@ -9,12 +9,18 @@ Read [AGENTS.md](AGENTS.md) for the operating contract. Identify the requested a
 
 Carry the application through the [completion contract](workflows/delivery.md#completion-contract). Resolve the latest JCB at execution time under the [version policy](standards/version-policy.md); source hashes in research references are not runtime requirements. Use the canonical [Playground guide](testing/playground/README.md) for browser authoring.
 
+Let JCB do the routine generation. Start from complete reusable features in the [reference catalogue](examples/reference-patterns.md), acquire their required records, and adapt only what the application needs. JCB intentionally gives advanced authors freedom; apply the established patterns with informed judgment, without adding a framework around capabilities it already supplies.
+
 | Task | Entry point |
 | --- | --- |
 | Turn an application request into a working extension | [Request-to-extension workflow](workflows/request-to-extension.md) |
 | Reuse or adapt existing entities and their relationships | [Entity reuse](standards/entity-reuse.md) |
 | Choose GUID application relationships, modal selectors or migrate existing IDs | [Application identities](packages/workflows/application-identities.md), [modal relationships](packages/workflows/modal-relationships.md), [GUID migration](packages/workflows/guid-migration.md) |
 | Save repeated form rows to their own tables and Admin Views | [Normalized subforms](packages/workflows/normalized-subforms.md) |
+| Load structured page data and compose reusable presentation | [Dynamic Get recipe](packages/workflows/dynamic-get.md), [presentation models](packages/models/presentation-and-queries.md) |
+| Add managed file uploads, image cropping and display | [Files and images recipe](packages/workflows/media-files.md) |
+| Find complete reference features to pull and adapt | [Demo, Service Directory and JCB patterns](examples/reference-patterns.md) |
+| Trace a GUI code field or improve authored source quality | [Compiler tracing](packages/workflows/debug.md#trace-a-gui-code-field), [authored code](standards/authored-code.md) |
 | Choose package acquisition, Extrusion, immediate or staged data import | [Import router](packages/workflows/imports.md) |
 | Understand Init, Pull, Reset and Push across repository categories | [Repository operations](standards/repository-operations.md) |
 | Add custom PHP behaviour and choose administrator/site/library placement | [PHP customization](super-powers/workflows/customize-extension.md) |

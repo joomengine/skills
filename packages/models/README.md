@@ -13,9 +13,11 @@ These guides explain how JCB records become an application. Read the [package co
 | Choose form input, storage, application relationships or validation | [Fields and relationships](fields-and-relationships.md) |
 | Choose application GUIDs and configure selection/edit/default behavior | [Application identities](../workflows/application-identities.md), [modal relationships](../workflows/modal-relationships.md) |
 | Persist repeated rows to separate child entities | [Normalized subforms](../workflows/normalized-subforms.md) |
+| Add complete managed file uploads, image cropping and display | [Files and images](../workflows/media-files.md) |
 | Expose list/item operations and inspect generated API routes | [API selection](api-selection.md) |
 | Harvest an existing extension or import application data | [Import router](../workflows/imports.md), [Extrusion](../workflows/extrusion.md) |
 | Query data, render a frontend/custom backend page, reuse a template/layout | [Presentation and Dynamic Gets](presentation-and-queries.md) |
+| Configure structured page retrieval with related collections | [Dynamic Get recipe](../workflows/dynamic-get.md) |
 | Build/attach a module or plugin and its class members/update records | [Modules, plugins and class records](extensions.md) |
 | Load a library, transfer files/folders, package assets or diagnose a missing resource | [Libraries and assets](libraries-and-assets.md) |
 | Reuse code, substitute placeholders, or resolve embedded code dependencies | [Custom Code and placeholders](code-and-placeholders.md) |
@@ -49,7 +51,7 @@ Field Types, Super Powers, Joomla Powers, Snippets, repository connection record
 ## Build a feature deliberately
 
 1. Define the application result and target: who edits/views which data, relationships/cardinality, required storage and authorization, runtime Joomla/PHP versions and extension ownership.
-2. Choose the smallest actual records and nested settings that implement it. Start with Joomla core capabilities and existing shared code. Reuse a shared record deliberately; give an independently adapted record a new checked identity rather than mutating unrelated consumers.
+2. Choose the smallest complete reusable feature and its actual records and nested settings. Use the [reference catalogue](../../examples/reference-patterns.md) to inspect and acquire existing implementations. Reuse a shared record deliberately; give an independently adapted record a new checked identity rather than mutating unrelated consumers.
 3. Read each entity's reference and its compiler consumer. Set the corresponding enable flag when supplying optional code. Preserve import representations and natural keys; do not copy local numeric IDs or UI-only controls into package JSON.
 4. Attach records to the root through real linking children and outbound references. A Field, View or Library stored in the repository pool is not automatically part of every component.
 5. Recompute/verify package dependencies, then resolve non-package catalogues and embedded code references. A complete GUID graph does not prove that an application selector, SQL join or runtime service points at the right data.
