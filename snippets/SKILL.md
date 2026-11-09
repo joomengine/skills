@@ -5,6 +5,8 @@ description: "Create, extend, maintain, migrate and validate JCB Snippet reposit
 
 # Work with JCB Snippets
 
+Use the [latest JCB version policy](../standards/version-policy.md). Resolve the current production release for production-target work and current compatible UI dependencies; historical source and example versions are evidence rather than required pins.
+
 Use this entrypoint within the complete `joomengine-jcb` checkout; retain its shared parent resources. Follow [skill loading](../standards/skill-loading.md) and [AGENTS.md](../AGENTS.md). Read [scope and applicability](README.md), then load the task's contract and workflow.
 
 Record the repository and branch, intended pattern and consuming view, existing or new identity decision, supported JCB/Joomla/PHP and UI-library versions, attribution, and required type/library sources. Inspect [specification.md](specification.md) and the affected [fields](fields.md); verify implementation assumptions against [sources.md](sources.md).
@@ -28,4 +30,4 @@ Run commands from the checkout root using [tools/README.md](../tools/README.md).
 
 For executable changes, follow [Playground setup](../testing/playground/README.md) and [consumer integration](workflows/integrate.md): inspect persisted records, copy into an attached view, save/reopen the consumer, compile, inspect generated source/assets, install and exercise the rendered page. Apply durable corrections to the snippet, consumer blueprint or compiler source and regenerate.
 
-Finish with a reviewable source/index/type diff, GUID and source-precedence decisions, attribution/library requirements, exact checks and observed consumer results, and remaining limits. Keep prior [verification](verification.md) separate from this candidate's evidence. Prepare reproducible JCB defects for [human issue submission](../testing/reporting-issues.md).
+Finish with a reviewable source/index/type diff, GUID and source-precedence decisions, attribution/library requirements, exact checks and observed consumer results, and remaining limits. Keep prior [verification](verification.md) separate from this candidate's evidence. If these instructions prevent the requested outcome or require an undocumented workaround, report the gap through the [Skills feedback workflow](../testing/reporting-issues.md) and continue supported recovery. Upstream JCB issue submission follows the separate human-led procedure there.

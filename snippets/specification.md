@@ -1,5 +1,7 @@
 # Snippet repository contract
 
+**Operating version:** use the [latest JCB version policy](../standards/version-policy.md) and current compatible UI dependencies. Recorded source snapshots establish observations, not required runtime pins.
+
 **Authority:** verified implementation at the revisions recorded in [sources](sources.md), with additional authoring rules explicitly marked **Policy**. Field-level details are in [fields.md](fields.md).
 
 ## Current layout and source of truth

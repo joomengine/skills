@@ -2,7 +2,9 @@
 
 Start with [SKILL.md](SKILL.md). A JCB package repository is a portable pool of authored records, child settings, raw assets and locator indexes. A component, Joomla module or plugin is a root into that graph; compilation turns the resolved authoring data into installable Joomla extensions. A repository package is not itself an extension ZIP, and a Joomla package installer is another representation again.
 
-This module covers all **41 logical package contracts** found in **42 Remote Config classes** at JCB `6.x@408703a857ad937479b1e28de7f693af178dcc83`: 40 database entities and the virtual `file_system` contract used by File and Folder. [Model routing](models/README.md) maps every contract and the associated nested settings. The [inventory](model-contracts.json) and individual field references make exact data discoverable without loading every model. The supported interchange baseline is this inspected JCB revision; verify differences before applying it to another release. The live installed Playground version and actual test outcomes are recorded separately in [verification](verification.md).
+Use the [latest JCB version policy](../standards/version-policy.md): resolve the current production release for production-target builds and the current alpha/beta channel for requested development work. Follow the actual installed model contracts and compiler behavior.
+
+The recorded inventory covers **41 logical package contracts** found in **42 Remote Config classes** at JCB `6.x@408703a857ad937479b1e28de7f693af178dcc83`: 40 database entities and the virtual `file_system` contract used by File and Folder. [Model routing](models/README.md) maps these contracts and associated nested settings; the [inventory](model-contracts.json) and field references make their metadata discoverable. This revision identifies the research snapshot, not a required JCB version. Inspect current definitions when a contract changes and update the guide. Actual execution results remain in [verification](verification.md).
 
 ## Choose the work
 

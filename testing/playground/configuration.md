@@ -1,16 +1,18 @@
-# Configure a reproducible Playground test
+# Configure a Playground build
 
-Use [the common workflow](README.md) to acquire and test a candidate. This configuration follows Playground `58b21b3`, inspected 2026-11-03; [current source evidence](sources.md#current-workflow-refresh-2026-11-03) identifies the implementation. Verify the published build and running installation before relying on a supported version or feature.
+Use the [canonical Playground guide](README.md) to build and deliver the requested extension. Select current releases using the [version policy](../../standards/version-policy.md): latest compatible production releases for production work, or the latest applicable development releases for development/testing. The [source ledger](sources.md) records inspected implementation revisions; those citations are evidence, not required runtime pins.
 
 Playground's URL selects a runtime, deployment and initial Joomla route. It does **not** select a Power/Field Type/Snippet/Package Git read branch. Configure the repository target, provider, read branch, enabled state and precedence **inside JCB** using the [common acquisition workflow](README.md#3-configure-the-candidates-real-jcb-repository-connection).
 
-## Available version baseline
+## Select current compatible versions
 
 Select the target through the live **Joomla**, **JCB** and **PHP** controls. Read the published `assets/version-catalog.json` and its `generatedAt` when available. The build stages discovered packages and hashes; opening a selector refreshes that published catalogue, not the upstream release servers. Do not hardcode a list of newest releases into a skill or assume a saved site was upgraded by a catalogue refresh.
 
-The inspected source supports current stable, nightly and newest upcoming preview choices for Joomla 5–7 and JCB 5 onwards. Joomla 5 uses JCB 5; Joomla 6 uses JCB 6. Joomla 7 with JCB 6 is an **experimental forward-test pairing**, offered when the actual catalogue and recipe support it. A menu entry is not evidence that a candidate passed on that target. Confirm recipe requirements and effective installed versions after launch.
+Choose the latest compatible Joomla, JCB and PHP releases offered by the published catalogue for the requested target. Use the **stable** group for production work; select the latest applicable **nightly** or **upcoming preview** (alpha, beta or release candidate) when the task calls for development testing. Respect an explicit older compatibility target while choosing its latest supported releases. If the requested release is absent, investigate catalogue freshness and compatible deployment choices rather than silently using a historical example version.
 
-Source defaults still identify Joomla 6.2.0, PHP 8.4 and `jcb`; PHP minor selections include 8.3, 8.4 and 8.5. The current build obtains native 64-bit PHP integer runtimes from a resolved `php-wasm-int64` release. Record the effective PHP patch, `PHP_INT_SIZE`, build/package hashes and selected JCB release rather than copying the earlier 32-bit runtime's patch table. The current JCB build retains its original bundled spreadsheet dependencies. Historical 32-bit compatibility receipts do not describe this new build.
+The catalogue and recipe determine valid Joomla/JCB pairings. An experimental forward-test pairing is useful for compatibility work and needs its own runtime checks; selecting it does not establish production compatibility. Confirm the effective installed versions after launch. The inspected build obtains native 64-bit PHP integer runtimes from a resolved `php-wasm-int64` release and retains JCB's bundled spreadsheet dependencies. Record the effective PHP patch, `PHP_INT_SIZE` and selected package identities/hashes as the build receipt; do not turn that receipt into a fixed version requirement for later builds.
+
+A restored installation can show **Saved version** with its stored package identity/hash. Refreshing the catalogue does not upgrade that installation. Use **Use this deployment** for an independent build with the newly selected releases, and preserve work with **Save** plus a complete export before replacing an environment. Prepared images are eligible only when their package identities match the selected configuration.
 
 ## Ready-to-use test links
 
@@ -50,11 +52,17 @@ Boolean values support `1/0`, `true/false` and `yes/no`. Use the current deploym
 | `config` and optional `sha256` | Public deployment-document URL and optional document digest. This digest does not cover every custom package. |
 | `#deploy=...` | Share-generated deployment configuration. Prefer the UI's encoding and keep credentials out of links. |
 
+## Install another extension
+
+In **Deployment → Extension packages**, add one URL row per package. **Use this deployment** installs them in an independent site; **Apply to this site** applies the supported changes to the running site. Once Joomla is open, its normal extension installer also accepts packages through the supported upload or URL flow.
+
 Custom extension/template URLs support HTTP and HTTPS without embedded credentials or fragments. They are installed through Joomla's `extension:install --url=URL`. Current source routes PHP HTTP through the shared transport with its configured Worker fallback when browser Fetch cannot expose a remote response; this supersedes the earlier direct-Fetch-only restriction. A custom-package failure stays visible while Joomla opens so it can be retried. Required managed deployment packages must install successfully, and their staged package hashes are verified. Do not apply the old direct-fetch checksum behaviour to the current custom-URL path. Inspect actual installer errors, especially for slow database-heavy packages. Installation has its own bounded execution budget; changing ordinary page timeouts alone does not prove the installer limit changed. See the [2026-11-09 network evidence](sources.md#current-network-and-mcp-refresh-2026-11-09).
 
 Startup commands execute after installation and are not replayed merely by reopening a completed saved site. Review commands/packages before **Apply to this site**; removing an item from a recipe does not uninstall it. Failed apply offers checkpoint recovery as a separate site.
 
 ## Deployment presets
+
+**Configure deployment** stages the site name, administrator account, login behavior, Joomla/JCB/PHP selection, extension packages, languages, menus, template and starter content. **Basic** and **JSON** edit the same configuration. Inspect validation messages and recipe requirements when choices are disabled, then use **Use** for a new site or **Apply to this site** for supported changes. After launch, **Site**, **Admin** and **Credentials** open the current site's frontend, administrator and actual login details.
 
 **Save** in the deployment editor saves a recipe, with changes to built-ins becoming a Custom copy. **Save as copy** creates another recipe; deleting a custom recipe does not delete installed sites. **Use** starts an independent installation. **Apply to this site** checkpoints and applies supported changes to the running site. Joomla/deployment selection does not perform an in-place Joomla upgrade of an existing site.
 
@@ -72,9 +80,14 @@ Prepared images are used only for compatible selected package identities; other 
 | Restart | Preserve site data while restarting the runtime. |
 | Close | Close runtime ownership; saved sites can reopen. Preserve temporary work first. |
 | Reset / delete site | Delete the selected site's files/database. This is distinct from JCB entity Reset. |
+| Deployment Save / Save as copy | Save a reusable recipe; changes to built-ins become a Custom copy. This does not save the running site's data. |
+| Export / Import configuration | Transfer the deployment recipe, including its administrator settings; this does not transfer installed files/database. |
+| Deployment images | List and remove reusable browser images without deleting saved sites; this is separate from saving the active site or exporting its content. |
+| JCB Download Component | Retain the compiled installable extension ZIP for a Joomla consumer. It is separate from a complete site or source repository export. |
 | Complete Download / Upload | Transfer and restore the complete site as an independent saved instance; follow [delivery and restore](../../workflows/delivery.md). |
 | Share / recipe import | Recreate setup only. |
-| Files-only recovery | Salvage files from a failed site; can contain private data and lacks SQL. It is not a complete-site archive. |
+| Files-only / SQL-only download | Export the selected portion for inspection or recovery; neither alone is a restorable complete-site archive. |
+| Recover saved site | Offer backup/recovery without booting Joomla. Files-only recovery after database failure lacks SQL and can contain private settings; it is not a complete-site archive. |
 
 Only one tab owns a saved site. Detached editor/database windows still depend on the owner tab. Browser storage can be cleared or evicted; exported artifacts provide a separate backup. Saving files and database is not a guarantee of a single atomic transaction across every store.
 

@@ -42,7 +42,7 @@ Deliver the root GUID/key, repositories, branches, exact tested commits, depende
 
 ## Preserve and restore a complete Playground site
 
-The source-backed workflow below applies to Playground `58b21b3`, inspected 2026-11-03. See the [current agent guide](https://github.com/joomengine/playground/blob/58b21b3d61c7415c231f8d180c388409b4910d74/docs/agent-guide.md), [export implementation](https://github.com/joomengine/playground/blob/58b21b3d61c7415c231f8d180c388409b4910d74/src/export.mjs), [archive producer](https://github.com/joomengine/playground/blob/58b21b3d61c7415c231f8d180c388409b4910d74/src/export/site.php) and [Upload implementation](https://github.com/joomengine/playground/blob/58b21b3d61c7415c231f8d180c388409b4910d74/src/site-import.mjs).
+Use the [canonical Playground guide](../testing/playground/README.md) with the current installation. The [source ledger](../testing/playground/sources.md) records the inspected export, archive and Upload implementations; its dated revisions are supporting evidence, not required runtime versions.
 
 1. Save intended editor buffers and finish any intended JCB/database changes. Use Playground **Save** and wait for success. Keep the owner tab open until export completes.
 2. Download **Complete site**. It includes `site/`, `database.sql`, `database.ndjson` and `export.json`, together with deployment material. The current importer requires those root-level files and installed Joomla files; preserve the generated layout. Verify the archive exists and retain its checksum. Files-only and SQL-only downloads are partial alternatives, not this portable site.
@@ -58,6 +58,12 @@ For conventional hosting, use the archive's `DEPLOYMENT.md`: provision compatibl
 Uploading a complete-site archive to an authorised repository is an artifact-storage operation, separate from JCB blueprint Push. Preserve the exact ZIP and its checksum with a short restore instruction and source/runtime receipt; select a private destination for private state. Check repository/file-size constraints and use an appropriate authorised release/large-file facility where required.
 
 Do not promise that a forge's **Download ZIP** of an arbitrary expanded Joomla checkout can be uploaded directly to Playground. Forge archives commonly add a wrapper directory and do not create the required database and export metadata. If the repository stores the complete-site ZIP, the recipient downloads that inner ZIP and supplies it to Playground **Upload**. Restoring the exact artifact is the acceptance test. There is no verified one-button Playground “push entire site to Git” operation in this inspected release; use the available repository tools to publish the downloaded artifact when authorised.
+
+## Completion contract
+
+Deliver a complete, stable, runnable Joomla extension ready for deployment on the agreed target. Finish the requested behavior and its real integrations, keep the authoritative JCB graph and Power source consistent, and supply the final compiler-produced installers with their required runtime dependencies. Verify installation and the application's agreed acceptance cases. For a requested Playground handoff, supply the Complete site archive and verify that it opens independently with the project and its data intact.
+
+Give the recipient practical installation, configuration and continued-maintenance instructions. Resolve build failures in maintained source and regenerate the affected artifacts. If a skill gap prevents the expected result or forces a workaround, [report it in the Skills repository](../testing/reporting-issues.md) and continue the recovery workflow; the feedback becomes input to the next skills improvement.
 
 ## Completion receipt
 

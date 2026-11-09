@@ -72,7 +72,11 @@ Inspected Playground `main@df82e34a104019c34bcbfd251d37bd9d88d347a0`, including 
 
 Updated task routing for a supplied MCP site or browser-only Playground, application GUIDs and independently persisted child Admin Views, maintained compiler prerequisites, runtime installers and complete-site restoration. The inspected current MCP test asserts a nested API category read and subsequent site health; this replaces the older source restriction without claiming all JCB writes are supported.
 
-Skill-entry/distribution validation and whitespace checks passed during this documentation review. The Playground footer still points to `docs/agent-guide.md`, and all 42 URLs in the revised guide parsed. No new live browser application build, MCP execution, native integration or complete-site restoration was performed. These changes are documentation and source-review results; the historical runtime receipts above remain bounded to their original artifacts.
+Skill-entry/distribution validation and whitespace checks passed during this documentation review. At the inspected upstream revision, the Playground footer pointed to `docs/agent-guide.md`, and all 42 URLs in that guide parsed. No new live browser application build, MCP execution, native integration or complete-site restoration was performed. These changes are documentation and source-review results; the historical runtime receipts above remain bounded to their original artifacts.
+
+### Canonical guide follow-up
+
+The approved documentation architecture moves the comprehensive extension-building guide into [Skills](README.md). Playground's footer and repository README link directly to it; the former `docs/agent-guide.md` retains only a forwarding notice. Browser controls, deployment/version selection, debugging, persistence, delivery and feedback now share this maintained workflow and its [configuration reference](configuration.md). Playground development documentation stays with its implementation repository. The [version policy](../../standards/version-policy.md) resolves latest JCB for new work while preserving these historical observations.
 
 ## Separate live custom-PHP exercise — 2026-11-03
 

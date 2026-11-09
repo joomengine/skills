@@ -1,6 +1,10 @@
 # JoomEngine Skills
 
-**Joomla Packaging Engine Skills** provides the complete development route around Joomla Component Builder: understand a requested application, reuse existing entities, add custom PHP behaviour, compile and exercise the extension, and deliver maintainable source or installable packages. Start an application request with the [request-to-extension workflow](workflows/request-to-extension.md); use the model routes below for a focused change. JCB authoring records and supporting Power source remain the maintainable source throughout the workflow.
+**Joomla Packaging Engine Skills** guides agents from an application request to a complete, stable, runnable Joomla extension ready for deployment on the agreed target. The workflow covers requirements, reusable entities, custom PHP behaviour, compilation, installed validation and final delivery, with maintainable JCB source throughout. Start with the [request-to-extension workflow](workflows/request-to-extension.md); use the model routes below for a focused change.
+
+Use the **latest JCB** for new work, resolving the current production release when the build begins. Development tasks can use the latest alpha/beta channel. Historical source hashes document inspected behavior; they do not lock the skills to that release. Follow the [version policy](standards/version-policy.md).
+
+Real component builds drive improvement. If following the skills fails to produce the requested outcome or requires an undocumented workaround, [report the problem in the Skills repository](testing/reporting-issues.md). Maintainers use those reports to improve the instructions, examples and tools.
 
 The official [JoomEngine skills repository](https://github.com/joomengine/skills) provides operational guidance for agents working across the **Joomla Component Builder (JCB) ecosystem**. Use [SKILL.md](SKILL.md) as the concise task router, then load only the relevant module, reference and workflow. This repository explains how to locate authoritative sources, make consistent changes and verify the result; it complements JCB source code and its [architecture publication](https://architecture.joomlacomponentbuilder.com/).
 
@@ -33,7 +37,8 @@ A starting prompt can be as simple as: “Use https://github.com/joomengine/skil
 | Build a package in JCB's GUI and Push its source to an authorized branch | [Playground authoring and export](packages/workflows/author-in-playground.md) |
 | Test an implementation in browser-hosted JCB, compile it and inspect its output | [Playground integration workflow](testing/playground/README.md) |
 | Choose Joomla/PHP versions, deployment and initial URL path | [Playground configuration](testing/playground/configuration.md) |
-| Prepare a JCB bug report for human submission | [Issue reporting](testing/reporting-issues.md) |
+| Report a build outcome or missing/incorrect skill guidance | [Skills feedback and issue reporting](testing/reporting-issues.md) |
+| Select current JCB releases and interpret historical source references | [Latest-version policy](standards/version-policy.md) |
 | Find the right JCB architecture context | [Architecture map](architecture/README.md) |
 | Add another operational module to this repository | [Module authoring standard](standards/module-authoring.md) |
 | Discover monitored core mirrors, reduce GitHub reads or recover source access | [Repository network workflow](standards/repository-network.md) |
@@ -65,6 +70,8 @@ These are different entity formats. A Field Type describes the foundation and co
 Use the maintained [repository network](standards/repository-network.md) for core-source discovery and alternative read transports. Its live target list expands over time; preserve canonical identity and record the actual mirror and revision. [`joomengine/packages`](https://github.com/joomengine/packages) is the default Package repository.
 
 ## Default integration environment
+
+The [Playground agent guide](testing/playground/README.md) in this repository is the canonical guide for **using Playground to build Joomla extensions**. Playground's runtime Agent link points here. Documentation for developing Playground itself stays in the [Playground repository](https://github.com/joomengine/playground); link to the relevant technical reference when needed instead of maintaining a second agent workflow there.
 
 [JoomEngine Playground](https://playground.joomengine.org/) is the default integration route for agents with browser access working on executable JCB changes. It runs Joomla, PHP and MariaDB in the browser and supplies a JCB deployment, so an agent can configure a repository's target and read branch, import candidate definitions, inspect their local records, compile a real consumer and exercise the generated extension. Respect user opt-outs and declared target versions. Static checks still run; an unavailable browser or unsupported target must be recorded as an unrun integration stage.
 

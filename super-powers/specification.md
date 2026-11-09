@@ -4,6 +4,8 @@ Read this before changing the structure of a Power repository. For individual fi
 
 ## Scope and evidence
 
+**Operating version:** follow the [latest JCB version policy](../standards/version-policy.md). Use the current production compiler for production-target work; compare affected behavior against current code while retaining the historical observations below.
+
 **Implementation baseline:** JCB `6.x` at [`408703a857ad937479b1e28de7f693af178dcc83`](https://github.com/vdm-io/Joomla-Component-Builder/commit/408703a857ad937479b1e28de7f693af178dcc83), inspected 2026-10-31. The inspected `Componentbuilder/Power/` subtree, `Compiler/Power.php`, `Compiler/Power/` subtree and `admin/forms/power.xml` are byte-identical on `5.x` at [`eb4bacd7a549fb2f13b48b993c4efac85e7f0029`](https://github.com/vdm-io/Joomla-Component-Builder/commit/eb4bacd7a549fb2f13b48b993c4efac85e7f0029). That comparison does not prove compatibility of every PHP method in a Power with every Joomla version. GitHub's `master` branch endpoint redirected to `5.x` during inspection; record explicit branch and commit rather than treating `master` as a version contract.
 
 This specification concerns **PHP Super Powers**. Joomla Powers, component package blueprints, JavaScript powers and other JCB entities have separate formats. Do not apply `super-powers.json` or the PHP class-body rules to them by analogy.

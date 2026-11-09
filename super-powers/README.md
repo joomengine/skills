@@ -8,7 +8,7 @@ Use this module to **create, extend, maintain, debug, or scale a PHP Super Power
 
 This module covers PHP power definitions, GUID identities, settings, raw class bodies, indexes, generated representations, dependencies, namespace placeholders, authoring workflows, and validation. It does not define JCB package entity repositories, Joomla Power mappings, JavaScript powers, component UI design, an OpenAI modernization project, or MCP service implementation.
 
-The implementation baseline is the inspected JCB `6.x` revision, with a comparison against `5.x`, plus the seven repository snapshots recorded in the [source map](sources.md) and [repository registry](../registries/power-repositories.json). This is not a promise of compatibility with every JCB/Joomla/PHP release. Establish the actual target versions before making a change and recheck any affected contract against that source.
+Use the [latest JCB version policy](../standards/version-policy.md) for authoring and compilation. The inspected JCB `6.x` revision, `5.x` comparison and repository snapshots in the [source map](sources.md) identify research evidence, not runtime pins. Resolve the current release, inspect affected contracts there, and use compatible current dependencies from the [repository registry](../registries/power-repositories.json).
 
 ## Choose the task
 

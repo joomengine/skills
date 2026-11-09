@@ -1,11 +1,11 @@
 ---
 name: playground
-description: "Use JoomEngine Playground to author and validate Joomla Component Builder models in browser-hosted Joomla, PHP and MariaDB. Use for repository setup, Init/Pull/Reset, persisted-record inspection, package authoring and Push/export, component/module/plugin compilation and installation, generated-file inspection and PHP debugging. Select model-specific acceptance tests and record actual version and capability limits."
+description: "Build and deliver complete Joomla extensions with Joomla Component Builder in browser-hosted Joomla, PHP and MariaDB. Use for application authoring, repository setup, Init/Pull/Reset, package Push/export, compilation, installation, runtime validation, PHP debugging and portable site delivery through JoomEngine Playground."
 ---
 
-# Exercise the real JCB path in Playground
+# Build and deliver with JCB in Playground
 
-Read the [common procedure](README.md) and choose the requested supported runtime from [configuration](configuration.md). Record the actual installed versions, candidate source commit and relevant repository configuration. Respect opt-outs; otherwise use the available browser for authorized implementation testing without a routine approval pause.
+Read the [canonical Playground agent guide](README.md) and select the latest compatible releases from [configuration](configuration.md) using the [version policy](../../standards/version-policy.md). Complete the requested extension through maintained source, compilation, installation, working features and final delivery. Record installed versions, candidate source and relevant repository configuration. Respect the user's environment choice; otherwise use the available browser without a routine approval pause.
 
 | Changed artifact | Required model procedure |
 | --- | --- |
@@ -23,4 +23,4 @@ For a new application request, follow the [request-to-extension route](../../wor
 
 Use Code to inspect actual generated/installed files and diagnose requests; use DB to inspect the same site's saved data. Return durable fixes to maintained source, reacquire/recompile/reinstall and retest. Database-held JCB definitions are not updated by editing generated PHP. Optional in-Playground AI and MCP have separate capabilities; consult the [source and capability ledger](sources.md) and [MCP gate](../../workflows/mcp.md#use-mcp-with-playground) rather than assuming external-agent access or browser MCP content-writing support.
 
-Preserve a receipt with source/runtime identities, selected repositories, actions, expected and observed values, artifacts and limits. Report static, import/refresh, export/read-back, compile, install and runtime outcomes separately. A blocked browser, credential or unsupported target is a named gap, not a pass. Use the [bounded historical receipt](verification.md) as an example and the [human issue handoff](../reporting-issues.md) for a reproducible upstream defect.
+Preserve a receipt with source/runtime identities, selected repositories, actions, expected and observed values and delivered artifacts. Keep the actual results of each stage clear. When the skills do not lead to the agreed outcome, report the reproducible problem in [Skills issues](https://github.com/joomengine/skills/issues) using the [feedback procedure](../reporting-issues.md), so maintainers can improve the instructions. Upstream JCB reports follow the separate human-led route in that procedure.

@@ -1,10 +1,10 @@
-# Test JCB changes in Playground
+# Build and deliver Joomla extensions in Playground
 
-[JoomEngine Playground](https://playground.joomengine.org/) runs Joomla, JCB, PHP and MariaDB in the browser. Use it to exercise repository acquisition, JCB authoring, compilation and installed consumer behaviour in a disposable environment. This is the common environment procedure; the entity modules retain their own acceptance tests.
+[JoomEngine Playground](https://playground.joomengine.org/) runs Joomla, JCB, PHP and MariaDB in the browser. Use this canonical agent guide to take an application request through maintainable JCB source to a complete, stable, runnable Joomla extension ready for deployment on the agreed target. Author, compile, install and exercise the requested features, then deliver the extension installers and requested portable site. No local JCB server deployment is required. The Playground footer links here; maintain the agent workflow in this Skills repository.
 
 **Project policy:** when implementation work calls for JCB integration testing, use an available suitable Playground/browser environment within the user's authorization. Continue ordinary test setup and reversible test changes without adding an approval pause. Respect an explicit opt-out, a different requested environment, and the browser/tool's actual capabilities. If the environment is unavailable, unsupported or blocked, retain the evidence, continue independent checks, and report the exact unexecuted stage. Never turn a blocked test into a pass or require an account, paid AI provider or public publication merely to run this procedure.
 
-**Evidence boundary:** networking and MCP guidance was refreshed against Playground `main` at `df82e34a104019c34bcbfd251d37bd9d88d347a0` on 2026-11-09. Other environment and delivery guidance retains its 2026-11-03 source baseline. It uses the int64 PHP distribution and a published dynamic Joomla/JCB catalogue. Earlier source references and browser receipts remain dated historical evidence; JCB acquisition details use the separately pinned JCB `6.x` source. Compare the live installation before relying on a controller name or format. See [current sources](sources.md#current-network-and-mcp-refresh-2026-11-09) and [observed verification](verification.md); source inspection and upstream tests do not prove a candidate change passed.
+Select the latest compatible production releases for production work, or the latest applicable development releases for development/testing, using the [version policy](../../standards/version-policy.md). Check the actual installed versions and current controls. The [source ledger](sources.md) records implementation revisions, including the int64 PHP distribution, dynamic Joomla/JCB catalogue and current network/MCP transport; the [verification record](verification.md) retains execution history separately. Source citations and past receipts do not pin a new build to those versions.
 
 For monitored core mirrors and access recovery, use [repository network discovery and JCB setup](../../standards/repository-network.md#configure-jcb-and-playground). Preserve the actual candidate branch and keep read transport separate from authorized Push destinations.
 
@@ -12,6 +12,9 @@ For monitored core mirrors and access recovery, use [repository network discover
 
 | Task | Read next |
 | --- | --- |
+| Build an application from a prompt | [Request-to-extension workflow](../../workflows/request-to-extension.md) |
+| Understand JCB's architecture and source models | [Architecture references](../../architecture/README.md) and [model router](../../packages/models/README.md) |
+| Choose production or development releases | [Latest-version policy](../../standards/version-policy.md) |
 | Select versions, create a link, reopen or export a test site | [Configuration and lifecycle](configuration.md) |
 | Super Power acceptance | [Import, compile and runtime workflow](../../super-powers/workflows/validate-and-integrate.md) |
 | Field Type acceptance | [New/existing Field, compilation and runtime workflow](../../field-types/workflows/validate-and-integrate.md) |
@@ -21,7 +24,23 @@ For monitored core mirrors and access recovery, use [repository network discover
 | Use a user-hosted MCP or assess Playground MCP | [Connection, discovered capabilities and browser limits](../../workflows/mcp.md) |
 | Deliver ZIPs, source repositories or the whole site | [Delivery and restore verification](../../workflows/delivery.md) |
 | Understand what has actually run | [Verification record](verification.md) |
-| Preserve and hand off a defect | [Issue reporting](../reporting-issues.md) |
+| Report guidance that prevents the required outcome | [Skills feedback and issue reporting](../reporting-issues.md) |
+
+## Build from a request
+
+1. Follow the [request-to-extension workflow](../../workflows/request-to-extension.md) to establish entities, operations, permissions, integrations and acceptance cases. Reuse the user's supplied answers and environment. Use an existing capable Joomla/JCB MCP connection when provided; otherwise open [JCB setup](https://playground.joomengine.org/?deploy=jcb&start=0) and work in the administrator GUI.
+2. Reuse the relevant Fields, views and Powers. Keep application-row GUIDs separate from JCB definition GUIDs and business keys, retain numeric Joomla primary keys, and create a real Admin View for each separately stored child entity. Use [application identities](../../packages/workflows/application-identities.md), [normalized subforms](../../packages/workflows/normalized-subforms.md) and the [model router](../../packages/models/README.md) for these decisions.
+3. Build one complete source-to-runtime slice, then finish the remaining requested features. Save and reopen definitions, compile, inspect the genuine installer, install it and exercise its behaviour. Carry lasting corrections back to JCB records, Power source or maintained assets and rebuild.
+4. Follow [delivery](../../workflows/delivery.md) to provide the runtime installers and requested **Complete site** archive. Upload that exact archive as an independent site and verify the JCB graph, application relationships, save/reload behaviour and representative compilation. Keep runtime dependencies and build-only prerequisites explicit.
+5. If missing, incorrect or unclear skills prevent the agreed outcome, create or contribute to a matching [Skills issue](https://github.com/joomengine/skills/issues) with the reproduction and improvement needed. Follow the [feedback procedure](../reporting-issues.md), continue useful implementation work, and use the resulting issue to improve the shared instructions.
+
+## Operate the browser
+
+The outer page is Rocket; Joomla runs in its preview. Use Rocket to configure sites, save/download work and open **JoomEngine Code** or **DB**. Use the Joomla administrator to install extensions and edit JCB records. **Site** and **Admin** navigate the running preview; **Credentials** shows this site's login details.
+
+Wait for provisioning, navigation and dialogs to finish, then inspect the resulting controls before acting. Open the preview or its iframe through the browser tool's supported interface. Use current labels and fields, scrolling or keyboard focus where necessary; layouts can vary by version. Keep the owner tab open. Use supported file upload/download controls to transfer packages and verify each transfer.
+
+The optional **JCB + MCP** deployment supplies same-browser authenticated HTTP. Discover the actions needed for the task and use the GUI for unavailable operations. A private browser site is not exposed to an external client merely by sharing the static Playground URL; follow the [MCP execution route](../../workflows/mcp.md#use-mcp-with-playground).
 
 ## Common workflow
 
@@ -55,7 +74,7 @@ Record these values for every effective source:
 
 | Setting | Required check |
 | --- | --- |
-| Content target | Super Power (`1`), Joomla Power (`2`), Field Types (`3`), Packages (`4`), or Snippets (`5`) as appropriate; a package's concrete Fields differ from Field Type catalogue records |
+| Content target | Super Power (`1`), Joomla Power (`2`), Field Types (`3`), Packages (`4`), Snippets (`5`), or the separate Repositories catalogue (`6`) as appropriate; a package's concrete Fields differ from Field Type catalogue records |
 | Provider/type | GitHub or Gitea matching the actual host; these are independent of the content target |
 | Host, organization and repository | Exact source; the inspected GitHub provider normalizes its API base to `https://api.github.com`; Gitea uses the configured base |
 | Read branch | Candidate branch containing the tested commit, explicitly set; a write branch does not select import source |
@@ -76,16 +95,18 @@ Use the entity list's supported authenticated toolbar/selection flow with its no
 | Operation | Meaning and verification |
 | --- | --- |
 | **Init** | Discover/select remote definitions to acquire. Ordinary initialization preserves an already-local GUID; an “already local” result does not prove the candidate was imported. |
-| **Pull** | Opens the pull-selection flow. Inspect the selected source and offered changes, complete the intended selection, then inspect the resulting record. Opening the selection screen is not acquisition evidence. |
+| **Pull** | Can initialize missing selected items and replace existing definitions from the selected source. Inspect the offered changes, complete selection, then inspect the resulting records and dependencies. |
 | **Reset** in a JCB entity list | Refreshes selected local definitions from remote lookup. Preserve intentional local edits first; verify the expected GUID and source before overwriting. Dependency traversal differs by entity. |
 | **Reset** in Playground | Deletes the selected test site's saved files/database. It is unrelated to refreshing an entity. |
-| **Push** in JCB | Writes to the configured remote source. It is unnecessary for a read/import test and belongs only to an authorized export/publication step. |
+| **Push** in JCB | Exports to eligible configured write destinations, potentially more than one. Audit effective destinations using [publication preflight](../../packages/workflows/publication-preflight.md); the selected read source does not restrict Push. |
 
 Import only the required items. Capture meaningful success/local/not-found/error results. Inspect the saved local record's GUID, changed content and dependencies; a toast, record count or HTTP 200 is insufficient. For an update, check a distinctive intended difference. If a cached index or wrong branch hides a change, verify remote commit, indexed paths and selection first, then use the target version's supported reload/refresh path. Do not bypass an import failure by writing directly to JCB's database and call that a successful repository import.
 
 Package authoring may start in this GUI: create and connect the actual component/module/plugin records, compile/test them, then export their portable source through Push. Follow the [package authoring workflow](../../packages/workflows/author-in-playground.md) before supplying credentials or writing. Audit all eligible package write destinations; the inspected generic exporter can write beyond one apparently selected repository. Verify the remote payload/index/asset diff and acquire it into another test instance. A compiler ZIP download is not this repository export.
 
 ### 5. Exercise the actual authoring consumer
+
+For a new component, create concrete **Fields** with the required Field Types and storage settings, create an **Admin View**, attach the Fields in its association editor, and attach that view to the **Joomla Component** through its component association editor. Add the required site views, permissions, code, assets and dependencies. Use the [model router](../../packages/models/README.md) for each record's contract and verify the saved associations.
 
 Follow the linked module workflow. A referenced Super Power, an attached concrete Field, or source copied into an actual Snippet consumer must participate in the build. An imported but unused catalogue item proves only acquisition. Preserve and compare existing consumers when the change affects existing identities.
 
@@ -107,7 +128,13 @@ A compiler/runtime failure needs diagnosis against the actual source revision. I
 
 Record source and runtime revisions, repository settings/effective order, changed identities, exact actions, expected/observed results, artifact hashes/paths, and remaining limits. Separate static, discovery, import/refresh, compile, installation and runtime outcomes. Mark skipped or blocked stages explicitly, including the opt-out or concrete blocker. Use the [verification record](verification.md) as an example of bounded evidence, not a result to copy into another task.
 
-Save the test site explicitly if it must survive reloads and export needed artifacts. Keep credentials and private recovery files out of public receipts. A Share link transfers public setup, not the database/files or proof of a completed run. Preserve failures before reset or closing a temporary site. For a reproducible upstream defect, follow [human issue reporting](../reporting-issues.md); do not automatically submit an issue or contact maintainers.
+Save the site explicitly if it must survive reloads and export the requested artifacts. Keep credentials and private recovery files out of public receipts. A Share link transfers public setup; use **Complete site** for the database and files. Preserve failures before reset or closing a temporary site. Report skill gaps through the [Skills feedback procedure](../reporting-issues.md); upstream JCB issue submission follows its separate human-led route.
+
+## Save and deliver the finished work
+
+Use **Playground Save** and wait for success, then retain the JCB-generated installers and **Download → Complete site** when the client needs the editable workspace. **Upload** restores that complete archive as an independent saved site. Verify login, project definitions, application GUID relationships and a real save/reload after import. Follow the canonical [delivery and restoration procedure](../../workflows/delivery.md) for archive contents, hashes, compiler prerequisites, clean-consumer dependencies and conventional hosting through the archive's `DEPLOYMENT.md`.
+
+Remove temporary repository write credentials before producing a distributable site and select delivery visibility appropriate to its account/application data. Keep the original site until restoration succeeds. The [lifecycle table](configuration.md#lifecycle-persistence-and-evidence) distinguishes editor saving, persistent site saving, recipes, installers and complete-site archives.
 
 ## Inspect and diagnose with JoomEngine Code
 
