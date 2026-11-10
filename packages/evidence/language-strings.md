@@ -35,7 +35,20 @@ A later authorized exercise on the same Joomla/JCB/PHP target saved two literal 
 
 This establishes the bounded Site View source-to-generated-key/INI/translation-record path. An import already present in a compiler template does not prove insertion into an import-free file. Comment-only import placement, Template/Layout/Custom Code consumers, quote-sensitive extraction and installed language switching remain separate acceptance cases, not covered by the two plain-text probes.
 
-The attempted browser Excel export populated its data table but did not produce a retrieved download during this exercise. A separately constructed synthetic workbook is not an exported artifact and cannot establish the export/import round trip. No workbook import, translated recompilation or installed language-switch test is claimed by this receipt; follow the remaining acceptance steps before promoting those stages to passed.
+The attempted browser Excel export populated its data table but did not produce a retrieved download during this exercise. A separately constructed synthetic workbook is not an exported artifact and cannot establish the export/import round trip. The separate synthetic-workbook exercise below establishes import and translated recompilation, but not recovery of the original export download or an installed language-switch test.
+
+## Synthetic workbook import and translated recompilation
+
+The separate XLSX contained the two exact collected Source values and an `af-ZA` column. Its SHA-256 is `7cdbaf5a72e3b9df0245de7e1e129afeb39a5ed0814bb7b9232b0bb7c4322490`. Upload opened the mapping form, automatic Source/Afrikaans mappings were inspected, and the immediate import reported two processed rows with 100% success. Both source rows subsequently showed an Afrikaans translation; reopening a row confirmed the saved value, rather than relying only on the import message.
+
+Recompilation at the existing 30% threshold succeeded but reported Afrikaans exclusion: 2 of 196 source strings translated (approximately 1.02%). An isolated test temporarily lowered the threshold to 1%, then recompiled. The retained translated installer SHA-256 is `d0f09af370eeba64f998696417fd42bf96d5cf77b2ddfc724906c884fae7046d`. Its manifest references `language/af-ZA/af-ZA.com_demo.ini`, and `site/language/af-ZA/af-ZA.com_demo.ini` contains exactly:
+
+```ini
+COM_DEMO_SKILLS_LANGUAGE_ROUND_TRIP="Vaardighede se taalrondrit"
+COM_DEMO_SKILLS_LANGUAGE_SECOND_MESSAGE="Vaardighede se tweede taalboodskap"
+```
+
+This proves the bounded **synthetic XLSX → inspected mapping → saved translations → threshold exclusion/inclusion → emitted translated INI and manifest** path. It does not prove actual exported-workbook recovery, update/preservation of a pre-existing different translation, every supported format/filter combination, clean installation or runtime language switching. The threshold adjustment was a disposable diagnostic, not a recommended production completeness policy.
 
 ## Skills validation
 
