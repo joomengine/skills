@@ -20,6 +20,7 @@ These guides explain how JCB records become an application. Read the [package co
 | Configure structured page retrieval with related collections | [Dynamic Get recipe](../workflows/dynamic-get.md) |
 | Build/attach a module or plugin and its class members/update records | [Modules, plugins and class records](extensions.md) |
 | Load a library, transfer files/folders, package assets or diagnose a missing resource | [Libraries and assets](libraries-and-assets.md) |
+| Author a shared source block with per-use arguments | [Manual Custom Code](../workflows/custom-code.md), [last-resort automation](../workflows/custom-code-automation.md) |
 | Reuse code, substitute placeholders, or resolve embedded code dependencies | [Custom Code and placeholders](code-and-placeholders.md) |
 
 ## Three different meanings of “model”
