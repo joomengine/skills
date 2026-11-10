@@ -4,7 +4,7 @@
 
 ## Choose the correct kind of reusable code
 
-Use an appropriate Joomla core capability first, then an existing shared Power or other maintained implementation. Use a [Super Power](../../super-powers/README.md) when the requirement is a reusable class/interface/trait with its own namespace/dependency contract. Use a Custom Code record for supported reusable source insertion. Use a [layout/template](presentation-and-queries.md#reuse-layouts-and-templates) for presentation reuse, and a placeholder for a deliberate substitution value. A Snippet is an authoring source/example, not automatic runtime dependency resolution.
+Use an appropriate Joomla core capability first, then an existing shared Power or other maintained implementation. Use a [Super Power](../../super-powers/README.md) when the requirement is a reusable class/interface/trait with its own namespace/dependency contract. Use a Custom Code record for supported reusable source insertion: maintain one source block in JCB and let the compiler expand its placeholder at every consuming location. The Function Name identifies the block; it does not necessarily declare or call a PHP function. Use a [layout/template](presentation-and-queries.md#reuse-layouts-and-templates) for presentation reuse, and a placeholder for a deliberate substitution value. A Snippet is an authoring source/example, not automatic runtime dependency resolution.
 
 Preserve the actual insertion context. A code slot can be a method body, class members, imports/header, SQL, JavaScript or markup. Document the values/types available there, required services and the intended result. A whole class pasted into an existing class-body slot is not made valid by successful JSON validation. Keep raw repository text in the decoded representation prescribed by the reference; do not copy database Base64 into fields whose package importer performs that encoding.
 
@@ -19,6 +19,8 @@ The component Remote Config's direct-child list does not automatically export ev
 Source: [Compiler/Customcode](https://github.com/vdm-io/Joomla-Component-Builder/blob/408703a857ad937479b1e28de7f693af178dcc83/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Customcode.php), [Component Remote Config](https://github.com/vdm-io/Joomla-Component-Builder/blob/408703a857ad937479b1e28de7f693af178dcc83/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Package/Component/Remote/Config.php). Exact selectors and transformation order are implementation-specific; a textual match in a comment and active compiled code should be assessed separately.
 
 ## Hash-based automation is a distinct path
+
+**Project policy: discouraged, last resort only.** Prefer native JCB settings, supported code slots, manual Custom Code, Powers and compiler extension points. Use automation only for a concrete requirement those mechanisms cannot meet, and record why the maintenance burden is justified.
 
 `target=1` selects hash-based Custom Code automation. Its form includes the applicable Joomla version, component/path, insertion or replacement `type`, comment mode and line/hash boundary metadata (`from_line`, `to_line`, `hashtarget`, `hashendtarget`). These values describe a source location/update operation; they are not merely alternate labels for a manual named insertion. Use the real JCB automation workflow to establish valid boundaries rather than inventing line numbers or hashes.
 
