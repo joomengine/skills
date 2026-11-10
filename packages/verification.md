@@ -2,6 +2,10 @@
 
 Inspected on **31 October 2026**. This record separates source-derived contracts, offline validation and observed browser execution. It does not certify every package entity/field combination or every Joomla target.
 
+## Language-string skills follow-up on 10 November 2026
+
+The [language evidence receipt](evidence/language-strings.md) records source and UI evidence for the complete authoring, filtering, export/import and recompilation workflow. It separates source-derived examples and limitations from actually exercised stages; read it before claiming a multilingual round-trip pass.
+
 ## Custom Code skills follow-up on 10 November 2026
 
 The [focused receipt](evidence/custom-code.md) separates pinned source inspection and live Playground UI observations from the still-unrun Custom Code compiler/runtime and automation round-trip cases. Follow its acceptance links rather than interpreting the new examples as completed live tests. The linked-Admin-View FooTable recovery in [assets](models/libraries-and-assets.md#close-footable-assets-for-linked-admin-views) separately identifies issue #7 reporter evidence and required clean-consumer checks.

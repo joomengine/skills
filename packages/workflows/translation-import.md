@@ -1,5 +1,7 @@
 # Reuse the immediate language translation importer
 
+To translate a component rather than adapt the importer itself, start with the full [language-string workflow](language-strings.md): authoring, collection, published languages, filters/export, workbook translation, import mapping and compiled/installed verification.
+
 Use JCB's language translation importer as the native reference for a **download example → upload → map → Apply** workflow. It imports spreadsheet data into JCB's `language_translation` records; it is neither Joomla INI installation nor the Demo queue processor. For another application, adapt the complete composition through [immediate import](immediate-import.md), using that application's tables and rules.
 
 **Observed sources:** generated JCB in `extension-builder/joomla` `main@24c4671dfb03f8e75c64e8b3888f68b39df3f273` for the visible feature composition, and JCB `6.x@037752c7e6599aa4cec900138dfb61af7ee4ba8f` for the service trace below, inspected 2026-11-09. Apply the [latest JCB version policy](../../standards/version-policy.md); these revisions identify inspected examples, not required runtime versions.

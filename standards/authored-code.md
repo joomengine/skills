@@ -33,6 +33,8 @@ Review authoring dependencies and generated imports separately. Resolved namespa
 
 **Project policy:** wrap every authored user-facing language string in Joomla's `Text::_()` or its Text Joomla Power reference, including headings, button labels, prompts, validation messages and accessible labels. Apply this in Site Views, Templates, Layouts, Custom Code and other JCB code areas; do not leave hard-coded interface text merely because it is inside HTML. Keep HTML outside the translated text and respect the receiving PHP/HTML context. Verify the Text import in each generated PHP file, using its JPK where needed. Compilation should collect the source text and generate the language key and entry; manually inventing `COM_...` keys is not the default authoring workflow.
 
+Follow [Language strings and multilingual components](../packages/workflows/language-strings.md) for PHP/HTML examples, comment-only JPK references, quote-sensitive extraction and every stage of the filtered spreadsheet round trip.
+
 ## Review the maintained source and its result
 
 Before delivery, read the saved GUI source and Power bodies as code, not just database payloads. Confirm readable formatting, useful method boundaries, correct reference selectors, appropriate Template/Layout composition and the absence of temporary probes. Compile, inspect the resulting imports and placement, lint the generated PHP and exercise the affected feature. Carry corrections back to the owning source and rebuild so the delivered result is reproducible.

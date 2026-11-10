@@ -23,6 +23,7 @@ Read [scope and baseline](README.md) and the shared [operating contract](../AGEN
 | Generate API routes or activate a compiler prerequisite | [API selection](models/api-selection.md), [compiler plugins](workflows/compiler-plugins.md) |
 | Explain repository operations or publish source | [Operations](../standards/repository-operations.md), [publication preflight](workflows/publication-preflight.md) |
 | Create/reuse parameterized Custom Code | [Manual Custom Code](workflows/custom-code.md), [last-resort automation](workflows/custom-code-automation.md) |
+| Author translatable text and complete a filtered spreadsheet translation round trip | [Language strings](workflows/language-strings.md) |
 | Add custom PHP services, callers and class placement | [PHP customization](../super-powers/workflows/customize-extension.md) |
 | Discover a maintained core mirror or recover public source access | [Shared repository network](../standards/repository-network.md) |
 | Select the correct entity or nested setting | [Model router](models/README.md) and the matching field file in [contract inventory](model-contracts.json) |
