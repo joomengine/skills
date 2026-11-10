@@ -23,3 +23,20 @@ The UI help states that existing translations are not removed. The earlier inspe
 The workflow examples and expected generated key/INI pair are teaching examples supported by source, not a claim that each has run in Playground. Quote-sensitive extraction, comment-only import placement, each presentation consumer, combined-filter workbook scope, mapped update/preservation, recompilation and installed language switching require the [acceptance sequence](../workflows/language-strings.md#acceptance-and-troubleshooting). Record later actual results here without replacing failures or unrun stages with a generic “passed.”
 
 Repository static checks and CI validate skills consistency only. Their actual commands/results belong in the PR and do not prove the component's multilingual runtime.
+
+## Bounded live compilation and export inspection
+
+A later authorized exercise on the same Joomla/JCB/PHP target saved two literal probes in the Demo's Looks Site View and compiled Demo successfully. The retained installer SHA-256 is `72e653b41f13f40bc46650579e41c509decaf79bfda663e9f86226e63bed7617`.
+
+- `site/tmpl/looks/default.php` contains `use Joomla\CMS\Language\Text;` and calls to `COM_DEMO_SKILLS_LANGUAGE_ROUND_TRIP` and `COM_DEMO_SKILLS_LANGUAGE_SECOND_MESSAGE`.
+- `site/language/en-GB/en-GB.com_demo.ini` contains the exact source values `Skills language round trip` and `Skills language second message`.
+- Language Translations contains the two collected source records. Their local IDs are not portable identities.
+- With Demo selected and a search narrowing the visible list to those probes, the export's hidden data table populated with additional non-probe rows. Its headers were Source, `af-ZA`, `nl-NL`, `fr-FR`, `de-DE`, `pt-PT` and `ru-RU`. This directly confirms that search did not restrict export data on this target. No downloaded XLSX was obtained at this stage, so it is not evidence of a completed workbook round trip.
+
+This establishes the bounded Site View source-to-generated-key/INI/translation-record path. An import already present in a compiler template does not prove insertion into an import-free file. Comment-only import placement, Template/Layout/Custom Code consumers, quote-sensitive extraction and installed language switching remain separate acceptance cases, not covered by the two plain-text probes.
+
+The attempted browser Excel export populated its data table but did not produce a retrieved download during this exercise. A separately constructed synthetic workbook is not an exported artifact and cannot establish the export/import round trip. No workbook import, translated recompilation or installed language-switch test is claimed by this receipt; follow the remaining acceptance steps before promoting those stages to passed.
+
+## Skills validation
+
+On November 10 the revised skills passed `bash tools/check.sh`: 45 fetch, 22 network, 13 mapping, 10 composed-service, 37 Power, 41 Field Type/Snippet and 33 Package checks, **201 total**. ShellCheck 0.10.0, PHP 8.4.27 lint for all five PHP example blocks, and `git diff --check` passed. These checks validate source/skills consistency and example PHP syntax, not language extraction or spreadsheet/runtime behaviour beyond the explicitly observed slice above.
