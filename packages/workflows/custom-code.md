@@ -24,7 +24,7 @@ Use the current supported target under the [version policy](../../standards/vers
 
 Values replace `[[[arg0]]]`, `[[[arg1]]]`, and so on in the code body. Number arguments consecutively from zero; five expected values end at `[[[arg4]]]`. Every invocation must supply the full expected count in the correct order. Do not assume the compiler reliably rejects missing or surplus values: inspect the generated result and validate the caller contract yourself. For complex structured data prefer a real class/function API rather than a fragile string protocol.
 
-The following names are teaching examples, not reserved identities. Check uniqueness before creating them.
+Expected outputs below show the inserted payload; compiler tracking comments may surround it. The following names are teaching examples, not reserved identities. Check uniqueness before creating them.
 
 ### No arguments
 
