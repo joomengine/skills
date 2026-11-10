@@ -4,6 +4,8 @@ A [`site_view`](../reference/site_view.md) renders a frontend page; a [`custom_a
 
 For a build, follow the [Dynamic Get and presentation workflow](../workflows/dynamic-get.md). Configure ordinary data loading, relationships and restrictions in Dynamic Get, then render its results through connected templates and layouts. Inspect the [reference patterns](../../examples/reference-patterns.md#dynamic-gets-and-presentation) before writing replacement query or view plumbing. JCB deliberately leaves advanced application design open; custom PHP remains available for requirements beyond the configured query, with responsibility for its correctness in the authored source.
 
+Make all authored interface text, including buttons and accessible labels, translatable in every Site View, Template and Layout. Follow the complete [language-string workflow](../workflows/language-strings.md) for Text/JPK references, per-file imports, HTML separation, collection, filters, spreadsheet export/import and runtime verification.
+
 ## Define a page from its consumer inward
 
 Set `system_name` for authoring identification, `name` for the view's display identity, and `codename`/`context` deliberately for generated code and context. Keep the GUID stable when updating the same view. Renaming a generated route or code name can affect menus, router code, links, templates and integrations even when the package identity stays unchanged.

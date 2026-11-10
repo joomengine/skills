@@ -18,6 +18,7 @@ Let JCB do the routine generation. Start from complete reusable features in the 
 | Choose GUID application relationships, modal selectors or migrate existing IDs | [Application identities](packages/workflows/application-identities.md), [modal relationships](packages/workflows/modal-relationships.md), [GUID migration](packages/workflows/guid-migration.md) |
 | Save repeated form rows to their own tables and Admin Views | [Normalized subforms](packages/workflows/normalized-subforms.md) |
 | Load structured page data and compose reusable presentation | [Dynamic Get recipe](packages/workflows/dynamic-get.md), [presentation models](packages/models/presentation-and-queries.md) |
+| Make interface strings translatable and export/import component translations | [Language strings and multilingual components](packages/workflows/language-strings.md) |
 | Add managed file uploads, image cropping and display | [Files and images recipe](packages/workflows/media-files.md) |
 | Find complete reference features to pull and adapt | [Demo, Service Directory and JCB patterns](examples/reference-patterns.md) |
 | Trace a GUI code field or improve authored source quality | [Compiler tracing](packages/workflows/debug.md#trace-a-gui-code-field), [authored code](standards/authored-code.md) |

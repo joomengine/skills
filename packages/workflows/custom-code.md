@@ -2,6 +2,8 @@
 
 Use this workflow to maintain a source block once and insert it into multiple JCB code areas, optionally substituting different values at each use. This is **compile-time source expansion**, not a PHP function call. For a reusable class/API use a Power; for presentation composition consider a Template/Layout. Read the [model and dependency boundaries](../models/code-and-placeholders.md) first. Hash automation is a separate [discouraged last-resort workflow](custom-code-automation.md).
 
+For user-facing wording inside a reusable block, follow [language strings](language-strings.md). Preserve literal Text/JPK calls in the block; the compiler expands Custom Code before collecting its language strings.
+
 ## Inputs and authority
 
 Use the current supported target under the [version policy](../../standards/version-policy.md), and the [Playground guide](../../testing/playground/README.md) for browser authoring. Record the JCB/Joomla/PHP versions, consumer component, source/read branch, insertion slots, expected output and all dependencies. Work in an authorized disposable site or preserve existing source before editing. Follow the [source/evidence receipt](../evidence/custom-code.md); its pinned implementation baseline is not an installation requirement.

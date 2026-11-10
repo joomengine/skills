@@ -30,6 +30,8 @@ Start with the [package contract](../specification.md), then choose the task bel
 
 The procedures describe the inspected JCB `6.x` contract at `408703a857ad937479b1e28de7f693af178dcc83`. Compare the installed version before using a named action. [Package sources](../sources.md) identify implementation authority; [package verification](../verification.md) records actual results. Examples, expected results and prescribed acceptance cases are not completed test evidence.
 
+For interface text, use [Language strings and multilingual components](language-strings.md): author every string, compile/collect, configure languages, filter/export, translate/import, then recompile and verify the installed result.
+
 ## Operation scopes that govern these workflows
 
 Read the shared [repository operations overview](../../standards/repository-operations.md) first when distinguishing content categories, connection registration, Init, Pull, Reset and Push. It includes the later alpha2 source review; the pinned table below retains its original alpha1 evidence scope.
