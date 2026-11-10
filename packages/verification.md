@@ -2,6 +2,10 @@
 
 Inspected on **31 October 2026**. This record separates source-derived contracts, offline validation and observed browser execution. It does not certify every package entity/field combination or every Joomla target.
 
+## Custom Code skills follow-up on 10 November 2026
+
+The [focused receipt](evidence/custom-code.md) separates pinned source inspection and live Playground UI observations from the still-unrun Custom Code compiler/runtime and automation round-trip cases. Follow its acceptance links rather than interpreting the new examples as completed live tests. The linked-Admin-View FooTable recovery in [assets](models/libraries-and-assets.md#close-footable-assets-for-linked-admin-views) separately identifies issue #7 reporter evidence and required clean-consumer checks.
+
 ## Follow-up documentation checks on 9 November 2026
 
 The revised distribution passed `bash tools/check.sh` with PHP 8.3.6 (Tokenizer and SimpleXML available): 45 fetch, 22 network, 13 mapping, 37 Power, 41 Field Type/Snippet and 33 Package regressions plus 10 composed-service cases, **201 total**. ShellCheck 0.9.0, Bash/JSON/skill/registry/local-link checks and `git diff --check` passed. These are freshly executed tooling checks, not a new compiler or installed-runtime pass. The [independent routing exercise](../testing/scenarios/verification.md#documentation-routing-exercise-on-9-november-2026) tests the documentation path at planning level only.
