@@ -8,6 +8,7 @@ The original interchange inventory below remains pinned to alpha1. A focused fol
 
 | Follow-up area | Canonical guide and evidence |
 | --- | --- |
+| Custom Code manual reuse and Hash automation | [Focused November 10 source/UI evidence](evidence/custom-code.md), [manual workflow](workflows/custom-code.md), [automation](workflows/custom-code-automation.md) |
 | Repository acquisition/publication | [Operations](../standards/repository-operations.md), [publication preflight](workflows/publication-preflight.md) |
 | Application identity and selectors | [Identities](workflows/application-identities.md), [modal relationships](workflows/modal-relationships.md), [migration](workflows/guid-migration.md) |
 | Separate-table storage and imports | [Normalized subforms](workflows/normalized-subforms.md), [import mechanisms](workflows/imports.md) |
