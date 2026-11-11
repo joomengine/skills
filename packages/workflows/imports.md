@@ -46,4 +46,6 @@ Resolve shared Powers through [core discovery](../../standards/repository-networ
 
 Compile from saved authoring records and install the generated extension with its runtime libraries. Follow **download example → fill a synthetic row → upload → inspect/correct mapping → apply or queue and process → inspect saved rows → inspect results/history**. Verify an update and a repeated request under the selected matching/retry policy, then cancellation, invalid input and access denial. Test each advertised format and the expected data volume. Inspect GUID links and any retained Files records as applicable.
 
+Use the shared [import/export acceptance checklist](import-acceptance.md) to distinguish pre-validation from rollback, test exact spreadsheet values and sheet selection, verify the real exporter/download, preserve omitted fields through native saves, and name the retry states actually exercised.
+
 Recover failures in the maintained blueprint or Power, regenerate and repeat the affected journey. If a code field's destination is unclear, use [compiler tracing](debug.md#trace-a-gui-code-field). Record the actual checks through [package verification](../verification.md) and report missing guidance through the [Skills feedback loop](../../testing/reporting-issues.md).

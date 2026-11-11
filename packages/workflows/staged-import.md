@@ -2,6 +2,8 @@
 
 Use this path when the application needs upload/mapping now, a retained file and job record, queue/history visibility and processing later. Select it from the [application requirements](imports.md#select-a-reference-from-the-requirements), alongside the [immediate composition](immediate-import.md). Saving a queue record does not execute the import, register a schedule or create a browser background worker.
 
+Apply the shared [import/export acceptance checklist](import-acceptance.md) to its spreadsheet contract, actual downloads, save semantics and retry states. Queue persistence does not change the distinction between pre-write rejection and rollback, or between a completed-operation replay and an interrupted job with unknown writes.
+
 **Observed reference:** Packages `master@4fd6ce1f2a11a478abb291d03a1a3b32ceeda5c9` and shared Powers `master@9cd980492bed4c8177a6e32b703641950ec93604`, inspected 2026-11-09. These are source evidence under the [latest-version policy](../../standards/version-policy.md). Follow the complete [reference graph](../../examples/reference-patterns.md#importers), not only its processor:
 
 The [Importer Custom Admin View](https://github.com/joomengine/packages/blob/4fd6ce1f2a11a478abb291d03a1a3b32ceeda5c9/src/custom_admin_view/917d2c1a-1b37-4ded-9ace-ef486fcc3e4d/item.json) supplies the example action, mapping submission and message endpoint. Its graph contains upload/queue Templates, mapping/message/table/modal Layouts, Files/File Types/queue/message Admin Views, Dynamic Gets and the processor plugin/Power. Use the [specimen index](../../examples/reference-patterns.md#importers) for their definition identities and pinned source links.

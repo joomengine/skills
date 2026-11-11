@@ -107,6 +107,8 @@ If the feature promises preservation of unmapped languages, reproduce with two e
 
 Spreadsheet formats depend on the installed reader/library and its dependency closure. Test CSV and every advertised workbook format; literal cell values, formulas and calculated values have different contracts. Package the compatible reader library and autoloader in a generated consumer rather than assuming JCB's authoring host provides them.
 
+Use the [shared acceptance checklist](import-acceptance.md) for CSV quoting/encoding, text identifiers and zero, mapping/sheet consistency, the verified native Exporter signature, omitted-field preservation and distinct retry outcomes. It supplies tests for adaptations without treating a local Power's extra API as a universal JCB contract.
+
 ## Acceptance and cleanup
 
 In a disposable [Playground](../../testing/playground/README.md), create synthetic source strings with two languages. Use the actual **Download Example** action, fill in one existing source string and a changed translation, upload that file, inspect/correct all header targets and Apply. Compare saved values with the intended update and verify the returned result. A successful download and a separate manually constructed input do not exercise the shared header/mapping contract. Test missing source, unknown mapping, duplicate mapping, empty file, a row exception among valid rows, active sheet other than 0, a denied account and a repeated request. Compare row counts and JSON, and retain errors even when a success message is also present.
