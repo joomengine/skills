@@ -2,6 +2,8 @@
 
 Use this workflow when fields, views, relationships and the generated CRUD/API baseline need application-specific algorithms, integrations or services. JCB remains the authoring and compilation system: keep custom PHP in its Power source records and repositories, connect it through the relevant JCB model hooks, and regenerate the extension after changes. Begin with the [request-to-extension workflow](../../workflows/request-to-extension.md) when the application has not yet been designed.
 
+These Powers are native customization, not permission to maintain a parallel application outside JCB. Follow the [authoring boundary](../../standards/authored-code.md#keep-implementation-inside-jcb) for legitimate JCB-authored plugins/modules, supported assets and explicitly authorized exceptions.
+
 ## Contents
 
 - [Choose the responsibility and reusable dependency](#choose-the-responsibility-and-reusable-dependency)

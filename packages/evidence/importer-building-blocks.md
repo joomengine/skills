@@ -6,7 +6,7 @@ Inspected **11 November 2026**. This receipt supports the [immediate authoring m
 
 | Source | Inspected revision and use |
 | --- | --- |
-| [Generated JCB](https://github.com/extension-builder/joomla/tree/86b1900a87ccd979233572e47f1f2513fc1493f1) | `main@86b1900a87ccd979233572e47f1f2513fc1493f1`: immediate View/Model/controller, Templates/Layouts, helper, Ajax and compiler insertion points. |
+| [Core JCB](https://github.com/joomengine/Joomla-Component-Builder/tree/037752c7e6599aa4cec900138dfb61af7ee4ba8f) | `6.x@037752c7e6599aa4cec900138dfb61af7ee4ba8f`: rechecked immediate View/Model/controller, Templates/Layouts, helper, Ajax input dispatch and compiler insertion points. This is the final authority for JCB implementation and compilation behavior. |
 | [Packages](https://github.com/joomengine/packages/tree/4fd6ce1f2a11a478abb291d03a1a3b32ceeda5c9) | `master@4fd6ce1f2a11a478abb291d03a1a3b32ceeda5c9`: published Demo native graph, read through the advertised [Codefloe mirror](https://codefloe.com/joomla/packages). |
 | [Super Powers](https://github.com/joomengine/super-powers/tree/9cd980492bed4c8177a6e32b703641950ec93604) | `master@9cd980492bed4c8177a6e32b703641950ec93604`: actual `settings.json`/`code.power`, providers and processor construction, read through the advertised [Codefloe mirror](https://codefloe.com/joomla/super-powers). |
 | [Playground](https://github.com/joomengine/playground/tree/c49d02588d1a5276ab78d3dc3f5e3df19d30e463) | `main@c49d02588d1a5276ab78d3dc3f5e3df19d30e463`: native startup-command implementation; live `assets/manifest.json` reported the same source commit. |
@@ -15,13 +15,13 @@ Mirror discovery used the current [JCB community network](https://api.joomlacomp
 
 ## Immediate source-to-authoring result
 
-The [source Model](https://github.com/extension-builder/joomla/blob/86b1900a87ccd979233572e47f1f2513fc1493f1/admin/src/Model/Import_translationsModel.php) and [View](https://github.com/extension-builder/joomla/blob/86b1900a87ccd979233572e47f1f2513fc1493f1/admin/src/View/Import_translations/HtmlView.php), their callers and the compiler establish a native reconstruction:
+The [source Model](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/admin/src/Model/Import_translationsModel.php) and [View](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/admin/src/View/Import_translations/HtmlView.php), their callers and the compiler establish a native reconstruction:
 
 - Custom Admin View linked to an Item Dynamic Get with custom PHP source. The getter supplies session-owned `guid` and `file_type` through the literal `$data =` contract.
 - Native controller/model, Ajax and document hooks, with their enable flags; uploader Template; mapping/help Layouts; shared helper/header definition; Libraries/files and canonical Powers.
 - One `adminForm`; inline mapping controls rather than invented persistent Field identities; synchronous `Import.Transient`, not a queue.
 
-The complete field map and pinned compiler proofs are in the [workflow](../workflows/translation-import.md#author-the-native-jcb-graph). Static reference traversal from the inspected factory/utility roots found 133 Power definitions with no unresolved GUID references in that catalogue snapshot. This is metadata/source closure, not proof that every class executes or that a generated consumer packages every library. Shared providers also reference persistent/console services; their presence does not impose queue storage on the immediate path.
+The complete field map and pinned core compiler proofs are in the [workflow](../workflows/translation-import.md#author-the-native-jcb-graph). The source is sufficient to author the native graph; a fresh reconstruction must still be compiled and tested. Static reference traversal from the inspected factory/utility roots found 133 Power definitions with no unresolved GUID references in that catalogue snapshot. This is metadata/source closure, not proof that every class executes or that a generated consumer packages every library. Shared providers also reference persistent/console services; their presence does not impose queue storage on the immediate path.
 
 Original immediate UI record GUIDs were not recovered from the inspected catalogues/seeds. The default package Custom Admin View index and installation seed identify the Demo queued importer instead. **This is a provenance limit, not a build blocker:** create new application records and reuse existing Powers. Do not present a new reconstruction as an unchanged Pull of the original upstream blueprint or substitute Demo identities for the immediate feature.
 

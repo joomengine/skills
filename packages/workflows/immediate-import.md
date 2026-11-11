@@ -4,6 +4,8 @@ Use this workflow when administrators upload and map a spreadsheet, then apply i
 
 **Authority:** the translation guide records the inspected implementation and its source-specific behavior. The adaptation steps below are project guidance for reusing that feature in another application. Use the [latest JCB version policy](../../standards/version-policy.md); reference commits identify evidence, not an installation requirement.
 
+The core source and compiler provide a native reconstruction route even when the original portable records are unavailable. Author and compile that graph within the [JCB-native boundary](../../standards/authored-code.md#keep-implementation-inside-jcb). The [receipt's unrun reconstruction tests](../evidence/importer-building-blocks.md#immediate-source-to-authoring-result) limit what is proven, not whether an agent may build and validate the feature.
+
 ## Acquire the feature and define its application contract
 
 1. Identify the application tables/Admin Views, required columns, create/update match key and [GUID relationship policy](application-identities.md). Determine supported formats, realistic file volume, permissions, omitted/empty value behavior and what users should see when only some rows can be applied. Keep domain rules tied to the requested feature rather than inheriting another application's business keys or numeric limits.

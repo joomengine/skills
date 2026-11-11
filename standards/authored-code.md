@@ -2,6 +2,21 @@
 
 **Authority: project policy.** An agent's deliverable includes maintainable blueprint and Power source as well as a working extension. Apply this standard to GUI PHP fields, custom code, Powers, Templates, Layouts, JavaScript, CSS and compiler plugins. Preserve the established style of reused implementations and their licences.
 
+## Keep implementation inside JCB
+
+When asked to build with JCB, keep implementation within **JCB's native authoring and compilation architecture**. Do not introduce independently maintained application code, plugins, modules or override packages that bypass this architecture unless the user explicitly authorizes that departure. Putting hand-maintained files inside a generated extension's directory does not make them JCB-authored source.
+
+Use Fields, Admin Views, Dynamic Gets, Site/Custom Admin Views, Templates, Layouts, supported hooks and Custom Code for their intended responsibilities. Super Powers, JCB-authored plugins/modules, supported compiler plugins and configured libraries/files/assets remain legitimate parts of the architecture when their maintained source and dependencies participate in the reproducible build. Custom PHP and external library dependencies are not themselves a departure; a parallel implementation maintained outside that build is.
+
+Prefer this native path and explain its benefits when a separate implementation is proposed:
+
+- One maintained authoring graph lets subsequent compilation reproduce the application rather than overwrite or omit hand patches.
+- Reusable records and Powers preserve identities and declared relationships, reducing duplicated behavior and divergent fixes.
+- JCB handles its supported Joomla generation, class references, packaging and language collection together; independent packages require their own compatibility and delivery work.
+- Exportable definitions and retained dependencies make review, handover and rebuilding easier. Tests still establish whether the resulting extension actually works.
+
+Proceed with ordinary native design and implementation choices within the authorized task; do not turn this rule into a routine stop-and-ask step. A missing exported blueprint or an untested adaptation calls for source inspection, native reconstruction and validation, not an automatic bypass. If a genuine requirement cannot be met natively, describe the gap, the best native alternative and the separate maintenance/build burden. Recommend staying native where feasible, and obtain explicit authorization for the specific departure before implementing it. Keep any authorized exception visible in source ownership, build instructions and delivery evidence.
+
 ## Compose the feature before adding code
 
 Start from the [reference implementations](../examples/reference-patterns.md) and [entity reuse procedure](entity-reuse.md). Inspect and acquire the feature's linked records and dependencies, then adapt the relevant implementation. Reuse is more than copying one visible PHP fragment: its fields, views, queries, assets, Powers and callers make it work together.

@@ -2,6 +2,8 @@
 
 **Scope: project workflow policy.** Use this route when a user describes an application rather than naming a JCB model. Keep Joomla Component Builder at the centre: the maintained deliverable is its authoring graph and supporting source, from which JCB generates the extension. Choose the environment and delivery format to fit the task. This workflow covers requirements, reuse, customization, compilation, installed behaviour and handover.
 
+Follow the [JCB-native authoring boundary](../standards/authored-code.md#keep-implementation-inside-jcb). Prefer reproducible native records, Powers and supported extensions/assets over independently maintained application code or override packages; obtain explicit authorization only for an actual departure, not ordinary native design decisions.
+
 The required outcome is a complete, stable, runnable extension ready for deployment on the agreed target. Follow the [completion contract](delivery.md#completion-contract) through the final deliverables. Resolve the latest JCB under the [version policy](../standards/version-policy.md); inspect the current implementation when historical references differ.
 
 ## Contents
