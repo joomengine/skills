@@ -4,7 +4,7 @@ To translate a component rather than adapt the importer itself, start with the f
 
 Use JCB's language translation importer as the native reference for a **download example → upload → map → Apply** workflow. It imports spreadsheet data into JCB's `language_translation` records; it is neither Joomla INI installation nor the Demo queue processor. For another application, adapt the complete composition through [immediate import](immediate-import.md), using that application's tables and rules.
 
-**Observed sources:** generated JCB in `extension-builder/joomla` `main@24c4671dfb03f8e75c64e8b3888f68b39df3f273` for the visible feature composition, and JCB `6.x@037752c7e6599aa4cec900138dfb61af7ee4ba8f` for the service trace below, inspected 2026-11-09. Apply the [latest JCB version policy](../../standards/version-policy.md); these revisions identify inspected examples, not required runtime versions.
+**Observed sources:** generated JCB in `extension-builder/joomla` `main@86b1900a87ccd979233572e47f1f2513fc1493f1` for the visible feature composition and native compiler mapping (rechecked 2026-11-11), and JCB `6.x@037752c7e6599aa4cec900138dfb61af7ee4ba8f` for the service trace below, inspected 2026-11-09. Apply the [latest JCB version policy](../../standards/version-policy.md); these revisions identify inspected examples, not required runtime versions.
 
 ## Reuse the complete interface
 
@@ -12,16 +12,70 @@ The reference separates the Custom Admin View, uploader template, mapping layout
 
 | Part of the feature | Inspected generated source and behavior |
 | --- | --- |
-| View composition | [`admin/tmpl/import_translations/default.php`](https://github.com/extension-builder/joomla/blob/24c4671dfb03f8e75c64e8b3888f68b39df3f273/admin/tmpl/import_translations/default.php) loads `translationimporterareajsix` as a separate template. |
-| Upload area | [`default_translationimporterareajsix.php`](https://github.com/extension-builder/joomla/blob/24c4671dfb03f8e75c64e8b3888f68b39df3f273/admin/tmpl/import_translations/default_translationimporterareajsix.php) configures the VDM UIkit uploader's type/upload/display/delete endpoints, assets, progress/errors and mapping visibility. |
-| Upload and mapping endpoints | [`AjaxModel`](https://github.com/extension-builder/joomla/blob/24c4671dfb03f8e75c64e8b3888f68b39df3f273/admin/src/Model/AjaxModel.php), `getTranslationDetails`, `uploadTranslation`, `displayTranslationColumns` and `deleteTranslation`, connect type/session metadata, `File.Agent` and the mapping layouts. |
-| Mapping presentation | [`translationimportercolumnsdisplayjsix.php`](https://github.com/extension-builder/joomla/blob/24c4671dfb03f8e75c64e8b3888f68b39df3f273/admin/layouts/translationimportercolumnsdisplayjsix.php) renders the spreadsheet mapping subform and Apply control. Follow its Fields and helper calls as well as the layout markup. |
-| Downloadable example | [`Import_translationsController::getLanguageTranslationsExample`](https://github.com/extension-builder/joomla/blob/24c4671dfb03f8e75c64e8b3888f68b39df3f273/admin/src/Controller/Import_translationsController.php) exports a header row with `Spreadsheet.Exporter`, after token and action-permission checks. |
-| Shared example/mapping definition | [`ComponentbuilderHelper::getLanguageTranslationsHeaders/getItemImportSubformValues`](https://github.com/extension-builder/joomla/blob/24c4671dfb03f8e75c64e8b3888f68b39df3f273/admin/src/Helper/ComponentbuilderHelper.php) supplies header labels to the example and database targets to the mapping form. |
+| View composition | [`admin/tmpl/import_translations/default.php`](https://github.com/extension-builder/joomla/blob/86b1900a87ccd979233572e47f1f2513fc1493f1/admin/tmpl/import_translations/default.php) loads `translationimporterareajsix` as a separate template. |
+| Upload area | [`default_translationimporterareajsix.php`](https://github.com/extension-builder/joomla/blob/86b1900a87ccd979233572e47f1f2513fc1493f1/admin/tmpl/import_translations/default_translationimporterareajsix.php) configures the VDM UIkit uploader's type/upload/display/delete endpoints, assets, progress/errors and mapping visibility. |
+| Upload and mapping endpoints | [`AjaxModel`](https://github.com/extension-builder/joomla/blob/86b1900a87ccd979233572e47f1f2513fc1493f1/admin/src/Model/AjaxModel.php), `getTranslationDetails`, `uploadTranslation`, `displayTranslationColumns` and `deleteTranslation`, connect type/session metadata, `File.Agent` and the mapping layouts. |
+| Mapping presentation | [`translationimportercolumnsdisplayjsix.php`](https://github.com/extension-builder/joomla/blob/86b1900a87ccd979233572e47f1f2513fc1493f1/admin/layouts/translationimportercolumnsdisplayjsix.php) builds the `maps`, `column` and `target` controls inline with Joomla subform/list field types and FormHelper, then renders Apply. These are not three persistent JCB Field records. |
+| Downloadable example | [`Import_translationsController::getLanguageTranslationsExample`](https://github.com/extension-builder/joomla/blob/86b1900a87ccd979233572e47f1f2513fc1493f1/admin/src/Controller/Import_translationsController.php) exports a header row with `Spreadsheet.Exporter`, after token and action-permission checks. |
+| Shared example/mapping definition | [`ComponentbuilderHelper::getLanguageTranslationsHeaders/getItemImportSubformValues`](https://github.com/extension-builder/joomla/blob/86b1900a87ccd979233572e47f1f2513fc1493f1/admin/src/Helper/ComponentbuilderHelper.php) supplies header labels to the example and database targets to the mapping form. |
 
-Use the [reference map](../../examples/reference-patterns.md#importers) and [entity reuse procedure](../../standards/entity-reuse.md) to locate and acquire the corresponding authoring records and their dependencies. The generated repository above shows the implementation; it does not by itself provide portable `item.json` authoring records. Where an authoring origin is unclear, trace it with [compiler diagnostics](debug.md#trace-a-gui-code-field) in the reference JCB project before porting it. Keep Custom Code, Templates, Layouts, Powers/providers and assets as maintained JCB dependencies. Preserve compiler placeholders and JPK/SPK references rather than copying expanded host namespaces from generated PHP.
+Use the [reference map](../../examples/reference-patterns.md#importers) and [entity reuse procedure](../../standards/entity-reuse.md) to acquire published authoring records and dependencies. The generated repository does not itself supply the immediate view's portable `item.json` records, but its source and the compiler establish the native reconstruction below. **Original record GUIDs are not required to build this feature.** Create new application records, reuse canonical Powers, and preserve the distinction between reconstruction and unchanged upstream reuse. Installing JCB supplies the working screen; it does not imply that screen's editable blueprint is seeded. Keep Templates, Layouts, helper code, Powers/providers and assets in maintained JCB source rather than copying an expanded generated class into one hook.
 
 Adapt the existing frontend and its endpoint contracts together. A new upload form calling only `File.Agent` omits the working uploader, mapping UI, cancellation and example export. Keep the session-scoped lifecycle for transient uploads; use the [managed Files/File Types feature](media-files.md) when the application actually needs retained file records. Neither choice requires switching execution timing.
+
+## Author the native JCB graph
+
+This is a **source-verified reconstruction route**, not a recovered export of the original authoring records or a newly compiled reconstruction. The [evidence receipt](../evidence/importer-building-blocks.md) separates those claims. Use the [native concept map](../../architecture/concepts.md) if the view/query distinction is unfamiliar.
+
+Start from the [Model](https://github.com/extension-builder/joomla/blob/86b1900a87ccd979233572e47f1f2513fc1493f1/admin/src/Model/Import_translationsModel.php#L221-L291) and [View](https://github.com/extension-builder/joomla/blob/86b1900a87ccd979233572e47f1f2513fc1493f1/admin/src/View/Import_translations/HtmlView.php). Create the smallest complete graph in this order:
+
+| Native record or field | What to author and preserve |
+| --- | --- |
+| Dynamic Get | `gettype=1` (Item), `main_source=3` (Custom). Put the session/file-type initialization from `getItem()` into `php_custom_get`, ending with `$data = (object) ['guid' => $guid, 'file_type' => $file_type]`. Adapt session prefixes, formats and temporary-path settings. Do not paste the generated ItemModel class or `getItem()` wrapper. |
+| Custom Admin View | Set a coherent codename, name and `main_get` pointing to that getter. Attach it through the component's Custom Admin Views association. The `default` body loads the uploader Template; the generated output must retain one `adminForm`, task field, CSRF token and toolbar submit handling. |
+| Model/controller hooks | Enable `add_custom_button=1`. Put `getTmpPath()` in `php_model`; put Example, Apply, return/back, payload conversion and cleanup methods in `php_controller`. Define Example/back custom buttons; Apply is invoked from the mapping Layout. Keep permissions, CSRF, owned-file lookup and result handling with these actions. |
+| Uploader Template | Alias `translationimporterareajsix`, or a coherent application alias. Put setup PHP in enabled `php_view` and markup/events in `template`. Preserve `$this->item->guid` and `$this->item->file_type`, progress/error/display areas and restoration of the uploader after deletion. |
+| Mapping/help Layouts | Aliases `translationimportercolumnsdisplayjsix` and `translationimportereasymappingjsix`, or coherently adapted aliases. Use enabled `php_view` for setup and `layout` for presentation. Build the inline mapping controls under `vdm_import`, using the same header/target definition as Example. |
+| Ajax hooks | Enable `add_php_ajax=1`, provide the four methods in `php_ajaxmethod`, and configure their `ajax_input` arguments/filters below. JCB generates the shared Ajax model/dispatch; a new hand-written Ajax controller is unnecessary. |
+| Document/assets hook | Enable `add_php_document=1`; retain explicit references to both Ajax-only Layouts so the compiler discovers them. Preserve subform/choices/fancy-select assets from the source View. Attach the UIkit/VDM uploader Library and files through native configuration; do not copy generated hashed asset registrations. |
+| Shared helper | Use the enabled component admin/both helper area, directly or through reusable Custom Code, for the header, target and mapping methods. Keep `getLanguageTranslationsHeaders`, spreadsheet-header state and matching methods together. Custom Code follows its natural-key contract, not a made-up GUID for each PHP method. |
+| Target schema and dependencies | Configure `Import.Entity` for the application's actual Admin View/table, key, match field and related writes. Pull the existing Powers below and their closure, and include the spreadsheet library/autoloader. The reference uses `language_translation`, numeric primary key `id` and match field `source`; those are domain choices, not defaults for every importer. |
+
+The Custom Dynamic Get deliberately supplies session state, not an Admin View database row. Preserve the literal `$data =` assignment: the [Item-getter compiler](https://github.com/extension-builder/joomla/blob/86b1900a87ccd979233572e47f1f2513fc1493f1/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Dynamicget/GetItem.php#L450-L460) detects it and suppresses its database fetch. Returning the object directly is not equivalent. Generated `$db`/`$query` scaffolding does not mean this particular getter needs a queue table.
+
+The [Customview loader](https://github.com/extension-builder/joomla/blob/86b1900a87ccd979233572e47f1f2513fc1493f1/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Customview/Data.php#L458-L499) resolves `main_get`, Libraries, presentation references and enabled hooks. The [custom-button loader](https://github.com/extension-builder/joomla/blob/86b1900a87ccd979233572e47f1f2513fc1493f1/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Model/Custombuttons.php#L128-L168) gates decoding of both `php_model` and `php_controller` on `add_custom_button`; merely filling those code boxes is insufficient. [Template/Layout resolution](https://github.com/extension-builder/joomla/blob/86b1900a87ccd979233572e47f1f2513fc1493f1/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Templatelayout/Data.php) follows aliases and nested references. Keep the source View's Layout-discovery comments until an equivalent explicit dependency path is verified.
+
+### Keep the Ajax and form contracts together
+
+The [source endpoints](https://github.com/extension-builder/joomla/blob/86b1900a87ccd979233572e47f1f2513fc1493f1/admin/src/Model/AjaxModel.php#L6860-L7040) use these arguments. Configure native input rows with the shown filters and null defaults; preserve authenticated dispatch and form-token handling.
+
+| Task | Arguments/filters | Result |
+| --- | --- | --- |
+| `getTranslationDetails` | `guid:STRING`, `target:BASE64` | Session-owned upload type definition. |
+| `uploadTranslation` | `guid:STRING`, `entity:STRING`, `target:BASE64` | File.Agent upload; store the returned file metadata under the operation's session key. |
+| `displayTranslationColumns` | `entity:STRING`, `target:BASE64` | Mapping Layout when a file exists; help Layout otherwise. |
+| `deleteTranslation` | `guid:STRING` | Remove the operation's temporary file/metadata. Test the source caveat below. |
+
+The uploader's `entity` is the runtime operation GUID and `target` encodes the view name. Neither is an authoring-record identity. The mapping Layout reads spreadsheet headers, generates fixed mapping rows and dispatches `import_translations.importLanguageTranslations`; adapt all component/view/task/target/session names together. Apply reads `vdm_import`, recursively converts mapping arrays to objects, and resolves the file path from the owned session state rather than trusting a posted path.
+
+### Reuse the actual Power roots
+
+These original GUIDs are verified from `settings.json` and `code.power` in shared Powers at `9cd980492bed4c8177a6e32b703641950ec93604`. Retain their portable placeholders and resolve their dependencies through the [Super Powers workflow](../../super-powers/SKILL.md).
+
+| Root | Canonical definition |
+| --- | --- |
+| Component Import Factory | [`ff8d5fdb-2d1f-4178-bd18-a43b8efd1068`](https://github.com/joomengine/super-powers/blob/9cd980492bed4c8177a6e32b703641950ec93604/src/ff8d5fdb-2d1f-4178-bd18-a43b8efd1068/settings.json) |
+| Component Import provider | [`b5184f80-613e-46c8-b40a-b60de779bb78`](https://github.com/joomengine/super-powers/blob/9cd980492bed4c8177a6e32b703641950ec93604/src/b5184f80-613e-46c8-b40a-b60de779bb78/code.power) |
+| Transient processor / Entity | `abd147d0-2f8c-4905-80f5-164f20278d1c` / `ae8978fd-bfd3-45a3-97ef-1b8bf2140c10` |
+| Component File Factory / File.Agent | `884eca78-281f-4eab-b962-d97e355af16d` / `d4b415ad-20d7-4b33-a957-88024b56e3f0` |
+| VDM File TypeDefinition used by Ajax | `ca7e1532-c285-4b4e-9b67-f485cc039bc7` |
+| Spreadsheet Header / component Exporter | `fd3f322a-082d-4579-93ad-3352c5adfc71` / `e250638e-4a50-41f9-9172-db3e7f174d26` |
+| SessionHelper / GuidHelper / FormHelper | `47a63728-cd5d-4d53-99cf-2409bd1c744c` / `9c513baf-b279-43fd-ae29-a585c8cbc4f0` / `1198aecf-84c6-45d2-aea8-d531aa4afdfa` |
+| Data Factory for the header helper | `9d76b8dc-3883-4755-b11c-131d19ca8a53` |
+
+The Import Factory registers Table, Database, Model, Data, generic Import, File, Spreadsheet and component Import providers. Its closure also declares persistent/console services; that does **not** require queue tables on the immediate path. The spreadsheet Powers declare `phpspreadsheet/vendor/autoload.php` in their composer metadata; verify the generated consumer actually ships and loads it. The authoring host's installed library is not sufficient.
+
+Compile the new records and inspect the emitted item contract, model/controller methods, Ajax registration, Templates/Layouts, imports and assets. Then run the complete [immediate acceptance](immediate-import.md#acceptance-and-recovery). Original upstream GUID recovery matters for identity-preserving synchronization, not for this independent implementation.
 
 ## Follow the real caller and services
 
@@ -45,6 +99,9 @@ These observations explain behavior in the inspected service implementations. Ch
 | `execute()` removes `payload->maps`; `result()` clears Message state | Use a fresh payload per attempt and capture results once; reset/isolate other shared mutable services for independent runs. |
 | [Header](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Spreadsheet/Header.php) reads the workbook's active sheet; [Reader](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Import/Spreadsheet/Reader.php) defaults to sheet 0 | Verify that preview, mapping and execution select the same sheet. |
 | Exported `Source` header and helper matching rules differ | Inspect mapping after importing an exported example; do not assume automatic matching populated the source target. |
+| Upload stores file metadata as an array, but the inspected `deleteTranslation()` reads `file_path` as an object property | Cancellation cleanup needs a runtime check and, if affected, a maintained-source correction; do not claim it works from source inspection alone. |
+| Apply checks the submitted file value's GUID syntax but retrieves the path through session state | Verify exact operation/file ownership, including same-session and cross-session cases; a syntactically valid GUID is not an authorization check. |
+| Controller cleanup clears upload-type/file entries but not the operation GUID key | Decide whether reuse is intended or a new operation must rotate the key, then test the complete lifecycle. |
 
 If the feature promises preservation of unmapped languages, reproduce with two existing languages and an input mapping only one, then inspect the saved JSON. The inspected writer alone does not establish that guarantee.
 

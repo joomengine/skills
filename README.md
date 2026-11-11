@@ -2,6 +2,8 @@
 
 **Joomla Packaging Engine Skills** guides agents from an application request to a complete, stable, runnable Joomla extension ready for deployment on the agreed target. The workflow covers requirements, reusable entities, custom PHP behaviour, compilation, installed validation and final delivery, with maintainable JCB source throughout. Start with the [request-to-extension workflow](workflows/request-to-extension.md); use the model routes below for a focused change.
 
+New to JCB? The [short native concept map](architecture/concepts.md) explains how Fields and backend Admin Views define data, Dynamic Gets retrieve it, and frontend Site Views or backend Custom Admin Views present it through Templates and Layouts. Start there before selecting from the task routes.
+
 Use the **latest JCB** for new work, resolving the current production release when the build begins. Development tasks can use the latest alpha/beta channel. Historical source hashes document inspected behavior; they do not lock the skills to that release. Follow the [version policy](standards/version-policy.md).
 
 Real component builds drive improvement. If following the skills fails to produce the requested outcome or requires an undocumented workaround, [report the problem in the Skills repository](testing/reporting-issues.md). Maintainers use those reports to improve the instructions, examples and tools.

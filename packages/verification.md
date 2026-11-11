@@ -2,6 +2,10 @@
 
 Inspected on **31 October 2026**. This record separates source-derived contracts, offline validation and observed browser execution. It does not certify every package entity/field combination or every Joomla target.
 
+## Native importer follow-up on 11 November 2026
+
+The [importer building-block receipt](evidence/importer-building-blocks.md) records the compiler-supported immediate reconstruction and the published Demo queue graph. The live Demo slice compiled/installed its component and console plugin, uploaded/mapped a synthetic CSV, executed the native command, observed **Awaiting → Completed** and reopened the created row. The queue message-info icon failed; actual example-download recovery, error-log persistence, retry/concurrency and a newly authored immediate reconstruction remain unverified. The [concept map](../architecture/concepts.md) is concise orientation derived from these native relationships, not a full fresh-agent build.
+
 ## Language-string skills follow-up on 10 November 2026
 
 The [language evidence receipt](evidence/language-strings.md) records source and UI evidence for the complete authoring, filtering, export/import and recompilation workflow. It separates source-derived examples and limitations from actually exercised stages; read it before claiming a multilingual round-trip pass.

@@ -1,5 +1,7 @@
 # Architecture reference and task routing
 
+For a quick introduction to the native records and how they connect, start with the [short concept map](concepts.md). Use the deeper architecture sources below for the specific boundary your task needs.
+
 This directory connects operational tasks in `skills` to the broader [Joomla Component Builder: Contextual Compilation Architecture](https://architecture.joomlacomponentbuilder.com/) publication. It is a source map, not a replacement edition of the white paper. JCB includes structured definitions, repository exchange, compilation, generated applications, recovery, and regeneration. Super Powers is one part of that lifecycle.
 
 **Verified publication:** edition 1.0.0, 16 September 2026; repository revision [`7ac0ba83361e4b1d5181d2a441989ab17d50d63f`](https://github.com/joomengine/architecture/tree/7ac0ba83361e4b1d5181d2a441989ab17d50d63f), inspected 31 October 2026. The live article manifest reported the same source revision and 62 articles. Publication edition numbers are not JCB or Joomla software versions.
