@@ -20,7 +20,7 @@ The core source and compiler provide a native reconstruction route even when the
 3. Adapt the mapping fields to source `column` → supported `target`. Validate required and ambiguous mappings before applying rows. Read the same sheet/header row for preview and execution. Apply the format and resource limits appropriate to the actual environment; do not silently import a prefix of an over-limit file.
 4. Configure the import Entity for the actual parent table, parent key, link/match field and any supported joins/subforms. Follow the existing model and Power behavior before adding an adapter. Reuse ordinary row import where it satisfies the application's save semantics. A new domain Power should address a specific unmet rule and have an actual caller/provider.
 5. Keep permission and CSRF checks at the upload, Apply, delete/cancel and example actions as appropriate. Resolve the file from the authenticated operation's owned metadata. Do not accept an arbitrary request-supplied server path. Use a fresh execution payload and capture `execute(...)->result()` once, following the reference's mutable-state semantics.
-6. Show the actual result and row errors. Immediate execution is not inherently an all-or-nothing transaction; the inspected Transient importer can continue after row failures. Choose the error policy the feature needs. Retain the normal per-row workflow when that is correct; implement and test a focused transaction/staging adaptation only when the application requires an atomic batch. See [matching the failure policy](#match-the-failure-policy) before making that promise.
+6. Show the actual result and row errors. Immediate execution is not inherently an all-or-nothing transaction; the inspected Transient importer can continue after row failures. Choose the error policy the feature needs. Retain the normal per-row workflow when that is correct; validate the entire input before writing when invalid input must reject the file, and add a transaction boundary only when required for write-failure atomicity. See [matching the failure policy](#match-the-failure-policy) before making either promise.
 7. Clean the temporary upload/session state on completion and cancellation according to the selected retry behavior. If correction/retry retains an upload, keep it bound to the same authorized operation and remove it when no longer needed. Reuse the reference's lifecycle rather than adding queue tables to solve a temporary-upload requirement.
 
 Keep Joomla toolbar dispatch working across the upload and mapping areas. The immediate reference uses one `adminForm`; preserve its task and CSRF fields and avoid nested forms. Exercise the real toolbar buttons after compilation.
@@ -30,15 +30,20 @@ Keep Joomla toolbar dispatch working across the upload and mapping areas. The im
 | Application requirement | Implementation consequence |
 | --- | --- |
 | Apply valid rows and report rejected rows | Reuse the ordinary row-processing composition; present row errors and the actual saved result even if the assessor also reports success. |
-| Reject the whole file if any row fails | Use a supported transaction around all affected application writes, with validation before mutation as needed; prove rollback on a late failure. This is an application adaptation, not the default Transient contract. |
+| Reject invalid input before applying any row | Validate all selected rows and required references without writes before execution. Prove an invalid late row leaves the batch unapplied; this is pre-write rejection, not rollback. |
+| Roll back the batch if a write fails | Use a supported transaction around the declared application-write boundary and prove rollback on a late write failure after validation. Inspect all participating writers; this is a deliberate application policy, not the default Transient contract. |
 | Update existing records without duplicating them | Configure a stable match key and check create/update/replay behavior, preserving application GUIDs. |
 | Protect against concurrent edits | Use the application's existing locking/revision strategy at the write boundary and test a stale update. A preview check or transaction alone is not a concurrency policy. |
 
 If an atomic adaptation is needed, inspect every writer participating in its boundary, including joins and Joomla Table/asset operations; see [save boundaries](normalized-subforms.md#place-the-transaction-correctly). A collection-only adapter is one possible design, not a required layer for every importer. Do not claim all-or-nothing behavior when underlying services have already persisted rows or commit independently.
 
+Follow the shared [failure-policy tests](import-acceptance.md#choose-the-failure-promise-before-testing), including relationship-resolution side effects during validation. Preserve omitted fields and subforms through the [intended native save path](import-acceptance.md#preserve-fields-through-the-intended-native-save-path), rather than assuming every native writer has the same full-form or partial-update semantics.
+
 ## Acceptance and recovery
 
 Compile from saved authoring records and install the genuine ZIP on the target with its spreadsheet library and loader. Run the real interface, not only an isolated importer call:
+
+Use the shared [spreadsheet, download and retry acceptance](import-acceptance.md) for the detailed fixtures and evidence requirements behind this journey.
 
 | Case | Expected result |
 | --- | --- |
