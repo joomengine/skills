@@ -5,6 +5,8 @@ description: "Create, extend, maintain and debug Joomla Component Builder packag
 
 # Build JCB package blueprints
 
+Start with the [native concept map](../architecture/concepts.md) when choosing between data-owning Admin Views, frontend Site Views, backend Custom Admin Views and their Dynamic Gets. Use the detailed routes below only for the records involved in the task.
+
 Use the [latest JCB version policy](../standards/version-policy.md). Resolve the current production release for production-target work; source hashes in these references are research evidence, not runtime requirements.
 
 Read [scope and baseline](README.md) and the shared [operating contract](../AGENTS.md). Obtain the requested extension behaviour, Joomla/JCB/PHP targets, source/read branch, authorized write destinations, existing identities and dependency catalogues. Preserve established source and local edits. Inspect uncertain target-specific behaviour before authoring.

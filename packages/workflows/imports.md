@@ -28,7 +28,7 @@ Determine the advertised formats, expected volume, matching key, relationship id
 
 ## Deliver a complete import feature
 
-**Project policy:** reuse the working feature graph before writing new importer code. Locate the [reference specimens](../../examples/reference-patterns.md#importers), then follow [entity reuse](../../standards/entity-reuse.md) to acquire the relevant Custom Admin View, queries, templates, layouts, Fields, Custom Code, Powers/providers, assets and any persisted entities. Use JCB's repository operations to pull available definitions and dependencies. Generated PHP helps trace the implementation; it is not a substitute for the maintained blueprint.
+**Project policy:** reuse the working feature graph before writing new importer code. Locate the [reference specimens](../../examples/reference-patterns.md#importers), then follow [entity reuse](../../standards/entity-reuse.md) to acquire the relevant Custom Admin View, queries, templates, layouts, Fields where actually used, Custom Code, Powers/providers, assets and any persisted entities. Use JCB's repository operations to pull available definitions and dependencies. When only generated source is published, reconstruct the supported native records using the [immediate authoring map](translation-import.md#author-the-native-jcb-graph), then maintain and compile those records. Missing original GUIDs do not block an independent reconstruction; they prevent claiming unchanged upstream identity.
 
 The delivered interface must include:
 
