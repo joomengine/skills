@@ -6,6 +6,10 @@
 
 When asked to build with JCB, keep implementation within **JCB's native authoring and compilation architecture**. Do not introduce independently maintained application code, plugins, modules or override packages that bypass this architecture unless the user explicitly authorizes that departure. Putting hand-maintained files inside a generated extension's directory does not make them JCB-authored source.
 
+**New builds start as JCB definitions, not as independently coded Joomla extensions.** Do not hand-code a new component, form scaffold or SQL schema outside JCB and then use Extrusion to pull it back in as a shortcut. Ending inside JCB does not make that outside-first workflow native. Extrusion remains appropriate for migrating genuinely pre-existing source/schema supplied or discovered for the task; record that provenance before using it.
+
+Author new Fields, views, Powers and relationships through JCB in Playground, or through an authorized native definition repository/MCP route followed by JCB import, compilation and Playground validation. Editing a serialized JCB definition is not the same as hand-coding generated Joomla output.
+
 Use Fields, Admin Views, Dynamic Gets, Site/Custom Admin Views, Templates, Layouts, supported hooks and Custom Code for their intended responsibilities. Super Powers, JCB-authored plugins/modules, supported compiler plugins and configured libraries/files/assets remain legitimate parts of the architecture when their maintained source and dependencies participate in the reproducible build. Custom PHP and external library dependencies are not themselves a departure; a parallel implementation maintained outside that build is.
 
 Prefer this native path and explain its benefits when a separate implementation is proposed:
