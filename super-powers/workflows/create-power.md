@@ -38,6 +38,8 @@ Create `src/<guid>/` and author the following as one logical change:
 - Do not invent a new global base abstraction to serve one class. Do not add runtime credentials, environment-specific file paths, or database row IDs to exported metadata.
 - Keep upstream licence notices when adapting source. Select the licensing flag that actually corresponds to the chosen template behaviour; do not copy somebody else's author attribution as your own.
 
+For token-only JPK/SPK dependencies with no existing namespace import, inspect generated import scope. The [JCB 6.2.0 Header recovery](../settings-reference.md#token-derived-imports-on-jcb-620) is version-specific; it does not change the body-only rule or require Header on every Power.
+
 ### Index and SPK construction
 
 The index key, entry `guid`, settings `guid`, and GUID directory must identify the same power. The complete index contract is in the [specification](../specification.md). Construct `path`, `settings`, `power`, and `code` from that one identity; paths are repository-relative.
