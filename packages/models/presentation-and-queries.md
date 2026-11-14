@@ -68,6 +68,33 @@ Their `dynamic_get` selector supports the editor's display of available dynamic 
 
 Use a literal supported layout/template invocation, then inspect the dependency scan and generated destination. The compiler discovers references in selected HTML/PHP, resolves aliases, caches records by target/view and recursively scans nested presentation code. A dynamically constructed alias is not proven discoverable merely because PHP could evaluate it at runtime. Explicitly verify that every nested layout/template and asset is emitted. See [Templatelayout/Data](https://github.com/vdm-io/Joomla-Component-Builder/blob/408703a857ad937479b1e28de7f693af178dcc83/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Templatelayout/Data.php) and [Alias/Data](https://github.com/vdm-io/Joomla-Component-Builder/blob/408703a857ad937479b1e28de7f693af178dcc83/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Alias/Data.php).
 
+## Put preparation PHP in Custom View Script
+
+**Authoring policy:** put the setup statements that would otherwise appear in a PHP block at the top of a presentation file in that record's **Custom View Script** area. For a Template or Layout, select **Add PHP (custom view script) = Yes** (`add_php_view=1`) and enter the statements in **Custom Script** (`php_view`). Enter **raw PHP without `<?php` or `?>`**. Keep the HTML in the separate `template` or `layout` body. Site Views and Custom Admin Views have the same enable/body pair for their presentation; do not confuse it with `php_jview_display` or a view-class method.
+
+For example, in a Template whose actual consumer supplies `$this->item`, Custom Script contains:
+
+```php
+$item = $this->item;
+$isPublished = (int) $item->published === 1;
+```
+
+The Template body can then render:
+
+```php
+<?php if ($isPublished): ?>
+	<h2><?php echo $this->escape($item->title); ?></h2>
+<?php endif; ?>
+```
+
+Use tabs, spaces around operators, readable multiline conditions and blank lines between logical preparation steps. Indent HTML by structure. Keep output escaping, translated text and lightweight rendering conditionals in the markup; leave data retrieval to Dynamic Gets and business operations to native hooks/Powers.
+
+The script executes in the generated presentation file before its markup, not in an independently created method. Put a Template's preparation in that Template and a Layout's preparation in that Layout. Respect each renderer's input contract: a Layout does not automatically receive a parent Template's local variables or view `$this`; pass its intended display data explicitly. Check missing/empty input as well as the populated case.
+
+**Source verification (2026-11-14):** official JCB `6.x@037752c7e6599aa4cec900138dfb61af7ee4ba8f`: [Template fields](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/admin/forms/template.xml#L157-L209), [Layout fields](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/admin/forms/layout.xml#L169-L221), and [enabled PHP loading](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Alias/Data.php#L484-L499). The Joomla 6 [Template output](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/admin/compiler/joomla_6/default_site_template.php#L23-L25) and [Layout output](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/admin/compiler/joomla_6/SITE_LAYOUT.php#L20-L22) insert the script before an existing closing PHP tag. This establishes the field syntax from source, not a new Playground runtime pass.
+
+After saving, reopen both fields, compile and inspect the generated file: preparation must precede the markup within one valid PHP opening section. Lint it, install, and render the actual consumer including nested layouts and empty inputs. Remove temporary tracing probes and regenerate. Do not fix tag/scope errors only in compiled output.
+
 ## Author and prove the page
 
 1. Define URL/menu entry, user/access expectations, single/list result shape, empty/not-found behaviour and the exact target Joomla/PHP versions.

@@ -38,6 +38,8 @@ Use [Dynamic Get](../packages/workflows/dynamic-get.md) to define the site data 
 
 If the receiving context is unclear, [trace a GUI code field](../packages/workflows/debug.md#trace-a-gui-code-field) with a temporary comment and inspect JoomEngine Code before adding boilerplate or changing a method's structure.
 
+For presentation preparation, follow [Custom View Script placement](../packages/models/presentation-and-queries.md#put-preparation-php-in-custom-view-script): enable the owning record's script, enter raw PHP without opening/closing tags, and keep readable markup in the presentation body. Preserve the actual Template/Layout input scope.
+
 ## Let JCB resolve class references
 
 For additional Joomla classes, use the appropriate **Joomla Power Key (JPK)** and verify its target-version mapping. For custom/reusable Power classes, use the **Super Power Key (SPK)** or the Power's supported GUID dependency selectors. In active PHP, the reference forms are `Joomla___...___Power` and `Super___...___Power`; catalogue display forms with `---` delimiters are not PHP tokens. Resolve actual keys from the installed catalogue; do not invent them.
