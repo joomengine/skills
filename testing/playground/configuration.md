@@ -2,7 +2,7 @@
 
 Use the [canonical Playground guide](README.md) to build and deliver the requested extension. Select current releases using the [version policy](../../standards/version-policy.md): latest compatible production releases for production work, or the latest applicable development releases for development/testing. The [source ledger](sources.md) records inspected implementation revisions; those citations are evidence, not required runtime pins.
 
-**Lifecycle version scope:** the controls below describe merged Playground PR #24 (`c403f035`, 2026-11-14). Check the deployed manifest and visible controls before applying them: the live manifest still reported `c49d025` during this review. Older builds retain different Save/Close and temporary-site behavior. See the [source ledger](sources.md#workspace-lifecycle-refresh-2026-11-14) and [storage recovery](storage-recovery.md).
+**Lifecycle version scope:** the controls below describe merged Playground PR #24 (`c403f035`, 2026-11-14). Check the deployed manifest and visible controls before applying them: the initial review saw `c49d025`, while the [later live test](verification.md#2026-11-14-live-follow-up-after-pr-24-deployment) confirmed deployed `c403f035`. Older builds retain different Save/Close and temporary-site behavior. See the [source ledger](sources.md#workspace-lifecycle-refresh-2026-11-14) and [storage recovery](storage-recovery.md).
 
 Playground's URL selects a runtime, deployment and initial Joomla route. It does **not** select a Power/Field Type/Snippet/Package Git read branch. Configure the repository target, provider, read branch, enabled state and precedence **inside JCB** using the [common acquisition workflow](README.md#3-configure-the-candidates-real-jcb-repository-connection).
 
