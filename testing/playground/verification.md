@@ -4,13 +4,13 @@
 
 ## 2026-11-14: native workflow, storage recovery and PHP placement review
 
-This initial phase was a source-and-guidance review, not a new end-to-end Playground build. The [later live follow-up](#2026-11-14-live-follow-up-after-pr-24-deployment) below adds bounded runtime results without retroactively changing this phase's coverage. Existing dated runtime receipts below remain unchanged. The seven focused changes clarify records-first authoring, versioned Playground lifecycle, storage recovery, affected Power import placement, a focused regression procedure, presentation PHP placement, and the evidence/navigation tying them together.
+This initial phase was a source-and-guidance review, not a new end-to-end Playground build. The [later live follow-up](#2026-11-14-live-follow-up-after-pr-24-deployment) below adds bounded runtime results without retroactively changing this phase's coverage. Existing dated runtime receipts below remain unchanged. The seven focused changes clarify records-first authoring, versioned Playground lifecycle, storage recovery, Class Header Code import authoring, its focused verification procedure, presentation PHP placement, and the evidence/navigation tying them together.
 
 | Area | Evidence and result | Not established by this review |
 | --- | --- | --- |
 | New-build boundary | Maintainer policy now explicitly rules out hand-code-first then Extrusion; genuinely pre-existing migrations and native definition-repository/MCP routes remain supported. | No fresh-agent complete-build pass. |
 | Playground lifecycle/recovery | [Pinned PR #24 source inspection and live-manifest observation](sources.md#workspace-lifecycle-refresh-2026-11-14); [recovery procedure](storage-recovery.md) distinguishes original issue #11, current source, and upstream test contract. | No new live failure/export/restore run; merged source was not assumed deployed. |
-| Power imports | [Stable and corrected compiler source](../../super-powers/settings-reference.md#token-derived-imports-on-jcb-620) inspected; issue #12's Header correction is attributed to its report. | The [headerless acceptance matrix](../../super-powers/workflows/validate-and-integrate.md#headerless-token-import-acceptance-case) remains **not run** for this review on both affected and corrected targets. |
+| Power imports | Maintainer clarified that [Class Header Code](../../super-powers/settings-reference.md#class-header-code-for-imports) is the supported import-authoring path. The previous headerless bug classification has been withdrawn. | The [Class Header verification](../../super-powers/workflows/validate-and-integrate.md#class-header-import-verification) was not run in this review. |
 | Template/Layout preparation | [Official forms and generated-file templates](../../packages/models/presentation-and-queries.md#put-preparation-php-in-custom-view-script) establish `add_php_view` / `php_view`, raw PHP syntax and placement before markup. | No new GUI save/compile/render test of this example; target scope and real consumer still require runtime acceptance. |
 
 Local `git diff --check` passed. The offline aggregate reached the skill-distribution and mapping checks, but could not finish because this executor has no PHP CLI (`tools/check.sh: php: command not found`); ShellCheck is also unavailable locally. The PR's exact-head **Documentation and tooling** CI is the full aggregate validation authority, not a claim that these missing local checks passed. Neither static CI nor this source review proves the runtime cases above. Preserve separate actual results when those cases are executed.
@@ -37,13 +37,11 @@ The native **Jeff Script Probe** Template (local **ID 164**) used raw Custom Vie
 
 The Demo component compiled and installed; the frontend rendered **42** for the Template and **43** for the Layout. This verifies raw-PHP preparation and the tested consumer/data scope on this target. Original Demo source was then restored, compiled and installed again. This is not a general pass for every nested renderer, empty-input path or supported Joomla version.
 
-### Headerless Power: affected-version failure reproduced
+### Power experiment: unsupported setup, classification corrected
 
-Native Power **HeaderlessProbe** (local **ID 1269**), namespace `Jeff\Regression`, was a final class with **Header = No** and empty **Use Selection**. Its method used the Text JPK; Demo Looks referenced the Power by its SPK. GUI tracing comments were enabled.
+The earlier experiment used a Power with Header disabled, no Use Selection, and a Text JPK in its class body. Compilation and installation succeeded, but the installed caller returned HTTP 500 after an import was placed inside the class. Original Demo source was restored, recompiled and reinstalled; its frontend returned to normal.
 
-Compilation and installation succeeded, but generated `libraries/jcb_demo/Jeff.Regression/src/HeaderlessProbe.php` contained `use Joomla\CMS\Language\Text;` **inside the class**, after a JCBGUI marker. Invoking the Demo frontend caller returned **HTTP 500**. The import placement and actual caller failure independently reproduce the affected JCB 6.2.0 behavior described in [issue #12](https://github.com/joomengine/skills/issues/12); successful compilation/installation alone did not establish usable code.
-
-Original Demo source was restored and recompiled/reinstalled; its frontend returned to normal. **Not run:** native Header workaround, tracing-disabled variant, an SPK dependency method inside the fixture Power, or the corrected alpha compiler. The consumer's SPK reference is not a test of the fixture's own SPK import-injection path. The [full acceptance matrix](../../super-powers/workflows/validate-and-integrate.md#headerless-token-import-acceptance-case) remains only partially executed. No compiler fix is claimed by this documentation change.
+**Maintainer correction, 14 November 2026:** this tested a currently unsupported authoring setup, not a confirmed JCB bug. The supported approach is to enable and use [Class Header Code](../../super-powers/settings-reference.md#class-header-code-for-imports) for the required import. The earlier bug/regression classification is withdrawn. The experiment did **not** run the Class Header Code approach and therefore provides no runtime verdict on that supported workflow.
 
 ## Live Super Power import
 

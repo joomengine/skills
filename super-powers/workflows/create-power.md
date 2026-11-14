@@ -38,7 +38,7 @@ Create `src/<guid>/` and author the following as one logical change:
 - Do not invent a new global base abstraction to serve one class. Do not add runtime credentials, environment-specific file paths, or database row IDs to exported metadata.
 - Keep upstream licence notices when adapting source. Select the licensing flag that actually corresponds to the chosen template behaviour; do not copy somebody else's author attribution as your own.
 
-For token-only JPK/SPK dependencies with no existing namespace import, inspect generated import scope. The [JCB 6.2.0 Header recovery](../settings-reference.md#token-derived-imports-on-jcb-620) is version-specific; it does not change the body-only rule or require Header on every Power.
+Put required namespace imports in the enabled [Class Header Code area](../settings-reference.md#class-header-code-for-imports), without PHP tags, and keep Main Class Code body-only. Do not rely on a Header-disabled token-only setup to supply those imports.
 
 ### Index and SPK construction
 
