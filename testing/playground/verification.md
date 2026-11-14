@@ -4,7 +4,7 @@
 
 ## 2026-11-14: native workflow, storage recovery and PHP placement review
 
-This is a source-and-guidance review, not a new end-to-end Playground build. Existing dated runtime receipts below remain unchanged. The seven focused changes clarify records-first authoring, versioned Playground lifecycle, storage recovery, affected Power import placement, a focused regression procedure, presentation PHP placement, and the evidence/navigation tying them together.
+This initial phase was a source-and-guidance review, not a new end-to-end Playground build. The [later live follow-up](#2026-11-14-live-follow-up-after-pr-24-deployment) below adds bounded runtime results without retroactively changing this phase's coverage. Existing dated runtime receipts below remain unchanged. The seven focused changes clarify records-first authoring, versioned Playground lifecycle, storage recovery, affected Power import placement, a focused regression procedure, presentation PHP placement, and the evidence/navigation tying them together.
 
 | Area | Evidence and result | Not established by this review |
 | --- | --- | --- |
@@ -14,6 +14,36 @@ This is a source-and-guidance review, not a new end-to-end Playground build. Exi
 | Template/Layout preparation | [Official forms and generated-file templates](../../packages/models/presentation-and-queries.md#put-preparation-php-in-custom-view-script) establish `add_php_view` / `php_view`, raw PHP syntax and placement before markup. | No new GUI save/compile/render test of this example; target scope and real consumer still require runtime acceptance. |
 
 Local `git diff --check` passed. The offline aggregate reached the skill-distribution and mapping checks, but could not finish because this executor has no PHP CLI (`tools/check.sh: php: command not found`); ShellCheck is also unavailable locally. The PR's exact-head **Documentation and tooling** CI is the full aggregate validation authority, not a claim that these missing local checks passed. Neither static CI nor this source review proves the runtime cases above. Preserve separate actual results when those cases are executed.
+
+## 2026-11-14: live follow-up after PR #24 deployment
+
+**Environment:** deployed Playground `c403f0353806e723be386b6e1ddbec7d84c64768`, Joomla **6.2.0**, JCB **6.2.0**, PHP **8.4.27**. This follow-up used native JCB authoring and a compiled/installed Demo consumer. Local record IDs below identify this disposable site's observations, not portable identities or instructions to reuse those IDs. No private runtime URL or credentials are included.
+
+### Storage failure and complete live export
+
+At **14:37 UTC**, automatic persistence reported `QuotaExceededError` while the browser estimate showed approximately **75.5 kB usage / 10.74 GB quota**. This discrepancy does not establish the underlying cause or a physical capacity limit. The live site remained usable: a new JCB Placeholder record, local **ID 32**, was created despite the persistence failure.
+
+At **14:38 UTC**, a complete live backup was downloaded successfully:
+
+- Size: **51,306,867 bytes**.
+- SHA-256: `8318e72a97df28109c45f134c604ac8ceab870e8ec08ac245ded12cdfdc47b7a`.
+- ZIP CRC validation passed; the exported SQL contained the newly created Placeholder record.
+
+This establishes continued native authoring and preservation of that latest database change in an externally downloaded archive despite failed automatic persistence. **Manual restoration into a clean browser storage context was not run.** Do not label the entire download/restore/rebuild round trip passed, infer that all database values were compared, or discard the original solely on the strength of ZIP integrity.
+
+### Template and Layout Custom View Script
+
+The native **Jeff Script Probe** Template (local **ID 164**) used raw Custom View Script `$probeValue = 6 * 7;`. The native **Jeff Layout Probe** Layout (local **ID 139**) used `$layoutValue = (int) $displayData['value'] + 1;`. Neither script included opening or closing PHP tags. Demo's **Looks** Site View (local **ID 83**) consumed the probes with the appropriate data contract.
+
+The Demo component compiled and installed; the frontend rendered **42** for the Template and **43** for the Layout. This verifies raw-PHP preparation and the tested consumer/data scope on this target. Original Demo source was then restored, compiled and installed again. This is not a general pass for every nested renderer, empty-input path or supported Joomla version.
+
+### Headerless Power: affected-version failure reproduced
+
+Native Power **HeaderlessProbe** (local **ID 1269**), namespace `Jeff\Regression`, was a final class with **Header = No** and empty **Use Selection**. Its method used the Text JPK; Demo Looks referenced the Power by its SPK. GUI tracing comments were enabled.
+
+Compilation and installation succeeded, but generated `libraries/jcb_demo/Jeff.Regression/src/HeaderlessProbe.php` contained `use Joomla\CMS\Language\Text;` **inside the class**, after a JCBGUI marker. Invoking the Demo frontend caller returned **HTTP 500**. The import placement and actual caller failure independently reproduce the affected JCB 6.2.0 behavior described in [issue #12](https://github.com/joomengine/skills/issues/12); successful compilation/installation alone did not establish usable code.
+
+Original Demo source was restored and recompiled/reinstalled; its frontend returned to normal. **Not run:** native Header workaround, tracing-disabled variant, an SPK dependency method inside the fixture Power, or the corrected alpha compiler. The consumer's SPK reference is not a test of the fixture's own SPK import-injection path. The [full acceptance matrix](../../super-powers/workflows/validate-and-integrate.md#headerless-token-import-acceptance-case) remains only partially executed. No compiler fix is claimed by this documentation change.
 
 ## Live Super Power import
 
