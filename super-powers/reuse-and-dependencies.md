@@ -31,6 +31,8 @@ The [Joomla 6 deprecation documentation](https://manual.joomla.org/updates/54-60
 | Joomla/PHP runtime types | Imported names in an enabled `head`, custom inheritance/interfaces, or fully qualified types in code | The type exists in the consuming runtime; signatures and lifecycle match its version. These are not missing GUID dependencies. |
 | Composer or other shipped libraries | `composer` metadata, imports, autoload access points and consuming-project packaging | The actual package, supported version and autoload files are supplied. A metadata entry alone does not install a Composer package. |
 
+JPK/SPK body tokens can discover dependencies separately from explicit metadata imports. Inspect their compiled namespace imports and actual caller; an empty custom header is valid authoring, but the [6.2.0 token-import recovery](settings-reference.md#token-derived-imports-on-jcb-620) documents a version-specific placement defect and native correction.
+
 The registry is a **baseline**, not a claim that every power dependency in the ecosystem lives in these seven repositories. Do not turn a missing lookup into a fake local class or invent a GUID to make the check pass.
 
 ## Ordered resolution and provenance
