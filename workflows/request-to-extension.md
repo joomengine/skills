@@ -75,7 +75,7 @@ Resolve the following decisions before building the affected slice; load only th
 | File uploads and product/entity images | Reuse the complete [Files/File Types, uploader, cropping and display feature](../packages/workflows/media-files.md), adapting its configuration and consumers. |
 | Page data and presentation | Use [Dynamic Get](../packages/workflows/dynamic-get.md) for the result graph and [Templates/Layouts](../packages/models/presentation-and-queries.md) for its presentation. |
 | Acquire definitions or import business data | Select the operation in the [import router](../packages/workflows/imports.md). Immediate import and staged queue processing are different application designs. |
-| Start from existing forms/schema | Use [Extrusion](../packages/workflows/extrusion.md), then inspect the persisted graph and emitted schema for lossy conversions. |
+| Migrate genuinely pre-existing forms/schema (record their provenance; do not generate scaffolds for this purpose) | Use [Extrusion](../packages/workflows/extrusion.md), then inspect the persisted graph and emitted schema for lossy conversions. |
 | Generate API resources | Choose the actual component-view API mode and test routes/ACL through [API selection](../packages/models/api-selection.md). |
 | Maintain compiler corrections | Keep them in the supported [compiler-plugin workflow](../packages/workflows/compiler-plugins.md), with build activation and retained source assets. |
 | Change an existing ID-based application | Use the [GUID migration workflow](../packages/workflows/guid-migration.md); preserving data is a separate task from choosing new-project defaults. |

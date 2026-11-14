@@ -13,6 +13,8 @@ Use this router whenever a request says “import.” Identify the **input**, th
 | Existing application changing relationship keys | [GUID migration](guid-migration.md) | Preserved data/identity graph, durable retry plan and recovery checks |
 | Exported complete Playground website | [Delivery and restore](../../workflows/delivery.md) | Successful import into an independent Playground session; not a JCB package repository operation |
 
+For a new component, start with native JCB definitions. Extrusion is for genuinely pre-existing source/schema migration, not for hand-coding a fresh component or scaffold and pulling it back into JCB. Follow the [authoring boundary](../../standards/authored-code.md#keep-implementation-inside-jcb).
+
 ## Select a reference from the requirements
 
 Choose execution timing and file retention separately. The [JCB translation importer](translation-import.md) is a complete immediate, session-scoped reference. The [Demo importer](staged-import.md) combines managed Files and File Types, upload/mapping templates, queue/history display and a persistent processor. Use the composition that fits the requested experience; neither is a universal application default.

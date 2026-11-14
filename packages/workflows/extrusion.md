@@ -1,6 +1,6 @@
 # Harvest existing source with Extrusion
 
-Use Extrusion when the input is an existing extension source tree or supported SQL schema. Use [Package acquisition](maintain.md) for an existing JCB authoring graph and [application imports](imports.md) for business data. Extrusion creates or updates authoring definitions; it does not prove the original application's behaviour has been reconstructed.
+Use Extrusion to migrate a genuinely pre-existing extension source tree or supported SQL schema. Do not first hand-code a new component, form scaffold or schema merely to feed this tool. For a new build, follow the [native request workflow](../../workflows/request-to-extension.md) and author JCB definitions from the start. Use [Package acquisition](maintain.md) for an existing JCB authoring graph and [application imports](imports.md) for business data. Extrusion creates or updates authoring definitions; it does not prove the original application's behaviour has been reconstructed.
 
 **Source baseline:** JCB `6.x@037752c7e6599aa4cec900138dfb61af7ee4ba8f`, inspected 9 November 2026. The source-derived limits below are versioned findings. The supplied Clothing Store handover reports additional GUI observations; its companion build/checkpoint archives were not supplied with this documentation change, so those observations are not new runtime passes.
 
