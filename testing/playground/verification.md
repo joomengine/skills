@@ -2,6 +2,19 @@
 
 **Observation date:** 31 October 2026. This is a bounded record of an agent-operated live browser test and separate source inspection. It is not a claim that all modules, repository revisions or Playground features were exercised.
 
+## 2026-11-14: native workflow, storage recovery and PHP placement review
+
+This is a source-and-guidance review, not a new end-to-end Playground build. Existing dated runtime receipts below remain unchanged. The seven focused changes clarify records-first authoring, versioned Playground lifecycle, storage recovery, affected Power import placement, a focused regression procedure, presentation PHP placement, and the evidence/navigation tying them together.
+
+| Area | Evidence and result | Not established by this review |
+| --- | --- | --- |
+| New-build boundary | Maintainer policy now explicitly rules out hand-code-first then Extrusion; genuinely pre-existing migrations and native definition-repository/MCP routes remain supported. | No fresh-agent complete-build pass. |
+| Playground lifecycle/recovery | [Pinned PR #24 source inspection and live-manifest observation](sources.md#workspace-lifecycle-refresh-2026-11-14); [recovery procedure](storage-recovery.md) distinguishes original issue #11, current source, and upstream test contract. | No new live failure/export/restore run; merged source was not assumed deployed. |
+| Power imports | [Stable and corrected compiler source](../../super-powers/settings-reference.md#token-derived-imports-on-jcb-620) inspected; issue #12's Header correction is attributed to its report. | The [headerless acceptance matrix](../../super-powers/workflows/validate-and-integrate.md#headerless-token-import-acceptance-case) remains **not run** for this review on both affected and corrected targets. |
+| Template/Layout preparation | [Official forms and generated-file templates](../../packages/models/presentation-and-queries.md#put-preparation-php-in-custom-view-script) establish `add_php_view` / `php_view`, raw PHP syntax and placement before markup. | No new GUI save/compile/render test of this example; target scope and real consumer still require runtime acceptance. |
+
+Local `git diff --check` passed. The offline aggregate reached the skill-distribution and mapping checks, but could not finish because this executor has no PHP CLI (`tools/check.sh: php: command not found`); ShellCheck is also unavailable locally. The PR's exact-head **Documentation and tooling** CI is the full aggregate validation authority, not a claim that these missing local checks passed. Neither static CI nor this source review proves the runtime cases above. Preserve separate actual results when those cases are executed.
+
 ## Live Super Power import
 
 The agent opened [the public Playground](https://playground.joomengine.org/) in a cloud Chrome browser and used the ordinary Joomla/JCB GUI. No repository source was published or changed for this test.

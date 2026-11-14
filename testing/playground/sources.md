@@ -2,6 +2,19 @@
 
 This is the source ledger for the shared [Playground workflow](README.md) and [configuration reference](configuration.md). These pages give project testing policy and derived operational guidance; the sources below establish implementation behaviour. Actual task execution belongs in a dated receipt, including the [verification record](verification.md).
 
+## Workspace lifecycle refresh: 2026-11-14
+
+Inspected merged Playground `main` at [`c403f0353806e723be386b6e1ddbec7d84c64768`](https://github.com/joomengine/playground/commit/c403f0353806e723be386b6e1ddbec7d84c64768), [PR #24](https://github.com/joomengine/playground/pull/24). This supersedes older manual site-Save/Close, temporary-interface and deployment-storage statements below. The live `https://playground.joomengine.org/assets/manifest.json` still returned `c49d02588d1a5276ab78d3dc3f5e3df19d30e463` during this review: merge status alone does not establish deployment. No new browser recovery run was performed for this Skills update.
+
+| Pinned source | Inspected behavior |
+| --- | --- |
+| [README lifecycle](https://github.com/joomengine/playground/blob/c403f0353806e723be386b6e1ddbec7d84c64768/README.md#L360-L457), [app](https://github.com/joomengine/playground/blob/c403f0353806e723be386b6e1ddbec7d84c64768/src/app.mjs) | Automatic live persistence, recipe Save, Stop/Start and Restart, reset/replacement protection, shared owner and companion views, explicit full backups and cleanup. Rocket ignores `persist=0`; lower-level API options do not override that UI contract. |
+| [Configuration](https://github.com/joomengine/playground/blob/c403f0353806e723be386b6e1ddbec7d84c64768/src/config.mjs#L458-L483) | Private recipe schema 3 with schema 2 import compatibility; public Share schema remains separate. |
+| [Runtime persistence](https://github.com/joomengine/playground/blob/c403f0353806e723be386b6e1ddbec7d84c64768/src/playground.mjs#L356-L395) | Serialized file/database flushes; failed persistence retains a visible error and does not advance saved state. Complete download remains available. Sequential live flushes are not an atomic transaction across both stores. |
+| [Full backups](https://github.com/joomengine/playground/blob/c403f0353806e723be386b6e1ddbec7d84c64768/src/site-backups.mjs), [backup test](https://github.com/joomengine/playground/blob/c403f0353806e723be386b6e1ddbec7d84c64768/test/site-backups.browser.mjs#L108-L217) | Actual archive size plus 10 MiB estimated headroom, prepared-download fallback, atomic replacement retaining the previous backup, injected continuous persistence failure followed by download and clean-context restoration of latest files/records/relationships. Test source inspected, not executed in this review. |
+
+[Issue #11](https://github.com/joomengine/skills/issues/11) records the older persistence failure and temporary-session diagnosis; it does not measure quota or establish a component-size limit. Use the canonical [storage recovery procedure](storage-recovery.md), keeping actual application success distinct from persistence success. Neither PHP memory limits nor a generic checkpoint error establish browser storage usage.
+
 ## Canonical agent guide consolidation: 2026-11-09
 
 The [Skills Playground guide](README.md) is the canonical agent workflow for using Playground to build and deliver extensions. Playground's footer and repository README link directly to it; `docs/agent-guide.md` in Playground retains a short forwarding notice for existing links. Playground implementation and contributor documentation stay in the Playground repository. Historical guide links in this ledger identify the material inspected at the time, rather than a second maintained operational guide.
