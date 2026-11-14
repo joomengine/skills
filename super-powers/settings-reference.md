@@ -85,30 +85,28 @@ An existing Joomla adapter demonstrates custom inheritance correctly: [`Openai H
 
 Sources: [Selection::codeEnabled](https://github.com/vdm-io/Joomla-Component-Builder/blob/408703a857ad937479b1e28de7f693af178dcc83/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Power/Selection.php#L213), [setHeader and setLicensingTemplate](https://github.com/vdm-io/Joomla-Component-Builder/blob/408703a857ad937479b1e28de7f693af178dcc83/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Power.php#L1052).
 
-## Token-derived imports on JCB 6.2.0
+## Class Header Code for imports
 
-**Version-specific recovery, not a mandatory Header for every Power.** Keep Main Class Code / `code.power` body-only. Ordinary namespace imports belong above the declaration in the enabled Header, never between properties or methods. The metadata-import behaviour above does not establish the safety of the separate JPK/SPK token-injection path.
+Use the Power's **Class Header Code** area for namespace imports needed by its PHP class. Enable **Header** (`add_head=1`), then place the import in `head`, without PHP tags:
 
-[Skills issue #12](https://github.com/joomengine/skills/issues/12) reports JCB **6.2.0**, Joomla **6.2.0**, PHP **8.4.27**, with GUI trace comments enabled: local final-class Powers had `add_head=0`, an empty `head`, no `use_selection`, and valid JPK/SPK body references. Generated imports appeared inside the class, where PHP treats `use` as trait use. Compilation and installation alone therefore did not establish working runtime loading. This is a reported failing shape, not a claim that every headerless Power fails.
+```php
+use Joomla\CMS\Language\Text;
+```
 
-When that symptom occurs on the affected target:
+Keep **Main Class Code** / `code.power` body-only and use the imported class in its methods:
 
-1. Inspect the saved Power body and generated PHP. Confirm the ordinary imports were injected into class scope rather than authored there; record the installed compiler version and tracing setting.
-2. In the native Power editor enable **Header** (`add_head=1`) and add an actual namespace import needed by this Power, without PHP tags. For a Power using Joomla Text on this target, the reported correction was `use Joomla\CMS\Language\Text;`. Select the correct class/alias for the target and the Power's real dependencies; do not add an unrelated dummy import to every Power.
-3. Retain the body JPK/SPK references. Save the native definition (or maintain its authoritative `settings.json` and `code.power` source pair), compile again and reinstall the resulting component. Do not repair only generated PHP.
-4. Inspect imports after the namespace and before the declaration, then execute the actual installed caller. Check duplicate/conflicting imports and aliases as well as syntax. Apply the [focused import-scope acceptance case](workflows/validate-and-integrate.md#headerless-token-import-acceptance-case).
+```php
+public function label(): string
+{
+	return Text::_('Import scope check');
+}
+```
 
-### Source and outcome boundaries
+The header is emitted after the namespace and before the class declaration. Do not put ordinary namespace imports between properties or methods. In repository form, maintain `add_head` and `head` in `settings.json` alongside the body in `code.power`; compile and reinstall from these maintained definitions, not a patched generated file. Check the actual target class and alias to avoid duplicate or conflicting imports. The [focused verification procedure](workflows/validate-and-integrate.md#class-header-import-verification) checks the generated class and installed caller.
 
-Inspected on **2026-11-14** against the official JCB source:
+**Maintainer clarification, 14 November 2026:** relying on JPK/SPK body tokens to establish these imports with Header disabled is not the supported authoring approach. Use Class Header Code, not a headerless-token workaround or an assumed compiler upgrade. The failed headerless experiment associated with [Skills issue #12](https://github.com/joomengine/skills/issues/12) tested an unsupported setup; it must not be classified as a confirmed JCB bug. This does not require a custom header on Powers that need no such imports, nor change imports supplied through supported dependency metadata.
 
-| Target | Evidence | Meaning |
-| --- | --- | --- |
-| 6.2.0, `bb9b155f00c4ffd6de285de6fab9db4fec538ee8` | [Injector::addUseStatements/addLines](https://github.com/joomengine/Joomla-Component-Builder/blob/bb9b155f00c4ffd6de285de6fab9db4fec538ee8/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Power/Injector.php#L528-L599) | With no existing imports, the fallback searches forward for a comment ending/empty line near the declaration; this supports the reported misplaced-import diagnosis. |
-| 6.2.1-alpha1, `73abb73f1a2e9c1de3264d0dfa4bc7e666b4264d` | [Token-based insertion](https://github.com/joomengine/Joomla-Component-Builder/blob/73abb73f1a2e9c1de3264d0dfa4bc7e666b4264d/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Power/Injector.php#L552-L620) | `token_get_all` identifies the named declaration, preserving preceding modifiers, attributes and comments and skipping anonymous classes / `Foo::class` as insertion targets. The source contains a correction. |
-| Inspected `6.x`, 6.2.1-alpha2, `037752c7e6599aa4cec900138dfb61af7ee4ba8f` | [Injector](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Power/Injector.php#L552-L620) | Retains that token-based implementation; this is source inspection, not proof of the installed Playground version. |
-
-Issue #12 reports that the native Header correction restored its caller and that the wider component suite passed 74 checks. Its small illustrative snippet was **not** run as an isolated regression fixture. A [later live test](../testing/playground/verification.md#2026-11-14-live-follow-up-after-pr-24-deployment) independently reproduced the headerless JPK failure on JCB 6.2.0 with tracing enabled; it did not test the Header workaround, SPK path, tracing disabled or a corrected alpha target. Neither receipt establishes universal compatibility. Follow the [version policy](../standards/version-policy.md): resolve the current production release for ordinary builds; do not upgrade a production task to an alpha merely to avoid inspecting the actual target. On a target containing the correction, test the headerless case rather than carrying the workaround forward as a universal requirement.
+The field and placement implementation is documented in [Header and licensing](#header-and-licensing); the maintainer clarification defines the supported authoring practice. The earlier headerless experiment did not test this Class Header Code procedure and is not evidence that the supported path failed.
 
 ## Composer linkage
 

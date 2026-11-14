@@ -91,29 +91,17 @@ Run the caller through the installed extension's actual route, command or servic
 
 Report each stage independently using the [shared evidence procedure](../../testing/playground/README.md) and [receipt](../../testing/playground/verification.md): repository checks, PHP lint/tests, new import or existing-item refresh, generated namespace/path inspection, runtime caller and limits. If import ran but compilation did not, say exactly that. If access or a capability fails, record the observed blocker and the next concrete step; do not retain an obsolete blanket claim that no environment exists.
 
-## Headerless token-import acceptance case
+## Class Header import verification
 
-**Purpose:** exercise [issue #12's version-specific import-placement path](../settings-reference.md#token-derived-imports-on-jcb-620) through native JCB authoring, compilation and a real installed consumer. This is an acceptance procedure, **not a recorded pass**. Keep it separate from an application's broader test-suite result.
+Verify the supported [Class Header Code approach](../settings-reference.md#class-header-code-for-imports) through native JCB authoring and a real installed consumer. This procedure is not a recorded runtime pass.
 
-1. Use a disposable Playground and the current production target by default. Record installed JCB/Joomla/PHP versions, Playground deployment revision when available, compiler source revision if known, and fixture identities. For an explicitly requested regression comparison, use separate affected 6.2.0 and corrected-version sites; do not downgrade or replace active work. If one target is unavailable, mark its row **not run**.
-2. Create a small final-class Power in JCB with a fresh GUID and normal namespace/description. Save Header disabled (`add_head=0`), empty Header and no `use_selection`; reopen and record the actual persisted empty representation. Keep Main Class Code body-only. Do not add PHP tags, enclosing declarations or ordinary namespace imports.
-3. Add a method that calls the Joomla Text JPK, for example the body fragment below. Add a separate method using a resolved SPK for a deterministic helper, selected from an inspected current catalogue or another small native fixture Power. Record its GUID, source revision, callable signature, input and expected result. Do not invent a dependency token or use an external network call as the fixture.
+1. Use a disposable Playground and record the installed JCB/Joomla/PHP versions and the Power's identity. Enable **Header** (`add_head=1`) and put the required namespace import in **Class Header Code** (`head`), without PHP tags. For the Text example, use `use Joomla\CMS\Language\Text;`.
+2. Keep **Main Class Code** body-only. Add the example `label()` method from the settings reference, which calls `Text::_()`. Save and reopen the Power to check both the enabled header and method.
+3. Reference the Power through its actual SPK in a native JCB view, hook or command, and call `label()`. Use the saved Power's GUID rather than an invented token. Keep the consumer in JCB's maintained source, not in generated output.
+4. Compile and inspect the generated Power: the import follows the namespace and precedes the declaration, the method calls the intended class/alias, and the dependency and autoloader are present. Check syntax where an interpreter is available.
+5. Install the compiled artifact and execute the actual caller. Confirm the expected label in the selected language. Record the source record, generated path, caller and observed result separately from compile/install success. Correct authoring records and rebuild if necessary; do not repair only generated PHP.
 
-```php
-/** Return a translated label. */
-public function label(): string
-{
-	return Joomla___ba6326ef_cb79_4348_80f4_ab086082e3c5___Power::_('Import scope check');
-}
-```
-
-4. Add a native JCB view/hook/command consumer that references this Power by its active SPK and invokes both methods. Assert the expected label in the selected language and the helper's deterministic result. Resolve the fixture's actual GUID into the token; do not paste a made-up example GUID. This consumer must be compiled and installed with the test extension, not injected into generated files.
-5. Compile first with GUI source tracing enabled, then repeat with tracing disabled. For **each** artifact inspect the generated Power file: imports follow its namespace and precede its declaration, no ordinary class import occurs in class scope, aliases are unique, JPK/SPK tokens resolve, and the dependency files/autoloader are present. Lint generated PHP on the target interpreter. Lint alone is insufficient because class-scope `use` can parse as valid trait syntax.
-6. Install each compiled artifact and invoke the actual consumer. Record the observed output or exact loading error separately for the JPK and SPK paths. A compile success, install success or imported record does not substitute for these calls.
-7. On an affected target exhibiting the defect, apply the enabled native Header correction with a real required import. Retain both body tokens, recompile, inspect, reinstall and repeat the calls with tracing on/off. Check both import scope and behavior; never patch the generated class as the maintained repair.
-8. On a corrected target, repeat the original **headerless** case. Verify it independently; a successful Header workaround on 6.2.0 does not prove the corrected compiler path, and source inspection does not replace this test. Disable temporary tracing after diagnosis and preserve the source records and relevant compiled output with the receipt.
-
-Record one result row per target, header state and tracing state. Include: source/dependency revisions, persisted flags, generated file path and import/declaration excerpt, PHP lint result, caller route/command, expected/actual JPK and SPK results, and pass/fail/blocked/not-run. Keep credentials and private application data out of the receipt. If a fixture has not been executed, retain that status explicitly rather than copying the issue's broader 74-check result.
+Do not disable Header to test an unsupported token-only import setup as though it were a required acceptance case. Record unrun checks honestly; the earlier headerless experiment does not establish a pass or failure of this supported workflow.
 
 ## Round-trip and drift investigation
 
