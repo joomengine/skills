@@ -32,6 +32,7 @@ Let JCB do the routine generation. Start from complete reusable features in the 
 | Add custom PHP behaviour and choose administrator/site/library placement | [PHP customization](super-powers/workflows/customize-extension.md) |
 | Reference Joomla classes through JPK mappings | [Joomla Powers skill](joomla-powers/SKILL.md) |
 | Use an existing Joomla/JCB MCP connection | [MCP setup and execution](workflows/mcp.md) |
+| Ship initial/reference data in a component installer | [Native Table/Dump initial data](packages/workflows/initial-data.md) |
 | Deliver installable ZIPs, blueprint source or a portable site | [Delivery](workflows/delivery.md) |
 | Follow a complete application example and its acceptance cases | [Worked scenarios](examples/README.md), [independent-agent acceptance](testing/scenarios/README.md) |
 | Author or maintain reusable PHP Powers | [Super Powers skill](super-powers/SKILL.md) |

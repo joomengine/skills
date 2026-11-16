@@ -24,6 +24,7 @@ Start with the [package contract](../specification.md), then choose the task bel
 | Apply a file synchronously | [Immediate import](immediate-import.md), [translation reference](translation-import.md) | Real shared importer composition with a defined application commit policy |
 | Process a queued import | [Staged import](staged-import.md) | Queue, actual processor, failure/retry and worker coordination policy |
 | Activate a compiler correction or retained SQL prerequisite | [Compiler plugins](compiler-plugins.md) | Installed/enabled/selected build prerequisite and repeat compilation |
+| Ship application data on first installation | [Native initial data](initial-data.md) | Table-mode snapshot in the installer, reviewed mappings and verified fresh-consumer records |
 | Publish Packages and Powers | [Publication preflight](publication-preflight.md) | Audited destinations, distinct exports and remote readback |
 
 **Project policy:** use [Playground](../../testing/playground/README.md) by default for authorized implementation testing on a supported target. It is also a practical authoring environment: create Fields, Views and the Component with JCB, then use the package Push path to export their graph to an authorized candidate branch. The [configuration guide](../../testing/playground/configuration.md) governs setup, supported versions, persistence and browser limitations. A documentation-only task does not imply running every live operation.

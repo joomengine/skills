@@ -11,11 +11,15 @@ Choose the deliverable from the user's goal. A compiled extension, its editable 
 | Continue with this complete Playground workspace | **Download → Complete site** portable ZIP | **Upload** the exact archive in an isolated workspace and verify files, records, relationships and behaviour. |
 | Recreate the initial setup | Deployment recipe or Share link | Launch an independent installation; edited files/database are intentionally not transferred. |
 
+A blueprint alone does not preserve Table-mode seed data: the inspected Packages exporter excludes the local `addtables` map and does not embed live rows as a Dump. Use deliberately stored Dump SQL for portable embedded blueprint seeds, or retain/restore the source database and mapping, for example through the complete workspace. See [Table versus Dump](../packages/workflows/initial-data.md#choose-the-source-and-deliverable).
+
 Include only deliverables actually generated. A working source repository is not an installation ZIP; a compiled component does not preserve editable JCB records; a Share link does not back up a completed site.
 
 For a Playground-built application requested for client review and continued editing, deliver the compiled runtime extension ZIPs **and** the complete-site ZIP. Include the editable project source when requested or already authorised. This lets the client install the extension on Joomla or use Playground **Upload** to inspect and continue the same JCB project. A text-only source checkpoint can preserve selected definitions and evidence, but is not automatically a complete authoring graph or independently reproducible build.
 
 ## Compile and retain installable packages
+
+When the installer must ship application/reference data, follow [native initial data](../packages/workflows/initial-data.md). Configure each relevant Admin View with **Add MySQL install → Table**, review its column map and compile the populated source tables. Inspect the generated install SQL and prove the records on a fresh consumer, not an update of the authoring site.
 
 Use the actual root's compiler operation and inspect every warning/error. Download each requested extension package through JCB or a verified MCP artifact flow. Record filename, extension version, target Joomla/PHP, source commit/root identity, dependencies and SHA-256. Test installation and the user's actual use cases; successful compilation alone cannot prove payment, shipping, authorisation or stock-synchronisation behaviour.
 

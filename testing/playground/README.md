@@ -117,6 +117,8 @@ Save/reopen the JCB authoring record and verify that the change persists. Record
 
 ### 6. Compile, inspect, install and run
 
+For bundled application/reference data, use [Admin View Table-mode initial data](../../packages/workflows/initial-data.md) and the [fresh-install acceptance case](../scenarios/initial-data.md). Populating the authoring component alone does not put its records in the installation ZIP.
+
 Compile the selected test component for the intended Joomla target through JCB. Check compilation messages and download the resulting package. Inspect actual generated PHP/XML/templates, dependencies, autoloading/assets and relevant SQL using the module's acceptance criteria. Record the package hash and generated paths where available; successful ZIP creation alone does not prove the changed feature is included.
 
 Use the compiler's **Download Component** result to retain the ZIP outside the browser runtime, then list/extract it into a separate scratch directory for inspection with available ZIP/PHP/XML tools. Keep the original package and its hash alongside the receipt. Upstream's compiler test finds its generated ZIP under `/persist/www/tmp/`, but take the current result/download location as authoritative rather than guessing a filename. Code can inspect files that actually exist in the active site; it does not automatically expand a ZIP into an installed component. After installation, inspect the real installed paths and compare the relevant files with the compiled package. If the available browser cannot download/upload or expose artifact bytes, record that inspection/install stage as blocked instead of inferring package contents from a success page. [P08, P12](sources.md)

@@ -14,6 +14,10 @@ Optional SQL data, alias construction, category integration, tabs, linked views,
 
 The compiler [Adminview/Data::getQuery/getData](https://github.com/vdm-io/Joomla-Component-Builder/blob/408703a857ad937479b1e28de7f693af178dcc83/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Adminview/Data.php) joins all four children by view GUID, sets names/placeholders and processes tabs, permissions, Fields, history, conditions, relations, linked views, scripts/hooks and SQL. This order explains why an unresolved Field or wrong parent link can affect several later features.
 
+## Ship initial records with the view
+
+When the installed component must include initial data, use the native [Table/Dump initial-data workflow](../workflows/initial-data.md). For Playground installer delivery, populate the installed component and select **Table** in each relevant Admin View's MySQL installation settings. Review the generated source map; JCB reads those live rows at compile time and writes the installer SQL. Use deliberately populated **Dump** SQL when an independently rebuildable blueprint must embed the data without its original source table.
+
 ## Attach Fields with `admin_fields.addfields`
 
 Each row references a reusable Field GUID and defines **this view's use** of that Field. The Field record owns its XML/storage; the attachment owns list/edit placement and controls.
