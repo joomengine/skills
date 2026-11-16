@@ -47,3 +47,7 @@ When the agent encounters a gap, capture its exact stopping point and the missin
 Classify external problems accurately: an unavailable browser connection, service token or source mirror is not automatically a JCB defect. For an apparent runtime defect, preserve a minimal reproduction under the [reporting procedure](../reporting-issues.md). Continue independent work where possible without weakening the user's requirement.
 
 A scenario is complete for a named target only when its required stages and cases pass against the same delivered candidate. A change after the receipt requires revalidation of the affected evidence. Community documentation can be published with explicit incomplete integration evidence; it must not advertise those incomplete workflows as proven. Update [verification](verification.md) with actual receipt links and limits, and keep historical failures distinguishable from later successful runs.
+
+## Initial-data feature acceptance
+
+Use the [native Table/Dump initial-data scenario](initial-data.md) to verify compile-time data snapshots, source-map choices and fresh installation independently of a full beginner build. It is a prescribed test, not a completed run.
