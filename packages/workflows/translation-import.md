@@ -188,6 +188,8 @@ There is no queued job or console execution in this sequence. The row-reading ch
 
 The imported data now belongs to JCB's language translation records. It has not yet rewritten an installed component's INI files. Complete the [compile/install language verification](language-strings.md) to generate and deliver the component's translations. Use the operational notes below when adapting the reference, and verify the new component's own contracts.
 
+<a id="follow-the-real-caller-and-services"></a>
+
 ## Service dependency reference
 
 1. Read [Import_translationsController::importLanguageTranslations/cleanupImportState](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/admin/src/Controller/Import_translationsController.php). The Apply action checks CSRF and `import_translations.access`, resolves temporary file metadata from session state, sets entity parent table `language_translation`, parent key `id`, and matching link field `source`, then calls `execute(payload)->result()` synchronously.
@@ -195,6 +197,8 @@ The imported data now belongs to JCB's language translation records. It has not 
 3. Read [Import Factory](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Import/Factory.php) and [Import service provider::getTransient](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Service/Import.php). The provider constructs Transient in this order: Message, Mapper, Data, Spreadsheet Reader, RowDataArray, Row, ParentTable, JoinTables, Assessor, Entity. Its factory registers Table, Database, Model, Data, Import, File, Spreadsheet and component-specific Import providers. A service name without this closure and its caller is insufficient.
 4. Inspect [Mapper::set/getTableField](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Import/Mapper.php). Each mapping row has `column` and `target`; ordinary targets are `table.field`. Translation values use the two-value subform format `language_translation.translation|translation|language|<language-tag>`. The controller recursively converts posted mapping arrays to objects. Unknown targets can be skipped, and duplicate source-column keys can overwrite earlier mappings; validate required and ambiguous mappings in the caller before execution when data completeness matters.
 5. Follow [Transient::execute/import/result](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Import/Item/Transient.php), [ParentTable::processParent](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Import/ParentTable.php), and [Import Item::get/processSubform2](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Import/Item.php). This is where mapping becomes actual model data and where matching existing `source` rows leads to update.
+
+<a id="source-specific-troubleshooting"></a>
 
 ## Operational notes when adapting the reference
 
@@ -219,6 +223,8 @@ If the feature promises preservation of unmapped languages, reproduce with two e
 Spreadsheet formats depend on the installed reader/library and its dependency closure. Test CSV and every advertised workbook format; literal cell values, formulas and calculated values have different contracts. Package the compatible reader library and autoloader in a generated consumer rather than assuming JCB's authoring host provides them.
 
 Use the [shared acceptance checklist](import-acceptance.md) for CSV quoting/encoding, text identifiers and zero, mapping/sheet consistency, the verified native Exporter signature, omitted-field preservation and distinct retry outcomes. It supplies tests for adaptations without treating a local Power's extra API as a universal JCB contract.
+
+<a id="acceptance-and-cleanup"></a>
 
 ## Acceptance of a new adaptation and cleanup
 
