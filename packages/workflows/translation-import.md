@@ -25,7 +25,7 @@ Adapt the existing frontend and its endpoint contracts together. A new upload fo
 
 ## Author the native JCB graph
 
-This is a **source-verified native reconstruction route**. The source identifies what to author and how the compiler consumes it; proceed to build and validate that graph. The remaining limit is verification: this documentation task did not recover an original authoring export or compile a new reconstruction. The [evidence receipt](../evidence/importer-building-blocks.md) keeps those statuses separate from the existing importer's runtime evidence. Use the [native concept map](../../architecture/concepts.md) if the view/query distinction is unfamiliar.
+JCB's language translation importer is an established production implementation. This **source-verified native authoring route** identifies how to reproduce its composition in another component. Use the [evidence receipt](../evidence/importer-building-blocks.md) for the provenance of the source mapping and earlier checks. Acceptance testing below concerns the new adaptation, not whether JCB already has a working importer. Use the [native concept map](../../architecture/concepts.md) if the view/query distinction is unfamiliar.
 
 Start from the [Model](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/admin/src/Model/Import_translationsModel.php#L221-L291) and [View](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/admin/src/View/Import_translations/HtmlView.php). Create the smallest complete graph in this order:
 
@@ -81,7 +81,114 @@ Compile the new records and inspect the emitted item contract, model/controller 
 
 The translation helper builds targets for source strings and published language tags, including the two-value translation subform. For an ordinary application importer, reuse [Table-driven import fields](import-fields.md) to discover the component's fields and labels. Keep this immediate upload/Apply composition, but do not turn the translation-specific header helper into a manually enumerated catalogue of application columns. Mapper consumes mappings and validates their metadata; it is not the mapping UI's field-discovery helper.
 
-## Follow the real caller and services
+## What to reuse and what must fit the component
+
+Separate **standard JCB import mechanisms** from the **component-specific fit** before writing code. “Standard” here means reusable capabilities in this JCB service family, not that every import must have an identical screen or execution mode.
+
+1. **Upload and operation lifecycle.** Reuse File.Agent, type definitions and the chosen native uploader. For this immediate composition, reuse the temporary session-owned upload lifecycle. Tailor accepted formats, temporary path policy, component/view names, permissions and session/DOM identifiers. Managed retained files are a separate legitimate lifecycle choice, not a reason to replace the import engine.
+2. **Discovering targets and building the mapping UI.** Reuse Table metadata and the ordinary field helper for table-based imports, Joomla form controls, Spreadsheet.Header and the mapping contract. Tailor participating tables, parent selection, protected-field exclusions, labels/aliases and required business values. The translation importer has a specific fit: its language columns come from published JCB language records and map to a two-property subform. Do not copy that language-specific target generator into a roster importer, and do not replace Table discovery with an exhaustive static roster schema.
+3. **Example/export and source headers.** Reuse Spreadsheet.Exporter and the same target-discovery policy used by mapping. Tailor the useful sample/header set, filename, sheet title and any deliberate sample data. A headers-only example and an export of existing records serve different purposes. The translation `Source` plus language-tag pattern is not a universal import format.
+4. **Mapping and row interpretation.** Reuse Mapper's `column`/`target` contract, Table metadata validation, Row and the existing Item services. Tailor genuine business normalization/validation and supported relationship policies through maintained JCB code and the existing extension points. Do not rewrite generic spreadsheet parsing, metadata lookup or mapping merely to express a domain rule.
+5. **Identity and persistence.** Reuse ParentTable/JoinTables and the component Data/Model services. Tailor parent table/key, matching field, joined entities and relationship keys. Translation matching by `source` with numeric `id` is its own policy, not the roster default; decide the roster's stable identity and matching behavior from its actual model. Existing-row updates, omitted fields and validation outcomes must match that application's contract.
+6. **Execution timing.** Reuse `Import.Transient` for the immediate Apply flow described here, or the native persistent/console composition for [queued imports](staged-import.md). Tailor the choice to workload and operational needs. Session-only upload state and a synchronous redirect are not universal queue requirements; a queued adaptation needs its persisted job/file state and console processor. Both should retain the shared metadata/mapping/row-processing mechanisms where their service composition uses them.
+7. **Results and delivery.** Reuse Message/Assessor and native cleanup mechanisms. Tailor meaningful application messages, permissions, success criteria and retry/update policy without silently changing engine behavior. For translations, the downstream step is component compilation and language-file delivery; a roster importer instead verifies its member/team records and relationships. Use the shared PHPDoc standard for authored code in either case.
+
+The design decision is not “reuse everything unchanged” versus “write a custom importer.” **Reuse the machinery; fit the configuration and domain behavior to the component.** Record those tailored choices before implementation so a later schema change does not require maintaining a second column catalogue.
+
+## End-to-end request and data flow
+
+**Production-reference flow, traced on 2026-11-17 at the core revision above.** Read this sequence together with the native authoring graph, rather than treating the service list as a complete implementation recipe. Preserve the existing composition; do not create another upload/mapping framework.
+
+### 1. Open the Custom Admin View and establish the operation
+
+`Import_translationsModel::getItem()` checks `import_translations.access` and creates/reuses session state. Its custom getter returns an object with `guid` and `file_type`; this is an import operation, not a translation record. Keep these identities separate:
+
+- **Operation GUID (`$this->item->guid`):** stored under `componentbuilder_import_translations_guid`; sent as uploader `entity`, used for display lookup and submitted as `vdm_import[file]`.
+- **Temporary file-type GUID (`$this->item->file_type`):** stored under `componentbuilder_import_translations_file_type`. The associated type definition is under `componentbuilder_import_translations_<file-type-guid>`; it describes the accepted upload, not a saved managed File Type record.
+- **Uploaded file definition:** stored as an array under `componentbuilder_<operation-guid>`. It includes the actual `file_path`; neither the operation GUID nor the file-type GUID is that path.
+
+The type definition configures field `translation_file`, document type, temporary directory from `getTmpPath()`, and the inspected formats `csv`, `xlsx`, `xls`, `ods`, `gnumeric`. Preserve its full contract and compatible reader dependencies. These names and session prefixes must change coherently when adapting to another component; do not reuse JCB's session namespace in that component.
+
+`default.php` provides the surrounding form and loads the uploader Template. The Template configures the four Ajax URLs, token, encoded view target and operation identity. Its hidden `file_type` selector supplies the temporary type GUID. Keep its DOM IDs and uploader `data-*` references consistent, together with the UIkit/VDM uploader Library and Joomla form assets. Put setup PHP in **Custom View Script** (`php_view`, enabled, without PHP opening/closing tags); leave markup and event handlers in the Template/Layout body.
+
+### 2. Obtain a spreadsheet, without confusing example and data export
+
+The toolbar's `getLanguageTranslationsExample()` checks the token and `import_translations.example`, calls `getLanguageTranslationsHeaders(false)`, and sends **one header row only** to `Spreadsheet.Exporter`. It does not export existing source strings. To translate existing strings, follow the [language export/filter workflow](language-strings.md), which supplies actual source rows.
+
+The helper has two deliberate modes:
+
+- `false` (default): returns human spreadsheet headers, beginning with `Source`, followed by language tags.
+- `true`: returns mapping option keys such as `language_translation.source` and `language_translation.translation|translation|language|af-ZA`, with human labels as values.
+
+Both modes obtain language tags through `DataFactory::_('Load')->values(['langtag'], ['language'], ['published' => 1], ['name' => 'ASC'])`. This means **published JCB language records**, not an arbitrary enumeration of installed Joomla language packs. At this inspected revision, an empty result uses fallback tags `af-ZA`, `nl-NL`, `fr-FR`, `de-DE`, `pt-PT`, `ru-RU`. For a deliberately configured language set, publish the intended records and verify the resulting headers/targets; do not mistake the fallback for the project's required languages.
+
+### 3. Resolve upload type, upload, and retain server-owned state
+
+The uploader calls `ajax.getTranslationDetails` with the type GUID and encoded target. `AjaxModel::getTranslationDetails()` validates the GUID, accepts target `import_translations`, and returns the session-held type definition. Upload then calls `ajax.uploadTranslation` with that type GUID, the operation GUID and target. `uploadTranslation()` supplies the type to `new TypeDefinition($type)` and `FileFactory::_('File.Agent')->type(...)->get()`; on success it saves `toArray()` of the returned file definition under the operation's session key.
+
+No translation row is written during upload. Do not substitute a browser-supplied path for the saved file definition. Retain the Ajax controller's token/authentication checks and validate the ownership contract described below when adapting it.
+
+### 4. Build the mapping interface from the actual uploaded headers
+
+`ajax.displayTranslationColumns` looks up the operation's file definition. Without a file it renders the easy-mapping/help Layout and returns `state: 0`; with a file it passes `data`, `entity` and `target` to `translationimportercolumnsdisplayjsix` and returns `state: 1`. The uploader's display event hides the upload area when mapping becomes available.
+
+The mapping Layout obtains the workbook headers through `Spreadsheet.Header->get($file->file_path)`, stores them with `setSpreadsheetHeaders()`, and obtains initial mappings from `getItemImportSubformValues()`. It separately obtains dropdown targets from `getLanguageTranslationsHeaders(true)`. It constructs Joomla's inline `maps` subform containing readonly `column` and selectable `target` list fields, then calls `setup(..., $values, 'vdm_import')`. These are runtime form controls, not new persistent Field records. The Layout also renders the hidden operation GUID and the Apply task.
+
+A mapping row carries a **spreadsheet column identifier**, such as `A`, not the header's displayed text. The helper's initial `maps0`, `maps1`, etc. values pair those identifiers with suggested targets. Its matching methods compare target keys/field portions and label prefixes; suggestions must be inspected. In particular, the inspected `Source` example label is not proof that the source target will be selected automatically. The helper enumerates `A` through `CZ` for initial values while the Layout sets its row limits from actual headers; preserve the native arrangement and verify actual submitted rows rather than assuming arbitrary-width spreadsheets are proven.
+
+### 5. Submit a concrete map, not another schema definition
+
+For a workbook with `A: Source`, `B: af-ZA`, and row 2 containing `Welcome`, `Welkom`, the relevant submitted values are:
+
+```text
+vdm_import[file] = <operation-guid>
+vdm_import[maps][maps0][column] = A
+vdm_import[maps][maps0][target] = language_translation.source
+vdm_import[maps][maps1][column] = B
+vdm_import[maps][maps1][target] = language_translation.translation|translation|language|af-ZA
+```
+
+The pipe-delimited target means: write into the `translation` field of `language_translation`; put the cell value under subform property `translation`; set property `language` to `af-ZA`. It does not name a physical database column called `af-ZA`. This translation-specific target builder and the [ordinary Table-driven field helper](import-fields.md) solve different discovery needs; both feed the existing Mapper rather than replacing it.
+
+### 6. Apply resolves services, entity policy and file path
+
+The Layout dispatches `import_translations.importLanguageTranslations`. The controller checks CSRF and `import_translations.access`, reads the `vdm_import` array, validates the submitted file value's GUID syntax and resolves the operation/type/file definition from session state. It retrieves `Import.Transient` and `Import.Entity` from the same Import Factory and sets the entity policy:
+
+```text
+parent table = language_translation
+parent key   = id
+match field  = source
+```
+
+Its `arrayToObject()` recursively converts the maps and payload to objects; casting only the outer array is not equivalent. The payload supplied to `execute()` contains `maps` plus `file_path` from the saved file definition. The submitted `file` field is an operation reference, not an alternative path. The reference's GUID-syntax check is not a complete ownership guarantee: an adaptation must ensure the posted operation and session-owned upload are the intended pair, without trusting arbitrary request paths.
+
+### 7. Execute synchronously through the existing import pipeline
+
+The factory/provider composition below supplies the component Table metadata, Mapper, Data, reader, current Row, ParentTable, JoinTables, Item writer, Assessor and Message services. Configure and use one coherent service container so Mapper, row processing and entity settings share the intended state.
+
+`Transient::execute()` checks the file, initializes Mapper from `payload->maps` and the entity's parent table, removes `maps` from the payload, and stores remaining data in the import Data bucket. At the inspected [Entity defaults](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Import/Entity.php), processing starts at row **2**, with a minimum of **2** column values. The reader is called with chunk size **100**. These are concrete reference settings, not permission to hard-code them for every application. Rows without usable values/index or below the configured minimum are skipped before processing.
+
+For each processed row, the Row service holds the spreadsheet values. Mapper validates table/field targets against Table metadata and separates parent versus joined mappings; `Import Item::get()` reads mapped columns. For the example above, `processSubform2()` builds the logical item:
+
+```text
+source: Welcome
+translation:
+  translation0:
+    language: af-ZA
+    translation: Welkom
+```
+
+The component's Data/Model write path handles persistence of that structured field. Do not manually construct a parallel importer schema or write raw translation SQL. `ParentTable` requires the match value (`source`), looks up its existing row, updates it by `id` if found, otherwise inserts it and obtains the new numeric `id`. Generic JoinTables processing follows; this language caller does not configure an ordinary application's join map. The source and subform processing are not evidence that unmapped existing translations are merged: verify that behavior using the preservation test below.
+
+There is no queued job or console execution in this sequence. The row-reading chunk size does not turn this immediate importer into a queue. Use the [queued workflow](staged-import.md) when that separate execution model is required.
+
+### 8. Report results, clean up, and complete the translation round trip
+
+`result()` obtains the collected messages and resets Message state. The controller calls `cleanupImportState()` after execution and in its caught failure paths, clears the temporary type/file session entries and deletes the recorded file through `File.Agent`. It selects its redirect status from success messages and separately enqueues info/error messages. A success banner alone is therefore not proof that every row succeeded; inspect all messages and saved records. Apply's cleanup is distinct from the uploader's `deleteTranslation` action and its UI event that restores the upload area; verify both paths independently.
+
+The imported data now belongs to JCB's language translation records. It has not yet rewritten an installed component's INI files. Complete the [compile/install language verification](language-strings.md) to generate and deliver the component's translations. Use the operational notes below when adapting the reference, and verify the new component's own contracts.
+
+## Service dependency reference
 
 1. Read [Import_translationsController::importLanguageTranslations/cleanupImportState](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/admin/src/Controller/Import_translationsController.php). The Apply action checks CSRF and `import_translations.access`, resolves temporary file metadata from session state, sets entity parent table `language_translation`, parent key `id`, and matching link field `source`, then calls `execute(payload)->result()` synchronously.
 2. Follow the actual upload and preview path through [AjaxModel](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/admin/src/Model/AjaxModel.php), `File.Agent`, and [ComponentbuilderHelper::getItemImportSubformValues/getLanguageTranslationsHeaders](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/admin/src/Helper/ComponentbuilderHelper.php). The controller's submitted file GUID check alone is not a general application upload-ownership implementation; bind the mapping/apply state to the uploader and exact session-owned file.
@@ -89,9 +196,9 @@ The translation helper builds targets for source strings and published language 
 4. Inspect [Mapper::set/getTableField](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Import/Mapper.php). Each mapping row has `column` and `target`; ordinary targets are `table.field`. Translation values use the two-value subform format `language_translation.translation|translation|language|<language-tag>`. The controller recursively converts posted mapping arrays to objects. Unknown targets can be skipped, and duplicate source-column keys can overwrite earlier mappings; validate required and ambiguous mappings in the caller before execution when data completeness matters.
 5. Follow [Transient::execute/import/result](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Import/Item/Transient.php), [ParentTable::processParent](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Import/ParentTable.php), and [Import Item::get/processSubform2](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Import/Item.php). This is where mapping becomes actual model data and where matching existing `source` rows leads to update.
 
-## Source-specific troubleshooting
+## Operational notes when adapting the reference
 
-These observations explain behavior in the inspected service implementations. Check the corresponding implementation on the target version when diagnosing a symptom; they do not require a replacement import framework for every application.
+These notes explain specific contracts of the inspected implementation for authors adapting the working importer. They are not a claim that the production importer is untested or generally unreliable. Preserve the native services; consult the target version when an adaptation behaves differently.
 
 | Source behavior | Consequence for an agent |
 | --- | --- |
@@ -113,7 +220,7 @@ Spreadsheet formats depend on the installed reader/library and its dependency cl
 
 Use the [shared acceptance checklist](import-acceptance.md) for CSV quoting/encoding, text identifiers and zero, mapping/sheet consistency, the verified native Exporter signature, omitted-field preservation and distinct retry outcomes. It supplies tests for adaptations without treating a local Power's extra API as a universal JCB contract.
 
-## Acceptance and cleanup
+## Acceptance of a new adaptation and cleanup
 
 In a disposable [Playground](../../testing/playground/README.md), create synthetic source strings with two languages. Use the actual **Download Example** action, fill in one existing source string and a changed translation, upload that file, inspect/correct all header targets and Apply. Compare saved values with the intended update and verify the returned result. A successful download and a separate manually constructed input do not exercise the shared header/mapping contract. Test missing source, unknown mapping, duplicate mapping, empty file, a row exception among valid rows, active sheet other than 0, a denied account and a repeated request. Compare row counts and JSON, and retain errors even when a success message is also present.
 
