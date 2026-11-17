@@ -77,6 +77,10 @@ The Import Factory registers Table, Database, Model, Data, generic Import, File,
 
 Compile the new records and inspect the emitted item contract, model/controller methods, Ajax registration, Templates/Layouts, imports and assets. Then run the complete [immediate acceptance](immediate-import.md#acceptance-and-recovery). Original upstream GUID recovery matters for identity-preserving synchronization, not for this independent implementation.
 
+## Ordinary table fields versus translation targets
+
+The translation helper builds targets for source strings and published language tags, including the two-value translation subform. For an ordinary application importer, reuse [Table-driven import fields](import-fields.md) to discover the component's fields and labels. Keep this immediate upload/Apply composition, but do not turn the translation-specific header helper into a manually enumerated catalogue of application columns. Mapper consumes mappings and validates their metadata; it is not the mapping UI's field-discovery helper.
+
 ## Follow the real caller and services
 
 1. Read [Import_translationsController::importLanguageTranslations/cleanupImportState](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/admin/src/Controller/Import_translationsController.php). The Apply action checks CSRF and `import_translations.access`, resolves temporary file metadata from session state, sets entity parent table `language_translation`, parent key `id`, and matching link field `source`, then calls `execute(payload)->result()` synchronously.

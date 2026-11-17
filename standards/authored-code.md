@@ -31,7 +31,7 @@ Use [Dynamic Get](../packages/workflows/dynamic-get.md) to define the site data 
 
 - Use tabs for indentation and the established brace style. In authored PHP methods and control blocks, put opening braces on their own lines. Preserve a reused template's consistent PHP alternative syntax where it makes HTML easier to read.
 - Keep one statement per line. Space operators and arguments, separate logical steps with blank lines and wrap long calls, arrays, conditions and HTML attributes. Do not compress a maintained method, template or script into dense lines.
-- Give methods one coherent responsibility and use descriptive names. Add useful PHPDoc for public methods and non-obvious contracts: inputs, return values, exceptions and relevant side effects. Comments should explain lifecycle assumptions, decisions or constraints, not narrate every statement.
+- Give methods one coherent responsibility and use descriptive names. Document classes, properties and all authored methods, including protected/private methods, using the [Joomla-style PHPDoc contract](#document-php-contracts-in-joomla-style). Comments should explain lifecycle assumptions, decisions or constraints, not narrate every statement.
 - Indent HTML according to its structure. Split distinct view sections into Templates and shared display fragments into Layouts where this makes ownership and reuse clearer. Render data already prepared by the model; keep persistence, import orchestration and session mutations out of presentation markup.
 - Keep scripts and styles in their supported JCB asset/code locations. Generated or deliberately minified delivery assets are separate from the readable source maintained in JCB.
 - Respect the receiving field's contract: body-only PHP, class members, full HTML or another expected form. Preserve JCB placeholders and custom-code references rather than replacing them with one build's resolved values.
@@ -39,6 +39,38 @@ Use [Dynamic Get](../packages/workflows/dynamic-get.md) to define the site data 
 If the receiving context is unclear, [trace a GUI code field](../packages/workflows/debug.md#trace-a-gui-code-field) with a temporary comment and inspect JoomEngine Code before adding boilerplate or changing a method's structure.
 
 For presentation preparation, follow [Custom View Script placement](../packages/models/presentation-and-queries.md#put-preparation-php-in-custom-view-script): enable the owning record's script, enter raw PHP without opening/closing tags, and keep readable markup in the presentation body. Preserve the actual Template/Layout input scope.
+
+## Document PHP contracts in Joomla style
+
+**Project policy:** a one-line label such as “component-specific import definition” is not sufficient documentation of a maintained class or method. Use structured PHPDoc, including for private helpers. Keep it accurate and useful rather than adding decorative text or tags that do not describe the code.
+
+- Classes: explain the responsibility and important lifecycle/dependency assumptions, with an accurate `@since`.
+- Properties: explain what the value represents; include `@var` with its type (and array element/shape detail when useful) and `@since`.
+- Methods: a concise summary, a blank line, and further explanation when behavior, side effects or constraints need it. Document each parameter with `@param`, the result with `@return` (including `void`), relevant propagated exceptions with `@throws`, and `@since`. Align tag/type/name columns consistently with the surrounding Joomla-style code.
+- Use the version in which the member was introduced in the component or maintained Power. Do not copy Joomla's `1.6` or an upstream JCB version into new application code. Preserve truthful history when reusing a member; if its introduction version is unknown, establish it from project history rather than inventing one.
+- Keep PHPDoc and native type declarations consistent. Do not add meaningless parameters or return tags to a class description, or claim exceptions that the method catches internally. Body-only GUI hooks do not need an invented method wrapper just to carry a docblock; document the actual maintained method/class at its owning source.
+
+For example, this private method illustrates the required structure inside a Power with an existing injected Table service. The sample `@since 1.0.0` assumes that is this component's real introduction version. This illustrates a method contract, **not a replacement importer helper** or instructions to write a new wrapper:
+
+```php
+	/**
+	 * Get the authored field metadata for an import table.
+	 *
+	 * Standard default fields are not added to the result.
+	 * This reads metadata, not the table's stored data rows.
+	 *
+	 * @param   string  $table  The component table name.
+	 *
+	 * @return  array  Field metadata, or an empty array when unavailable.
+	 * @since   1.0.0
+	 */
+	private function getImportFieldMetadata(string $table): array
+	{
+		return $this->table->fields($table, false, true) ?? [];
+	}
+```
+
+For a source example of structured private-method PHPDoc, inspect core [Mapper::getTableField](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Import/Mapper.php). Match the quality of its contract documentation, not its historical version number. The [import source review](../packages/workflows/import-acceptance.md#review-source-quality-and-field-discovery) applies this standard alongside dynamic metadata reuse.
 
 ## Let JCB resolve class references
 
