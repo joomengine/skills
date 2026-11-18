@@ -20,7 +20,7 @@ A restored installation can show **Saved version** with its stored package ident
 
 Start with [JCB setup](https://playground.joomengine.org/?deploy=jcb&start=0), [JCB + MCP setup](https://playground.joomengine.org/?deploy=jcb-mcp&start=0), or [Joomla-only consumer setup](https://playground.joomengine.org/?deploy=blank&start=0). Inspect the current selectors, choose the requested supported target and launch. `start=0` suppresses the countdown so configuration can be reviewed.
 
-For an independent installation, use **Configure deployment → Use this deployment** or [fresh JCB setup](https://playground.joomengine.org/?deploy=jcb&fresh=1&start=0). `fresh=1` also bypasses prepared images and runs the recipe. A normal visit can resume the persisted live site. Name long-running work clearly and retain a complete downloaded export before replacing it. The current live workspace is replaced only after the dirty-work/backup checks; a new key is not a backup.
+For normal work, resume the intended existing workspace or use **Configure deployment → Use this deployment** for an independent installation, allowing prepared images where eligible. Use [fresh JCB setup](https://playground.joomengine.org/?deploy=jcb&fresh=1&start=0) deliberately when the task needs a full recipe installation: `fresh=1` bypasses prepared images. It is not a routine quota-recovery switch or a clean browser storage context. A normal visit can resume the persisted live site. Name long-running work clearly and retain a complete downloaded export before replacing it. The current live workspace is replaced only after the dirty-work/backup checks; a new key is not a backup.
 
 To select the compiler as the first page, encode the entire **inner Joomla path including its query** as one `path` value:
 
@@ -98,6 +98,20 @@ One window owns the runtime and storage lock; companion Playground views share i
 
 Full backup replacement is atomic: a rejected write retains the old archive and offers the prepared new archive for download. The storage estimate uses actual archive size plus a 10 MiB margin, but an estimate can still be followed by a rejected write. Follow [storage recovery](storage-recovery.md) rather than resetting or repeatedly replaying a successful application action.
 
+## PHP settings and distinct time budgets
+
 Default PHP settings remain `upload_max_filesize=128M`, `post_max_size=160M`, `max_execution_time=60`, `max_input_time=60`, `max_input_vars=10000`, `memory_limit=512M`. The settings dialog validates bounds and checks effective values. Browser memory, installation/export budgets and HTTP limits remain separate constraints. An authorised API harness can read `runtimeInfo`; a UI-only agent records observable information and names what it could not inspect.
+
+Keep the default execution/input pair at **60/60 seconds** for ordinary work. For a genuinely large or long-running workload that needs additional allowance, adjust the relevant settings through the supported PHP settings UI, up to **300/300** where needed, and verify the effective values. 300/300 is neither the default nor a blanket best practice. It does not increase IndexedDB quota or fix a failed storage transaction.
+
+| Budget | Meaning in the inspected implementation |
+| --- | --- |
+| PHP execution and input time | Separate PHP settings, each defaulting to 60 seconds and bounded to 5–300 seconds in the settings UI. |
+| Ordinary PHP request host deadline | `min(600000, max(180000, (max_execution_time + max_input_time + 30) * 1000))` milliseconds: 180 seconds at 60/60, capped at 600 seconds even at 300/300. |
+| Managed extension-install allowance | Separate installation budget, default 180 seconds execution plus 30 seconds host cleanup allowance (210 seconds). Explicit operation allowances have their own validation; ordinary PHP settings do not automatically replace them. |
+| Browser-tool wait | The automation tool's wait for a navigation, action or transfer. Its expiry alone does not establish the PHP/runtime outcome or undo a completed mutation. |
+| Export, persistence and transfer | Distinct operations with their own progress/errors; neither PHP execution time nor an automation wait measures browser storage capacity. |
+
+A complete-site Upload derives configuration from the archive's saved Playground metadata. Do not assume settings selected on the destination before Upload remain effective. Inspect the restored site's actual PHP settings and versions after adoption and before a demanding operation; change only what the workload requires. Record effective values and the particular timer/error when diagnosing failures. These are [source-derived rules](sources.md#operating-procedure-source-review-2026-11-18), not a claim of a new live run.
 
 Use HTTPS/localhost, a supported browser, service workers, IndexedDB, Web Locks, SharedArrayBuffer and cross-origin isolation. Embedded hosting must supply compatible isolation; an iframe attribute alone is insufficient. Follow browser capability restrictions and diagnose failures rather than disabling browser security.

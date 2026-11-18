@@ -5,7 +5,7 @@ description: "Build and deliver complete Joomla extensions with Joomla Component
 
 # Build and deliver with JCB in Playground
 
-Read the [canonical Playground agent guide](README.md) and select the latest compatible releases from [configuration](configuration.md) using the [version policy](../../standards/version-policy.md). Complete the requested extension through maintained source, compilation, installation, working features and final delivery. Record installed versions, candidate source and relevant repository configuration. Respect the user's environment choice; otherwise use the available browser without a routine approval pause.
+Start with the [browser operating procedure](README.md#operate-the-browser): one controller, one mutation at a time, inspect outcomes before replay, and retain downloads. Read the [canonical Playground agent guide](README.md) and select the latest compatible releases from [configuration](configuration.md) using the [version policy](../../standards/version-policy.md). Complete the requested extension through maintained source, compilation, installation, working features and final delivery. Record installed versions, candidate source and relevant repository configuration. Respect the user's environment choice; otherwise use the available browser without a routine approval pause.
 
 | Changed artifact | Required model procedure |
 | --- | --- |
