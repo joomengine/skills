@@ -20,7 +20,7 @@ A restored installation can show **Saved version** with its stored package ident
 
 Start with [JCB setup](https://playground.joomengine.org/?deploy=jcb&start=0), [JCB + MCP setup](https://playground.joomengine.org/?deploy=jcb-mcp&start=0), or [Joomla-only consumer setup](https://playground.joomengine.org/?deploy=blank&start=0). Inspect the current selectors, choose the requested supported target and launch. `start=0` suppresses the countdown so configuration can be reviewed.
 
-For normal work, resume the intended existing workspace or use **Configure deployment → Use this deployment** for an independent installation, allowing prepared images where eligible. Use [fresh JCB setup](https://playground.joomengine.org/?deploy=jcb&fresh=1&start=0) deliberately when the task needs a full recipe installation: `fresh=1` bypasses prepared images. It is not a routine quota-recovery switch or a clean browser storage context. A normal visit can resume the persisted live site. Name long-running work clearly and retain a complete downloaded export before replacing it. The current live workspace is replaced only after the dirty-work/backup checks; a new key is not a backup.
+For normal work, resume the intended existing workspace or use **Configure deployment → Use this deployment** for an independent installation, allowing prepared images where eligible. Use [fresh JCB setup](https://playground.joomengine.org/?deploy=jcb&fresh=1&start=0) deliberately when the task needs a new installation: `fresh=1` can bypass normal maintained prepared images and trigger a full recipe installation. An explicitly supplied non-maintained snapshot remains authoritative; inspect the resolved deployment rather than assuming every fresh launch runs the full installer. It is not a routine quota-recovery switch or a clean browser storage context. A normal visit can resume the persisted live site. Name long-running work clearly and retain a complete downloaded export before replacing it. The current live workspace is replaced only after the dirty-work/backup checks; a new key is not a backup.
 
 To select the compiler as the first page, encode the entire **inner Joomla path including its query** as one `path` value:
 
@@ -45,7 +45,7 @@ Boolean values support `1/0`, `true/false` and `yes/no`. Use the current deploym
 | `login=no` | Disable automatic administrator login; use Credentials for this site's actual login. |
 | `persist=0` | Ignored by the post-PR #24 Rocket interface: the live site always persists. Older temporary-mode URLs are not a current recovery guarantee. |
 | `key` | Select a browser-local saved-site identity; reusing it can reopen existing data. It is not a shared site URL or an access secret. |
-| `fresh=1` | Create a new live-site key and run the recipe instead of a prepared image; replacing the current live workspace offers backup/download first. |
+| `fresh=1` | Create a new live-site key; can bypass normal maintained prepared images and trigger the full recipe. An explicit non-maintained snapshot is an exception. Replacing the current live workspace offers backup/download first. |
 | `toolbar=0` / `hideToolbar=1` | Hide header/footer with edge restore controls. Explicit `hideToolbar` takes precedence. |
 | `start=0` | Show configuration without automatic launch. |
 | `extensions` | Encoded JSON array of `{ "url": "..." }` package objects; use the editor's repeatable URL rows for ordinary setup. User-supplied package checksum fields are ignored. |
