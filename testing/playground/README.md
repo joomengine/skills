@@ -29,14 +29,6 @@ For monitored core mirrors and access recovery, use [repository network discover
 | Understand what has actually run | [Verification record](verification.md) |
 | Report guidance that prevents the required outcome | [Skills feedback and issue reporting](../reporting-issues.md) |
 
-## Build from a request
-
-1. Follow the [request-to-extension workflow](../../workflows/request-to-extension.md) to establish entities, operations, permissions, integrations and acceptance cases. Reuse the user's supplied answers and environment. Use an existing capable Joomla/JCB MCP connection when provided; otherwise open [JCB setup](https://playground.joomengine.org/?deploy=jcb&start=0) and work in the administrator GUI.
-2. Pull complete reusable features from the [reference blueprints](../../examples/reference-patterns.md), including the Fields, views, queries, Templates, Layouts and Powers that make them work. Keep application-row GUIDs separate from definition GUIDs and business keys, retain numeric Joomla primary keys, and create a real Admin View for each separately stored child entity. Use [application identities](../../packages/workflows/application-identities.md), [normalized subforms](../../packages/workflows/normalized-subforms.md), [Dynamic Get](../../packages/workflows/dynamic-get.md) and [managed files/images](../../packages/workflows/media-files.md) for the affected features.
-3. Build one complete source-to-runtime slice, then finish the remaining requested features. Save and reopen definitions, compile, inspect the genuine installer, install it and exercise its behaviour. Carry lasting corrections back to JCB records, Power source or maintained assets and rebuild.
-4. Follow [delivery](../../workflows/delivery.md) to provide the runtime installers and requested **Complete site** archive. Upload that exact archive in an isolated browser storage context, after preserving any destination work, and verify the JCB graph, application relationships, save/reload behaviour and representative compilation. Keep runtime dependencies and build-only prerequisites explicit.
-5. If missing, incorrect or unclear skills prevent the agreed outcome, create or contribute to a matching [Skills issue](https://github.com/joomengine/skills/issues) with the reproduction and improvement needed. Follow the [feedback procedure](../reporting-issues.md), continue useful implementation work, and use the resulting issue to improve the shared instructions.
-
 ## Operate the browser
 
 The outer page is Rocket; Joomla runs in its preview. Use Rocket to configure sites, save/download work and open **JoomEngine Code** or **DB**. Use the Joomla administrator to install extensions and edit JCB records. **Site** and **Admin** navigate the running preview; **Credentials** shows this site's login details.
@@ -44,6 +36,29 @@ The outer page is Rocket; Joomla runs in its preview. Use Rocket to configure si
 Wait for provisioning, navigation and dialogs to finish, then inspect the resulting controls before acting. Open the preview or its iframe through the browser tool's supported interface. Use current labels and fields, scrolling or keyboard focus where necessary; layouts can vary by version. Keep the owner tab open. Use supported file upload/download controls to transfer packages and verify each transfer.
 
 The optional **JCB + MCP** deployment supplies same-browser authenticated HTTP. Discover the actions needed for the task and use the GUI for unavailable operations. A private browser site is not exposed to an external client merely by sharing the static Playground URL; follow the [MCP execution route](../../workflows/mcp.md#use-mcp-with-playground).
+
+### One controller, one mutation at a time
+
+Keep one agent/controller responsible for a live workspace. Preserve its owner tab and coordinate any companion views; do not let independent agents submit changes to the same runtime concurrently. Finish and inspect each save, import, compile, installation or restore before starting the next mutation. A browser-tool wait expiring is not proof that PHP failed or that the operation was cancelled.
+
+After a timeout, inspect current progress, the resulting record/artifact and the persistence indicator through supported controls. If work is still running, continue observing rather than submitting it again. If the application completed but persistence failed, follow [storage recovery](storage-recovery.md). Retry only after establishing the prior outcome and whether replay is safe; stopping a request does not roll back committed writes. Keep [PHP settings, runtime deadlines and browser waits](configuration.md#php-settings-and-distinct-time-budgets) separate.
+
+### Download and retain an artifact
+
+Use this sequence for compiler ZIPs, complete-site exports and prepared recovery downloads:
+
+1. Prepare the browser tool's supported download capture/listener **before** triggering the download. Where its API returns a pending event/promise, register it without awaiting completion yet; where downloads are captured automatically, use that documented capability.
+2. Trigger the download action once, then await or inspect the resulting transfer. Do not wait for a download event before clicking the action that produces it, and do not repeatedly click because a tool wait expired.
+3. Verify the resulting file exists outside Playground origin storage, retain it at the authorized delivery location, and record its actual filename, byte size and checksum. Inspect the expected ZIP contents before calling it the requested artifact. A click, toast or temporary download handle alone is not durable retention.
+4. If no file arrives, inspect the transfer/error and source state before retrying. For compiler ZIPs use the [Code fallback](#6-compile-inspect-install-and-run) when appropriate. Report unsupported transfer capabilities rather than inventing browser APIs or claiming a completed download.
+
+## Build from a request
+
+1. Follow the [request-to-extension workflow](../../workflows/request-to-extension.md) to establish entities, operations, permissions, integrations and acceptance cases. Reuse the user's supplied answers and environment. Use an existing capable Joomla/JCB MCP connection when provided; otherwise open [JCB setup](https://playground.joomengine.org/?deploy=jcb&start=0) and work in the administrator GUI.
+2. Pull complete reusable features from the [reference blueprints](../../examples/reference-patterns.md), including the Fields, views, queries, Templates, Layouts and Powers that make them work. Keep application-row GUIDs separate from definition GUIDs and business keys, retain numeric Joomla primary keys, and create a real Admin View for each separately stored child entity. Use [application identities](../../packages/workflows/application-identities.md), [normalized subforms](../../packages/workflows/normalized-subforms.md), [Dynamic Get](../../packages/workflows/dynamic-get.md) and [managed files/images](../../packages/workflows/media-files.md) for the affected features.
+3. Build one complete source-to-runtime slice, then finish the remaining requested features. Save and reopen definitions, compile, inspect the genuine installer, install it and exercise its behaviour. Carry lasting corrections back to JCB records, Power source or maintained assets and rebuild.
+4. Follow [delivery](../../workflows/delivery.md) to provide the runtime installers and requested **Complete site** archive. Upload that exact archive in an isolated browser storage context, after preserving any destination work, and verify the JCB graph, application relationships, save/reload behaviour and representative compilation. Keep runtime dependencies and build-only prerequisites explicit.
+5. If missing, incorrect or unclear skills prevent the agreed outcome, create or contribute to a matching [Skills issue](https://github.com/joomengine/skills/issues) with the reproduction and improvement needed. Follow the [feedback procedure](../reporting-issues.md), continue useful implementation work, and use the resulting issue to improve the shared instructions.
 
 ## Common workflow
 
@@ -65,7 +80,7 @@ Do not merge or change the production/default branch to make testing convenient.
 
 ### 2. Start a separate test site and record its actual environment
 
-Choose a [version-specific link](configuration.md#ready-to-use-test-links), inspect setup and Launch. Use a temporary site for a short test or a uniquely named saved site for work spanning reloads. Keep the owning Playground tab open. Wait for successful provisioning and the actual JCB administrator screen; a loaded outer page is not a successful Joomla launch.
+Choose a [version-specific link](configuration.md#ready-to-use-test-links), inspect setup and Launch. Use a clearly named independent workspace for isolated testing, preserving any existing work before replacement. Current Rocket persists live sites automatically; `persist=0` is not a temporary-site mode. Prefer normal prepared deployment where eligible; reserve `fresh=1` for an intentional full recipe installation as explained in [configuration](configuration.md#ready-to-use-test-links). Keep the owning Playground tab open. Wait for successful provisioning and the actual JCB administrator screen; a loaded outer page is not a successful Joomla launch.
 
 Record the live build's source revision when obtainable from its public `assets/manifest.json`, resolved Joomla/PHP versions, installed JCB version, recipe, browser and candidate revision. The deployment manifest records package provenance; a saved site may still contain an older JCB installation. Use the running site's version information as well. Preserve non-secret setup/progress diagnostics if launch fails. Do not use a guessed `window.playground` global: the shipped UI keeps its runtime handle private to its module. [P01–P04, P07](sources.md)
 
@@ -119,7 +134,7 @@ Save/reopen the JCB authoring record and verify that the change persists. Record
 
 For bundled application/reference data, use [Admin View Table-mode initial data](../../packages/workflows/initial-data.md) and the [fresh-install acceptance case](../scenarios/initial-data.md). Populating the authoring component alone does not put its records in the installation ZIP.
 
-Compile the selected test component for the intended Joomla target through JCB. Check compilation messages and download the resulting package. Inspect actual generated PHP/XML/templates, dependencies, autoloading/assets and relevant SQL using the module's acceptance criteria. Record the package hash and generated paths where available; successful ZIP creation alone does not prove the changed feature is included.
+Compile the selected test component for the intended Joomla target through JCB. Check compilation messages and [download and retain](#download-and-retain-an-artifact) the resulting package. Inspect actual generated PHP/XML/templates, dependencies, autoloading/assets and relevant SQL using the module's acceptance criteria. Record the package hash and generated paths where available; successful ZIP creation alone does not prove the changed feature is included.
 
 Use the compiler's **Download Component** result to retain the ZIP outside the browser runtime, then list/extract it into a separate scratch directory for inspection with available ZIP/PHP/XML tools. Keep the original package and its hash alongside the receipt. Upstream's compiler test finds its generated ZIP under `/persist/www/tmp/`, but take the current result/download location as authoritative rather than guessing a filename. Code can inspect files that actually exist in the active site; it does not automatically expand a ZIP into an installed component. After installation, inspect the real installed paths and compare the relevant files with the compiled package. If the available browser cannot download/upload or expose artifact bytes, record that inspection/install stage as blocked instead of inferring package contents from a success page. [P08, P12](sources.md)
 
@@ -131,7 +146,7 @@ A compiler/runtime failure needs diagnosis against the actual source revision. I
 
 ### 7. Save evidence and report the stages separately
 
-Record source and runtime revisions, repository settings/effective order, changed identities, exact actions, expected/observed results, artifact hashes/paths, and remaining limits. Separate static, discovery, import/refresh, compile, installation and runtime outcomes. Mark skipped or blocked stages explicitly, including the opt-out or concrete blocker. Use the [verification record](verification.md) as an example of bounded evidence, not a result to copy into another task.
+Record source and runtime revisions, repository settings/effective order, changed identities, exact actions, expected/observed results, artifact hashes/paths, and remaining limits. For a failed operation use the [failure receipt](storage-recovery.md#report-the-failing-layer) instead of assigning a cause from a generic timeout or quota message. Separate static, discovery, import/refresh, compile, installation and runtime outcomes. Mark skipped or blocked stages explicitly, including the opt-out or concrete blocker. Use the [verification record](verification.md) as an example of bounded evidence, not a result to copy into another task.
 
 Submit intended JCB forms and save intended editor buffers, then export the requested artifacts. In post-PR #24 builds the live site persists automatically; check the persistence indicator and retain an external full backup. Keep credentials and private recovery files out of public receipts. A Share link transfers public setup; use **Complete site** for the database and files. Preserve failures before reset or closing the owner tab; use [storage recovery](storage-recovery.md) when persistence fails. Report skill gaps through the [Skills feedback procedure](../reporting-issues.md); upstream JCB issue submission follows its separate human-led route.
 

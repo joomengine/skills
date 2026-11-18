@@ -11,7 +11,7 @@ Read [AGENTS.md](AGENTS.md) for the operating contract. Identify the requested a
 
 **Native orientation:** Fields and Admin Views define data and conventional backend management. Dynamic Gets retrieve that data for frontend Site Views and similarly structured backend Custom Admin Views; Templates and Layouts compose their presentation. Component associations assemble the graph for compilation. Read the short [concept map](architecture/concepts.md) before choosing records if these relationships are unfamiliar.
 
-Carry the application through the [completion contract](workflows/delivery.md#completion-contract). Resolve the latest JCB at execution time under the [version policy](standards/version-policy.md); source hashes in research references are not runtime requirements. Use the canonical [Playground guide](testing/playground/README.md) for browser authoring.
+Carry the application through the [completion contract](workflows/delivery.md#completion-contract). Resolve the latest JCB at execution time under the [version policy](standards/version-policy.md); source hashes in research references are not runtime requirements. Use the canonical [Playground guide](testing/playground/README.md) for browser authoring, starting with its [browser operating procedure](testing/playground/README.md#operate-the-browser).
 
 Let JCB do the routine generation. Start from complete reusable features in the [reference catalogue](examples/reference-patterns.md), acquire their required records, and adapt only what the application needs. JCB intentionally gives advanced authors freedom; apply the established patterns with informed judgment, without adding a framework around capabilities it already supplies.
 

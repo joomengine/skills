@@ -2,6 +2,19 @@
 
 This is the source ledger for the shared [Playground workflow](README.md) and [configuration reference](configuration.md). These pages give project testing policy and derived operational guidance; the sources below establish implementation behaviour. Actual task execution belongs in a dated receipt, including the [verification record](verification.md).
 
+## Operating procedure source review: 2026-11-18
+
+Inspected Playground `main` at [`1dd95451f8a0c3fda51802f8cbf0a1e72d0fb079`](https://github.com/joomengine/playground/commit/1dd95451f8a0c3fda51802f8cbf0a1e72d0fb079). This is source inspection supporting the focused operating guidance, not a new browser exercise, a deployment assertion, or a diagnosis of an unresolved managed-browser storage rejection. Historical execution receipts below and in [verification](verification.md) remain unchanged.
+
+| Pinned source | Supports |
+| --- | --- |
+| [PHP settings](https://github.com/joomengine/playground/blob/1dd95451f8a0c3fda51802f8cbf0a1e72d0fb079/src/php-settings.mjs), `DEFAULT_PHP_SETTINGS`, `phpRequestTimeoutMs`, `installationBudget` | 60/60 execution/input defaults; 5–300 setting bounds; ordinary request deadline formula; separate 180-second default installer execution and 210-second host budget. |
+| [Launcher](https://github.com/joomengine/playground/blob/1dd95451f8a0c3fda51802f8cbf0a1e72d0fb079/src/app.mjs#L1166-L1357), `launch` | Incoming archive runtime is prepared and flushed before adoption; `finally` resets an unadopted prepared runtime. Existing live persistence failure and failed incoming adoption are different states. |
+| [Site import](https://github.com/joomengine/playground/blob/1dd95451f8a0c3fda51802f8cbf0a1e72d0fb079/src/site-import.mjs#L54-L80), `configurationForSiteExport` | Restore derives configuration from archive metadata rather than assuming the destination form's PHP settings persist. |
+| [Configuration parser](https://github.com/joomengine/playground/blob/1dd95451f8a0c3fda51802f8cbf0a1e72d0fb079/src/config.mjs), [runtime](https://github.com/joomengine/playground/blob/1dd95451f8a0c3fda51802f8cbf0a1e72d0fb079/src/playground.mjs) | Purposeful `fresh` deployment, prepared-image eligibility, runtime request handling and progress are separate from a browser tool's waits. |
+
+One controller, serialized mutations, inspect-before-retry, tool-neutral download capture and bounded authorized cleanup are operational guidance. They do not add a runtime feature or require a separate automated workflow. Verify the deployed revision and actual result during real use; an upstream test or static skills check is not that result.
+
 ## Workspace lifecycle refresh: 2026-11-14
 
 Inspected merged Playground `main` at [`c403f0353806e723be386b6e1ddbec7d84c64768`](https://github.com/joomengine/playground/commit/c403f0353806e723be386b6e1ddbec7d84c64768), [PR #24](https://github.com/joomengine/playground/pull/24). This supersedes older manual site-Save/Close, temporary-interface and deployment-storage statements below. The initial inspection of `https://playground.joomengine.org/assets/manifest.json` returned `c49d02588d1a5276ab78d3dc3f5e3df19d30e463`; a later live test on the same date confirmed deployed `c403f0353806e723be386b6e1ddbec7d84c64768`. The [follow-up receipt](verification.md#2026-11-14-live-follow-up-after-pr-24-deployment) records successful live export during persistence failure, native presentation compilation/rendering and the corrected classification of the unsupported headerless Power experiment. Manual clean-context restore remains unrun. Merge status alone is not deployment evidence.
