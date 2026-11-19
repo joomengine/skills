@@ -12,13 +12,13 @@ The [evidence receipt](../evidence/language-strings.md) identifies pinned compil
 
 ## 1. Author the source text in JCB
 
-In HTML, keep markup outside the language string and echo translated text **inside** the markup:
+In a Site View template whose HtmlView provides `sanitize()`, keep markup outside the language string and echo translated text **inside** the markup:
 
 ```php
 <button type="submit">
-	<?php echo htmlspecialchars(Joomla___ba6326ef_cb79_4348_80f4_ab086082e3c5___Power::_('Save changes'), ENT_QUOTES, 'UTF-8'); ?>
+	<?php echo $this->sanitize(Joomla___ba6326ef_cb79_4348_80f4_ab086082e3c5___Power::_('Save changes'), false); ?>
 </button>
-<p><?php echo htmlspecialchars(Text::_('Your changes are ready'), ENT_QUOTES, 'UTF-8'); ?></p>
+<p><?php echo $this->sanitize(Text::_('Your changes are ready'), false); ?></p>
 ```
 
 The Text JPK is `Joomla___ba6326ef_cb79_4348_80f4_ab086082e3c5___Power`. Use the installed mapping; its catalogue display spelling is not PHP syntax. In a PHP-only code field, do not insert another `<?php ... ?>` pair:
@@ -27,7 +27,7 @@ The Text JPK is `Joomla___ba6326ef_cb79_4348_80f4_ab086082e3c5___Power`. Use the
 $message = Joomla___ba6326ef_cb79_4348_80f4_ab086082e3c5___Power::_('Your changes are ready');
 ```
 
-Keep `'<button>Save changes</button>'` out of the translation call. HTML structure belongs to the view/template/layout, while translators receive plain wording. For an HTML attribute such as `title` or `aria-label`, translate its value and escape it for the attribute context. The examples use `htmlspecialchars` for HTML output; translating text is not output escaping. PHP-only values need escaping at their eventual output boundary, not an unconditional HTML transformation.
+Keep `'<button>Save changes</button>'` out of the translation call. HTML structure belongs to the view/template/layout, while translators receive plain wording. For a quoted HTML attribute such as `title` or `aria-label`, translate before applying the appropriate output helper; do not shorten or add tooltip markup. In a standalone Layout, use the [native StringHelper path](../../standards/authored-code.md#use-native-helpers-for-frontend-output), not a presumed HtmlView method. Translating text is not output escaping. PHP-only values need escaping at their eventual output boundary, not an unconditional HTML transformation.
 
 Ensure the Text class is imported **in each generated PHP file**. A JPK occurrence makes JCB acquire/resolve that mapping and add the import; subsequent calls in that file may use `Text::_()`. Some compiler templates already supply the import, so reuse it when confirmed. One token elsewhere in the component does not establish imports in all separately generated files. Inspect the final class name/alias if the file has a naming conflict.
 
