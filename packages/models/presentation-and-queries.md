@@ -17,7 +17,7 @@ Optional view logic is controlled by distinct switches and contexts:
 | Settings | Intended context to inspect in generated output |
 | --- | --- |
 | `add_php_view` / `php_view` (Custom View Script) | Statements at the top of the generated presentation file, before its markup; not an HtmlView method. |
-| `php_model` (PHP Model) | Model-class members/methods, not statements inside `getItem()` or `getItems()`. Inspect the corresponding enable controls, including custom-button configuration. |
+| `php_model` (PHP Model) | Model-class members/methods, not statements inside `getItem()` or `getItems()`. |
 | `php_controller` (PHP Controller) | Controller-class methods for actions; validate task routing, input, authorization and CSRF protection. |
 | `add_php_document` / `php_document` | Document preparation, including assets/metadata. |
 | `add_php_jview_display` / `php_jview_display` | Generated view display method logic. |
@@ -25,6 +25,8 @@ Optional view logic is controlled by distinct switches and contexts:
 | `add_view_toolbar` / `view_toolbar` | Statements inside `addToolbar()`; the enabled custom toolbar replaces the default toolbar-button code, rather than simply appending buttons. |
 | CSS/document JavaScript/JavaScript file flags and bodies | Their corresponding inline/document/file output, not a universal code injection slot. |
 | Custom buttons and AJAX flags/collections | Generated actions and handlers; validate routing, authorization and input handling separately. |
+
+**PHP Model and PHP Controller enable switch:** on the inspected core JCB `6.x@037752c`, set the Site View’s **Add Custom Buttons** to **Yes** (`add_custom_button=1`) even if you only need to emit PHP Model or PHP Controller methods. Leave the button rows empty unless the feature needs a visible button. The [compiler gates both emitters on this switch](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Architecture/CustomButtons.php#L196-L205), while [button-row rendering has its own empty-row guard](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Architecture/CustomButtons.php#L406-L437). The [Hello World Greetings record](https://github.com/vast-development-method/hello-world-blueprint/blob/5802e7c1d9bfaac005c765ccda830a7d07cd7e12/src/site_view/2fec9afa-bf4f-4bd0-8054-715550443824/item.json) demonstrates the enabled switch with no button row. If the saved body is missing from the generated class, check the switch and inspect the target compiler before changing the design.
 
 Use complete code for the actual slot's scope: a class member cannot be inserted into an expression/body slot just because both accept PHP. Existing generated source is useful to locate that scope; make the lasting edit in the blueprint. The [Customview data consumer](https://github.com/vdm-io/Joomla-Component-Builder/blob/408703a857ad937479b1e28de7f693af178dcc83/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Customview/Data.php) processes the default body, Library attachments, template/layout discovery and primary/custom getters. The [view references](../reference/site_view.md) retain the complete enable/body pairs and nested button shapes.
 
