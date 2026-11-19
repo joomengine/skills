@@ -16,14 +16,23 @@ Optional view logic is controlled by distinct switches and contexts:
 
 | Settings | Intended context to inspect in generated output |
 | --- | --- |
-| `add_php_view` / `php_view` | PHP associated with rendering the view's presentation. |
+| `add_php_view` / `php_view` (Custom View Script) | Statements at the top of the generated presentation file, before its markup; not an HtmlView method. |
+| `php_model` (PHP Model) | Model-class members/methods, not statements inside `getItem()` or `getItems()`. Inspect the corresponding enable controls, including custom-button configuration. |
+| `php_controller` (PHP Controller) | Controller-class methods for actions; validate task routing, input, authorization and CSRF protection. |
 | `add_php_document` / `php_document` | Document preparation, including assets/metadata. |
 | `add_php_jview_display` / `php_jview_display` | Generated view display method logic. |
-| `add_php_jview` / `php_jview` | Additional generated view-class PHP. |
+| `add_php_jview` / `php_jview` | Additional generated HtmlView-class members/methods. |
+| `add_view_toolbar` / `view_toolbar` | Statements inside `addToolbar()`; the enabled custom toolbar replaces the default toolbar-button code, rather than simply appending buttons. |
 | CSS/document JavaScript/JavaScript file flags and bodies | Their corresponding inline/document/file output, not a universal code injection slot. |
 | Custom buttons and AJAX flags/collections | Generated actions and handlers; validate routing, authorization and input handling separately. |
 
 Use complete code for the actual slot's scope: a class member cannot be inserted into an expression/body slot just because both accept PHP. Existing generated source is useful to locate that scope; make the lasting edit in the blueprint. The [Customview data consumer](https://github.com/vdm-io/Joomla-Component-Builder/blob/408703a857ad937479b1e28de7f693af178dcc83/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Customview/Data.php) processes the default body, Library attachments, template/layout discovery and primary/custom getters. The [view references](../reference/site_view.md) retain the complete enable/body pairs and nested button shapes.
+
+## Check scope and asset initialization before using a hook
+
+Use the [Hello World hook map](../../examples/reference-patterns.md#hello-world-native-code-slot-map) to distinguish a method body, a class-member slot and presentation PHP. A Site View includes model, controller and HtmlView extension points as well as markup; do not move these responsibilities into a large default template. Dynamic Get hooks prepare retrieved data; PHP Model can supply methods called by those hooks. PHP View Display prepares the view after retrieval; PHP Document prepares its document/assets; Custom View Script prepares local rendering variables.
+
+A local variable from one method does not exist in another. In PHP Document, acquire the asset manager **before your first use**, for example raw PHP `$viewAssets = $this->getDocument()->getWebAssetManager();`. Do not assume a later generated `$wa` assignment already ran. At core JCB `6.x@037752c`, [the Joomla 6 Site View template](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/admin/compiler/joomla_6/SITE_VIEW_HTML.php#L147-L179) places `SITE_DOCUMENT_CUSTOM_PHP` before its own `$wa` initialization. Check the actual target's generated ordering; a proposed compiler fix is not evidence that installed releases initialize it earlier. Keep application fixes in the authored hook, not an edited generated file.
 
 ## Choose a Dynamic Get source and result shape
 

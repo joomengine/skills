@@ -66,4 +66,6 @@ Inspect the generated model, view and presentation files in JoomEngine Code. Con
 
 If data is absent, trace the actual property back through its getter, relation keys and restrictions before adding manual queries. If rows repeat, inspect single-row cardinality and grouping. If a collection disappears, inspect its generated method and the selected key passed into it. If markup is missing, check the literal alias, compiler discovery and emitted file. Return fixes to JCB records and supporting sources, regenerate, and report guidance failures through the [Skills feedback workflow](../../testing/reporting-issues.md).
 
+Keep normalization of stored values and data-affecting settings in the model or a reusable Power called from its native hook. The [authored-code owner rules](../../standards/authored-code.md#choose-the-native-owner-before-writing-code) distinguish those operations from render-only setup.
+
 For top-of-file preparation and calculated display locals, use the owning [Custom View Script](../models/presentation-and-queries.md#put-preparation-php-in-custom-view-script), without PHP tags. Keep the markup separate and preserve each nested renderer's input contract.

@@ -67,6 +67,8 @@ Do not promise that a forge's **Download ZIP** of an arbitrary expanded Joomla c
 
 Deliver a complete, stable, runnable Joomla extension ready for deployment on the agreed target. Finish the requested behavior and its real integrations, keep the authoritative JCB graph and Power source consistent, and supply the final compiler-produced installers with their required runtime dependencies. Verify installation and the application's agreed acceptance cases. For a requested Playground handoff, supply the Complete site archive and verify that it opens independently with the project and its data intact.
 
+Before packaging authored behavior, complete the [maintained-source and generated-output review](../standards/authored-code.md#review-the-maintained-source-and-its-result). A working install does not replace this check.
+
 Give the recipient practical installation, configuration and continued-maintenance instructions. Resolve build failures in maintained source and regenerate the affected artifacts. If a skill gap prevents the expected result or forces a workaround, [report it in the Skills repository](../testing/reporting-issues.md) and continue the recovery workflow; the feedback becomes input to the next skills improvement.
 
 ## Completion receipt

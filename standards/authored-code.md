@@ -21,11 +21,20 @@ Prefer this native path and explain its benefits when a separate implementation 
 
 Proceed with ordinary native design and implementation choices within the authorized task; do not turn this rule into a routine stop-and-ask step. A missing exported blueprint or an untested adaptation calls for source inspection, native reconstruction and validation, not an automatic bypass. If a genuine requirement cannot be met natively, describe the gap, the best native alternative and the separate maintenance/build burden. Recommend staying native where feasible, and obtain explicit authorization for the specific departure before implementing it. Keep any authorized exception visible in source ownership, build instructions and delivery evidence.
 
-## Compose the feature before adding code
+## Choose the native owner before writing code
 
 Start from the [reference implementations](../examples/reference-patterns.md) and [entity reuse procedure](entity-reuse.md). Inspect and acquire the feature's linked records and dependencies, then adapt the relevant implementation. Reuse is more than copying one visible PHP fragment: its fields, views, queries, assets, Powers and callers make it work together.
 
 Use [Dynamic Get](../packages/workflows/dynamic-get.md) to define the site data shape and supported query behaviour before adding handwritten queries. Keep view markup in readable Templates and reusable Layouts with explicit input data. Put application algorithms in cohesive [Super Powers](../super-powers/workflows/customize-extension.md) and connect them through the appropriate lifecycle fields. A small supported operation does not need an extra adapter, service container, staging layer or compiler plugin merely to look complete. Extend the existing implementation where the actual application contract requires more behaviour.
+
+Before writing a custom body, name the behavior, owning JCB record/field, and generated method or file. Inspect a matching public reference and verify the scope on the target build. Use the [Hello World field map and Service Directory worked trace](../examples/reference-patterns.md#native-code-placement-and-composition) and the [presentation hook map](../packages/models/presentation-and-queries.md). In particular:
+
+- **Dynamic Get / model:** use native selection, joins, restrictions and related getters. Use the matching model hook to normalize stored values and prepare results. Resolve settings that affect data or business behavior upstream, with explicit component, menu and item precedence as applicable. Keep reads, writes and normalization out of display hooks and templates. A model returns data or a domain outcome; request handling and redirects belong to the caller.
+- **Controller:** accept and validate request input, delegate work, and choose the response or redirect. Do not repeat queries, normalization or business rules in each action. If multiple tasks need the same behavior, delegate to one maintained implementation without breaking callers that still rely on existing task names.
+- **HtmlView:** call the model, pass prepared values to presentation, and handle document, toolbar and view lifecycle work. Reuse the initialized application, document and other objects in the verified scope. In a PHP Document hook, prefer the view's document and acquire the manager once for the authored block if no initialized local is available. Do not fetch the application again just to reach the same document.
+- **Template / Layout:** render explicit inputs. Reading a prepared display flag, choosing a branch, formatting a label or grouping prepared cards for display is legitimate. Do not fetch global settings again, decode or mutate stored records, or reconstruct application policy here. Keep simple preamble statements in the native Custom View Script and use distinct template/layout input contracts.
+
+If a feature seems difficult, first check the data shape, stage of the request and code slot. Move the logic to its native owner or reuse the existing helper before adding another service, override or compiler plugin. Do not cancel or escalate an ordinary design choice that has a native solution.
 
 ## Write source another developer can maintain
 
@@ -88,6 +97,24 @@ Review authoring dependencies and generated imports separately. Resolved namespa
 
 Follow [Language strings and multilingual components](../packages/workflows/language-strings.md) for PHP/HTML examples, comment-only JPK references, quote-sensitive extraction and every stage of the filtered spreadsheet round trip.
 
+## Use native helpers for frontend output
+
+**Project policy:** for authored frontend plain-text output, use the generated HtmlView's `$this->sanitize()` where the real consumer provides it; pass `false` when the value must not be shortened. In a standalone Layout, use the appropriate JCB `StringHelper` method via the verified Power/import for that file, unless the caller deliberately supplies another verified native output helper. Verify the actual alias, version and value type. Do not assume that a Layout's `$this` is the caller's HtmlView. Prefer this native path over direct `htmlspecialchars()`; use the latter only when the native helper cannot safely express the required output and record the reason.
+
+For a standalone Layout with a plain-text `label` input, this is a small authored markup example. The Power key is the one used by the inspected [Joomla 6 HtmlView template](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/admin/compiler/joomla_6/SITE_VIEW_HTML.php#L184-L202); verify its resolution in the installed catalogue and compiled Layout.
+
+```php
+<span><?php echo Super___1f28cb53_60d9_4db1_b517_3c7dc6b429ef___Power::sanitize((string) ($displayData['label'] ?? '')); ?></span>
+```
+
+For plain text in markup or a quoted attribute, use the unshortened form. The inspected [StringHelper implementation](https://github.com/joomengine/Joomla-Service-Directory/blob/d25ca95084d79e552e2ae99f67011679d41d3ad4/libraries/vendor_joomservice/JoomService.Joomla/src/Utilities/StringHelper.php#L284-L326) removes tags and encodes the result; [shortening](https://github.com/joomengine/Joomla-Service-Directory/blob/d25ca95084d79e552e2ae99f67011679d41d3ad4/libraries/vendor_joomservice/JoomService.Joomla/src/Utilities/StringHelper.php#L65-L106) may add tooltip markup. A literal angle-bracket expression that must survive as text has a different contract from stripping markup. Verify the appropriate native helper for the intended result. Do not use plain-text sanitization in place of URL scheme validation, JavaScript/JSON encoding or rich-HTML filtering. Translate before output handling, and do not encode a value twice when its input contract already says it is encoded for that context.
+
 ## Review the maintained source and its result
 
-Before delivery, read the saved GUI source and Power bodies as code, not just database payloads. Confirm readable formatting, useful method boundaries, correct reference selectors, appropriate Template/Layout composition and the absence of temporary probes. Compile, inspect the resulting imports and placement, lint the generated PHP and exercise the affected feature. Carry corrections back to the owning source and rebuild so the delivered result is reproducible.
+Before delivery, review saved GUI bodies and Powers as code, not just as database payloads. For each affected behavior:
+
+1. **Source ownership:** name the owning record and hook and confirm that model, controller, view and presentation responsibilities are not mixed. Check native helper reuse, data/settings ownership, meaningful method boundaries, Joomla-style PHPDoc and readable layout formatting.
+2. **Compiled placement:** reopen the saved source, compile, and inspect the corresponding generated method, variable scope, imports and asset order. Lint the affected generated PHP. If surprising code is generated rather than authored, trace the compiler source and record it separately; do not patch generated files or duplicate behavior in a different hook to hide it.
+3. **Installed behavior:** exercise the actual consumer, not just the compiler screen. Check populated and empty data, and where the changed feature emits text, labels with quotes, ampersands and non-ASCII characters. For an asset change, check that the intended scripts/styles load in order. Record what ran and what did not.
+
+Remove tracing probes and carry lasting corrections back to the owning JCB source. Rebuild after corrections so the delivered extension is reproducible.
