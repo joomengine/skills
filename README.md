@@ -23,6 +23,9 @@ A starting prompt can be as simple as: “Use https://github.com/joomengine/skil
 | Build an extension from a user's application requirements | [Request-to-extension workflow](workflows/request-to-extension.md) |
 | Reuse an existing entity or create an independent adaptation | [Entity reuse and dependency acquisition](standards/entity-reuse.md) |
 | Design portable application keys and modal relationships | [Application identities](packages/workflows/application-identities.md), [modal relationships](packages/workflows/modal-relationships.md) |
+| Configure dashboard shortcuts or build native frontend editing | [Dashboard and menus](packages/models/component.md#choose-dashboard-shortcuts-by-work-frequency), [frontend create/edit](packages/workflows/site-edit-view.md) |
+| Set up conditional fields, menu overrides or native admin actions | [Everyday authoring](packages/workflows/admin-authoring-patterns.md) |
+| Test an upgrade or maintain modules, plugins, routing and CLI | [Extension upgrade](packages/workflows/extension-upgrade.md), [extension toolchain](packages/workflows/extension-toolchain.md) |
 | Store subform children in their own tables and Admin Views | [Normalized subforms](packages/workflows/normalized-subforms.md) |
 | Load page data and related collections through JCB | [Dynamic Get recipe](packages/workflows/dynamic-get.md) |
 | Reuse a complete file uploader, image cropping and display feature | [Files and images](packages/workflows/media-files.md) |
