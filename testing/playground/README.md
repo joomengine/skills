@@ -18,7 +18,8 @@ For monitored core mirrors and access recovery, use [repository network discover
 | Understand JCB's architecture and source models | [Architecture references](../../architecture/README.md) and [model router](../../packages/models/README.md) |
 | Choose production or development releases | [Latest-version policy](../../standards/version-policy.md) |
 | Select versions, create a link, reopen or export a test site | [Configuration and lifecycle](configuration.md) |
-| Recover failed browser persistence without losing JCB work | [Storage recovery](storage-recovery.md) |
+| Restore the latest Complete site ZIP after a storage failure | [Storage recovery](storage-recovery.md#start-with-the-latest-usable-export) |
+| Resume or restore a site whose administrator will not open | [Administrator recovery](administrator-recovery.md) |
 | Super Power acceptance | [Import, compile and runtime workflow](../../super-powers/workflows/validate-and-integrate.md) |
 | Field Type acceptance | [New/existing Field, compilation and runtime workflow](../../field-types/workflows/validate-and-integrate.md) |
 | Snippet acceptance | [Acquisition, copied consumer and runtime workflow](../../snippets/workflows/integrate.md) |
@@ -31,7 +32,7 @@ For monitored core mirrors and access recovery, use [repository network discover
 
 ## Operate the browser
 
-The outer page is Rocket; Joomla runs in its preview. Use Rocket to configure sites, save/download work and open **JoomEngine Code** or **DB**. Use the Joomla administrator to install extensions and edit JCB records. **Site** and **Admin** navigate the running preview; **Credentials** shows this site's login details.
+The outer page is Rocket; Joomla runs in its preview. Use Rocket to configure sites, save/download work and open **JoomEngine Code** or **DB**. Use the Joomla administrator to install extensions and edit JCB records. **Site** and **Admin** navigate the running preview; **Login details** (called **Credentials** in some versions) shows the saved sandbox login. If signing in fails after resume or Upload, follow [administrator recovery](administrator-recovery.md).
 
 Wait for provisioning, navigation and dialogs to finish, then inspect the resulting controls before acting. Open the preview or its iframe through the browser tool's supported interface. Use current labels and fields, scrolling or keyboard focus where necessary; layouts can vary by version. Keep the owner tab open. Use supported file upload/download controls to transfer packages and verify each transfer.
 
