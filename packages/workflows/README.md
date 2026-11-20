@@ -8,6 +8,11 @@ Start with the [package contract](../specification.md), then choose the task bel
 | Build through JCB's browser editor and export source | [Author in Playground and Push](author-in-playground.md) | Saved JCB graph, inspected candidate-branch export, and fresh-instance acquisition |
 | Change an existing component or shared record | [Maintain a package graph](maintain.md) | Stable intended identities, updated relationships and affected-consumer checks |
 | Explain a missing record, failed import or generated defect | [Debug integration](debug.md) | Reproducible failure traced to the responsible representation |
+| Generate and verify Joomla frontend create/edit | [Native Site Edit View](site-edit-view.md) | Native form, real ownership and state policy, tested save/cancel and denied access |
+| Use conditional fields, menu options or native admin actions | [Everyday authoring](admin-authoring-patterns.md) | Saved and consumed settings, not just displayed controls |
+| Design meaningful dashboard shortcuts and administrator navigation | [Dashboard and menus](../models/component.md#choose-dashboard-shortcuts-by-work-frequency) | Only the intended tiles and menu entries, with independent access checks |
+| Preserve records during an extension upgrade | [Two-version upgrade](extension-upgrade.md) | Retained A/B artifacts, observed schema and rows after upgrade, reinstall and clean install |
+| Maintain modules, plugins, routing, lifecycle hooks and CLI | [Extension toolchain](extension-toolchain.md) | Source-owned changes and checks in the exact installed consumer |
 | Move to another supported Joomla/JCB/PHP target | [Migrate the target](migrate-target.md) | Explicit compatibility changes and fresh-install/upgrade evidence |
 | Accept a candidate | [Validate and integrate](validate-and-integrate.md) | Separate structure, acquisition, export, compilation, installation and runtime results |
 | Design new portable application relationships | [Application identities](application-identities.md), [modal controls](modal-relationships.md) | Stable row keys, coherent selectors and normal Joomla ACL/edit routing |

@@ -22,6 +22,9 @@ Let JCB do the routine generation. Start from complete reusable features in the 
 | Turn an application request into a working extension | [Request-to-extension workflow](workflows/request-to-extension.md) |
 | Reuse or adapt existing entities and their relationships | [Entity reuse](standards/entity-reuse.md) |
 | Choose GUID application relationships, modal selectors or migrate existing IDs | [Application identities](packages/workflows/application-identities.md), [modal relationships](packages/workflows/modal-relationships.md), [GUID migration](packages/workflows/guid-migration.md) |
+| Configure dashboard shortcuts or build native frontend editing | [Dashboard and menus](packages/models/component.md#choose-dashboard-shortcuts-by-work-frequency), [frontend create/edit](packages/workflows/site-edit-view.md) |
+| Set up conditional fields, menu overrides or native admin actions | [Everyday authoring](packages/workflows/admin-authoring-patterns.md) |
+| Test an upgrade or maintain modules, plugins, routing and CLI | [Extension upgrade](packages/workflows/extension-upgrade.md), [extension toolchain](packages/workflows/extension-toolchain.md) |
 | Save repeated form rows to their own tables and Admin Views | [Normalized subforms](packages/workflows/normalized-subforms.md) |
 | Load structured page data and compose reusable presentation | [Dynamic Get recipe](packages/workflows/dynamic-get.md), [presentation models](packages/models/presentation-and-queries.md) |
 | Make interface strings translatable and export/import component translations | [Language strings and multilingual components](packages/workflows/language-strings.md) |

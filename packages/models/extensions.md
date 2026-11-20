@@ -4,6 +4,8 @@
 
 Use the exact target's compiler branch. The behaviour below was inspected in JCB `408703a857ad937479b1e28de7f693af178dcc83`, principally the `JoomlaSix` consumers. A Joomla 3/4/5 class-body specimen is not proof that its events, namespaces, service provider or assets work unchanged in Joomla 6.
 
+Use the [extension toolchain workflow](../workflows/extension-toolchain.md) for module placement and plugin-event checks, Power placement and version-gated CLI discovery.
+
 ## Attach an extension deliberately
 
 Each component child holds a collection of module/plugin GUID references with a `target`: `0` compile and export, `1` compile only, `2` export only. The compiler's attachment models skip compilation for `target=2`. These build choices are distinct from a module's site/administrator target and from repository read/write branches. See [Joomlamodules](https://github.com/vdm-io/Joomla-Component-Builder/blob/408703a857ad937479b1e28de7f693af178dcc83/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Model/Joomlamodules.php) and [Joomlaplugins](https://github.com/vdm-io/Joomla-Component-Builder/blob/408703a857ad937479b1e28de7f693af178dcc83/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Model/Joomlaplugins.php). Do not infer a single repository destination from these flags; package Push scope follows the [repository workflow](../workflows/create-repository.md).
