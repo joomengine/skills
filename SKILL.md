@@ -27,7 +27,7 @@ Let JCB do the routine generation. Start from complete reusable features in the 
 | Make interface strings translatable and export/import component translations | [Language strings and multilingual components](packages/workflows/language-strings.md) |
 | Add managed file uploads, image cropping and display | [Files and images recipe](packages/workflows/media-files.md) |
 | Find complete reference features to pull and adapt | [Demo, Service Directory and JCB patterns](examples/reference-patterns.md) |
-| Trace a GUI code field or improve authored source quality | [Compiler tracing](packages/workflows/debug.md#trace-a-gui-code-field), [authored code](standards/authored-code.md) |
+| Trace a GUI code field or improve authored source quality | [Compiler tracing](packages/workflows/debug.md#trace-a-gui-code-field), [authored code](standards/authored-code.md), [native coding recipes](examples/native-code-recipes.md) |
 | Choose package acquisition, Extrusion, immediate or staged data import | [Import router](packages/workflows/imports.md) |
 | Understand Init, Pull, Reset and Push across repository categories | [Repository operations](standards/repository-operations.md) |
 | Maintain reusable Custom Code blocks and arguments | [Manual Custom Code](packages/workflows/custom-code.md), [last-resort automation](packages/workflows/custom-code-automation.md) |

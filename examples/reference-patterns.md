@@ -21,6 +21,8 @@ Inspected on **2026-11-09**; the immediate importer and compiler mapping were re
 
 ## Native code placement and composition
 
+For implementation steps and acceptance checks, use the [native coding recipes](native-code-recipes.md). This catalogue explains where the public patterns come from.
+
 ### Hello World native code-slot map
 
 **Observed source, not a fresh compile/install test.** Compare the [Hello World blueprint (`main@5802e7c`)](https://github.com/vast-development-method/hello-world-blueprint/blob/5802e7c1d9bfaac005c765ccda830a7d07cd7e12/README.md) with the [Joomla 6 generated component (`6.x@a81c0dd`)](https://github.com/vast-development-method/hello-world-joomla-component/blob/a81c0dd8b8f41905671a86796a3e5995685fdaba/README.md). These separately published snapshots show placement, not proof that the exact pair was rebuilt together. The `JCBGUI.<entity>.<field>.<id>` comments identify source fields; their numeric IDs are local trace markers, not portable identities. Read the surrounding executable code, not only the demonstration comment: in the list model, for example, the query object already exists when the query hook runs.
