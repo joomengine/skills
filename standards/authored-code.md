@@ -34,6 +34,8 @@ Before writing a custom body, name the behavior, owning JCB record/field, and ge
 - **HtmlView:** call the model, pass prepared values to presentation, and handle document, toolbar and view lifecycle work. Reuse the initialized application, document and other objects in the verified scope. In a PHP Document hook, prefer the view's document and acquire the manager once for the authored block if no initialized local is available. Do not fetch the application again just to reach the same document.
 - **Template / Layout:** render explicit inputs. Reading a prepared display flag, choosing a branch, formatting a label or grouping prepared cards for display is legitimate. Do not fetch global settings again, decode or mutate stored records, or reconstruct application policy here. Keep simple preamble statements in the native Custom View Script and use distinct template/layout input contracts.
 
+Use the [native coding recipes](../examples/native-code-recipes.md) for exact field-to-output steps when implementing a component option, translating and rendering text, loading assets or wiring a Power.
+
 If a feature seems difficult, first check the data shape, stage of the request and code slot. Move the logic to its native owner or reuse the existing helper before adding another service, override or compiler plugin. Do not cancel or escalate an ordinary design choice that has a native solution.
 
 ## Write source another developer can maintain
