@@ -46,6 +46,8 @@ The [Fields model](https://github.com/vdm-io/Joomla-Component-Builder/blob/40870
 
 This mechanism composes displayed/modelled values; it is not a SQL foreign-key declaration or an Admin View-to-Admin View join-table definition. [Model/Relations](https://github.com/vdm-io/Joomla-Component-Builder/blob/408703a857ad937479b1e28de7f693af178dcc83/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Model/Relations.php) stores valid-GUID/area entries in field-relation/list-join registries and processes custom code. Check the value available at the selected stage, escaping in the view, missing joined values and export/list differences. Changing an area can change the data/code context even when the same string still parses.
 
+Use the [everyday authoring recipes](../workflows/admin-authoring-patterns.md) for dependent Fields and a native toolbar action. For per-component navigation, follow the [dashboard and menu policy](component.md#choose-dashboard-shortcuts-by-work-frequency).
+
 ## Tabs, linked views and actions
 
 The view's `addtabs` supplies ordinary tab names. `admin_custom_tabs.tabs` inserts custom HTML around a selected tab: `position=1` before or `2` after, plus its name and permission flag. This is a separate child record; do not store its rows in `admin_view.addtabs`. For Joomla 6, inspect the [version-selected custom-tabs consumer](https://github.com/vdm-io/Joomla-Component-Builder/blob/408703a857ad937479b1e28de7f693af178dcc83/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Model/JoomlaSix/Customtabs.php), then test tab placement, translation, IDs, controls and permissions.
