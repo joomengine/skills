@@ -1,0 +1,21 @@
+# Operate Playground from an MCP agent
+
+Use the maintained `@joomengine/mcp` package for an agent-owned Playground or a site already open in a client browser or JoomEngine Desktop. Install the MCP on the machine that owns the browser. The package README documents the Node and Chromium installation, MCP client configuration and desktop connection instructions. [Playground MCP](https://github.com/joomengine/mcp#install-from-npm)
+
+| Where the site runs | How the agent connects |
+| --- | --- |
+| Agent's cloud environment | Call `deployment_catalog`, choose a compatible Joomla, PHP and JCB recipe, then use `workspace_open`. The agent owns this isolated browser. Export wanted files and a Complete site archive before closing it. |
+| Client browser | Configure the existing Firefox or Chromium owner's local debugger endpoint on the MCP host, then use `workspace_attach`. Choose the intended tab if several sites match. |
+| JoomEngine Desktop | Open the intended site in the native application. Connect the MCP to that app's local webview debugger and call `workspace_attach`. Linux/macOS use Qt WebEngine and Windows uses WebView2. |
+
+Read `workspace_info` before mutations. An attachment shares the owner's current database and files. `workspace_close` detaches the MCP from a client-owned site. Consult the [browser and Desktop guide](https://github.com/joomengine/mcp/blob/main/docs/attach.md) for launch commands, profile selection and restore confirmation.
+
+## Choose the interface for the operation
+
+1. List the server's MCP tools and follow each input schema. Read `joomengine://skills/SKILL.md` and resolve linked documents relative to their resource URI. Tool-only clients can use `skills_list` and `skills_read`. Read the [Playground workflow](README.md) and the [model router](../../packages/models/README.md) for the requested artifact.
+2. Discover Joomla Web Services exposed by the maintained TypeScript `@joomengine/joomla-mcp` through `joomla_tools`. Use `joomla_call` for an operation discovered on the selected site. With the native package installed, discover its site-specific Joomla, JCB and generated extension capabilities through `native_tools` and invoke them with `native_call`. Follow the provider's grants, plan, confirmation and read-back contract. With a separately reachable native Joomla site, configure its Composer client and use `composer_tools` and `composer_call`. [Provider setup](https://github.com/joomengine/mcp/blob/main/docs/joomla.md)
+3. For native JCB source authoring in the browser, `jcb_form` inspects the installed form and validates candidate values. `jcb_save_records` saves records through JCB models and reports per-record outcomes. Use `jcb_list_components` and `jcb_compile` to obtain generated installer paths. Use `file_export` and `extension_install` with the generated artifacts. For a generated API, also install and enable its webservices plugin, refresh the installed component's action catalogue with `jcb_refresh_tools`, then discover and exercise the new action. [Compile and verify](https://github.com/joomengine/mcp/blob/main/docs/jcb.md)
+4. Test the installed behaviour through the Joomla browser navigation, inspection and form tools. Use the MCP's file, SQL, debugger and mail operations to inspect the same workspace. Fetch file revisions before editing, bind database query parameters, and verify affected state through the normal application route. Use the [development workflow](README.md#inspect-and-diagnose-with-joomengine-code) to return lasting fixes to maintained source.
+5. Select deployment and workspace-management tools from the current tool list for recipe configuration, PHP settings, persistence and backups. Treat a saved recipe, a backup stored in the browser, an extension installer and a Complete site download as distinct deliverables. Export portable artifacts, verify file identity, byte count and hash, restore the exact archive, and exercise the required feature on the restored site. [Delivery procedure](../../workflows/delivery.md)
+
+For a slow compile, install or restore, use `operation_start` when offered and poll `operation_status` on the same connection. A client's timeout can occur while the underlying job is still running. Inspect its result before resubmitting.

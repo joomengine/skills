@@ -14,6 +14,7 @@ For monitored core mirrors and access recovery, use [repository network discover
 
 | Task | Read next |
 | --- | --- |
+| Operate an agent cloud browser, client browser or JoomEngine Desktop through MCP | [Workspace and provider selection](agent-connections.md) |
 | Build an application from a prompt | [Request-to-extension workflow](../../workflows/request-to-extension.md) |
 | Understand JCB's architecture and source models | [Architecture references](../../architecture/README.md) and [model router](../../packages/models/README.md) |
 | Choose production or development releases | [Latest-version policy](../../standards/version-policy.md) |
