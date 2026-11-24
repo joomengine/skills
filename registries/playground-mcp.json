@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "description": "Match the tools advertised by a Playground MCP server to operational guidance in this distribution. A terminal * matches a tool-name prefix. Availability depends on the selected workspace, installed providers and host settings.",
+  "capabilities": [
+    {"id":"skills","title":"Discover canonical skills, resources, task prompts and provider routes","tools":["skills_*"],"guides":["SKILL.md","registries/skills.json","registries/modules.json"],"includeRegisteredSkills":true},
+    {"id":"workspaces","title":"Choose, open, attach, persist and manage browser or native desktop workspaces","tools":["workspace_*"],"guides":["testing/playground/agent-connections.md","testing/playground/configuration.md","testing/playground/administrator-recovery.md","testing/playground/storage-recovery.md"]},
+    {"id":"deployments","title":"Discover releases and deployment forms, capture configuration, share recipes and launch sites","tools":["deployment_*"],"guides":["testing/playground/configuration.md","standards/version-policy.md","testing/playground/storage-recovery.md"]},
+    {"id":"browser","title":"Navigate, inspect and operate the site, Playground, development panels and desktop webviews","tools":["browser_*","site_request"],"guides":["testing/playground/agent-connections.md","testing/playground/README.md","testing/playground/administrator-recovery.md"]},
+    {"id":"joomla","title":"Discover and call Joomla Web Services via the maintained TypeScript provider","tools":["joomla_*"],"guides":["workflows/mcp.md","testing/playground/agent-connections.md"]},
+    {"id":"native","title":"Discover and call site-installed Joomla, JCB and generated extension operations","tools":["native_*"],"guides":["workflows/mcp.md","testing/playground/README.md"]},
+    {"id":"composer","title":"Connect to a configured external Joomla site through the Composer stdio client","tools":["composer_*"],"guides":["workflows/mcp.md","testing/playground/agent-connections.md"]},
+    {"id":"providers","title":"Inspect provider capabilities, read its resources and templates, and use its prompts","tools":["provider_*"],"guides":["workflows/mcp.md","testing/playground/agent-connections.md"]},
+    {"id":"jcb","title":"Author models and reusable entities, compile, install and test generated extensions","tools":["jcb_*","extension_*","site_console"],"guides":["workflows/request-to-extension.md","testing/playground/README.md","workflows/delivery.md"],"includeRegisteredModules":true},
+    {"id":"files","title":"Search, edit, import, recover and manage files in JoomEngine Code","tools":["file_*"],"guides":["testing/playground/README.md","packages/workflows/debug.md"]},
+    {"id":"database","title":"Inspect the live MariaDB database and verify application state","tools":["database_*"],"guides":["testing/playground/README.md","packages/workflows/application-identities.md"]},
+    {"id":"debug","title":"Debug PHP on real requests and inspect paused execution","tools":["debug_*"],"guides":["testing/playground/README.md","packages/workflows/debug.md"]},
+    {"id":"mail","title":"Inspect and manage messages captured by the Playground mail catcher","tools":["mail_*"],"guides":["testing/playground/agent-connections.md","testing/playground/README.md"]},
+    {"id":"storage","title":"Inspect browser storage and recover persisted workspaces","tools":["storage_*"],"guides":["testing/playground/storage-recovery.md","testing/playground/administrator-recovery.md"]},
+    {"id":"backups","title":"Save, update, export, import, restore and remove site backups","tools":["backup_*","site_restore","site_export"],"guides":["workflows/delivery.md","testing/playground/storage-recovery.md","testing/playground/configuration.md"]},
+    {"id":"artifacts","title":"Transfer installers and portable exports between the workspace, MCP client and host files","tools":["artifact_*"],"guides":["workflows/delivery.md","testing/playground/README.md","testing/playground/storage-recovery.md"]},
+    {"id":"operations","title":"Start long-running tasks and inspect progress and results","tools":["operation_*"],"guides":["testing/playground/agent-connections.md","testing/playground/storage-recovery.md"]}
+  ]
+}

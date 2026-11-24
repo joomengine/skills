@@ -10,6 +10,8 @@ Use the maintained `@joomengine/mcp` package for an agent-owned Playground or a 
 
 Read `workspace_info` before mutations. An attachment shares the owner's current database and files. `workspace_close` detaches the MCP from a client-owned site. Consult the [browser and Desktop guide](https://github.com/joomengine/mcp/blob/main/docs/attach.md) for launch commands, profile selection and restore confirmation.
 
+The [capability registry](../../registries/playground-mcp.json) maps the tool families to their Skills. Start with the actual tools returned by the connected server. For clients with the 0.2 tools, call `skills_capabilities` for this host’s exact operations and guide URIs, `skills_search` to find a topic, and `skills_status` to inspect the active canonical revision.
+
 ## Choose the interface for the operation
 
 1. List the server's MCP tools and follow each input schema. Read `joomengine://skills/SKILL.md` and resolve linked documents relative to their resource URI. Tool-only clients can use `skills_list` and `skills_read`. Read the [Playground workflow](README.md) and the [model router](../../packages/models/README.md) for the requested artifact.
