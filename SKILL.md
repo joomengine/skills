@@ -36,6 +36,7 @@ Let JCB do the routine generation. Start from complete reusable features in the 
 | Maintain reusable Custom Code blocks and arguments | [Manual Custom Code](packages/workflows/custom-code.md), [last-resort automation](packages/workflows/custom-code-automation.md) |
 | Add custom PHP behaviour and choose administrator/site/library placement | [PHP customization](super-powers/workflows/customize-extension.md) |
 | Reference Joomla classes through JPK mappings | [Joomla Powers skill](joomla-powers/SKILL.md) |
+| Connect to a cloud browser, client browser or JoomEngine Desktop | [Playground MCP connections](testing/playground/agent-connections.md) |
 | Use an existing Joomla/JCB MCP connection | [MCP setup and execution](workflows/mcp.md) |
 | Ship initial/reference data in a component installer | [Native Table/Dump initial data](packages/workflows/initial-data.md) |
 | Deliver installable ZIPs, blueprint source or a portable site | [Delivery](workflows/delivery.md) |
