@@ -55,7 +55,7 @@ Turn on **Dashboard (add record)** only for an important top-level object that t
 
 ## Router settings
 
-[`component_router`](../reference/component_router.md) is a real portable child despite its absence from the inspected public specimen. Its modes are not one shared boolean:
+[`component_router`](../reference/component_router.md) is a portable child keyed by the component GUID, as shown by Service Directory J6. Follow the [Site Router workflow](../workflows/site-router.md) for the actual editor, mode choices, source-to-output trace and Playground checks. Its modes are not one shared boolean:
 
 | Setting | Form values |
 | --- | --- |
