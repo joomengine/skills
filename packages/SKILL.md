@@ -18,6 +18,7 @@ Read [scope and baseline](README.md) and the shared [operating contract](../AGEN
 | Choose application GUIDs, selectors and existing-data migration | [Identities](workflows/application-identities.md), [modal controls](workflows/modal-relationships.md), [migration](workflows/guid-migration.md) |
 | Configure dashboard shortcuts or build native frontend editing | [Dashboard and menus](models/component.md#choose-dashboard-shortcuts-by-work-frequency), [frontend create/edit](workflows/site-edit-view.md) |
 | Set up conditional fields, menu overrides or native admin actions | [Everyday authoring](workflows/admin-authoring-patterns.md) |
+| Configure and verify frontend URLs | [Site Router](workflows/site-router.md) |
 | Test an upgrade or maintain modules, plugins, routing and CLI | [Extension upgrade](workflows/extension-upgrade.md), [extension toolchain](workflows/extension-toolchain.md) |
 | Persist subform rows as independent entities | [Normalized subforms and child Admin Views](workflows/normalized-subforms.md) |
 | Load page data and nested collections through JCB | [Dynamic Get recipe](workflows/dynamic-get.md), [presentation models](models/presentation-and-queries.md) |
