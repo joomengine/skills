@@ -1,0 +1,64 @@
+# Build a component Site Router in JCB
+
+Use the **Component Site Router** record when a Joomla frontend component needs to turn internal links into SEF paths and resolve those paths back to the same view, record and filters. The JCB record is the maintained source; the compiled router is evidence, not a file to edit. A JCB Site View supplies the page, its main Dynamic Get supplies data, and the router handles URL identity and menu context. Routing does not grant permission to view, create or edit a record.
+
+## 1. Start with the native router
+
+1. Attach the required Site Views to the Joomla Component. Decide which view is the default and which should expose a Joomla menu type. After installing, create the actual Joomla menu item for the landing view; the JCB **Menu** flag generates the type, not the menu item or its alias.
+2. For each route, write down its Site View codename, parent/menu context, runtime key (if any), alias source and optional filters. Use the key the view actually consumes, not the JCB definition GUID. A record route normally needs a main Dynamic Get with the right record identity and a table alias the router can resolve; a plain list usually needs no item key. Frontend editing is a separate [Admin View association and task flow](site-edit-view.md).
+3. In JCB administration, open **Joomla Components** and use the component row action **The component site router**. Confirm the component on **Editing the Component Router → Settings**. The **Documentation** control reveals built-in notes; it does not choose a compiler mode. Save and reopen the record after changing it.
+
+| Setting | Choose it for |
+| --- | --- |
+| **Router Mode** / Constructor Before Parent: **Default** | Let JCB derive and register routes from the component's linked Site Views, their main selections and eligible frontend edit views. Pair it with **Methods → Default** when generated lookup methods are needed. Compile and inspect before deciding custom code is necessary. |
+| **Router Mode: Manual** | The form exposes a Site View subform, but the inspected JCB source marks this option “SOON”; its [constructor](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Creator/RouterConstructorManual.php) and [methods](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Creator/RouterMethodsManual.php) creators iterate discovered views, not the stored selection. Do not assume Manual restricts or reorders registration. Verify the installed compiler revision and output before relying on it. Where Default is insufficient and Manual does not implement the needed behavior, use JCB's Code slots. |
+| **Router Mode: Code** | Author only the constructor-body statements that must run **before** Joomla's parent constructor. Use the actual view codenames, register the parent before its children, and give each view at most one intended routing key. |
+| **Constructor After Parent: None / Code** | Normally leave it at **None**. Code here runs after the generated parent call but **before** the template attaches the normal Joomla rules. Do not repeat the parent call or attach the same rules twice. |
+| **Methods: None / Default / Code** | Leave inherited behavior alone with **None** only if it is sufficient. Use **Default** for generated lookup methods, or **Code** for custom class methods. Code replaces the generated methods for that slot; include lookup pairs your custom flow needs. |
+
+The slots are PHP fragments without opening/closing PHP tags. Do not paste a namespace, another class or another constructor into them. See the [serialized mode values and fields](../models/component.md#router-settings) and the [portable field reference](../reference/component_router.md). Database fields marked base64 carry **plain decoded PHP text in the package JSON**.
+
+## 2. Follow Service Directory J6 from blueprint to router
+
+Use **Service Directory J6**, not the separately indexed J5 root. Acquire it through normal [JCB package authoring/acquisition](author-in-playground.md) into a disposable workspace, retaining the component's linked views, Dynamic Gets, fields and dependencies. For inspection without an import, follow these pinned records:
+
+| Layer | What to inspect |
+| --- | --- |
+| JCB component | [Service Directory J6 root](https://github.com/joomengine/joomla-packages/blob/90145b345a7fc0a05b66cb7c979419971e47a27f/src/joomla_component/160d0efb-6bf0-48eb-8d46-55cf74729501/item.json), GUID `160d0efb-6bf0-48eb-8d46-55cf74729501`. The Router is a child keyed by that same component GUID, not a standalone extension. |
+| JCB component children | [Router, Site Views, Admin Views and Config records](https://github.com/joomengine/joomla-packages/tree/90145b345a7fc0a05b66cb7c979419971e47a27f/src/joomla_component/children/160d0efb-6bf0-48eb-8d46-55cf74729501). In `component-router.json` the three mode values are **3 / 1 / 3**: before-parent Code, after-parent None, methods Code. Use `component-site-views.json` to follow each linked view into its own `main_get`; use Admin Views to see where the `company` frontend edit route comes from. Config includes the [`sef_ids` field](https://github.com/joomengine/joomla-packages/blob/90145b345a7fc0a05b66cb7c979419971e47a27f/src/field/d2556e49-6f4a-44aa-8640-15e4f101fa9d/item.json). |
+| JCB compiler | [Router model](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Model/Router.php) gathers view metadata and the enabled slots; [Router creator](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/libraries/vendor_jcb/VDM.Joomla/src/Componentbuilder/Compiler/Creator/Router.php) selects the emitter. [Joomla 6 router template](https://github.com/joomengine/Joomla-Component-Builder/blob/037752c7e6599aa4cec900138dfb61af7ee4ba8f/admin/compiler/joomla_6/SITE_ROUTER.php) shows the three exact insertion points. |
+| Compiled component | [`site/src/Service/Router.php`](https://github.com/joomengine/Joomla-Service-Directory/blob/d25ca95084d79e552e2ae99f67011679d41d3ad4/site/src/Service/Router.php), [administrator service provider](https://github.com/joomengine/Joomla-Service-Directory/blob/d25ca95084d79e552e2ae99f67011679d41d3ad4/admin/services/provider.php) (registers Joomla's RouterFactory), [site RouteHelper](https://github.com/joomengine/Joomla-Service-Directory/blob/d25ca95084d79e552e2ae99f67011679d41d3ad4/site/src/Helper/RouteHelper.php), and [directory menu XML](https://github.com/joomengine/Joomla-Service-Directory/blob/d25ca95084d79e552e2ae99f67011679d41d3ad4/site/tmpl/directory/default.xml). The menu XML declares the menu type; templates/helpers build internal query links for Joomla rather than hard-coding deployed paths. |
+
+### What the reference actually does
+
+- **Before Parent:** registers `directory` first as the root; `companies`, `category`, `tag`, `areaofexpertise`, `lang`, `listing` and `company` register as children. `companies` uses `search`; `lang`, `listing` and `company` specify `id`. The reference chains `setKey('id')->setKey('search')` for its three facet views. Do not copy that as a two-key declaration: register one key and explicitly handle the other value in the build/parse pair.
+- **After Parent:** the record supplies nothing. JCB still emits the parent constructor call and attaches Joomla's **MenuRules**, **StandardRules** and **NomenuRules**. It also supplies the database dependency and reads `sef_ids` into the router's no-ID switch. That switch is a component option separate from Joomla's global SEF setting.
+- **Methods:** the component overrides `build()` and `parse()`. For its public search/listing flow, the root uses menu context, `companies` carries search text, and the facet/language/listing paths use a view segment plus the item segment, with optional search where applicable. The builder consumes known query variables and the parser restores them. Read them as a pair before changing either one. With IDs removed, the lookup pairs resolve aliases against their intended tables; `listing` resolves its identity against the company table. With IDs included, the reference also accepts a numeric prefix. The application, not the router lookup, decides publication and access.
+- **Separate public and edit routes:** `listing` is the public detail Site View; `company` is the generated frontend edit view. The latter has a segment helper that delegates to the listing helper but no corresponding `getCompanyId()` in this custom parser. Do not assume registering a view guarantees a public SEF round trip, or copy this into a component whose edit URLs must round-trip differently. Verify native create/edit/cancel separately.
+- **Fallbacks are application decisions:** this specimen falls back to `directory` for unrecognized or unresolved segments in its custom parser. For a different component, decide explicitly whether a missing or ambiguous route redirects, returns not found or falls back. Test that choice rather than treating the Directory fallback as a JCB default.
+
+### Adapt the pattern without copying the application
+
+If generated routing already works, keep it. To adapt the Code pattern, change the parent and child codenames, runtime key, menu entry and alias lookup to match the new views. For an optional filter, define one representation and consume it only when encoded; retain unrelated query parameters. Build internal links via Joomla routing with the correct menu/language context. Pair each emitted item shape with its inverse, bind lookup parameters, account for aliased rows that can collide in different parents or languages, and let the view enforce access. Do not reuse Service Directory's table names, strings, fallback or complete custom methods just to get friendly URLs.
+
+For example, a new component with actual Site Views named `catalog` and `entry` can express the same parent/child structure in **Constructor Before Parent → Code**:
+
+```php
+		$catalog = new RouterViewConfiguration('catalog');
+		$this->registerView($catalog);
+
+		$entry = new RouterViewConfiguration('entry');
+		$entry->setKey('id')->setParent($catalog);
+		$this->registerView($entry);
+```
+
+This only declares the relationship; it is not a custom build/parse implementation. Start with **Methods → Default** if JCB can generate the matching lookups for `entry`, and inspect the output. For example, if you add Code to encode a filter in a path segment, define what an internal link such as `view=entry&id=23&filter=featured` must resolve to on a fresh request: `entry`, record 23 and filter `featured`, under the intended menu. Do not promise an absolute SEF path before Joomla's menu and global SEF settings are in place.
+
+## 3. Compile and verify in Playground
+
+1. Save and reopen the Component Router and its view associations, then compile and install the candidate. Inspect `site/src/Service/Router.php` in the ZIP (installed under `components/com_<code>/src/Service/Router.php`), the router factory and menu XML. Make sure each code slot landed once, and check that methods and referenced tables match the target. If a slot did not land, use [GUI code-field tracing](debug.md#trace-a-gui-code-field) and fix the source record.
+2. Create an appropriate Joomla menu item. Seed known records and aliases, including a record the current visitor may not see. Build links from the actual frontend, open them in a fresh request and verify the resolved view, exact row, filter, language and menu context. Assert the result, not just HTTP 200. If a URL is wrong, compare the internal query, emitted segments, parsed values and view input in that order.
+3. Run the relevant matrix: SEF off as a baseline; SEF on with IDs retained and removed if offered; landing, list/filter (including spaces and non-ASCII text), facet, detail, missing alias, unpublished or unauthorized record, alternate or absent menu context, and multilingual links where supported. Exercise frontend edit with its intended access, save and cancel paths. Recompile after fixes and retest the same routes.
+4. Export the maintained JCB definitions and verify the router child and affected dependencies survive reacquisition. Record the JCB/Joomla/PHP versions, menu/SEF options, expected and observed targets, and what was not run. A source trace or a successful compile is not an installed route test.
+
+**Evidence boundary:** the reference above maps the public J6 blueprint to published compiled files and the inspected compiler. It is not a new Playground execution receipt. Consult the running JCB release before treating a pinned source detail (especially Manual) as current behavior.
