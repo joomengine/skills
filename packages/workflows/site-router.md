@@ -37,6 +37,20 @@ Use **Service Directory J6**, not the separately indexed J5 root. Acquire it thr
 - **Separate public and edit routes:** `listing` is the public detail Site View; `company` is the generated frontend edit view. The latter has a segment helper that delegates to the listing helper but no corresponding `getCompanyId()` in this custom parser. Do not assume registering a view guarantees a public SEF round trip, or copy this into a component whose edit URLs must round-trip differently. Verify native create/edit/cancel separately.
 - **Fallbacks are application decisions:** this specimen falls back to `directory` for unrecognized or unresolved segments in its custom parser. For a different component, decide explicitly whether a missing or ambiguous route redirects, returns not found or falls back. Test that choice rather than treating the Directory fallback as a JCB default.
 
+### Carry routing through the frontend
+
+Read the [Service Directory J6 frontend routing trace](../examples/service-directory-frontend-routing.md) before adapting the reference. It follows the visitor from the Joomla menu through category cards, search and facets to the listing and native edit/return flow, and identifies the editable Site Views, Dynamic Gets, Templates, Layouts and Custom Code behind each link.
+
+For a new component, write one route contract per public destination before adding code: **caller → internal query → menu/language context → optional path segments → parsed inputs → destination view and getter**. Include filter and clear links, sibling relationships, paging and return context where used. Keep these responsibilities distinct:
+
+| Responsibility | Maintained in JCB |
+| --- | --- |
+| Attach the page, declare the default/menu type, and enable native frontend edit where applicable | Component Site View and Admin View associations |
+| Select/filter the expected row or set of rows; prepare reusable link data | Main Dynamic Get and appropriate model hooks; use existing generated routing/helper APIs and shared code where needed |
+| Prepare a page-specific URL or pass it into a reusable layout | Site View Custom View Script; keep Templates and Layouts focused on rendering |
+| Turn a component query into path segments and back | The Component Site Router, only when native generation is insufficient |
+| Enforce authorization, save/cancel and route back | Native controller/model workflow and configured permissions, never just the URL or hidden controls |
+
 ### Adapt the pattern without copying the application
 
 If generated routing already works, keep it. To adapt the Code pattern, change the parent and child codenames, runtime key, menu entry and alias lookup to match the new views. For an optional filter, define one representation and consume it only when encoded; retain unrelated query parameters. Build internal links via Joomla routing with the correct menu/language context. Pair each emitted item shape with its inverse, bind lookup parameters, account for aliased rows that can collide in different parents or languages, and let the view enforce access. Do not reuse Service Directory's table names, strings, fallback or complete custom methods just to get friendly URLs.
@@ -57,7 +71,7 @@ This only declares the relationship; it is not a custom build/parse implementati
 ## 3. Compile and verify in Playground
 
 1. Save and reopen the Component Router and its view associations, then compile and install the candidate. Inspect `site/src/Service/Router.php` in the ZIP (installed under `components/com_<code>/src/Service/Router.php`), the router factory and menu XML. Make sure each code slot landed once, and check that methods and referenced tables match the target. If a slot did not land, use [GUI code-field tracing](debug.md#trace-a-gui-code-field) and fix the source record.
-2. Create an appropriate Joomla menu item. Seed known records and aliases, including a record the current visitor may not see. Build links from the actual frontend, open them in a fresh request and verify the resolved view, exact row, filter, language and menu context. Assert the result, not just HTTP 200. If a URL is wrong, compare the internal query, emitted segments, parsed values and view input in that order.
+2. Create an appropriate Joomla menu item. Seed known records and aliases, including a record the current visitor may not see. Build links from the actual frontend, open them in a fresh request and verify the resolved view, exact row, filter, language and menu context. Assert the result, not just HTTP 200. Exercise actual search submission, clear and pagination as well as direct URLs, and follow a facet link from a detail page back to its filtered list. If a URL is wrong, compare the internal query, emitted segments, parsed values and view input in that order.
 3. Run the relevant matrix: SEF off as a baseline; SEF on with IDs retained and removed if offered; landing, list/filter (including spaces and non-ASCII text), facet, detail, missing alias, unpublished or unauthorized record, alternate or absent menu context, and multilingual links where supported. Exercise frontend edit with its intended access, save and cancel paths. Recompile after fixes and retest the same routes.
 4. Export the maintained JCB definitions and verify the router child and affected dependencies survive reacquisition. Record the JCB/Joomla/PHP versions, menu/SEF options, expected and observed targets, and what was not run. A source trace or a successful compile is not an installed route test.
 
