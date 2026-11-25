@@ -8,7 +8,7 @@ Make all authored interface text, including buttons and accessible labels, trans
 
 ## Define a page from its consumer inward
 
-Set `system_name` for authoring identification, `name` for the view's display identity, and `codename`/`context` deliberately for generated code and context. Keep the GUID stable when updating the same view. Renaming a generated route or code name can affect menus, router code, links, templates and integrations even when the package identity stays unchanged.
+Set `system_name` for authoring identification, `name` for the view's display identity, and `codename`/`context` deliberately for generated code and context. Keep the GUID stable when updating the same view. Renaming a generated route or code name can affect menus, router code, links, templates and integrations even when the package identity stays unchanged. For route authoring and verification, follow the [Site Router workflow](../workflows/site-router.md).
 
 The view's `default` holds its main layout body. `main_get` is the primary Dynamic Get; `custom_get` is a collection of additional getters. Match the PHP/template's expected result shape to the getter type rather than treating every result as a list. Add the required Libraries to `libraries`; writing a stylesheet URL in a comment or selecting a Snippet does not attach a Library. The `snippet` and `dynamic_get` helper selections can themselves serialize as references, but do not replace the authoritative code or the `main_get`/`custom_get` consumer configuration.
 
