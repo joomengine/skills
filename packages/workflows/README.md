@@ -11,6 +11,7 @@ Start with the [package contract](../specification.md), then choose the task bel
 | Configure a Component Site Router | [Site Router](site-router.md) | Editable route configuration, compiled router and installed URL round trips |
 | Generate and verify Joomla frontend create/edit | [Native Site Edit View](site-edit-view.md) | Native form, real ownership and state policy, tested save/cancel and denied access |
 | Use conditional fields, menu options or native admin actions | [Everyday authoring](admin-authoring-patterns.md) | Saved and consumed settings, not just displayed controls |
+| Open related edit/create forms and return to the initiating Admin View | [Return to origin](return-to-origin.md) | Native Joomla task, generated receiver and verified round trip |
 | Design meaningful dashboard shortcuts and administrator navigation | [Dashboard and menus](../models/component.md#choose-dashboard-shortcuts-by-work-frequency) | Only the intended tiles and menu entries, with independent access checks |
 | Preserve records during an extension upgrade | [Two-version upgrade](extension-upgrade.md) | Retained A/B artifacts, observed schema and rows after upgrade, reinstall and clean install |
 | Maintain modules, plugins, routing, lifecycle hooks and CLI | [Extension toolchain](extension-toolchain.md) | Source-owned changes and checks in the exact installed consumer |

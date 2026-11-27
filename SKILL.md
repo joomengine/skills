@@ -24,6 +24,7 @@ Let JCB do the routine generation. Start from complete reusable features in the 
 | Choose GUID application relationships, modal selectors or migrate existing IDs | [Application identities](packages/workflows/application-identities.md), [modal relationships](packages/workflows/modal-relationships.md), [GUID migration](packages/workflows/guid-migration.md) |
 | Configure dashboard shortcuts or build native frontend editing | [Dashboard and menus](packages/models/component.md#choose-dashboard-shortcuts-by-work-frequency), [frontend create/edit](packages/workflows/site-edit-view.md) |
 | Set up conditional fields, menu overrides or native admin actions | [Everyday authoring](packages/workflows/admin-authoring-patterns.md) |
+| Open a related Admin View editor and return to the originating record | [Return to origin](packages/workflows/return-to-origin.md) |
 | Configure or verify a frontend Component Site Router | [Site Router workflow](packages/workflows/site-router.md) |
 | Test an upgrade or maintain modules, plugins, routing and CLI | [Extension upgrade](packages/workflows/extension-upgrade.md), [extension toolchain](packages/workflows/extension-toolchain.md) |
 | Save repeated form rows to their own tables and Admin Views | [Normalized subforms](packages/workflows/normalized-subforms.md) |

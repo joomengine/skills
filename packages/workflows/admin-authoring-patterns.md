@@ -58,6 +58,8 @@ Use separate Field definitions when two consumers need genuinely different reusa
 
 ## 3. A native administrator action with controller and model
 
+For a toolbar or inline link whose job is to open a different record editor and come back, use [Return to origin](return-to-origin.md). The target’s generated form handles the return; this recipe is for a separate controller operation.
+
 **Outcome:** add a read-only **Check readiness** action to a saved record's edit toolbar. It checks that a project-defined title is present, reports the result and returns to the edit screen. Start with this small observable operation before adapting it into a mutating bulk action. Use a separate synthetic Admin View or an authorized Demo adaptation; do not change a production shared view merely to try the recipe.
 
 1. In the owning **Admin View → Custom Buttons**, enable `add_custom_button`. Add a row with name `Check readiness`, method `checkReadiness`, an appropriate icon, target **Single** (`1`) and type **Default** (`0`). The method value is the method name, not a whole `view.method` route. The compiler constructs the task from the view code and method.

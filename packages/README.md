@@ -13,6 +13,7 @@ The recorded inventory covers **41 logical package contracts** found in **42 Rem
 | Start a package repository, choose identity and build a coherent graph | [Create repository](workflows/create-repository.md), [serialization contract](specification.md) |
 | Build through JCB's GUI and export to an authorized branch | [Author in Playground](workflows/author-in-playground.md) |
 | Choose portable application relationships and selector controls | [Application identities](workflows/application-identities.md), [modal relationships](workflows/modal-relationships.md), [GUID migration](workflows/guid-migration.md) |
+| Open a related record in a normal administrator editor and return after saving or closing | [Return to origin](workflows/return-to-origin.md) |
 | Persist repeated child entities through their own Admin Views | [Normalized subforms](workflows/normalized-subforms.md) |
 | Load structured page data and related collections | [Dynamic Get recipe](workflows/dynamic-get.md) |
 | Reuse managed uploads, image crops and display | [Files and images](workflows/media-files.md) |
