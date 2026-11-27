@@ -2,6 +2,8 @@
 
 Use a managed relationship when users need to choose an existing entity, create one or edit its details. Start with the shared ModalSelect Field and its target Admin View/controller pattern from the [reference catalogue](../../examples/reference-patterns.md#managed-relationships). Reuse the complete feature through JCB; it already supplies selection, title lookup and modal actions.
 
+If the requirement is full-page navigation to a related record and back, rather than selection in the still-open form, use [Return to origin](return-to-origin.md).
+
 Choose [application identities](application-identities.md) first. The default for a new application relationship is a stored row GUID, while each Joomla table keeps its numeric primary key. A blueprint definition GUID is not a selected application value.
 
 ## Reuse the complete relationship
