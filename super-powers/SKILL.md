@@ -14,6 +14,7 @@ Record the target repository and branch, requested behaviour, existing identity 
 | Task | Load and follow |
 | --- | --- |
 | Add application algorithms, integrations or services to a JCB extension | [Customize an extension](workflows/customize-extension.md): JPK/SPK choice, Administrator/Site/library placement, constructor injection, real callers and regeneration |
+| Scaffold and reuse a service through a real model and view | [Design a service](workflows/design-a-service.md): Save-time constructor scaffold, shared Joomla container, owner map and installed assertions |
 | Discover a maintained core mirror or recover public source access | [Shared repository network](../standards/repository-network.md) |
 | Start an empty repository | [Create a repository](workflows/create-repository.md) |
 | Add a class, interface or trait | [Create a Power](workflows/create-power.md) and affected [settings fields](settings-reference.md) |

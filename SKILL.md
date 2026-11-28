@@ -37,6 +37,7 @@ Let JCB do the routine generation. Start from complete reusable features in the 
 | Understand Init, Pull, Reset and Push across repository categories | [Repository operations](standards/repository-operations.md) |
 | Maintain reusable Custom Code blocks and arguments | [Manual Custom Code](packages/workflows/custom-code.md), [last-resort automation](packages/workflows/custom-code-automation.md) |
 | Add custom PHP behaviour and choose administrator/site/library placement | [PHP customization](super-powers/workflows/customize-extension.md) |
+| Design and wire a reusable service in JCB | [Native service example](super-powers/workflows/design-a-service.md): Power editor scaffold, Joomla DI provider and Factory, Dynamic Get and Template |
 | Reference Joomla classes through JPK mappings | [Joomla Powers skill](joomla-powers/SKILL.md) |
 | Connect to a cloud browser, client browser or JoomEngine Desktop | [Playground MCP connections](testing/playground/agent-connections.md) |
 | Use an existing Joomla/JCB MCP connection | [MCP setup and execution](workflows/mcp.md) |

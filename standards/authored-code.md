@@ -40,6 +40,8 @@ If a feature seems difficult, first check the data shape, stage of the request a
 
 ## Write source another developer can maintain
 
+For a new cross-layer feature, map each business rule to one owner before authoring. Use the [worked service example](../super-powers/workflows/design-a-service.md) to name the JCB hook, service contract, dependency construction, and expected outcome. Keep a constructor focused on its typed dependencies; use the owning provider for shared service construction and keep operation-specific state in the operation. Review the first native caller and its failure path before repeating the pattern across the component.
+
 - Use tabs for indentation and the established brace style. In authored PHP methods and control blocks, put opening braces on their own lines. Preserve a reused template's consistent PHP alternative syntax where it makes HTML easier to read.
 - Keep one statement per line. Space operators and arguments, separate logical steps with blank lines and wrap long calls, arrays, conditions and HTML attributes. Do not compress a maintained method, template or script into dense lines.
 - Give methods one coherent responsibility and use descriptive names. Document classes, properties and all authored methods, including protected/private methods, using the [Joomla-style PHPDoc contract](#document-php-contracts-in-joomla-style). Comments should explain lifecycle assumptions, decisions or constraints, not narrate every statement.

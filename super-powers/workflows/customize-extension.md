@@ -66,6 +66,8 @@ The [complete composed-service fixture](../examples/composed-service/README.md) 
 
 ## Wire a real caller and service construction
 
+Follow the [worked service example](design-a-service.md) for the exact save-time constructor and provider scaffolds, a typed service with Joomla DI, and its native model and Template caller.
+
 Choose the consuming JCB model and enabled PHP field by its lifecycle, available variables and generated location. Use the [package model router](../../packages/models/README.md) and the affected field reference. For example, a product/order Admin View operation, a Site View's supporting model or an authorised API operation can call the same service where the operation's contract permits it. Do not assume every field executes at the same time or that all PHP fields are class-member insertion points.
 
 When placement is uncertain, [trace the GUI code field](../../packages/workflows/debug.md#trace-a-gui-code-field) with a temporary comment and the compiler's diagnostic toggles. For site data and presentation, first use [Dynamic Get, Templates and Layouts](../../packages/workflows/dynamic-get.md) to supply and render the intended structure; reserve a custom service for behaviour those supported features do not already provide.
