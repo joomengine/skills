@@ -11,13 +11,13 @@
 ## Choose and configure the Joomla template first
 
 1. **Keep the current site template** when the site's existing shell already meets the design. Configure its style and existing positions. For a new design based on Cassiopeia, create a uniquely named **child template** under **System → Site Templates → Cassiopeia Details and Files → Create Child Template** on a disposable Playground. Change the child; keep the stock Cassiopeia files untouched. A child inherits the parent and needs that parent installed.
-2. **Create a separate Joomla site template** with its own name and installation manifest when the site needs an independent design or substantially different structure. If starting from a copy of Cassiopeia, give the copy its own extension identity, paths and asset registration, and preserve the original licensing notices. Edit and maintain it in Joomla's site templates area and retain its source and installer separately from the component blueprint.
+2. **Create a separate Joomla site template** with its own name and installation manifest when the site needs an independent design or substantially different structure. If starting from a copy of Cassiopeia, give the copy its own extension identity, paths and asset registration, and preserve the original licensing notices. Install its ZIP through **System → Install → Extensions**. Edit and maintain it in Joomla’s site templates area and retain its source and installer separately from the component blueprint.
 3. In **System → Site Template Styles**, make the selected style the site default for a whole-site redesign or assign it to the relevant menu items when only one area needs the design. Keep the previous style available for rollback. For an existing site, confirm which pages the request actually authorizes changing. A component install or update must leave the site's chosen default, template files and unrelated menu/module assignments alone.
 4. Create or reuse Joomla menu items for the relevant JCB Site Views. Publish the native Joomla **Menu** module in the template's menu position and choose the intended menu and page assignments. Put a footer, banner or sidebar in its named position using existing modules where possible. For a live feature such as a cart count in the header, publish a dedicated module that uses the component's existing service; keep cart rules in the component. A component-local link or filter is still valid inside the component content.
 
 ## Worked example: a catalogue in a Joomla template
 
-The example is illustrative. Start with a namespaced template or child in disposable Playground and a JCB catalogue Site View whose Dynamic Get supplies `$this->items`. The goal is a reusable shell around the catalogue and a regular Joomla article.
+Start with a Joomla site template or Cassiopeia child in disposable Playground and a JCB catalogue Site View whose main list Dynamic Get supplies `$this->items`. The same Joomla shell should frame the catalogue and a regular Joomla article.
 
 **Joomla template:** use existing positions if they fit. If the template introduces positions, declare them in `templateDetails.xml` and render the same names in its `index.php`. Here is the body fragment only; keep the selected template's document head, asset includes, accessibility features and other supported entry points intact.
 
@@ -34,7 +34,7 @@ The example is illustrative. Start with a namespaced template or child in dispos
 </footer>
 ```
 
-In Joomla Menus, add **Catalogue** (the component Site View) and **About** (a Joomla article); select the same site template style for both. Publish a **Menu** module in `menu` and a **Custom** module in `footer` for those pages. Configure the menu and footer content there, not by hard-coding them in the catalogue.
+In Joomla **Menus**, create **Catalogue** (the component Site View) and **About** (a Joomla article) in the same menu. Set **Template Style** to the chosen Joomla style on both menu items. Under **Content → Site Modules**, publish a **Menu** module in `menu`, select that menu, and assign the module to those pages. Publish a **Custom** module in `footer` for the same pages. Both pages now use the same navigation and footer, which can be edited in Joomla without compiling JCB.
 
 **JCB Site View:** keep the markup inside the component's output area. This uses Joomla Bootstrap grid and spacing classes, the view's native `sanitize()` helper, and its existing `Text` import or verified Joomla Power.
 

@@ -1,6 +1,6 @@
 # Build and wire a focused application service
 
-Use this workflow when a JCB feature needs a reusable business rule or replaceable integration. Start with the native records and the [source ownership standard](../../standards/authored-code.md#choose-the-native-owner-before-writing-code). Use a container when there are shared collaborators or multiple callers. A small operation with no shared dependencies can use a cohesive Power directly.
+Use this workflow when a JCB feature needs a reusable business rule or replaceable integration. Start with the native records and the [source ownership standard](../../standards/authored-code.md#choose-the-native-owner-before-writing-code). Start with the configured JCB hook or query for behavior it already supports. Put a custom rule in one focused Power with a named input and result. A small stateless rule with no shared dependencies can use a Power directly. For a service with shared collaborators, register it with the owning provider and resolve it through the existing Factory; add a provider and Factory only if this extension has no suitable one.
 
 ## Plan one vertical slice
 
@@ -15,7 +15,7 @@ Use this workflow when a JCB feature needs a reusable business rule or replaceab
 | Prepare the result for display | Dynamic Get's **PHP getItem Method** after-getting hook | Prepared product row → nullable `pack_total_minor` |
 | Present the outcome | Product Site View Template | Prepared quote → localized plain text |
 
-Reuse the [two-Power teaching fixture](../examples/composed-service/README.md) for the algorithm and the interface. Use a new identity and namespace for each distinct adaptation, or preserve the published identities only for unchanged fixture records. For an application with more than one caller, give each caller its own native controller or model boundary; have them resolve the same business service. If the use case writes data, keep the controller's request, ACL, CSRF and redirect handling at that boundary. The service owns the transaction and returns an outcome; the UI can distinguish a saved operation with a later notification failure from an operation that did not save.
+Reuse the [two-Power teaching fixture](../examples/composed-service/README.md) for the algorithm and the interface. Use a new identity and namespace for each distinct adaptation, or preserve the published identities only for unchanged fixture records. For example, when a second Site View also displays a pack quote, call the same `Quote.LineTotal` service from that view’s model hook using its authorized product SKU. The two models prepare their own display data, but both use the same provider registration and calculation. Their Templates render the prepared results. If the use case writes data, keep the controller's request, ACL, CSRF and redirect handling at that boundary. The service owns the transaction and returns an outcome; the UI can distinguish a saved operation with a later notification failure from an operation that did not save.
 
 ## 1. Save and inspect the constructor scaffold
 
