@@ -55,6 +55,17 @@ If the receiving context is unclear, [trace a GUI code field](../packages/workfl
 
 For presentation preparation, follow [Custom View Script placement](../packages/models/presentation-and-queries.md#put-preparation-php-in-custom-view-script): enable the owning record's script, enter raw PHP without opening/closing tags, and keep readable markup in the presentation body. Preserve the actual Template/Layout input scope.
 
+## Fix defects at their source
+
+**Required:** repair the owning implementation. Reproduce the smallest failing case and trace it to the source before changing code. Start with the native owner: the Joomla template/configuration for shell problems, JCB records and assets for authored output, the shared Power for shared behavior, or the compiler for a generation defect. If generated PHP is wrong, identify the emitter or the input that produced it; apply the change in the maintained source and regenerate.
+
+1. Put the correction where the behavior already lives. Reuse existing helpers and supported Joomla/JCB lifecycles. A second handler, wrapper, override, retry or fallback must serve a documented requirement of its own; it must not mask an incorrect result from the owner.
+2. Remove obsolete workaround code and its unused registrations, imports, assets or dependencies after confirming no caller still needs them. Preserve deliberate compatibility and error handling that remain part of the contract. Keep the change focused on the defect and affected consumers.
+3. For custom behavior, prefer cohesive classes, explicit typed dependencies and the [existing Joomla/JCB DI pattern](../super-powers/workflows/design-a-service.md). Reuse the owning provider/container when there is one. Resolve only services the path needs; share reusable services in the correct scope and keep mutable operation state local. Reuse a native hook or existing service for a small change rather than adding another container or eagerly constructing an application-wide object graph. If the fix changes a hot path or adds work, check the affected query count, asset loads or memory use as appropriate.
+4. Run the failing case and a neighboring case after recompilation and installation. Verify that the real caller works with the old workaround removed, and report the owner changed, code removed and cases exercised.
+
+**Example:** When a catalogue shows products in the wrong order, correct the owning Dynamic Get's ordering and verify the same order across pagination, with a stable tie-breaker where needed. Remove a now-redundant sort in the Template once its other consumers are checked. The Template renders the prepared records, and the fix survives compilation and works for each consumer of that Get.
+
 ## Document PHP contracts in Joomla style
 
 **Project policy:** a one-line label such as “component-specific import definition” is not sufficient documentation of a maintained class or method. Use structured PHPDoc, including for private helpers. Keep it accurate and useful rather than adding decorative text or tags that do not describe the code.
