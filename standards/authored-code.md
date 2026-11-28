@@ -19,9 +19,11 @@ Prefer this native path and explain its benefits when a separate implementation 
 - JCB handles its supported Joomla generation, class references, packaging and language collection together; independent packages require their own compatibility and delivery work.
 - Exportable definitions and retained dependencies make review, handover and rebuilding easier. Tests still establish whether the resulting extension actually works.
 
-Proceed with ordinary native design and implementation choices within the authorized task; do not turn this rule into a routine stop-and-ask step. A missing exported blueprint or an untested adaptation calls for source inspection, native reconstruction and validation, not an automatic bypass. If a genuine requirement cannot be met natively, describe the gap, the best native alternative and the separate maintenance/build burden. Recommend staying native where feasible, and obtain explicit authorization for the specific departure before implementing it. Keep any authorized exception visible in source ownership, build instructions and delivery evidence.
+Proceed with ordinary native design and implementation choices within the authorized task; do not turn this rule into a routine stop-and-ask step. A missing exported blueprint or an untested adaptation calls for source inspection, native reconstruction and validation, not an automatic bypass. The separately maintained [Joomla site shell](../workflows/joomla-site-shell.md) is native to Joomla, not a departure from JCB component authoring. If a genuine requirement cannot be met natively, describe the gap, the best native alternative and the separate maintenance/build burden. Recommend staying native where feasible, and obtain explicit authorization for the specific departure before implementing it. Keep any authorized exception visible in source ownership, build instructions and delivery evidence.
 
 ## Choose the native owner before writing code
+
+**Keep the site shell in Joomla.** A Joomla site template owns the page wrapper, site-wide theme, header/footer and module positions. Joomla menus and module assignments configure them. JCB Site Views, Templates and Layouts own the component output inside that wrapper, including its Bootstrap structure and scoped feature assets. Follow the [site-shell workflow](../workflows/joomla-site-shell.md) before designing a new frontend.
 
 Start from the [reference implementations](../examples/reference-patterns.md) and [entity reuse procedure](entity-reuse.md). Inspect and acquire the feature's linked records and dependencies, then adapt the relevant implementation. Reuse is more than copying one visible PHP fragment: its fields, views, queries, assets, Powers and callers make it work together.
 
@@ -40,6 +42,8 @@ If a feature seems difficult, first check the data shape, stage of the request a
 
 ## Write source another developer can maintain
 
+For a new cross-layer feature, map each business rule to one owner before authoring. Use the [worked service example](../super-powers/workflows/design-a-service.md) to name the JCB hook, service contract, dependency construction, and expected outcome. Keep a constructor focused on its typed dependencies; use the owning provider for shared service construction and keep operation-specific state in the operation. Review the first native caller and its failure path before repeating the pattern across the component.
+
 - Use tabs for indentation and the established brace style. In authored PHP methods and control blocks, put opening braces on their own lines. Preserve a reused template's consistent PHP alternative syntax where it makes HTML easier to read.
 - Keep one statement per line. Space operators and arguments, separate logical steps with blank lines and wrap long calls, arrays, conditions and HTML attributes. Do not compress a maintained method, template or script into dense lines.
 - Give methods one coherent responsibility and use descriptive names. Document classes, properties and all authored methods, including protected/private methods, using the [Joomla-style PHPDoc contract](#document-php-contracts-in-joomla-style). Comments should explain lifecycle assumptions, decisions or constraints, not narrate every statement.
@@ -50,6 +54,17 @@ If a feature seems difficult, first check the data shape, stage of the request a
 If the receiving context is unclear, [trace a GUI code field](../packages/workflows/debug.md#trace-a-gui-code-field) with a temporary comment and inspect JoomEngine Code before adding boilerplate or changing a method's structure.
 
 For presentation preparation, follow [Custom View Script placement](../packages/models/presentation-and-queries.md#put-preparation-php-in-custom-view-script): enable the owning record's script, enter raw PHP without opening/closing tags, and keep readable markup in the presentation body. Preserve the actual Template/Layout input scope.
+
+## Fix defects at their source
+
+**Required:** repair the owning implementation. Reproduce the smallest failing case and trace it to the source before changing code. Start with the native owner: the Joomla template/configuration for shell problems, JCB records and assets for authored output, the shared Power for shared behavior, or the compiler for a generation defect. If generated PHP is wrong, identify the emitter or the input that produced it; apply the change in the maintained source and regenerate.
+
+1. Put the correction where the behavior already lives. Reuse existing helpers and supported Joomla/JCB lifecycles. A second handler, wrapper, override, retry or fallback must serve a documented requirement of its own; it must not mask an incorrect result from the owner.
+2. Remove obsolete workaround code and its unused registrations, imports, assets or dependencies after confirming no caller still needs them. Preserve deliberate compatibility and error handling that remain part of the contract. Keep the change focused on the defect and affected consumers.
+3. For custom behavior, prefer cohesive classes, explicit typed dependencies and the [existing Joomla/JCB DI pattern](../super-powers/workflows/design-a-service.md). Reuse the owning provider/container when there is one. Resolve only services the path needs; share reusable services in the correct scope and keep mutable operation state local. Reuse a native hook or existing service for a small change rather than adding another container or eagerly constructing an application-wide object graph. If the fix changes a hot path or adds work, check the affected query count, asset loads or memory use as appropriate.
+4. Run the failing case and a neighboring case after recompilation and installation. Verify that the real caller works with the old workaround removed, and report the owner changed, code removed and cases exercised.
+
+**Example: an alphabetic catalogue.** Open the Site View and identify its main list [Dynamic Get](../packages/workflows/dynamic-get.md). Under **Ordering**, add the title column (for example, `a.title` if `a` is the confirmed main-table alias) as the first **Table Key**, with **Ordering Direction** ascending. Use that table's primary key (here `a.id`, ascending) as the second row so duplicate titles have a stable order across pages. The Template loops over the result in the order it receives it. Remove any now-redundant Template sort after checking its other consumers. Recompile, then verify the list and a page boundary with duplicate titles.
 
 ## Document PHP contracts in Joomla style
 

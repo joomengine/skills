@@ -9,7 +9,7 @@ Read [AGENTS.md](AGENTS.md) for the operating contract. Identify the requested a
 
 **JCB-native boundary:** new builds begin with JCB records, not externally hand-coded components or scaffolds later fed to Extrusion. Reserve Extrusion for genuinely pre-existing migration inputs. Keep implementation in JCB's authoring and compilation architecture. Independently maintained application code, plugins, modules or override packages that bypass it require explicit user authorization. Prefer the native path for reproducible builds and reusable source; [the boundary and its benefits](standards/authored-code.md#keep-implementation-inside-jcb) preserve ordinary native design freedom, including Powers, JCB-authored plugins/modules and supported assets.
 
-**Before writing custom code:** identify the native record or hook that owns the behavior and the generated scope it reaches. Follow the [code placement and review standard](standards/authored-code.md#choose-the-native-owner-before-writing-code). A working screen does not excuse misplaced logic or hand-patched output.
+**Before writing custom code:** identify the native record or hook that owns the behavior and the generated scope it reaches. Follow the [code placement and review standard](standards/authored-code.md#choose-the-native-owner-before-writing-code). A working screen does not excuse misplaced logic or hand-patched output. For frontend builds, [keep the site shell in Joomla](workflows/joomla-site-shell.md) and render only component content through JCB. For defects, [fix the owning source and remove obsolete workarounds](standards/authored-code.md#fix-defects-at-their-source).
 
 **Native orientation:** Fields and Admin Views define data and conventional backend management. Dynamic Gets retrieve that data for frontend Site Views and similarly structured backend Custom Admin Views; Templates and Layouts compose their presentation. Component associations assemble the graph for compilation. Read the short [concept map](architecture/concepts.md) before choosing records if these relationships are unfamiliar.
 
@@ -37,6 +37,7 @@ Let JCB do the routine generation. Start from complete reusable features in the 
 | Understand Init, Pull, Reset and Push across repository categories | [Repository operations](standards/repository-operations.md) |
 | Maintain reusable Custom Code blocks and arguments | [Manual Custom Code](packages/workflows/custom-code.md), [last-resort automation](packages/workflows/custom-code-automation.md) |
 | Add custom PHP behaviour and choose administrator/site/library placement | [PHP customization](super-powers/workflows/customize-extension.md) |
+| Design and wire a reusable service in JCB | [Native service example](super-powers/workflows/design-a-service.md): Power editor scaffold, Joomla DI provider and Factory, Dynamic Get and Template |
 | Reference Joomla classes through JPK mappings | [Joomla Powers skill](joomla-powers/SKILL.md) |
 | Connect to a cloud browser, client browser or JoomEngine Desktop | [Playground MCP connections](testing/playground/agent-connections.md) |
 | Use an existing Joomla/JCB MCP connection | [MCP setup and execution](workflows/mcp.md) |

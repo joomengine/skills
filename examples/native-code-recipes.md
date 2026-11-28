@@ -8,6 +8,7 @@ Use the recipe that matches the decision in front of you. The [Hello World map](
 | A label must be translated and rendered as plain text | [Translate and render a label](#translate-and-render-a-label) |
 | A view needs a script, stylesheet or JS configuration | [Use a view's document and assets](#use-the-views-document-and-assets) |
 | A model needs reusable PHP behaviour | [Connect a Power to a real caller](#connect-a-power-to-a-real-caller) |
+| Multiple native callers need a shared service | [Wire a focused service](../super-powers/workflows/design-a-service.md) |
 
 **Evidence:** the cited public native records and generated Joomla 6 output were inspected on 2026-11-20. The adaptations and acceptance steps below are instructions, not claims of a new compile/install run. Use the [current target versions](../standards/version-policy.md); the pins show what was inspected. Use an authorized disposable [Playground](../testing/playground/README.md) and known test data for the checks. For training, isolate adaptations from the upstream reference; for a distinct application, follow [entity reuse](../standards/entity-reuse.md) for identities and dependencies.
 
