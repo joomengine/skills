@@ -7,6 +7,7 @@ Choose the deliverable from the user's goal. A compiled extension, its editable 
 | Requested result | Deliver | Verify |
 | --- | --- | --- |
 | Install the extension | JCB-generated component/module/plugin installation ZIPs with version and checksum | Install into compatible Joomla and exercise the required behaviour. |
+| Install a custom site design | Separate Joomla template ZIP and editable template source, with style, menu and module setup | Verify the installed style and its assignments independently of the JCB component; see [site shell handover](joomla-site-shell.md#verify-debug-and-deliver-by-owner). |
 | Maintain it in another JCB instance | Packages blueprint plus identified external Power, Joomla Power, Field Type and other dependency repositories/revisions | Acquire into a fresh JCB instance, inspect the graph, compile, install and retest. |
 | Continue with this complete Playground workspace | **Download → Complete site** portable ZIP | **Upload** the exact archive in an isolated workspace and verify files, records, relationships and behaviour. |
 | Recreate the initial setup | Deployment recipe or Share link | Launch an independent installation; edited files/database are intentionally not transferred. |

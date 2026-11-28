@@ -75,6 +75,7 @@ Resolve the following decisions before building the affected slice; load only th
 | Managed categories and vocabularies | Create or reuse the managed entity and its selector; allow independent CRUD and store the relationship key instead of substituting unconstrained text. |
 | File uploads and product/entity images | Reuse the complete [Files/File Types, uploader, cropping and display feature](../packages/workflows/media-files.md), adapting its configuration and consumers. |
 | Page data and presentation | Use [Dynamic Get](../packages/workflows/dynamic-get.md) for the result graph and [Templates/Layouts](../packages/models/presentation-and-queries.md) for its presentation. |
+| Site theme, menu and module positions | [Choose a Joomla site shell](joomla-site-shell.md) before building the frontend. Use the existing template, a Cassiopeia child, or a separately installable Joomla template. Keep JCB rendering in the component slot. |
 | Acquire definitions or import business data | Select the operation in the [import router](../packages/workflows/imports.md). Immediate import and staged queue processing are different application designs. |
 | Migrate genuinely pre-existing forms/schema (record their provenance; do not generate scaffolds for this purpose) | Use [Extrusion](../packages/workflows/extrusion.md), then inspect the persisted graph and emitted schema for lossy conversions. |
 | Generate API resources | Choose the actual component-view API mode and test routes/ACL through [API selection](../packages/models/api-selection.md). |
